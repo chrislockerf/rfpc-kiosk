@@ -524,12 +524,46 @@ window.RFPC_CONTENT = {
        multiballs → the "Multiball Overview" page: one box per multiball; each
                     expands to detail + jackpots + a tip.
        strategy   → the "Strategy & Tips" page: six boxes, each expands to detail.
+       hold       → the closing "Now Playing" hold card line (italic serif) — the
+                    final frame of each machine's run.
+       proTips    → the footer pro-tip for each per-game page, keyed by page:
+                    intro · overview · rundown · modes · multiball · strategy · hold,
+                    plus any custom section key (e.g. movies, villains).
+                    (The "On The Floor" pages have no pro-tip by design.)
+       sequence   → OPTIONAL. The ordered list of pages for this machine. Each
+                    entry is either a built-in page key (intro · gameoverview ·
+                    rundown · modes · multiball · strategy · hold) or a custom
+                    section key defined in `sections` below. Omit `sequence` to use
+                    the default order. Reorder / add / remove entries freely.
+       sections   → OPTIONAL. Custom themed pages referenced by `sequence`. Each is
+                    keyed by its sequence key:
+                      key: { title, kicker, eyebrow, boxes: [{name, target, detail}] }
+                    Every box expands full-stage like the Rundown. Add as many
+                    sections (and boxes) as you like.
 
      Add or remove boxes freely; the pages resize to fit. Keep the game id keys.
      ========================================================================== */
   pages: {
 
     "james-bond": {
+      hold: "Six films. One license to kill. Go play.",
+      // Page order for this machine (keys map to built-in pages or custom sections
+      // below). Reorder / add / remove freely.
+      sequence: ["intro", "gameoverview", "rundown", "movies", "villains", "henchmen", "bondGirls", "qbranch", "multiball", "strategy", "hold"],
+      proTips: {
+        intro:     "Six Connery films, any order — but the Action Button outscores all of them.",
+        overview:  "One rule above all: charge the Action Button, then spend it on the biggest lit shot.",
+        rundown:   "Four mode types per film — Villains, Henchmen, SPECTRE, Q. Clear all four to finish it.",
+        movies:    "Six films, any order — each one needs all four mode types cleared to complete.",
+        villains:  "Beating a film’s villain is one of the four types — the marquee shot of the film.",
+        henchmen:  "Henchmen are the fast, repeatable film progress — lean on them early.",
+        bondGirls: "Bond girls light allies and awards — collect them to boost the film you’re playing.",
+        qbranch:   "Q gadgets are gravy — spend them from the scoop, but don’t drain reaching for it.",
+        modes:     "Repeating a film’s shots only scores points; spread them across the four types to advance.",
+        multiball: "Start Bird One inside a film so its jackpots double as film progress.",
+        strategy:  "Hold the left flipper on the plunge for the Super Skill down the right ramp.",
+        hold:      "Finish all six films for MI6 Multiball — the whole game builds to it.",
+      },
       overview: [
         "Six classic Connery films, played in any order.",
         "Every film needs all four mode types cleared to complete it.",
@@ -551,17 +585,95 @@ window.RFPC_CONTENT = {
         { name: "Bird One",      target: "The Rocket", detail: "Complete SPECTRE targets, then lock three balls in the rocket at the center loop.", jackpots: "Every shot lights green; blast the rocket for the Super Jackpot.", tip: "Start it inside a film so jackpots double as film progress." },
         { name: "MI6 Multiball", target: "Side Ramp",  detail: "The OHMSS wizard finale — the goal of the whole game.", jackpots: "Jackpots are paid from every film you completed.", tip: "Complete more films first; each one feeds this multiball." },
       ],
-      strategy: [
-        { name: "Button First",   detail: "Learn the Action Button before chasing films — it collects the biggest lit shot instantly." },
-        { name: "Vary Your Shots", detail: "Repeating a film’s shots only scores points — spread them across the four mode types to advance." },
-        { name: "Stack The Rocket", detail: "Start Bird One during a film so jackpots also count as film progress." },
-        { name: "Steer The Plunge", detail: "Hold the left flipper on the plunge for the Super Skill down the right ramp." },
-        { name: "Multipliers",    detail: "Use the button to stack 2× then 3× playfield before a big mode." },
-        { name: "Don’t Chase Q",  detail: "Q gadgets are gravy — don’t drain reaching for the scoop." },
-      ],
+      // Custom themed pages for James Bond, referenced by `sequence` above. Each
+      // box expands full-stage like the Rundown. Framed from the six Connery
+      // films — refine freely.
+      sections: {
+        movies: {
+          title: "The Movies", kicker: "The Six Films", eyebrow: "Play Them In Any Order",
+          boxes: [
+            { name: "Dr. No",                target: "1962", detail: "Bond’s first outing — hunt Dr. No’s reactor plot in Jamaica. Clear all four mode types to complete the film." },
+            { name: "From Russia With Love", target: "1963", detail: "SPECTRE sets a trap around the Lektor decoder. Work the villain, henchman, weapon and gadget shots." },
+            { name: "Goldfinger",           target: "1964", detail: "Stop the raid on Fort Knox. The signature film — Oddjob and the DB5 both live here." },
+            { name: "Thunderball",          target: "1965", detail: "Recover SPECTRE’s stolen warheads. Underwater battles and the jetpack gadget." },
+            { name: "You Only Live Twice",  target: "1967", detail: "Blofeld’s volcano lair and the space-capture plot. Little Nellie takes flight here." },
+            { name: "Diamonds Are Forever", target: "1971", detail: "Connery’s send-off — the Vegas diamond-smuggling ring and Blofeld’s return." },
+          ],
+        },
+        villains: {
+          title: "The Villains", kicker: "Beat The Boss", eyebrow: "One Of The Four Mode Types",
+          boxes: [
+            { name: "Dr. No",            target: "Right Ramp", detail: "The titular SPECTRE scientist — the villain shot of the first film." },
+            { name: "Rosa Klebb",        target: "Right Ramp", detail: "SPECTRE’s poison-blade colonel from From Russia With Love." },
+            { name: "Auric Goldfinger",  target: "Right Ramp", detail: "The gold-obsessed mastermind behind the Fort Knox raid." },
+            { name: "Emilio Largo",      target: "Right Ramp", detail: "SPECTRE No. 2 and the eyepatch behind the Thunderball warheads." },
+            { name: "Blofeld",           target: "Right Ramp", detail: "Ernst Stavro Blofeld — the SPECTRE chief of You Only Live Twice and Diamonds." },
+          ],
+        },
+        henchmen: {
+          title: "The Henchmen", kicker: "Take Out The Muscle", eyebrow: "Fast, Repeatable Progress",
+          boxes: [
+            { name: "Oddjob",       target: "Side Ramp", detail: "Goldfinger’s bowler-hat enforcer — the marquee Connery henchman." },
+            { name: "Red Grant",    target: "Side Ramp", detail: "The SPECTRE assassin from the train fight in From Russia With Love." },
+            { name: "Professor Dent", target: "Side Ramp", detail: "Dr. No’s inside man — the henchman of the first film." },
+            { name: "Fiona Volpe",  target: "Side Ramp", detail: "Largo’s deadly SPECTRE agent in Thunderball." },
+            { name: "Wint & Kidd",   target: "Side Ramp", detail: "The pair of assassins stalking Bond through Diamonds Are Forever." },
+          ],
+        },
+        bondGirls: {
+          title: "The Bond Girls", kicker: "Collect The Allies", eyebrow: "Boost The Current Film",
+          boxes: [
+            { name: "Honey Ryder",       target: "Left Loop", detail: "Dr. No — the first Bond girl, collected in Jamaica." },
+            { name: "Tatiana Romanova",  target: "Left Loop", detail: "From Russia With Love — the cipher clerk caught in SPECTRE’s trap." },
+            { name: "Pussy Galore",      target: "Left Loop", detail: "Goldfinger — the pilot who turns on the Fort Knox plan." },
+            { name: "Domino",            target: "Left Loop", detail: "Thunderball — Largo’s mistress who helps sink him." },
+            { name: "Tiffany Case",      target: "Left Loop", detail: "Diamonds Are Forever — the smuggler tangled in the ring." },
+          ],
+        },
+        qbranch: {
+          title: "Q-Branch Toys", kicker: "Spend The Gadgets", eyebrow: "Light Them, Then Cash In",
+          boxes: [
+            { name: "Aston Martin DB5",  target: "Scoop", detail: "The iconic Goldfinger car — ejector seat, tire slashers and all." },
+            { name: "Jetpack",           target: "Scoop", detail: "The Thunderball Bell Rocket Belt — a quick escape award." },
+            { name: "Little Nellie",     target: "Scoop", detail: "The armed autogyro from You Only Live Twice." },
+            { name: "Attaché Case",      target: "Scoop", detail: "The From Russia With Love kit — hidden blade, gold, and a nasty surprise." },
+          ],
+        },
+      },
     },
 
     "stranger-things": {
+      hold: "The gate is open. Go run the Upside Down.",
+      sequence: ["intro", "gameoverview", "rundown", "seasons", "demogorgon", "multiball", "strategy", "hold"],
+      sections: {
+        seasons: {
+          title: "The Seasons & Chapters", kicker: "Start At The TV", eyebrow: "Run The Flashing Shots",
+          boxes: [
+            { name: "The Search",     target: "The TV Scoop", detail: "Hunt for Will across Hawkins — the opening chapter." },
+            { name: "Hawkins Lab",    target: "Center Scoop", detail: "Break into the lab where the gate was opened." },
+            { name: "The Byers House", target: "Right Ramp",  detail: "Christmas lights and the wall of letters." },
+            { name: "The Hub",        target: "Left Orbit",   detail: "Regroup with the party and pick the next move." },
+            { name: "The Fun Fair",   target: "Left Ramp",    detail: "The Starcourt showdown builds from here." },
+          ],
+        },
+        demogorgon: {
+          title: "Demogorgon Battles", kicker: "Pound The Creature", eyebrow: "Escalating Fights",
+          boxes: [
+            { name: "The Demogorgon", target: "Bash Toy",    detail: "Hammer the creature to light and start its multiball." },
+            { name: "Demodogs",      target: "Pop Bumpers",  detail: "Thin the pack before the big one arrives." },
+            { name: "The Mind Flayer", target: "Center Shots", detail: "The shadow spreads across the playfield — spread your shots to match." },
+          ],
+        },
+      },
+      proTips: {
+        intro:     "Everything starts at the TV scoop — pick a chapter, then run its shots.",
+        overview:  "The Upside Down’s hidden ball scores while you flip the one you can see — let it work.",
+        rundown:   "Two multiballs and a wizard: Demogorgon, Mind Flayer, then the Battle of Starcourt.",
+        modes:     "Chapters are timed — start one at the TV and commit to its flashing shots.",
+        multiball: "Feed the Demogorgon to lock balls, then hammer every lit shot before they drop.",
+        strategy:  "Don’t chase the Bike Escape cold — combo the ramps when they’re already lit.",
+        hold:      "Clear every chapter to reach the Battle of Starcourt — the final stand.",
+      },
       overview: [
         "Start every mode at the TV scoop.",
         "Chapters play out across Hawkins as the Upside Down bleeds in.",
@@ -594,6 +706,47 @@ window.RFPC_CONTENT = {
     },
 
     "godzilla": {
+      hold: "The city’s yours to save. Go be King of the Monsters.",
+      sequence: ["intro", "gameoverview", "rundown", "cities", "kaiju", "multiball", "miniwizards", "strategy", "hold"],
+      sections: {
+        cities: {
+          title: "Cities", kicker: "Defend & Destroy", eyebrow: "Each One A Battleground",
+          boxes: [
+            { name: "City Round 1", target: "The Building", detail: "Topple the tower and clear the first city’s objectives." },
+            { name: "City Round 2", target: "The Bridge",   detail: "Down the span, then sweep the flashing city shots." },
+            { name: "City Round 3", target: "The Tanks",    detail: "Crush the armor rolling through the third city." },
+            { name: "City Round 4", target: "Powerlines",  detail: "Kill the grid to finish the last city before Planet X." },
+          ],
+        },
+        kaiju: {
+          title: "Kaiju Battles", kicker: "Choose Your Monster", eyebrow: "Light It At The Scoop",
+          boxes: [
+            { name: "Mechagodzilla",  target: "Right Spinner", detail: "The mechanical menace — ramp the spinner, then rip it again." },
+            { name: "King Ghidorah",  target: "The Scoop",     detail: "The three-headed terror from Planet X." },
+            { name: "Ebirah",         target: "Left Ramp",     detail: "The giant crustacean rising from the bay." },
+            { name: "Titanosaurus",   target: "Right Ramp",    detail: "The aquatic dinosaur summoned to level the city." },
+            { name: "Gigan",          target: "Left Orbit",    detail: "The cyborg with the buzzsaw chest." },
+            { name: "Megalon",        target: "Right Orbit",   detail: "The drill-handed defender of the underground." },
+          ],
+        },
+        miniwizards: {
+          title: "Mini Wizard Modes", kicker: "The Big Rounds", eyebrow: "Earned, Not Given",
+          boxes: [
+            { name: "Monster Zero",           target: "All Shots", detail: "A frenzy earned by starting enough Kaiju battles." },
+            { name: "Terror of Mechagodzilla", target: "All Shots", detail: "The reward for defending every city." },
+            { name: "Planet X",               target: "The Scoop", detail: "The gateway multiball on the road to King of the Monsters." },
+          ],
+        },
+      },
+      proTips: {
+        intro:     "Four cities, four Kaiju — defend them all the way to Planet X.",
+        overview:  "Just starting a city objective advances it — you don’t have to finish.",
+        rundown:   "Three multiballs stomp the city: Godzilla, Mechagodzilla, Saucer Attack.",
+        modes:     "Light Kaiju Battle at both ramps, then pick the monster you want to fight.",
+        multiball: "Batter the building down first — it’s the fastest path into Godzilla Multiball.",
+        strategy:  "Feed the Powerup meter between modes; it fuels the wizard run.",
+        hold:      "Conquer every city and reach Planet X for King of the Monsters.",
+      },
       overview: [
         "Defend four cities from the Xilien invasion.",
         "Just starting a city objective advances it — you don’t have to finish.",
@@ -627,6 +780,57 @@ window.RFPC_CONTENT = {
     },
 
     "deadpool": {
+      hold: "Maximum effort. Go break the fourth wall.",
+      sequence: ["intro", "gameoverview", "rundown", "battles", "quests", "teamups", "lildeadpool", "multiball", "sinister", "strategy", "hold"],
+      sections: {
+        battles: {
+          title: "The Battles", kicker: "Start At The Scoop", eyebrow: "Complete DEAD First",
+          boxes: [
+            { name: "Juggernaut", target: "The Scoop", detail: "The unstoppable freight-train fight." },
+            { name: "Sabretooth", target: "The Scoop", detail: "A brawl of claws and healing factors." },
+            { name: "Mystique",   target: "The Scoop", detail: "The shape-shifter who never fights straight." },
+          ],
+        },
+        quests: {
+          title: "The Quests", kicker: "Side Missions", eyebrow: "Points On The Way",
+          boxes: [
+            { name: "Chimichanga", target: "Left Ramp",    detail: "Collect food shots for a quick scoring run." },
+            { name: "Disco",       target: "Left Spinner", detail: "Rip the spinner to fuel the Disco multiball." },
+            { name: "Weapons Plus", target: "Standups",    detail: "Bank weapon targets to cash out at the scoop." },
+          ],
+        },
+        teamups: {
+          title: "Team-Ups", kicker: "Bank The Ally", eyebrow: "Stack Before A Battle",
+          boxes: [
+            { name: "Wolverine", target: "Center Spinner", detail: "Doubles all battle damage — the essential stack." },
+            { name: "Colossus",  target: "Right Ramp",     detail: "Doubles points during the battle." },
+            { name: "Domino",    target: "Left Ramp",      detail: "Luck powers add-a-ball and saves." },
+            { name: "Negasonic", target: "Left Orbit",     detail: "Explosive help for a big finish." },
+          ],
+        },
+        lildeadpool: {
+          title: "Lil’ Deadpool", kicker: "The Bonus Bug", eyebrow: "Little Merc, Big Points",
+          boxes: [
+            { name: "Lil’ Deadpool", target: "Mini Playfield", detail: "Feed the little guy to build a growing bonus multiplier." },
+          ],
+        },
+        sinister: {
+          title: "Mr. Sinister Modes", kicker: "The End Game", eyebrow: "Beat Every Battle Twice",
+          boxes: [
+            { name: "Clone Multiball", target: "All Shots", detail: "Replay the three battles — harder — for the clone army." },
+            { name: "The Final Battle", target: "The Scoop", detail: "Face Mr. Sinister himself — the goal of the whole game." },
+          ],
+        },
+      },
+      proTips: {
+        intro:     "Start battles at the scoop; team-ups make everything hit harder.",
+        overview:  "Bank Wolverine before a battle — it doubles all the damage you deal.",
+        rundown:   "Three multiballs and Sinister: Ninja, Disco, Mechsuit, then the Final Battle.",
+        modes:     "Complete DEAD at the scoop, then choose Juggernaut, Mystique or Sabretooth.",
+        multiball: "Lock three on the right ramp for Ninja — the easiest multiball to start.",
+        strategy:  "Ricochet the SNIKT target to the right ramp for up to 5× playfield.",
+        hold:      "Beat every battle twice for Clone Multiball, then face Mr. Sinister.",
+      },
       overview: [
         "Start battles at the scoop; beat the villain’s flashing shots.",
         "Team-ups double your damage and points — bank them first.",
@@ -660,6 +864,45 @@ window.RFPC_CONTENT = {
     },
 
     "foo-fighters": {
+      hold: "Gas up the van. The tour’s yours.",
+      sequence: ["intro", "gameoverview", "rundown", "vanmodes", "modulator", "multiball", "wizards", "strategy", "hold"],
+      sections: {
+        vanmodes: {
+          title: "Van Modes (Cities)", kicker: "Spell V-A-N", eyebrow: "Save Each City",
+          boxes: [
+            { name: "Los Angeles",  target: "Left Ramp",  detail: "Kick off the tour and save the first city from the Overlord." },
+            { name: "Chicago",      target: "Right Ramp", detail: "Work the ramps to clear the second stop." },
+            { name: "New York",     target: "Left Orbit", detail: "A crowded run — combo the loops to clear it." },
+            { name: "Seattle",      target: "Right Orbit", detail: "The rainy city and its tricky shots." },
+            { name: "Roswell",      target: "Captive Ball", detail: "Strange lights over the desert — the road to Area 51." },
+            { name: "The Overlord", target: "Side Ramp",  detail: "The final city — the Overlord makes his stand." },
+          ],
+        },
+        modulator: {
+          title: "The Modulator", kicker: "Mod The Van", eyebrow: "Upgrade Before A City",
+          boxes: [
+            { name: "Mod The Van",  target: "Paddle Target", detail: "Behind the drops — upgrades boost the whole run." },
+            { name: "Rock-O-Meter", target: "Right Orbit",   detail: "Climb toward 2×, then 3× playfield." },
+            { name: "Charge Up",    target: "Captive Ball",   detail: "Bank hits so the action button collects lit shots." },
+          ],
+        },
+        wizards: {
+          title: "Wizard Modes", kicker: "The Big Finishes", eyebrow: "Clear The Objectives",
+          boxes: [
+            { name: "FooBot Multiball", target: "All Shots", detail: "Earned by clearing cities, frenzies and Area 51." },
+            { name: "The Final Battle", target: "Side Ramp", detail: "Take on the Overlord for the whole tour." },
+          ],
+        },
+      },
+      proTips: {
+        intro:     "Tour the country in the van; save each city from the Overlord.",
+        overview:  "Mod the van before a city — a modded run scores far, far more.",
+        rundown:   "Three multiballs on the tour: Overlord, Area 51, Combotron.",
+        modes:     "Spell V-A-N with the white shots, then start a city at the left ramp.",
+        multiball: "Green the Overlord, lock a ball, then pound the captive ball for jackpots.",
+        strategy:  "Climb the Rock-O-Meter on the right orbit to 2×, then 3× playfield.",
+        hold:      "Save six cities to reach the Final Battle with the Overlord.",
+      },
       overview: [
         "Tour the country in the van; save each city from the Overlord.",
         "Mod the van before a city — a modded run scores far more.",
@@ -693,6 +936,55 @@ window.RFPC_CONTENT = {
     },
 
     "jurassic-park": {
+      hold: "Life finds a way. Go survive the island.",
+      sequence: ["intro", "gameoverview", "rundown", "paddocks", "trex", "multiball", "wizards", "other", "strategy", "hold"],
+      sections: {
+        paddocks: {
+          title: "Paddock Modes", kicker: "Spell M-A-P", eyebrow: "Enter, Then Rescue",
+          boxes: [
+            { name: "Raptor Pen",     target: "Left Ramp",    detail: "Contain the clever girls before they learn the door." },
+            { name: "Dilophosaurus",  target: "Center Scoop", detail: "Watch for the spit — a fast, dangerous rescue." },
+            { name: "Triceratops",    target: "Right Ramp",   detail: "Tend the sick trike and move the herd." },
+            { name: "Pteranodon",     target: "Left Orbit",   detail: "Aviary chaos — keep the ball moving." },
+            { name: "Brachiosaurus",  target: "Right Orbit",  detail: "A gentle giant guarding a tricky lane." },
+            { name: "Spinosaurus",    target: "Side Ramp",    detail: "The apex threat of the deep paddocks." },
+          ],
+        },
+        trex: {
+          title: "T-Rex Events", kicker: "The Truck", eyebrow: "Three Hits To Start",
+          boxes: [
+            { name: "T-Rex Encounter", target: "The Truck",  detail: "Three truck hits start the hurry-up into multiball." },
+            { name: "Truck Escape",    target: "Left Ramp",  detail: "Outrun the jaws in the mirror." },
+            { name: "T-Rex Paddock",   target: "Right Ramp", detail: "Return to the pen where it all broke loose." },
+          ],
+        },
+        wizards: {
+          title: "Wizard Modes", kicker: "The End Game", eyebrow: "Capture Every Paddock",
+          boxes: [
+            { name: "Escape Nublar",              target: "All Shots", detail: "Stage the escape after clearing the control rooms and paddocks." },
+            { name: "Visitor Center",             target: "Center Scoop", detail: "Regroup where the tour began." },
+            { name: "When Dinosaurs Ruled",       target: "All Shots", detail: "The ultimate wizard mode — the top of the mountain." },
+          ],
+        },
+        other: {
+          title: "Other Features", kicker: "Everything Else", eyebrow: "Points Are Points",
+          boxes: [
+            { name: "Smart Missile", target: "Action Button", detail: "Pick an award, then fire it at the center target." },
+            { name: "Chaos",         target: "Spell CHAOS",   detail: "Loose dinos everywhere — a multiball of pure mayhem." },
+            { name: "Amber / 2×",    target: "Purple Standups", detail: "Supply drops and doubled scoring." },
+            { name: "Control Room",  target: "Left Target",   detail: "Pick one of three modes with the flippers." },
+          ],
+        },
+      },
+      proTips: {
+        intro:     "Nedry’s virus loosed the dinosaurs — rescue the staff and escape the island.",
+        overview:  "Stack a paddock mode inside a multiball — rescues pay double in the chaos.",
+        rundown:   "Three ways to lose control: Chaos, Raptor Tri-Ball, and T-Rex Multiball.",
+        modes:     "Spell M-A-P with white shots to light a paddock, then bag the flashing capture.",
+        multiball: "Three truck hits start the T-Rex hurry-up straight into multiball.",
+        strategy:  "Feed the purple standups for supply drops and 2× scoring.",
+        hold:      "Capture every paddock to reach Escape Nublar.",
+      },
       overview: [
         "Nedry’s virus loosed the dinosaurs across the island.",
         "Rescue staff, capture paddocks, and stage your escape.",
@@ -726,6 +1018,30 @@ window.RFPC_CONTENT = {
     },
 
     "monster-bash": {
+      hold: "The band’s assembled. Go start the encore.",
+      sequence: ["intro", "gameoverview", "rundown", "monsters", "multiball", "strategy", "hold"],
+      sections: {
+        monsters: {
+          title: "The Monsters", kicker: "One Mode Each", eyebrow: "Collect The Instruments",
+          boxes: [
+            { name: "Frankenstein", target: "Center Ramp",     detail: "Drop Frank’s targets, then jolt the monster alive." },
+            { name: "Dracula",      target: "Dracula Loop",    detail: "Spell DRAC-ATTACK, then ride the coffin loop." },
+            { name: "Wolfman",      target: "Left Loop",       detail: "Rip the loop under a full moon." },
+            { name: "The Bride",    target: "Left Ramp",       detail: "Play the tight figure-8 ramp for Ball & Chain." },
+            { name: "The Creature", target: "Creature’s Lagoon", detail: "Sweep every major shot before the hurry-up dies." },
+            { name: "The Mummy",    target: "Mummy Target",    detail: "Bash the sarcophagus open to wake him." },
+          ],
+        },
+      },
+      proTips: {
+        intro:     "Round up six monsters and their instruments for the scariest band around.",
+        overview:  "Complete a mode to earn its instrument — playing it only lights the mini-wizard.",
+        rundown:   "Six monster modes, two multiballs, and the Monsters of Rock encore.",
+        modes:     "Each monster has its own shot — six in all; run them to collect instruments.",
+        multiball: "Drop Frank’s targets to open the center ramp, then jolt him alive.",
+        strategy:  "Sixty jet-bumper hits light Mummy Mayhem and super jets.",
+        hold:      "Collect all six instruments to start Monsters of Rock.",
+      },
       overview: [
         "Round up six classic monsters and their instruments.",
         "Complete a mode to earn its instrument; playing it only lights the mini-wizard.",
@@ -760,6 +1076,53 @@ window.RFPC_CONTENT = {
     },
 
     "john-wick": {
+      hold: "You’re back. Go earn your place at the High Table.",
+      sequence: ["intro", "gameoverview", "rundown", "jobs", "adversaries", "lightsout", "multiball", "wizards", "strategy", "hold"],
+      sections: {
+        jobs: {
+          title: "Jobs", kicker: "Take The Contract", eyebrow: "Serve The Seven Factions",
+          boxes: [
+            { name: "The Continental", target: "Weapons Crate", detail: "The hotel where no business is conducted — the first contract." },
+            { name: "High Table",      target: "Left Eject",    detail: "Work for the ruling council for the richest perks." },
+            { name: "The Bowery",      target: "Right Ramp",    detail: "Call in the King’s network of eyes." },
+            { name: "Ruska Roma",      target: "Left Ramp",     detail: "Old debts and older allies." },
+            { name: "The Adjudicator", target: "Center Ramp",  detail: "Answer for broken rules — a high-stakes job." },
+          ],
+        },
+        adversaries: {
+          title: "Adversaries", kicker: "Single-Ball Fights", eyebrow: "Drop Ten To Light It",
+          boxes: [
+            { name: "Ares",       target: "Left Eject", detail: "The Adjudicator’s enforcer — a brutal duel." },
+            { name: "Zero",       target: "Left Eject", detail: "The rival assassin with respect and a blade." },
+            { name: "Cassian",    target: "Left Eject", detail: "The old friend who still has a job to do." },
+            { name: "The Sommelier", target: "Left Eject", detail: "Not wine — weapons, and a fight to the finish." },
+          ],
+        },
+        lightsout: {
+          title: "Lights Out!", kicker: "Kill The Lights", eyebrow: "The Club Shootout",
+          boxes: [
+            { name: "Lights Out!", target: "Red Circle", detail: "The neon club sequence — stack blue circles to multiply every lit shot." },
+          ],
+        },
+        wizards: {
+          title: "Wizard Modes", kicker: "The End Game", eyebrow: "Serve Every Faction",
+          boxes: [
+            { name: "Red Circle Reckoning", target: "All Shots", detail: "The reward for clearing the multiballs, jobs and battles." },
+            { name: "The Staircase",        target: "Center Ramp", detail: "Fight down the steps of the Continental." },
+            { name: "The Duel",             target: "Left Eject",  detail: "One shot, one chance — the penultimate test." },
+            { name: "Special Assignment",   target: "The Scoop",   detail: "The final contract — the goal of the whole game." },
+          ],
+        },
+      },
+      proTips: {
+        intro:     "Out of retirement — take jobs for the seven factions and reach the High Table.",
+        overview:  "Spawn enemies before a job — lit shots multiply by the blue circles in front.",
+        rundown:   "Three multiballs off the High Table: Car Chase, Excommunicado, Deconsecrated.",
+        modes:     "Light three blue lights, then start the job at the VUK.",
+        multiball: "Spell WINSTON at the captive ball to light the Deconsecrated locks.",
+        strategy:  "Bank gold coins, then a ramp qualifies an ally to fight beside you.",
+        hold:      "Serve every faction to reach the Special Assignment.",
+      },
       overview: [
         "Out of retirement, out for blood — serve the seven factions.",
         "Take jobs at the crate, then cash them out for perks.",

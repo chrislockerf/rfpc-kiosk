@@ -13,11 +13,12 @@
 <script src="./content.js"></script>
 <style>
   /* Footer override (SignageFooter is a design-system primitive we don't edit):
-     drop the redundant center game-name + diamonds, and give the pro-tip the
-     room to sit left in a bigger serif. */
+     drop the redundant center game-name + diamonds, and split the bar so the
+     RFPC mark takes the left third and the pro-tip fills the right two-thirds. */
+  footer { grid-template-columns: 2fr 8fr !important; }
   footer > div:nth-child(2) { display: none !important; }
   footer > div:nth-child(3) {
-    grid-column: 2 / 4 !important;
+    grid-column: 2 / 3 !important;
     justify-content: flex-start !important;
     text-align: left !important;
   }
@@ -27,6 +28,9 @@
     max-width: none !important;
     line-height: 1.24 !important;
   }
+  /* "On The Floor" scenes carry no pro-tip (it duplicated the "Now Up" header) —
+     hide the whole footer pro-tip cell just on those (tagged data-game="floor"). */
+  [data-game="floor"] footer > div:nth-child(3) { display: none !important; }
 </style>
 </helmet>
 <div style="position:fixed; inset:0;">{{ app }}</div></x-dc>
@@ -323,6 +327,31 @@ class Component extends DCLogic {
       );
     };
 
+    // ---------- MACHINE: hold card (end-of-machine frame) ----------
+    // The final frame of each machine's run. In the continuous loop it holds for
+    // its dwell then advances; once segments are split into per-machine URLs this
+    // is the frame AbleSign parks on after the machine plays through once.
+    const holdRender = (m) => () => {
+      const ph = PHOTOS[m.game] || {};
+      const pg = PAGES[m.game] || {};
+      const line = pg.hold || "Now playing at The Lockedown.";
+      return h("div", { style: root },
+        h("div", { style: { flex: 1, minHeight: 0, display: "grid", gridTemplateColumns: "1fr 1.15fr", gap: "var(--sp-7)", alignItems: "center" } },
+          ph.cab
+            ? h("div", { key: "art", style: { position: "relative", height: "100%", minHeight: 0, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden",
+                background: "radial-gradient(52% 50% at 50% 52%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 72%)" } },
+                h("img", { src: ph.cab, onError: this._imgRetry, alt: m.title, style: { maxWidth: "100%", maxHeight: "100%", objectFit: "contain", filter: "drop-shadow(0 26px 54px rgba(0,0,0,0.66))" } }))
+            : h("div", { key: "art" }),
+          h("div", { key: "txt", style: { display: "flex", flexDirection: "column", justifyContent: "center", gap: "var(--sp-4)" } },
+            LOGOS[m.game] ? h("div", { key: "badge", style: { fontSize: "132px", lineHeight: 0.9, marginBottom: "var(--sp-2)" } }, logoNode(m.game)) : null,
+            h("div", { key: "ttl", style: { fontFamily: "var(--font-marquee)", fontWeight: "var(--w-bold)", fontSize: "88px", lineHeight: 0.94, textTransform: "uppercase", color: "var(--text-strong)", textWrap: "balance" } }, m.title),
+            h("div", { key: "mk", style: { fontFamily: "var(--font-mono)", fontSize: "26px", letterSpacing: "0.06em", color: "var(--accent-bright)" } }, m.maker),
+            h("div", { key: "tick", "aria-hidden": "true", style: { width: 132, height: 4, background: "var(--accent)", boxShadow: "var(--glow-accent-sm)", margin: "var(--sp-2) 0" } }),
+            h("p", { key: "line", className: "rfpc-serif-italic", style: { margin: 0, fontSize: "46px", lineHeight: 1.16, color: "var(--text-strong)", textWrap: "balance", maxWidth: "18ch" } }, line))
+        )
+      );
+    };
+
     // ---------- MACHINE: six-box spotlight (KioskShow) ----------
     const spotlightRender = (m) => () => {
       const x = EXTRA[m.game];
@@ -398,6 +427,17 @@ class Component extends DCLogic {
       return spotlightPage(m, "strat", sections, 3);
     };
 
+    // ---------- MACHINE: generic themed "section" page (Movies, Villains, …) ----------
+    // Driven entirely by content.js: PAGES[game].sections[key] = { title, kicker,
+    // eyebrow, boxes:[{name, target, detail}] }. Each box expands like the Rundown.
+    const sectionPageRender = (m, key) => () => {
+      const sec = ((PAGES[m.game] || {}).sections || {})[key] || {};
+      const boxes = sec.boxes || [];
+      const kicker = sec.kicker || "The Details";
+      const sections = boxes.map((b, i) => ({ index: i + 1, kicker: kicker, title: b.name, teaser: b.target || "", detail: boxDetail(b.target, b.detail || "") }));
+      return spotlightPage(m, key, sections, boxes.length >= 5 ? 3 : 2);
+    };
+
     // ---------- GENERAL: between-games combo (tip / lingo / real talk) ----------
     const comboRender = (v) => () => h("div", { style: root },
       lead(v.lead),
@@ -463,28 +503,47 @@ class Component extends DCLogic {
     if (!MACHINES.length || !generalScenes.length) {
       return { app: h("div", { style: { position: "fixed", inset: 0, background: "var(--forest-900)" } }) };
     }
+    // Default per-machine page order (machines without a custom `sequence`).
+    const DEFAULT_SEQ = ["intro", "gameoverview", "rundown", "modes", "multiball", "strategy", "hold"];
+    // Build one scene for a given page key. Known keys map to their dedicated
+    // renderers; any other key is treated as a custom themed section page whose
+    // content lives in PAGES[game].sections[key].
+    const makeScene = (m, key) => {
+      const pg = PAGES[m.game] || {};
+      const pt = pg.proTips || {};
+      const base = { kind: "machine", game: m.game, gameName: m.title };
+      const tip = pt[key] || m.proTip;
+      if (key === "intro") return Object.assign({}, base, { id: m.game + "-intro", eyebrow: "Get To Know The Line-Up", title: badgeTitle(m), meta: [m.maker], proTip: pt.intro || m.proTip, holdMs: holdMs, render: introRender(m), navKind: "Intro", navSub: "Machine & Credits" });
+      if (key === "gameoverview") return Object.assign({}, base, { id: m.game + "-gameoverview", eyebrow: "The Quick Read", title: badgeTitle(m), meta: ["Game Overview"], proTip: pt.overview || m.proTip, holdMs: holdMs, render: overviewPageRender(m), navKind: "Overview", navSub: "Game Overview" });
+      if (key === "rundown") return Object.assign({}, base, { id: m.game + "-spotlight", eyebrow: m.maker, title: badgeTitle(m), meta: ["The Rundown"], proTip: pt.rundown || m.proTip, holdMs: spotCycleMs, render: spotlightRender(m), navKind: "Rundown", navSub: "The Six-Box Rundown" });
+      if (key === "modes") {
+        const modeLabel = (pg.modes || {}).title || "Mode Overview";
+        const modeCount = ((pg.modes || {}).boxes || []).length || 1;
+        return Object.assign({}, base, { id: m.game + "-modes", eyebrow: "How Each One Plays", title: badgeLabel(m, modeLabel), meta: [m.title], pageLabel: modeLabel, proTip: pt.modes || m.proTip, holdMs: spotHold(modeCount), render: modesPageRender(m), navKind: "Modes", navSub: modeLabel });
+      }
+      if (key === "multiball") {
+        const mbCount = (pg.multiballs || []).length || 1;
+        return Object.assign({}, base, { id: m.game + "-mb", eyebrow: m.maker, title: badgeTitle(m), meta: ["Multiball Overview"], proTip: pt.multiball || m.proTip, holdMs: spotHold(mbCount), render: multiballsPageRender(m), navKind: "Multiball", navSub: "Multiball Overview" });
+      }
+      if (key === "strategy") {
+        const stratCount = (pg.strategy || []).length || 1;
+        return Object.assign({}, base, { id: m.game + "-strat", eyebrow: "Play It Smart", title: badgeTitle(m), meta: ["Strategy & Tips"], proTip: pt.strategy || m.proTip, holdMs: spotHold(stratCount), render: strategyPageRender(m), navKind: "Strategy", navSub: "Strategy & Tips" });
+      }
+      if (key === "hold") return Object.assign({}, base, { id: m.game + "-hold", eyebrow: "The Lockedown", title: badgeTitle(m), meta: ["Now Playing"], proTip: pt.hold || m.proTip, holdMs: holdMs, render: holdRender(m), navKind: "Hold", navSub: "Now Playing" });
+      // custom themed section page (e.g. movies, villains, henchmen)
+      const sec = (pg.sections || {})[key] || {};
+      const secTitle = sec.title || key;
+      const n = (sec.boxes || []).length || 1;
+      return Object.assign({}, base, { id: m.game + "-" + key, eyebrow: sec.eyebrow || m.maker, title: badgeLabel(m, secTitle), meta: [secTitle], proTip: tip, holdMs: spotHold(n), render: sectionPageRender(m, key), navKind: "Section", navSub: secTitle });
+    };
+
     MACHINES.forEach((m, i) => {
       const pg = PAGES[m.game] || {};
-      const modeCount = ((pg.modes || {}).boxes || []).length || 1;
-      const mbCount = (pg.multiballs || []).length || 1;
-      const stratCount = (pg.strategy || []).length || 1;
-      const modeLabel = (pg.modes || {}).title || "Mode Overview";
-
-      scenes.push({ id: "floor-" + m.game, kind: "overview", eyebrow: "The Lockedown", title: "On The Floor",
+      scenes.push({ id: "floor-" + m.game, kind: "overview", game: "floor", eyebrow: "The Lockedown", title: "On The Floor",
         meta: ["Now Up \u00B7 " + m.title], gameName: "The Lockedown",
-        proTip: "Eight machines, one basement. Up next: " + m.title + ".", holdMs: overviewMs, render: overviewFn(m.game) });
-      scenes.push({ id: m.game + "-intro", kind: "machine", game: m.game, eyebrow: "Get To Know The Line-Up", title: badgeTitle(m),
-        meta: [m.maker], gameName: m.title, proTip: m.proTip, holdMs: holdMs, render: introRender(m) });
-      scenes.push({ id: m.game + "-gameoverview", kind: "machine", game: m.game, eyebrow: "The Quick Read", title: badgeTitle(m),
-        meta: ["Game Overview"], gameName: m.title, proTip: m.proTip, holdMs: holdMs, render: overviewPageRender(m) });
-      scenes.push({ id: m.game + "-spotlight", kind: "machine", game: m.game, eyebrow: m.maker, title: badgeTitle(m),
-        meta: ["The Rundown"], gameName: m.title, proTip: m.proTip, holdMs: spotCycleMs, render: spotlightRender(m) });
-      scenes.push({ id: m.game + "-modes", kind: "machine", game: m.game, eyebrow: "How Each One Plays", title: badgeLabel(m, modeLabel),
-        meta: [m.title], gameName: m.title, pageLabel: modeLabel, proTip: m.proTip, holdMs: spotHold(modeCount), render: modesPageRender(m) });
-      scenes.push({ id: m.game + "-mb", kind: "machine", game: m.game, eyebrow: m.maker, title: badgeTitle(m),
-        meta: ["Multiball Overview"], gameName: m.title, proTip: m.proTip, holdMs: spotHold(mbCount), render: multiballsPageRender(m) });
-      scenes.push({ id: m.game + "-strat", kind: "machine", game: m.game, eyebrow: "Play It Smart", title: badgeTitle(m),
-        meta: ["Strategy & Tips"], gameName: m.title, proTip: m.proTip, holdMs: spotHold(stratCount), render: strategyPageRender(m) });
+        proTip: "", holdMs: overviewMs, render: overviewFn(m.game) });
+      const seq = (Array.isArray(pg.sequence) && pg.sequence.length) ? pg.sequence : DEFAULT_SEQ;
+      seq.forEach((key) => { const sc = makeScene(m, key); if (sc) scenes.push(sc); });
       const g = generalScenes[i % generalScenes.length];
       scenes.push({ id: m.game + "-gen-" + g.id, kind: "general", eyebrow: g.eyebrow, title: g.title, meta: g.meta,
         gameName: "The Lockedown", proTip: g.proTip, holdMs: breatherMs, render: g.render });
@@ -499,12 +558,7 @@ class Component extends DCLogic {
     const navOf = (s) => {
       if (s.kind === "overview") return { kind: "Floor", label: "On The Floor", sub: (s.meta && s.meta[0]) || "" };
       if (s.kind === "machine") {
-        var id = s.id || "";
-        if (id.endsWith("-gameoverview")) return { kind: "Overview", label: s.gameName, sub: "Game Overview" };
-        if (id.endsWith("-spotlight")) return { kind: "Rundown", label: s.gameName, sub: "The Six-Box Rundown" };
-        if (id.endsWith("-modes")) return { kind: "Modes", label: s.gameName, sub: s.pageLabel || "Mode Overview" };
-        if (id.endsWith("-mb")) return { kind: "Multiball", label: s.gameName, sub: "Multiball Overview" };
-        if (id.endsWith("-strat")) return { kind: "Strategy", label: s.gameName, sub: "Strategy & Tips" };
+        if (s.navKind) return { kind: s.navKind, label: s.gameName, sub: s.navSub || "" };
         return { kind: "Intro", label: s.gameName, sub: "Machine & Credits" };
       }
       return { kind: "Break", label: s.title, sub: (s.meta && s.meta[0]) || "" };
