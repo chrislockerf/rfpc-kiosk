@@ -1,0 +1,314 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/signage/**",
+              "ui_kits/signage/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Oswald|Playfair Display|Barlow Semi Condensed|Space Mono))/i]",
+        "message": "Font not provided by the design system. Available: Oswald, Playfair Display, Barlow Semi Condensed, Space Mono."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Chip'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|tone|icon|style|key|ref|className|style|children)$/]",
+        "message": "<Chip> doesn't accept that prop. Declared props: children, tone, icon, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Chip'] > JSXAttribute[name.name='tone'] > Literal[value!=/^(?:accent|brass|ghost)$/]",
+        "message": "<Chip> tone must be one of 'accent' | 'brass' | 'ghost'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='FilmTile'] > JSXAttribute > JSXIdentifier[name!=/^(?:ordinal|title|meta|style|key|ref|className|style|children)$/]",
+        "message": "<FilmTile> doesn't accept that prop. Declared props: ordinal, title, meta, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='KioskSection'] > JSXAttribute > JSXIdentifier[name!=/^(?:index|kicker|title|teaser|detail|key|ref|className|style|children)$/]",
+        "message": "<KioskSection> doesn't accept that prop. Declared props: index, kicker, title, teaser, detail."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='MarqueeHeader'] > JSXAttribute > JSXIdentifier[name!=/^(?:eyebrow|title|meta|badge|style|key|ref|className|style|children)$/]",
+        "message": "<MarqueeHeader> doesn't accept that prop. Declared props: eyebrow, title, meta, badge, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='SectionPanel'] > JSXAttribute > JSXIdentifier[name!=/^(?:index|kicker|title|lead|children|emphasis|underline|style|key|ref|className|style|children)$/]",
+        "message": "<SectionPanel> doesn't accept that prop. Declared props: index, kicker, title, lead, children, emphasis, underline, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ShotRow'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|target|children|marker|style|key|ref|className|style|children)$/]",
+        "message": "<ShotRow> doesn't accept that prop. Declared props: label, target, children, marker, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ShowReelScene'] > JSXAttribute > JSXIdentifier[name!=/^(?:id|kind|game|eyebrow|title|meta|proTip|gameName|holdMs|render|key|ref|className|style|children)$/]",
+        "message": "<ShowReelScene> doesn't accept that prop. Declared props: id, kind, game, eyebrow, title, meta, proTip, gameName, holdMs, render."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ShowReelScene'] > JSXAttribute[name.name='kind'] > Literal[value!=/^(?:machine|general|overview)$/]",
+        "message": "<ShowReelScene> kind must be one of 'machine' | 'general' | 'overview'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='SignageFooter'] > JSXAttribute > JSXIdentifier[name!=/^(?:proTip|proTipLabel|gameName|gameLogo|rfpcBadge|style|key|ref|className|style|children)$/]",
+        "message": "<SignageFooter> doesn't accept that prop. Declared props: proTip, proTipLabel, gameName, gameLogo, rfpcBadge, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='StageFrame'] > JSXAttribute > JSXIdentifier[name!=/^(?:game|header|footer|children|fit|style|key|ref|className|style|children)$/]",
+        "message": "<StageFrame> doesn't accept that prop. Declared props: game, header, footer, children, fit, style."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "Chip": {
+        "replaces": []
+      },
+      "FilmTile": {
+        "replaces": []
+      },
+      "KioskSection": {
+        "replaces": []
+      },
+      "MarqueeHeader": {
+        "replaces": []
+      },
+      "SectionPanel": {
+        "replaces": []
+      },
+      "ShotRow": {
+        "replaces": []
+      },
+      "ShowReelScene": {
+        "replaces": []
+      },
+      "SignageFooter": {
+        "replaces": []
+      },
+      "StageFrame": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--accent",
+      "--accent-bright",
+      "--accent-deep",
+      "--accent-glow",
+      "--accent-ink",
+      "--bg-page",
+      "--bg-stage",
+      "--border-accent",
+      "--border-hair",
+      "--border-panel",
+      "--brass-100",
+      "--brass-300",
+      "--brass-500",
+      "--cream-050",
+      "--cream-100",
+      "--cream-200",
+      "--cream-300",
+      "--cream-400",
+      "--dur-fast",
+      "--dur-med",
+      "--dur-slow",
+      "--ease-cinema",
+      "--font-body",
+      "--font-marquee",
+      "--font-mono",
+      "--font-serif",
+      "--footer-h",
+      "--forest-300",
+      "--forest-400",
+      "--forest-500",
+      "--forest-600",
+      "--forest-700",
+      "--forest-800",
+      "--forest-900",
+      "--glow-accent-md",
+      "--glow-accent-sm",
+      "--glow-text",
+      "--hair",
+      "--header-h",
+      "--lh-body",
+      "--lh-snug",
+      "--lh-tight",
+      "--marquee-rule",
+      "--r-lg",
+      "--r-md",
+      "--r-pill",
+      "--r-sm",
+      "--rim-accent",
+      "--rule",
+      "--safe-bottom",
+      "--safe-top",
+      "--safe-x",
+      "--shadow-lift",
+      "--shadow-panel",
+      "--sp-1",
+      "--sp-2",
+      "--sp-3",
+      "--sp-4",
+      "--sp-5",
+      "--sp-6",
+      "--sp-7",
+      "--sp-8",
+      "--stage-h",
+      "--stage-vignette",
+      "--stage-w",
+      "--surface-panel",
+      "--surface-raised",
+      "--t-body",
+      "--t-h1",
+      "--t-h2",
+      "--t-label",
+      "--t-lead",
+      "--t-marquee",
+      "--t-micro",
+      "--text-accent",
+      "--text-body",
+      "--text-brand",
+      "--text-faint",
+      "--text-muted",
+      "--text-strong",
+      "--track-eyebrow",
+      "--track-label",
+      "--track-marquee",
+      "--w-bold",
+      "--w-light",
+      "--w-medium",
+      "--w-regular",
+      "--w-semibold"
+    ],
+    "tokenKinds": {
+      "--forest-900": "color",
+      "--forest-800": "color",
+      "--forest-700": "color",
+      "--forest-600": "color",
+      "--forest-500": "color",
+      "--forest-400": "color",
+      "--forest-300": "color",
+      "--cream-050": "color",
+      "--cream-100": "color",
+      "--cream-200": "color",
+      "--cream-300": "color",
+      "--cream-400": "color",
+      "--brass-100": "color",
+      "--brass-300": "color",
+      "--brass-500": "color",
+      "--accent": "color",
+      "--accent-bright": "color",
+      "--accent-deep": "color",
+      "--accent-glow": "color",
+      "--accent-ink": "color",
+      "--bg-stage": "color",
+      "--bg-page": "color",
+      "--surface-panel": "color",
+      "--surface-raised": "color",
+      "--border-hair": "color",
+      "--border-panel": "color",
+      "--border-accent": "color",
+      "--text-strong": "font",
+      "--text-body": "font",
+      "--text-muted": "font",
+      "--text-faint": "font",
+      "--text-brand": "font",
+      "--text-accent": "font",
+      "--font-marquee": "font",
+      "--font-serif": "font",
+      "--font-body": "font",
+      "--font-mono": "font",
+      "--w-light": "font",
+      "--w-regular": "font",
+      "--w-medium": "font",
+      "--w-semibold": "font",
+      "--w-bold": "font",
+      "--t-marquee": "font",
+      "--t-h1": "font",
+      "--t-h2": "font",
+      "--t-lead": "font",
+      "--t-body": "font",
+      "--t-label": "font",
+      "--t-micro": "font",
+      "--track-marquee": "font",
+      "--track-eyebrow": "font",
+      "--track-label": "font",
+      "--lh-tight": "font",
+      "--lh-snug": "font",
+      "--lh-body": "font",
+      "--sp-1": "spacing",
+      "--sp-2": "spacing",
+      "--sp-3": "spacing",
+      "--sp-4": "spacing",
+      "--sp-5": "spacing",
+      "--sp-6": "spacing",
+      "--sp-7": "spacing",
+      "--sp-8": "spacing",
+      "--stage-w": "spacing",
+      "--stage-h": "spacing",
+      "--safe-x": "spacing",
+      "--safe-top": "spacing",
+      "--safe-bottom": "spacing",
+      "--header-h": "spacing",
+      "--footer-h": "spacing",
+      "--r-sm": "spacing",
+      "--r-md": "spacing",
+      "--r-lg": "spacing",
+      "--r-pill": "spacing",
+      "--hair": "spacing",
+      "--rule": "spacing",
+      "--marquee-rule": "spacing",
+      "--shadow-panel": "shadow",
+      "--shadow-lift": "shadow",
+      "--glow-accent-sm": "color",
+      "--glow-accent-md": "color",
+      "--glow-text": "font",
+      "--stage-vignette": "color",
+      "--rim-accent": "other",
+      "--ease-cinema": "other",
+      "--dur-slow": "other",
+      "--dur-med": "other",
+      "--dur-fast": "other"
+    },
+    "fontFamilies": [
+      "Barlow Semi Condensed",
+      "Oswald",
+      "Playfair Display",
+      "Space Mono"
+    ]
+  }
+}

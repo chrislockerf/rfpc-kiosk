@@ -1,0 +1,128 @@
+/* ============================================================
+   RFPC — COLOR SYSTEM
+   Family: warm VELVET-BLACK base + BRASS gold constant + CREAM
+   light (#e3dfcb, from the brand marks). A premium basement-arcade
+   "velvet-rope speakeasy" — a near-neutral dark stage so each of the
+   8 machines' vivid --accent pops at full strength from 10+ feet.
+   Ramp tokens are still named --forest-* for compatibility; their
+   values are the velvet-black (warm, whisper-of-brown) ramp.
+   ============================================================ */
+
+:root {
+  /* --- Velvet-black ramp (the RFPC "velvet") — warm near-black --- */
+  --forest-900: #0d0b0a;   /* deepest backdrop / letterbox */
+  --forest-800: #141110;   /* page background */
+  --forest-700: #1b1715;   /* raised section behind panels */
+  --forest-600: #211c19;   /* ★ panel base */
+  --forest-500: #2b2521;   /* panel edge / raised */
+  --forest-400: #3a332d;   /* hairline / hover lift */
+  --forest-300: #4e453c;   /* muted stroke */
+
+  /* --- Cream/bone ramp (brand light) --- */
+  --cream-050: #f4f1e6;
+  --cream-100: #e3dfcb;   /* ★ brand cream — primary text/marks */
+  --cream-200: #cfcab2;   /* secondary text */
+  --cream-300: #a7a488;   /* tertiary / captions */
+  --cream-400: #7c7d63;   /* dim label (warm olive-grey) */
+
+  /* --- Brass: RFPC family warmth (constant across games) --- */
+  --brass-100: #ecd493;
+  --brass-300: #cda744;   /* club gold — rules, marquee glow */
+  --brass-500: #8f7526;
+
+  /* --- Per-game accent. Overridden on [data-game] scopes. --- */
+  --accent:        var(--brass-300);
+  --accent-bright: var(--brass-100);
+  --accent-deep:   #4a3c11;
+  --accent-glow:   rgba(205, 167, 68, 0.42);
+  --accent-ink:    #0d0b0a;   /* text that sits ON the accent fill */
+
+  /* --- Semantic aliases (author against these) --- */
+  --bg-stage:       var(--forest-900);
+  --bg-page:        var(--forest-800);
+  --surface-panel:  var(--forest-600);
+  --surface-raised: var(--forest-500);
+  --border-hair:    rgba(227, 223, 203, 0.10);
+  --border-panel:   rgba(227, 223, 203, 0.16);
+  --border-accent:  var(--accent);
+
+  --text-strong:  var(--cream-100);
+  --text-body:    var(--cream-200);
+  --text-muted:   var(--cream-300);
+  --text-faint:   var(--cream-400);
+  --text-brand:   var(--brass-300);
+  --text-accent:  var(--accent-bright);
+}
+
+/* ============================================================
+   PER-GAME ACCENT SCOPES
+   Apply data-game="…" on the page shell. Every game keeps the
+   forest+cream family and swaps only its own --accent set.
+   ============================================================ */
+
+/* The Lockedown floor — 8 machines. Each keeps forest+cream; only --accent
+   swaps. Colors drawn from each title's own theme. */
+
+[data-game="stranger-things"] {
+  --accent:        #e23636;   /* Upside Down red */
+  --accent-bright: #f5807f;
+  --accent-deep:   #4a0d0d;
+  --accent-glow:   rgba(226, 54, 54, 0.42);
+  --accent-ink:    #0d0202;
+}
+
+[data-game="godzilla"] {
+  --accent:        #35c46b;   /* atomic green */
+  --accent-bright: #85e8a8;
+  --accent-deep:   #0d3a20;
+  --accent-glow:   rgba(53, 196, 107, 0.42);
+  --accent-ink:    #03110a;
+}
+
+[data-game="james-bond"] {
+  --accent:        #4d93ea;   /* 007 smart-missile blue */
+  --accent-bright: #9cc4f6;
+  --accent-deep:   #13324f;
+  --accent-glow:   rgba(77, 147, 234, 0.42);
+  --accent-ink:    #050c15;
+}
+
+[data-game="deadpool"] {
+  --accent:        #b01f2b;   /* merc crimson (deep) */
+  --accent-bright: #e56472;
+  --accent-deep:   #3a0810;
+  --accent-glow:   rgba(176, 31, 43, 0.42);
+  --accent-ink:    #0d0203;
+}
+
+[data-game="foo-fighters"] {
+  --accent:        #e2701f;   /* stage-light orange (warm) */
+  --accent-bright: #f5a462;
+  --accent-deep:   #48230a;
+  --accent-glow:   rgba(226, 112, 31, 0.42);
+  --accent-ink:    #0e0702;
+}
+
+[data-game="jurassic-park"] {
+  --accent:        #e0a020;   /* amber / jungle gold */
+  --accent-bright: #f5cd63;
+  --accent-deep:   #4a3407;
+  --accent-glow:   rgba(224, 160, 32, 0.42);
+  --accent-ink:    #0e0a02;
+}
+
+[data-game="monster-bash"] {
+  --accent:        #9d6ae0;   /* spooky purple */
+  --accent-bright: #c3a2f2;
+  --accent-deep:   #2f1a4d;
+  --accent-glow:   rgba(157, 106, 224, 0.42);
+  --accent-ink:    #08040e;
+}
+
+[data-game="john-wick"] {
+  --accent:        #26b0c9;   /* neon-noir Continental cyan */
+  --accent-bright: #79d4e5;
+  --accent-deep:   #08414c;
+  --accent-glow:   rgba(38, 176, 201, 0.42);
+  --accent-ink:    #021014;
+}

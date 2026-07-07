@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./ds-base.js"></script>
+<script src="./image-slot.js"></script>
+<script src="./content.js"></script>
+<style>
+  /* Footer override (SignageFooter is a design-system primitive we don't edit):
+     drop the redundant center game-name + diamonds, and give the pro-tip the
+     room to sit left in a bigger serif. */
+  footer > div:nth-child(2) { display: none !important; }
+  footer > div:nth-child(3) {
+    grid-column: 2 / 4 !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+  footer > div:nth-child(3) > span { white-space: nowrap !important; }
+  footer > div:nth-child(3) > p {
+    font-size: 34px !important;
+    max-width: none !important;
+    line-height: 1.24 !important;
+  }
+</style>
+</helmet>
+<div style="position:fixed; inset:0;">{{ app }}</div></x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1920,&quot;height&quot;:1080},&quot;holdSec&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:11,&quot;min&quot;:6,&quot;max&quot;:20,&quot;step&quot;:1,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Pacing&quot;},&quot;spotlightBoxSec&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:8,&quot;min&quot;:5,&quot;max&quot;:16,&quot;step&quot;:1,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Pacing&quot;},&quot;breatherHoldSec&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:9,&quot;min&quot;:5,&quot;max&quot;:16,&quot;step&quot;:1,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Pacing&quot;},&quot;reviewControls&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;auto&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;always&quot;,&quot;hidden&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Review&quot;}}">
+class Component extends DCLogic {
+  state = { paused: false, targetIdx: 0, navToken: 0, tocOpen: false, controlsVisible: false };
+  mainKey = "rfpc-lockedown-kiosk";
+
+  // retry a failed image a few times with backoff + cache-bust (transient serve
+  // misses during loop transitions otherwise leave a photo/badge blank). Class
+  // field so it exists on the very first render, before componentDidMount.
+  _imgRetry = (ev) => {
+    const el = ev.currentTarget || ev.target;
+    if (!el || !el.dataset) return;
+    const n = +(el.dataset.retry || 0);
+    if (n >= 5) return;
+    el.dataset.retry = String(n + 1);
+    const base = (el.getAttribute("src") || "").split("?")[0];
+    setTimeout(() => { el.src = base + "?r=" + Date.now(); }, 350 * (n + 1));
+  };
+
+  componentDidMount() {
+    this._onKey = (e) => {
+      const t = e.target;
+      if (t && /INPUT|TEXTAREA|SELECT|BUTTON/.test(t.tagName)) return;
+      if (e.key === " " || e.code === "Space") { e.preventDefault(); this.togglePlay(); }
+      else if (e.key === "ArrowRight") { e.preventDefault(); this.step(1); }
+      else if (e.key === "ArrowLeft") { e.preventDefault(); this.step(-1); }
+      else if (e.key === "c" || e.key === "C") { this.setState((s) => ({ tocOpen: !s.tocOpen })); }
+      else if (e.key === "Escape") { this.setState({ tocOpen: false }); }
+    };
+    this._onMove = () => {
+      if (!this.state.controlsVisible) this.setState({ controlsVisible: true });
+      clearTimeout(this._hideT);
+      this._hideT = setTimeout(() => this.setState({ controlsVisible: false }), 3200);
+    };
+    window.addEventListener("keydown", this._onKey);
+    window.addEventListener("mousemove", this._onMove);
+
+    // Photos/badges unmount and refetch on every loop cycle; warm the browser
+    // cache once so repeat cycles serve from memory, not the network (which
+    // occasionally drops a request mid-transition). Retry-on-error (_imgRetry,
+    // a class field) recovers any miss that still slips through.
+    this._warm = [];
+    this._warmCache = () => {
+      if (this._warmed) return;
+      const C = window.RFPC_CONTENT;
+      if (!C || !C.machines) return;
+      this._warmed = true;
+      C.machines.forEach((m) => {
+        ["cabinet", "playfield"].forEach((k) => {
+          const im = new Image();
+          im.src = "assets/" + m.game + "-" + k + "-cut.png";
+          this._warm.push(im);
+        });
+      });
+    };
+    this._warmCache();
+
+    // the DS bundle loads async; re-render once ShowReel is available
+    const ready = () => window.RFPCDesignSystem_18f9c3 && window.RFPCDesignSystem_18f9c3.ShowReel && window.RFPC_CONTENT;
+    if (!ready()) {
+      this._dsPoll = setInterval(() => { if (ready()) { clearInterval(this._dsPoll); this._warmCache(); this.forceUpdate(); } }, 80);
+    }
+  }
+  componentWillUnmount() {
+    window.removeEventListener("keydown", this._onKey);
+    window.removeEventListener("mousemove", this._onMove);
+    clearTimeout(this._hideT);
+    clearInterval(this._dsPoll);
+  }
+  _count() { return this._sceneCount || 1; }
+  // ShowReel owns its own idx; it re-reads its resume key whenever `storageKey`
+  // changes. So we never shrink the scenes array (that would leave ShowReel's
+  // idx out of range → crash). To navigate while paused we hand it a fresh
+  // per-target key whose stored value is the target index.
+  readMain() {
+    const n = this._count();
+    const s = parseInt(window.localStorage.getItem(this.mainKey), 10);
+    return Number.isNaN(s) ? 0 : ((s % n) + n) % n;
+  }
+  currentIdx() { return this.state.paused ? this.state.targetIdx : this.readMain(); }
+  gotoPaused(target) {
+    const n = this._count();
+    const t = (((target % n) + n) % n);
+    const tok = this.state.navToken + 1;
+    window.localStorage.setItem("rfpc-nav-" + tok, String(t));
+    this.setState({ paused: true, targetIdx: t, navToken: tok, tocOpen: false });
+  }
+  togglePlay() {
+    if (this.state.paused) {
+      window.localStorage.setItem(this.mainKey, String(this.state.targetIdx));
+      this.setState({ paused: false, tocOpen: false });
+    } else {
+      this.gotoPaused(this.readMain());
+    }
+  }
+  step(d) { this.gotoPaused(this.currentIdx() + d); }
+  jump(i) { this.gotoPaused(i); }
+
+  renderVals() {
+    const DS = window.RFPCDesignSystem_18f9c3 || {};
+    const { ShotRow, Chip } = DS;
+    const h = React.createElement;
+
+    // AutoFit — guarantees a detail node never overflows (clips) its spotlight
+    // box: measures natural layout height (transform-independent offsetHeight)
+    // and scales the content down to fit. When content already fits, scale is 1
+    // and the inner stays a full-height flex column so flex:1 spacers still pin
+    // chips / pro-tips to the bottom.
+    if (!this._AutoFit) {
+      this._AutoFit = function AutoFit(props) {
+        const outer = React.useRef(null);
+        const inner = React.useRef(null);
+        const scaleRef = React.useRef(1);
+        const [scale, setScale] = React.useState(1);
+        React.useLayoutEffect(function () {
+          const o = outer.current, n = inner.current;
+          if (!o || !n) return;
+          let raf = 0;
+          const measure = function () {
+            const avail = o.clientHeight;
+            const natural = n.offsetHeight; // unaffected by CSS transform
+            const s = (avail > 0 && natural > avail + 1) ? Math.max(0.4, avail / natural) : 1;
+            if (Math.abs(s - scaleRef.current) > 0.004) { scaleRef.current = s; setScale(s); }
+          };
+          const schedule = function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(measure); };
+          schedule();
+          const ro = new ResizeObserver(schedule);
+          ro.observe(o); ro.observe(n);
+          return function () { cancelAnimationFrame(raf); ro.disconnect(); };
+        });
+        return h("div", { ref: outer, style: { position: "relative", height: "100%", width: "100%", overflow: "hidden" } },
+          h("div", { ref: inner, style: { minHeight: "100%", width: "100%", display: "flex", flexDirection: "column", transformOrigin: "0 0", transform: "scale(" + scale + ")" } }, props.children));
+      };
+    }
+    const AutoFit = this._AutoFit;
+    const fit = function (node) { return h(AutoFit, null, node); };
+
+    const holdMs = Math.round((this.props.holdSec ?? 11) * 1000);
+    const breatherMs = Math.round((this.props.breatherHoldSec ?? 9) * 1000);
+    const overviewMs = 6500;
+    const boxHoldMs = Math.round((this.props.spotlightBoxSec ?? 8) * 1000);
+    const spotExpandMs = 720, spotGapMs = 1400, spotIntroMs = 2600;
+    const spotCycleMs = spotIntroMs + 6 * (2 * spotExpandMs + boxHoldMs + spotGapMs) + 900;
+    const spotHold = (n) => spotIntroMs + Math.max(1, n) * (2 * spotExpandMs + boxHoldMs + spotGapMs) + 900;
+
+    // ---------- presentational helpers (inline styles only) ----------
+    const root = { position: "absolute", inset: 0, display: "flex", flexDirection: "column", minHeight: 0 };
+    const lead = (txt) => h("p", { style: { margin: "0 0 var(--sp-4)", fontSize: "var(--t-lead)", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: "88ch" } }, txt);
+    const board = (cols, kids) => h("div", { style: { flex: 1, minHeight: 0, display: "grid", gridTemplateColumns: "repeat(" + cols + ", 1fr)", gap: "var(--sp-4)" } }, kids);
+    const cell = (children, glow) => h("div", {
+      style: {
+        position: "relative", display: "flex", flexDirection: "column", minHeight: 0, overflow: "hidden",
+        padding: "var(--sp-5)", borderRadius: "var(--r-lg)",
+        background: "linear-gradient(155deg, var(--surface-raised), var(--surface-panel))",
+        border: "var(--hair) solid var(--border-panel)",
+        boxShadow: glow ? "var(--shadow-lift), var(--glow-accent-sm)" : "var(--shadow-panel)",
+      },
+    }, h("div", { key: "rim", "aria-hidden": "true", style: { position: "absolute", inset: "0 0 auto 0", height: 3, background: "var(--accent)", opacity: 0.9 } }), children);
+    const cellHead = (kicker, title) => h("div", { style: { marginBottom: "var(--sp-3)" } }, [
+      kicker ? h("div", { key: "k", className: "rfpc-eyebrow", style: { color: "var(--text-faint)", marginBottom: 6 } }, kicker) : null,
+      h("div", { key: "t", style: { fontFamily: "var(--font-marquee)", fontWeight: "var(--w-bold)", fontSize: "var(--t-h1)", lineHeight: "var(--lh-snug)", textTransform: "uppercase", color: "var(--text-strong)" } }, title),
+    ]);
+    const para = (txt, big) => h("p", { style: { margin: 0, fontSize: big ? "var(--t-lead)" : "var(--t-body)", lineHeight: "var(--lh-body)", color: "var(--text-body)" } }, txt);
+    const italic = (txt, size) => h("p", { className: "rfpc-serif-italic", style: { margin: 0, fontSize: (size || 26) + "px", lineHeight: 1.3, color: "var(--text-strong)" } }, txt);
+
+    // =====================================================================
+    // CONTENT — all editable copy lives in content.js (window.RFPC_CONTENT)
+    // =====================================================================
+    const C = window.RFPC_CONTENT || {};
+    const MACHINES = C.machines || [];
+
+    // =====================================================================
+    // PER-TABLE EXTRAS — credits + the six-box content (multiballs, skills,
+    // action button, tips). Modes reuse m.shots; wizard reuses m.wizard.
+    // =====================================================================
+    const EXTRA = C.extra || {};
+    const PAGES = C.pages || {};
+
+    // ---------- spotlight detail builders (used inside KioskShow) ----------
+    const detailRows = (leadTxt, rows, cols) => fit(h(React.Fragment, null,
+      leadTxt ? h("p", { key: "l", style: { margin: "0 0 var(--sp-4)", fontSize: "var(--t-lead)", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: "48ch" } }, leadTxt) : null,
+      h("div", { key: "r", style: cols === 2 ? { display: "grid", gridTemplateColumns: "1fr 1fr", columnGap: "var(--sp-6)", rowGap: 0, alignContent: "start" } : null }, (rows || []).map((r, i) => ShotRow ? h(ShotRow, { key: i, label: r.label, target: r.target }, r.desc) : null))));
+    const wizardDetail = (w) => fit(h(React.Fragment, null,
+      h("p", { key: "b", style: { margin: 0, fontSize: "var(--t-lead)", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: "52ch" } }, w.body),
+      h("div", { key: "sp", style: { flex: 1 } }),
+      Chip ? h(Chip, { key: "c", tone: "brass", style: { alignSelf: "flex-start" } }, w.chip) : null));
+    const tipsDetail = (t) => fit(h(React.Fragment, null,
+      h("div", { key: "rows", style: { display: "flex", flexDirection: "column", gap: "var(--sp-4)" } },
+        t.rows.map((r, i) => h("div", { key: i },
+          h("span", { style: { fontFamily: "var(--font-marquee)", fontWeight: "var(--w-bold)", textTransform: "uppercase", color: "var(--text-strong)", fontSize: "var(--t-h2)" } }, r.name),
+          h("span", { style: { color: "var(--text-faint)", margin: "0 12px" } }, "\u2014"),
+          h("span", { style: { fontSize: "var(--t-body)", color: "var(--text-body)" } }, r.body)))),
+      h("div", { key: "sp", style: { flex: 1 } }),
+      h("p", { key: "pt", className: "rfpc-serif-italic", style: { margin: "var(--sp-4) 0 0", fontSize: "var(--t-lead)", color: "var(--text-strong)" } }, t.proTip)));
+
+    // ---------- OVERVIEW: the floor ----------
+    const overviewFn = (featured) => () => h("div", { style: root },
+      h("div", { style: { flex: 1, minHeight: 0, display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridTemplateRows: "repeat(2, 1fr)", gap: "var(--sp-4)" } },
+        MACHINES.map((m, i) => {
+          const on = m.game === featured;
+          return h("div", { key: m.game, "data-game": m.game, style: {
+            position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "flex-start",
+            padding: "var(--sp-4)", borderRadius: "var(--r-lg)",
+            background: on ? "linear-gradient(155deg, var(--surface-raised), var(--surface-panel))" : "linear-gradient(160deg, color-mix(in srgb, var(--surface-panel) 92%, transparent), color-mix(in srgb, var(--forest-800) 90%, transparent))",
+            border: "var(--hair) solid var(--border-panel)",
+            boxShadow: on ? "var(--shadow-lift), var(--glow-accent-md)" : "var(--shadow-panel)",
+            opacity: on ? 1 : 0.78,
+          } },
+            on ? h("div", { key: "spine", "aria-hidden": "true", style: { position: "absolute", left: 0, top: 0, bottom: 0, width: 5, background: "var(--accent)", boxShadow: "var(--glow-accent-md)" } }) : null,
+            h("div", { key: "head", style: { display: "flex", alignItems: "flex-start", gap: 12 } },
+              h("span", { "aria-hidden": "true", style: { marginTop: 8, width: 16, height: 16, flex: "none", borderRadius: 999, background: "var(--accent)", boxShadow: "var(--glow-accent-sm)" } }),
+              h("div", { style: { minWidth: 0 } },
+                h("div", { style: { fontFamily: "var(--font-marquee)", fontWeight: "var(--w-bold)", fontSize: "28px", lineHeight: 1.02, textTransform: "uppercase", color: "var(--text-strong)", textWrap: "balance" } }, m.title),
+                h("div", { style: { marginTop: 6, fontFamily: "var(--font-mono)", fontSize: "var(--t-label)", color: "var(--text-muted)" } }, m.maker))),
+            h("div", { key: "logo", style: { flex: 1, minHeight: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "72px", paddingLeft: "0.4em" } }, logoNode(m.game)),
+            on && Chip ? h("div", { key: "chip", style: { display: "flex", justifyContent: "flex-end" } }, h(Chip, { tone: "accent" }, "Now Up")) : null
+          );
+        })
+      )
+    );
+
+    // per-machine supplied photos (transparent cutouts on the velvet stage)
+    const PHOTOS = {
+      "james-bond": { cab: "assets/james-bond-cabinet-cut.png", pf: "assets/james-bond-playfield-cut.png" },
+      "deadpool": { cab: "assets/deadpool-cabinet-cut.png", pf: "assets/deadpool-playfield-cut.png" },
+      "foo-fighters": { cab: "assets/foo-fighters-cabinet-cut.png", pf: "assets/foo-fighters-playfield-cut.png" },
+      "godzilla": { cab: "assets/godzilla-cabinet-cut.png", pf: "assets/godzilla-playfield-cut.png" },
+      "john-wick": { cab: "assets/john-wick-cabinet-cut.png", pf: "assets/john-wick-playfield-cut.png" },
+      "jurassic-park": { cab: "assets/jurassic-park-cabinet-cut.png", pf: "assets/jurassic-park-playfield-cut.png" },
+      "stranger-things": { cab: "assets/stranger-things-cabinet-cut.png", pf: "assets/stranger-things-playfield-cut.png" },
+      "monster-bash": { cab: "assets/monster-bash-cabinet-cut.png", pf: "assets/monster-bash-playfield-cut.png" },
+    };
+
+    // per-machine circular accent badge (inline monochrome SVG, recolors via --accent).
+    // Fill shapes use currentColor for the accent; negative space is cream.
+    const LOGOS = {
+      "deadpool": { imgColor: "assets/deadpool-badge.png" },
+      "foo-fighters": { imgColor: "assets/foo-fighters-badge.png" },
+      "jurassic-park": { img: "assets/jp-badge.png" },
+      "godzilla": { img: "assets/godzilla-badge.png", w: "1.2em" },
+      "john-wick": { img: "assets/john-wick-badge.png", w: "0.4em" },
+      "james-bond": { img: "assets/bond-badge.png", w: "3.1em" },
+      "stranger-things": { img: "assets/stranger-things-badge.png", w: "2.8em" },
+      "monster-bash": { img: "assets/monster-bash-badge.png", w: "1.15em" },
+    };
+    const logoNode = (game) => {
+      const e = LOGOS[game];
+      if (!e) return null;
+      const base = { display: "inline-block", height: "1.06em", flex: "none", marginRight: "0.4em", filter: "drop-shadow(0 0 10px color-mix(in srgb, var(--accent) 45%, transparent))" };
+      if (typeof e === "string") {
+        return h("span", { key: "logo", style: Object.assign({}, base, { width: "1.06em", color: "var(--accent)" }), dangerouslySetInnerHTML: { __html: e } });
+      }
+      if (e.imgColor) {
+        const round = e.round !== false;
+        return h("img", { key: "logo", src: e.imgColor, onError: this._imgRetry, style: Object.assign({}, base, { width: e.w || "1.14em", height: round ? (e.w || "1.14em") : "1.14em", borderRadius: round ? "50%" : 0, objectFit: round ? "cover" : "contain" }) });
+      }
+      return h("span", { key: "logo", style: Object.assign({}, base, { width: e.w || "1.06em", background: "var(--accent)", WebkitMaskImage: "url(" + e.img + ")", maskImage: "url(" + e.img + ")", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center", WebkitMaskSize: "contain", maskSize: "contain" }) });
+    };
+    const badgeTitle = (m) => LOGOS[m.game]
+      ? h("span", { style: { display: "inline-flex", alignItems: "center" } }, logoNode(m.game), m.title)
+      : m.title;
+    const badgeLabel = (m, label) => LOGOS[m.game]
+      ? h("span", { style: { display: "inline-flex", alignItems: "center" } }, logoNode(m.game), label)
+      : label;
+
+    // ---------- MACHINE: intro page (cabinet + playfield image + credits) ----------
+    const roleList = (credits) => h("div", { style: { display: "flex", flexDirection: "column", gap: "var(--sp-3)" } },
+      credits.map((c, i) => h("div", { key: i },
+        h("div", { style: { fontFamily: "var(--font-marquee)", fontWeight: "var(--w-bold)", fontSize: "19px", letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--accent-bright)" } }, c.role),
+        h("div", { style: { marginTop: 3, fontSize: "23px", lineHeight: 1.25, color: "var(--text-strong)" } }, c.names))));
+    const introRender = (m) => () => {
+      const x = EXTRA[m.game];
+      const ph = PHOTOS[m.game] || {};
+      const slot = (key, kind, srcPath, ph2) => srcPath
+        ? h("div", { key: key, style: { position: "relative", minHeight: 0, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden",
+            background: "radial-gradient(56% 46% at 50% 55%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 72%)" } },
+            h("img", { src: srcPath, alt: m.title + " " + ph2, onError: this._imgRetry, style: { maxWidth: "100%", maxHeight: "100%", objectFit: "contain", filter: "drop-shadow(0 20px 44px rgba(0,0,0,0.6))" } }))
+        : h("div", { key: key, style: { position: "relative", minHeight: 0, display: "flex" } },
+            h("image-slot", { id: kind + "-" + m.game, shape: "rect", fit: "cover", placeholder: "Drop the " + m.title + " " + ph2,
+              style: { width: "100%", height: "100%", background: "transparent" } }));
+      return h("div", { style: root },
+        h("div", { style: { flex: 1, minHeight: 0, display: "grid", gridTemplateColumns: "0.82fr 0.96fr 1.18fr", gap: "var(--sp-5)" } },
+          slot("cab", "cab", ph.cab, "cabinet"),
+          slot("pf", "pf", ph.pf, "playfield"),
+          cell([
+            h("div", { key: "hd", style: { marginBottom: "var(--sp-4)", paddingBottom: "var(--sp-3)", borderBottom: "var(--hair) solid var(--border-panel)" } },
+              h("div", { style: { fontFamily: "var(--font-marquee)", fontWeight: "var(--w-bold)", fontSize: "42px", lineHeight: 1.0, textTransform: "uppercase", color: "var(--text-strong)" } }, m.title),
+              h("div", { style: { marginTop: 8, fontFamily: "var(--font-mono)", fontSize: "var(--t-label)", letterSpacing: "0.04em", color: "var(--accent-bright)" } }, m.maker)),
+            roleList(x.credits),
+          ]),
+        )
+      );
+    };
+
+    // ---------- MACHINE: six-box spotlight (KioskShow) ----------
+    const spotlightRender = (m) => () => {
+      const x = EXTRA[m.game];
+      const KioskShow = DS.KioskShow;
+      if (!KioskShow) return h("div", { style: root });
+      const sections = [
+        { index: 1, kicker: "On The Playfield", title: "Modes & Battles", teaser: m.lead, detail: detailRows(null, m.shots, (m.shots || []).length >= 5 ? 2 : 1) },
+        { index: 2, kicker: "Balls Everywhere", title: "Key Multiballs", teaser: x.multiballs.lead, detail: detailRows(x.multiballs.lead, x.multiballs.rows) },
+        { index: 3, kicker: "The End Game", title: "Wizard Mode", teaser: m.wizard.title, detail: wizardDetail(m.wizard) },
+        { index: 4, kicker: "At The Plunge", title: "Skill Shots", teaser: x.skills.lead, detail: detailRows(x.skills.lead, x.skills.rows) },
+        { index: 5, kicker: x.button.kicker, title: x.button.title, teaser: x.button.lead, detail: detailRows(x.button.lead, x.button.rows) },
+        { index: 6, kicker: "House Advice", title: "Table Tips", teaser: x.tips.proTip, detail: tipsDetail(x.tips) },
+      ];
+      return h("div", { style: Object.assign({}, root, { paddingTop: "14px", paddingBottom: "72px" }) },
+        h(KioskShow, { sections: sections, columns: 3, storageKey: "rfpc-spot-" + m.game, introMs: spotIntroMs, holdMs: boxHoldMs, gapMs: spotGapMs, expandMs: spotExpandMs }));
+    };
+
+    // ---------- MACHINE: Game Overview (big bullet points) ----------
+    const overviewPageRender = (m) => () => {
+      const bullets = (PAGES[m.game] || {}).overview || [];
+      const bullet = (b, i) => h("div", { key: i, style: { display: "flex", alignItems: "flex-start", gap: "var(--sp-4)" } },
+        h("span", { "aria-hidden": "true", style: { marginTop: "0.42em", width: 16, height: 16, flex: "none", transform: "rotate(45deg)", background: "var(--accent)", boxShadow: "var(--glow-accent-sm)" } }),
+        h("p", { style: { margin: 0, fontSize: "33px", lineHeight: 1.22, color: "var(--text-strong)", textWrap: "balance" } }, b));
+      const half = Math.ceil(bullets.length / 2);
+      const col = (items, off) => h("div", { style: { display: "flex", flexDirection: "column", justifyContent: "center", gap: "var(--sp-6)" } }, items.map((b, i) => bullet(b, off + i)));
+      return h("div", { style: root },
+        h("div", { style: { flex: 1, minHeight: 0, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--sp-5) var(--sp-8)", alignItems: "center" } },
+          col(bullets.slice(0, half), 0),
+          col(bullets.slice(half), half))
+      );
+    };
+
+    // ---------- shared spotlight-page + box-detail builders ----------
+    const targetChip = (t) => (t && Chip) ? h(Chip, { tone: "accent", style: { alignSelf: "flex-start", marginBottom: "var(--sp-4)" } }, t) : null;
+    const boxDetail = (targetTxt, body) => fit(h(React.Fragment, null,
+      targetChip(targetTxt),
+      h("p", { style: { margin: 0, fontSize: "var(--t-lead)", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: "54ch" } }, body)));
+    const mbDetail = (b) => fit(h(React.Fragment, null,
+      targetChip(b.target),
+      h("p", { key: "d", style: { margin: 0, fontSize: "var(--t-lead)", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: "54ch" } }, b.detail),
+      b.jackpots ? h("div", { key: "j", style: { marginTop: "var(--sp-4)" } },
+        h("div", { className: "rfpc-eyebrow", style: { color: "var(--accent-bright)", marginBottom: 6 } }, "Jackpots"),
+        h("p", { style: { margin: 0, fontSize: "var(--t-body)", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: "54ch" } }, b.jackpots)) : null,
+      h("div", { key: "sp", style: { flex: 1, minHeight: "var(--sp-4)" } }),
+      b.tip ? h("p", { key: "t", className: "rfpc-serif-italic", style: { margin: 0, fontSize: "var(--t-lead)", color: "var(--text-strong)" } }, b.tip) : null));
+    const stratDetail = (body) => fit(h(React.Fragment, null,
+      h("p", { style: { margin: 0, fontSize: "34px", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: "54ch" } }, body)));
+    const spotlightPage = (m, suffix, sections, cols) => {
+      const KioskShow = DS.KioskShow;
+      if (!KioskShow) return h("div", { style: root });
+      return h("div", { style: Object.assign({}, root, { paddingTop: "14px", paddingBottom: "72px" }) },
+        h(KioskShow, { sections: sections, columns: cols, storageKey: "rfpc-" + suffix + "-" + m.game, introMs: spotIntroMs, holdMs: boxHoldMs, gapMs: spotGapMs, expandMs: spotExpandMs }));
+    };
+
+    // ---------- MACHINE: Mode Overview (editable per-game title) ----------
+    const modesPageRender = (m) => () => {
+      const boxes = ((PAGES[m.game] || {}).modes || {}).boxes || [];
+      const sections = boxes.map((b, i) => ({ index: i + 1, kicker: "How To Play It", title: b.name, teaser: b.target, detail: boxDetail(b.target, b.detail || "") }));
+      return spotlightPage(m, "modes", sections, boxes.length >= 5 ? 3 : 2);
+    };
+
+    // ---------- MACHINE: Multiball Overview ----------
+    const multiballsPageRender = (m) => () => {
+      const mbs = (PAGES[m.game] || {}).multiballs || [];
+      const sections = mbs.map((b, i) => ({ index: i + 1, kicker: "Balls Everywhere", title: b.name, teaser: b.target, detail: mbDetail(b) }));
+      return spotlightPage(m, "mb", sections, mbs.length <= 2 ? 2 : 3);
+    };
+
+    // ---------- MACHINE: Strategy & Tips ----------
+    const strategyPageRender = (m) => () => {
+      const st = (PAGES[m.game] || {}).strategy || [];
+      const sections = st.map((b, i) => ({ index: i + 1, kicker: "House Advice", title: b.name, detail: stratDetail(b.detail || "") }));
+      return spotlightPage(m, "strat", sections, 3);
+    };
+
+    // ---------- GENERAL: between-games combo (tip / lingo / real talk) ----------
+    const comboRender = (v) => () => h("div", { style: root },
+      lead(v.lead),
+      board(3, [
+        cell([cellHead("House Tip", v.tipTitle), para(v.tip, true)]),
+        cell([cellHead("Say It Right", v.lingoTitle), para(v.lingo, true)]),
+        cell([cellHead("Overheard", "Real Talk"), h("div", { key: "sp", style: { flex: 1 } }), italic(v.quip, 30)]),
+      ])
+    );
+    const COMBOS = C.combos || [];
+
+    // ---------- GENERAL: house tips (5) ----------
+    const TIPS = C.tips || [];
+
+    const tips = () => h("div", { style: root },
+      lead("Nobody\u2019s a natural. These five habits separate a 90-second ball from a five-minute one."),
+      board(5, TIPS.map((t, i) => cell([
+        h("span", { key: "n", style: { fontFamily: "var(--font-mono)", fontWeight: 700, fontSize: "var(--t-label)", color: "var(--accent-bright)" } }, String(i + 1).padStart(2, "0")),
+        h("div", { key: "nm", style: { margin: "var(--sp-2) 0 var(--sp-3)", fontFamily: "var(--font-marquee)", fontWeight: "var(--w-bold)", fontSize: "27px", lineHeight: 1.04, textTransform: "uppercase", color: "var(--text-strong)", textWrap: "balance" } }, t.name),
+        h("p", { key: "b", style: { margin: 0, fontSize: "20px", lineHeight: 1.36, color: "var(--text-body)" } }, t.body),
+      ])))
+    );
+
+    // ---------- GENERAL: glossary ----------
+    const GLOSSARY = C.glossary || [];
+
+    const glossary = () => h("div", { style: root },
+      h("div", { style: { flex: 1, minHeight: 0, display: "grid", gridTemplateColumns: "1fr 1fr", gridTemplateRows: "repeat(4, 1fr)", gap: "var(--sp-3) var(--sp-6)", gridAutoFlow: "column" } },
+        GLOSSARY.map((g) => h("div", { key: g.term, style: { display: "grid", gridTemplateColumns: "230px 1fr", alignItems: "baseline", gap: "var(--sp-4)", padding: "var(--sp-2) 0", borderTop: "var(--hair) solid var(--border-hair)" } },
+          h("div", { style: { display: "flex", alignItems: "baseline", gap: "var(--sp-2)" } },
+            h("span", { "aria-hidden": "true", style: { width: 9, height: 9, transform: "rotate(45deg)", background: "var(--accent)", boxShadow: "var(--glow-accent-sm)", flex: "none", alignSelf: "center" } }),
+            h("span", { style: { fontFamily: "var(--font-marquee)", fontWeight: "var(--w-bold)", fontSize: "30px", textTransform: "uppercase", color: "var(--text-strong)" } }, g.term)),
+          h("p", { style: { margin: 0, fontSize: "22px", lineHeight: 1.32, color: "var(--text-body)" } }, g.def)))
+      )
+    );
+
+    // ---------- GENERAL: closing quip ----------
+    const Q = C.quip || {};
+    const quip = () => h("div", { style: root },
+      h("div", { style: { flex: 1, minHeight: 0, display: "grid", placeItems: "center", textAlign: "center" } },
+        h("div", { style: { maxWidth: 1300 } },
+          h("p", { style: { margin: "0 0 var(--sp-4)", fontFamily: "var(--font-marquee)", fontSize: "30px", letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)" } }, Q.intro),
+          h("p", { className: "rfpc-serif-italic", style: { margin: 0, fontSize: "56px", lineHeight: 1.2, color: "var(--text-strong)", textWrap: "balance" } }, Q.setup),
+          h("p", { className: "rfpc-serif-italic", style: { margin: "var(--sp-3) 0 0", fontSize: "72px", lineHeight: 1.05, color: "var(--brass-100)" } }, Q.punch),
+          h("p", { style: { margin: "var(--sp-5) 0 0", fontFamily: "var(--font-mono)", fontSize: "var(--t-label)", color: "var(--text-faint)" } }, Q.byline))
+      )
+    );
+
+    // =====================================================================
+    // THE LOOP — per table: On The Floor anchor (next table lit) → intro
+    // (cabinet + playfield + credits) → six-box spotlight → general breather.
+    // The floor screen repeats before each table so it's clear we've moved on.
+    // =====================================================================
+    // render fn per breather id; visible copy comes from C.general (content.js)
+    const genRender = { tips: tips, lingo: glossary, quip: quip,
+      combo0: comboRender(COMBOS[0]), combo1: comboRender(COMBOS[1]), combo2: comboRender(COMBOS[2]) };
+    const generalScenes = (C.general || []).map((g) => ({
+      id: g.id, eyebrow: g.eyebrow, title: g.title, meta: [g.meta], proTip: g.proTip,
+      render: genRender[g.id] || quip,
+    }));
+
+    const scenes = [];
+    if (!MACHINES.length || !generalScenes.length) {
+      return { app: h("div", { style: { position: "fixed", inset: 0, background: "var(--forest-900)" } }) };
+    }
+    MACHINES.forEach((m, i) => {
+      const pg = PAGES[m.game] || {};
+      const modeCount = ((pg.modes || {}).boxes || []).length || 1;
+      const mbCount = (pg.multiballs || []).length || 1;
+      const stratCount = (pg.strategy || []).length || 1;
+      const modeLabel = (pg.modes || {}).title || "Mode Overview";
+
+      scenes.push({ id: "floor-" + m.game, kind: "overview", eyebrow: "The Lockedown", title: "On The Floor",
+        meta: ["Now Up \u00B7 " + m.title], gameName: "The Lockedown",
+        proTip: "Eight machines, one basement. Up next: " + m.title + ".", holdMs: overviewMs, render: overviewFn(m.game) });
+      scenes.push({ id: m.game + "-intro", kind: "machine", game: m.game, eyebrow: "Get To Know The Line-Up", title: badgeTitle(m),
+        meta: [m.maker], gameName: m.title, proTip: m.proTip, holdMs: holdMs, render: introRender(m) });
+      scenes.push({ id: m.game + "-gameoverview", kind: "machine", game: m.game, eyebrow: "The Quick Read", title: badgeTitle(m),
+        meta: ["Game Overview"], gameName: m.title, proTip: m.proTip, holdMs: holdMs, render: overviewPageRender(m) });
+      scenes.push({ id: m.game + "-spotlight", kind: "machine", game: m.game, eyebrow: m.maker, title: badgeTitle(m),
+        meta: ["The Rundown"], gameName: m.title, proTip: m.proTip, holdMs: spotCycleMs, render: spotlightRender(m) });
+      scenes.push({ id: m.game + "-modes", kind: "machine", game: m.game, eyebrow: "How Each One Plays", title: badgeLabel(m, modeLabel),
+        meta: [m.title], gameName: m.title, pageLabel: modeLabel, proTip: m.proTip, holdMs: spotHold(modeCount), render: modesPageRender(m) });
+      scenes.push({ id: m.game + "-mb", kind: "machine", game: m.game, eyebrow: m.maker, title: badgeTitle(m),
+        meta: ["Multiball Overview"], gameName: m.title, proTip: m.proTip, holdMs: spotHold(mbCount), render: multiballsPageRender(m) });
+      scenes.push({ id: m.game + "-strat", kind: "machine", game: m.game, eyebrow: "Play It Smart", title: badgeTitle(m),
+        meta: ["Strategy & Tips"], gameName: m.title, proTip: m.proTip, holdMs: spotHold(stratCount), render: strategyPageRender(m) });
+      const g = generalScenes[i % generalScenes.length];
+      scenes.push({ id: m.game + "-gen-" + g.id, kind: "general", eyebrow: g.eyebrow, title: g.title, meta: g.meta,
+        gameName: "The Lockedown", proTip: g.proTip, holdMs: breatherMs, render: g.render });
+    });
+
+    // ---------- review layer: pause / step / table of contents ----------
+    this._sceneCount = scenes.length;
+    const N = scenes.length;
+    const eff = this.currentIdx();
+    const paused = this.state.paused;
+
+    const navOf = (s) => {
+      if (s.kind === "overview") return { kind: "Floor", label: "On The Floor", sub: (s.meta && s.meta[0]) || "" };
+      if (s.kind === "machine") {
+        var id = s.id || "";
+        if (id.endsWith("-gameoverview")) return { kind: "Overview", label: s.gameName, sub: "Game Overview" };
+        if (id.endsWith("-spotlight")) return { kind: "Rundown", label: s.gameName, sub: "The Six-Box Rundown" };
+        if (id.endsWith("-modes")) return { kind: "Modes", label: s.gameName, sub: s.pageLabel || "Mode Overview" };
+        if (id.endsWith("-mb")) return { kind: "Multiball", label: s.gameName, sub: "Multiball Overview" };
+        if (id.endsWith("-strat")) return { kind: "Strategy", label: s.gameName, sub: "Strategy & Tips" };
+        return { kind: "Intro", label: s.gameName, sub: "Machine & Credits" };
+      }
+      return { kind: "Break", label: s.title, sub: (s.meta && s.meta[0]) || "" };
+    };
+    const pad = (x) => String(x).padStart(2, "0");
+    const tocItems = scenes.map((s, i) => {
+      const nv = navOf(s);
+      return { key: s.id || String(i), num: pad(i + 1), label: nv.label, sub: nv.sub, kindLabel: nv.kind,
+        game: s.game || "", now: i === eff ? "NOW" : "", onJump: () => this.jump(i) };
+    });
+    const curNav = navOf(scenes[eff] || scenes[0]);
+    const reviewLabel = paused ? (pad(eff + 1) + " / " + pad(N) + "   \u00B7   " + curNav.label) : "Playing";
+
+    const reelScenes = paused ? scenes.map((s) => Object.assign({}, s, { holdMs: 1000000000 })) : scenes;
+    const mode = this.props.reviewControls || "auto";
+    const controlsShown = mode === "always" ? true : mode === "hidden" ? false : (paused || this.state.controlsVisible);
+    const playLabel = paused ? "\u25B6  Play" : "\u258C\u258C  Pause";
+
+    // ---------- review overlay (React node via a single hole; sc-if siblings
+    // of a full-mount x-import don't render in this DC, so build it here) ----------
+    const btn = {
+      display: "inline-flex", alignItems: "center", justifyContent: "center", height: 40,
+      borderRadius: 10, border: "1px solid var(--border-panel)",
+      background: "color-mix(in srgb, var(--surface-panel) 60%, transparent)",
+      color: "var(--text-strong)", fontFamily: "var(--font-marquee)", fontWeight: 600, cursor: "pointer",
+    };
+    const bar = controlsShown ? h("div", { key: "bar", style: {
+      position: "fixed", left: "50%", bottom: 26, transform: "translateX(-50%)", zIndex: 50,
+      display: "flex", alignItems: "center", gap: 12, padding: "9px 12px", borderRadius: 14,
+      background: "linear-gradient(155deg, var(--surface-raised), var(--surface-panel))",
+      border: "1px solid var(--border-panel)", boxShadow: "var(--shadow-lift)", fontFamily: "var(--font-body)",
+    } }, [
+      h("button", { key: "p", onClick: () => this.step(-1), title: "Previous (left arrow)", style: Object.assign({}, btn, { minWidth: 44, padding: "0 12px", fontSize: 20 }) }, "\u2039"),
+      h("button", { key: "t", onClick: () => this.togglePlay(), title: "Play / pause (space)", style: Object.assign({}, btn, { minWidth: 108, padding: "0 16px", fontSize: 15, letterSpacing: "0.05em", textTransform: "uppercase", background: "color-mix(in srgb, var(--accent) 20%, var(--surface-panel))" }) }, playLabel),
+      h("button", { key: "n", onClick: () => this.step(1), title: "Next (right arrow)", style: Object.assign({}, btn, { minWidth: 44, padding: "0 12px", fontSize: 20 }) }, "\u203A"),
+      h("span", { key: "l", style: { minWidth: 240, textAlign: "center", fontFamily: "var(--font-mono)", fontSize: 14, letterSpacing: "0.03em", color: "var(--text-body)" } }, reviewLabel),
+      h("button", { key: "c", onClick: () => this.setState((s) => ({ tocOpen: !s.tocOpen })), title: "Table of contents (C)", style: Object.assign({}, btn, { padding: "0 16px", fontSize: 14, letterSpacing: "0.05em", textTransform: "uppercase" }) }, "Contents"),
+    ]) : null;
+
+    const tocRow = (it) => h("div", { key: it.key, onClick: it.onJump, "data-game": it.game || undefined, style: {
+      display: "grid", gridTemplateColumns: "44px 88px 1fr auto 54px", alignItems: "baseline", gap: 16,
+      padding: "11px 10px", borderRadius: 9, cursor: "pointer", borderBottom: "1px solid var(--border-hair)",
+      background: it.now ? "color-mix(in srgb, var(--accent) 12%, transparent)" : "transparent",
+    } }, [
+      h("span", { key: "n", style: { fontFamily: "var(--font-mono)", fontSize: 17, color: "var(--accent-bright)" } }, it.num),
+      h("span", { key: "k", style: { fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--text-faint)" } }, it.kindLabel),
+      h("span", { key: "b", style: { fontFamily: "var(--font-marquee)", fontWeight: 600, fontSize: 22, letterSpacing: "0.01em", textTransform: "uppercase", color: "var(--text-strong)" } }, it.label),
+      h("span", { key: "s", style: { fontFamily: "var(--font-body)", fontSize: 15, color: "var(--text-muted)" } }, it.sub),
+      h("span", { key: "w", style: { fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: "0.1em", textAlign: "right", color: "var(--accent-bright)" } }, it.now),
+    ]);
+    const toc = this.state.tocOpen ? h("div", { key: "toc", onClick: () => this.setState({ tocOpen: false }), style: {
+      position: "fixed", inset: 0, zIndex: 60, background: "rgba(8,6,5,0.74)", backdropFilter: "blur(3px)", display: "grid", placeItems: "center",
+    } }, h("div", { onClick: (e) => e.stopPropagation(), style: {
+      width: "min(900px,88vw)", maxHeight: "84vh", overflow: "auto", padding: "26px 30px 22px", borderRadius: 16,
+      background: "linear-gradient(160deg, var(--surface-raised), var(--surface-panel))",
+      border: "1px solid var(--border-panel)", boxShadow: "var(--shadow-lift)",
+    } }, [
+      h("div", { key: "hd", style: { display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 16, paddingBottom: 14, borderBottom: "1px solid var(--border-panel)" } }, [
+        h("div", { key: "t", style: { fontFamily: "var(--font-marquee)", fontWeight: 700, fontSize: 30, letterSpacing: "0.05em", textTransform: "uppercase", color: "var(--text-strong)" } }, "Contents"),
+        h("div", { key: "s", style: { fontFamily: "var(--font-mono)", fontSize: 13, color: "var(--text-faint)" } }, "click a scene to jump \u00B7 esc to close"),
+      ]),
+      h("div", { key: "rows" }, tocItems.map(tocRow)),
+    ])) : null;
+
+    const ShowReel = DS.ShowReel;
+    const reelProps = {
+      scenes: reelScenes,
+      // flip the top-level holdMs so ShowReel's advance timer re-arms on
+      // resume (its effect keys off this prop, not per-scene holdMs)
+      holdMs: paused ? 1000000000 : holdMs,
+      storageKey: paused ? ("rfpc-nav-" + this.state.navToken) : this.mainKey,
+      rfpcBadge: "assets/rfpc-mark-cream.png",
+    };
+    const reel = ShowReel
+      ? h(ShowReel, reelProps)
+      : h("div", { style: { position: "fixed", inset: 0, background: "var(--forest-900)" } });
+
+    return { app: h("div", { style: { position: "fixed", inset: 0 } }, reel, bar, toc) };
+  }
+}
+</script>
+</body>
+</html>
