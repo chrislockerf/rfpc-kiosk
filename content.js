@@ -71,7 +71,7 @@ window.RFPC_CONTENT = {
       game: "james-bond",
       title: "James Bond 007",
       maker: "Stern · 2022",
-      proTip: "Master the Action Button before you chase films — it’s the machine’s #1 scoring tool.",
+      proTip: "The Action Button activates Smart Bombs, Multipliers and Add a Ball — it’s the machine’s #1 scoring tool if used properly.",
 
       // ---- INTRO: credits --------------------------------------------------
       credits: [
@@ -124,9 +124,9 @@ window.RFPC_CONTENT = {
 
       // ---- MULTIBALL OVERVIEW ----------------------------------------------
       multiballs: [
-        { name: "Bird One",      target: "Rocket Dropdowns, Center Lock", detail: "Complete rocket drop down targets to light lock, then lock three balls in the rocket at the center loop.", jackpots: "Every shot lights green to build the jackpot; blast the rocket for the Super Jackpot.", tip: "Earn an extended Bird One by shooting the two top flashing green targets at the start of the multiball." },
-        { name: "Jetpack", target: "Scuba Scoop, Left Orbit",  detail: "Shoot the tank to drop the Jetpack ball.  Shoot white shots to build jackpot and collect at left orbit", jackpots: "After hitting several white shots, shoot the left orbit to have 007 grap the ball - time your tank shot to drop the ball on it to earn a super jackpot.", tip: "Best used when stacked with a Villain or Henchman mode - not very useful on its own." },
-        { name: "Bond, James Bond", target: "Scuba Scoop or Right Ramp",  detail: "Activated by battling a Villain, a Henchman, and playing Bird One and Jetpack Multiballs", jackpots: "Timed mode with unlimited balls.  Shoot lit shots to earn a jackpots", tip: "Each shot earns a different Bond introduction voice over from one of the films." },
+        { name: "Bird One",      target: "Rocket Dropdowns, Center Lock", detail: "Complete rocket drop down targets to light lock, then lock three balls in the rocket at the center loop.", objective: "Lock three balls in the rocket for the game's signature multiball assault.", jackpots: "Every shot lights green to build the jackpot; blast the rocket for the Super Jackpot.", tip: "Earn an extended Bird One by shooting the two top flashing green targets at the start of the multiball." },
+        { name: "Jetpack", target: "Scuba Scoop, Left Orbit",  detail: "Shoot the tank to drop the Jetpack ball.  Shoot white shots to build jackpot and collect at left orbit", objective: "Drop the Jetpack ball and build white-shot value before collecting at the orbit.", jackpots: "After hitting several white shots, shoot the left orbit to have 007 grap the ball - time your tank shot to drop the ball on it to earn a super jackpot.", tip: "Best used when stacked with a Villain or Henchman mode - not very useful on its own." },
+        { name: "Bond, James Bond", target: "Scuba Scoop or Right Ramp",  detail: "Activated by battling a Villain, a Henchman, and playing Bird One and Jetpack Multiballs", objective: "Chain jackpots for as long as the timed mode runs — no ball is safe from ending it early.", jackpots: "Timed mode with unlimited balls.  Shoot lit shots to earn a jackpots", tip: "Each shot earns a different Bond introduction voice over from one of the films." },
       ],
 
       // ---- CUSTOM THEMED PAGES (Movies, Villains, Henchmen, …) -------------
@@ -193,14 +193,24 @@ window.RFPC_CONTENT = {
         },
       },
 
+      // ---- STRATEGY & TIPS (six-box) ---------------------------------------
+      strategy: [
+        { name: "Button First",        detail: "Learn the Action Button before chasing films — it's the machine's #1 scoring tool." },
+        { name: "Vary Your Shots",     detail: "Repeating a film's shots only scores points — spread them across modes to advance." },
+        { name: "Stack Bird One",      detail: "Start Bird One during a Villain or Henchman mode to double up on scoring." },
+        { name: "Save Jetpack",        detail: "Jetpack is weak alone — always stack it with a Villain or Henchman mode." },
+        { name: "Chase Bond Girls",    detail: "Bond Girl multipliers boost whatever film mode is currently running." },
+        { name: "Mind The Colors",     detail: "Blue, Pink and Green Action Button uses each do something different — know which is lit." },
+      ],
+
       // ---- NOW PLAYING hold card ------------------------------------------
-      hold: "Six iconic films. One license to kill. Push Start.",
+      hold: "The most famous secret agent ever. Six iconic films. Push Start.",
 
       // ---- WIRING: page order + footer pro-tips ----------------------------
       sequence: ["intro", "gameoverview", "rundown", "movies", "villains", "henchmen", "bondGirls", "qbranch", "multiball", "strategy", "hold"],
       proTips: {
-        intro:     "Learn the Skill Shots.  They can provide you with additional Smart Missiles right off the plunge.",
-        overview:  "Smart Missles (Blue Action Button) spot any shot. Collect them and use them wisely.",
+        intro:     "The Action Button activates Smart Missles, Multipliers and Add-a-ball.  Its the game's #1 scoring tool if used wisely.",
+        overview:  "Smart Missles (Blue Action Button) spot the most valable shot on the playfield. Collect them and use them wisely.",
         rundown:   "Each film has four modes — Villains, Henchmen, SPECTRE Weapon, Q Branch. Play each mode to complete the film and add to your end of ball bonus.",
         movies:    "Take the time to watch the iconic film clips that accompany each mode.",
         villains:  "Defeating a Villan gives you an extra Smart Missle and adds to your end of ball bonus.",
@@ -267,8 +277,8 @@ window.RFPC_CONTENT = {
       ],
 
       multiballs: [
-        { name: "Demogorgon MB",  target: "Bash Toy",     detail: "Feed the creature to lock balls, then hammer the lit shots.", jackpots: "Jackpots at the lit shots; the Super lands at the beast’s mouth.", tip: "Bash the toy fully before starting for more balls." },
-        { name: "Mind Flayer MB", target: "Center Shots", detail: "Spread shots across the shadow to build it.", jackpots: "Jackpots grow as the Flayer spreads across the playfield.", tip: "Keep shots moving across the center — don’t camp one lane." },
+        { name: "Demogorgon MB",  target: "Bash Toy",     detail: "Feed the creature to lock balls, then hammer the lit shots.", objective: "Lock the creature, then pour jackpots into the beast's mouth.", jackpots: "Jackpots at the lit shots; the Super lands at the beast’s mouth.", tip: "Bash the toy fully before starting for more balls." },
+        { name: "Mind Flayer MB", target: "Center Shots", detail: "Spread shots across the shadow to build it.", objective: "Spread the shadow across every shot before it consumes the whole playfield.", jackpots: "Jackpots grow as the Flayer spreads across the playfield.", tip: "Keep shots moving across the center — don’t camp one lane." },
       ],
 
       sections: {
@@ -290,6 +300,17 @@ window.RFPC_CONTENT = {
             { name: "The Mind Flayer", target: "Center Shots", detail: "The shadow spreads across the playfield — spread your shots to match." },
           ],
         },
+        moreHawkins: {
+          title: "More From Hawkins", kicker: "Placeholder Section", eyebrow: "Fill In With Real Content",
+          boxes: [
+            { name: "Placeholder 1", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 2", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 3", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 4", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 5", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 6", target: "TBD", detail: "Add real content here." },
+          ],
+        },
       },
 
       strategy: [
@@ -303,11 +324,12 @@ window.RFPC_CONTENT = {
 
       hold: "The gate is open. Go run the Upside Down.",
 
-      sequence: ["intro", "gameoverview", "rundown", "seasons", "demogorgon", "multiball", "strategy", "hold"],
+      sequence: ["intro", "gameoverview", "rundown", "seasons", "demogorgon", "moreHawkins", "multiball", "strategy", "hold"],
       proTips: {
         intro:     "Everything starts at the TV scoop — pick a chapter, then run its shots.",
         overview:  "The Upside Down’s hidden ball scores while you flip the one you can see — let it work.",
         rundown:   "Two multiballs and a wizard: Demogorgon, Mind Flayer, then the Battle of Starcourt.",
+        moreHawkins: "Placeholder pro tip — replace with real copy.",
         multiball: "Feed the Demogorgon to lock balls, then hammer every lit shot before they drop.",
         strategy:  "Don’t chase the Bike Escape cold — combo the ramps when they’re already lit.",
         hold:      "Clear every chapter to reach the Battle of Starcourt — the final stand.",
@@ -373,9 +395,9 @@ window.RFPC_CONTENT = {
       ],
 
       multiballs: [
-        { name: "Godzilla MB",      target: "The Building",  detail: "Batter the building down, then shoot it again to start.", jackpots: "Six jackpots light the Super.", tip: "Save it to stack with a city objective." },
-        { name: "Mechagodzilla MB", target: "Right Spinner", detail: "Ramp the spinner, hit the blue targets, then rip it again.", jackpots: "Spinner rips build every jackpot’s value.", tip: "Keep the spinner spinning to grow the jackpots." },
-        { name: "Saucer Attack MB", target: "Pop Bumpers",   detail: "Down the saucers in the bumpers to trigger it.", jackpots: "Jackpots at the orbits and ramps.", tip: "Feed the pops early to light it fast." },
+        { name: "Godzilla MB",      target: "The Building",  detail: "Batter the building down, then shoot it again to start.", objective: "Batter the building flat for repeated jackpot runs.", jackpots: "Six jackpots light the Super.", tip: "Save it to stack with a city objective." },
+        { name: "Mechagodzilla MB", target: "Right Spinner", detail: "Ramp the spinner, hit the blue targets, then rip it again.", objective: "Grind the spinner and blue targets to build toward the mechanical menace's jackpots.", jackpots: "Spinner rips build every jackpot’s value.", tip: "Keep the spinner spinning to grow the jackpots." },
+        { name: "Saucer Attack MB", target: "Pop Bumpers",   detail: "Down the saucers in the bumpers to trigger it.", objective: "Clear the pop bumpers to unleash a fast, chaotic jackpot round.", jackpots: "Jackpots at the orbits and ramps.", tip: "Feed the pops early to light it fast." },
       ],
 
       sections: {
@@ -407,6 +429,17 @@ window.RFPC_CONTENT = {
             { name: "Planet X",               target: "The Scoop", detail: "The gateway multiball on the road to King of the Monsters." },
           ],
         },
+        moreTokyo: {
+          title: "More From Tokyo", kicker: "Placeholder Section", eyebrow: "Fill In With Real Content",
+          boxes: [
+            { name: "Placeholder 1", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 2", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 3", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 4", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 5", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 6", target: "TBD", detail: "Add real content here." },
+          ],
+        },
       },
 
       strategy: [
@@ -420,11 +453,12 @@ window.RFPC_CONTENT = {
 
       hold: "The city’s yours to save. Go be King of the Monsters.",
 
-      sequence: ["intro", "gameoverview", "rundown", "cities", "kaiju", "multiball", "miniwizards", "strategy", "hold"],
+      sequence: ["intro", "gameoverview", "rundown", "cities", "kaiju", "miniwizards", "moreTokyo", "multiball", "strategy", "hold"],
       proTips: {
         intro:     "Four cities, four Kaiju — defend them all the way to Planet X.",
         overview:  "Just starting a city objective advances it — you don’t have to finish.",
         rundown:   "Three multiballs stomp the city: Godzilla, Mechagodzilla, Saucer Attack.",
+        moreTokyo: "Placeholder pro tip — replace with real copy.",
         multiball: "Batter the building down first — it’s the fastest path into Godzilla Multiball.",
         strategy:  "Feed the Powerup meter between modes; it fuels the wizard run.",
         hold:      "Conquer every city and reach Planet X for King of the Monsters.",
@@ -487,9 +521,9 @@ window.RFPC_CONTENT = {
       ],
 
       multiballs: [
-        { name: "Ninja MB",    target: "Right Ramp",       detail: "Lock three balls at the right ramp.", jackpots: "Jackpots at the lit ramps and loops.", tip: "Stack with a team-up for doubled jackpots." },
-        { name: "Disco MB",    target: "Left Spinner",     detail: "Rip the spinner enough times to light it.", jackpots: "Spinner value feeds the jackpots.", tip: "Keep the ball on the left for spinner rips." },
-        { name: "Mechsuit MB", target: "Weapons → Scoop",  detail: "Cash out collected weapons at the scoop.", jackpots: "Each weapon cashed raises the jackpot.", tip: "Collect weapons before cashing for a bigger start." },
+        { name: "Ninja MB",    target: "Right Ramp",       detail: "Lock three balls at the right ramp.", objective: "Lock three at the right ramp for a straightforward jackpot run.", jackpots: "Jackpots at the lit ramps and loops.", tip: "Stack with a team-up for doubled jackpots." },
+        { name: "Disco MB",    target: "Left Spinner",     detail: "Rip the spinner enough times to light it.", objective: "Keep the spinner spinning for a groove-powered jackpot party.", jackpots: "Spinner value feeds the jackpots.", tip: "Keep the ball on the left for spinner rips." },
+        { name: "Mechsuit MB", target: "Weapons → Scoop",  detail: "Cash out collected weapons at the scoop.", objective: "Cash in banked weapons for an armored jackpot assault.", jackpots: "Each weapon cashed raises the jackpot.", tip: "Collect weapons before cashing for a bigger start." },
       ],
 
       sections: {
@@ -531,6 +565,17 @@ window.RFPC_CONTENT = {
             { name: "The Final Battle", target: "The Scoop", detail: "Face Mr. Sinister himself — the goal of the whole game." },
           ],
         },
+        moreMayhem: {
+          title: "More Merc Mayhem", kicker: "Placeholder Section", eyebrow: "Fill In With Real Content",
+          boxes: [
+            { name: "Placeholder 1", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 2", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 3", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 4", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 5", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 6", target: "TBD", detail: "Add real content here." },
+          ],
+        },
       },
 
       strategy: [
@@ -544,11 +589,12 @@ window.RFPC_CONTENT = {
 
       hold: "Maximum effort. Go break the fourth wall.",
 
-      sequence: ["intro", "gameoverview", "rundown", "battles", "quests", "teamups", "lildeadpool", "multiball", "sinister", "strategy", "hold"],
+      sequence: ["intro", "gameoverview", "rundown", "battles", "quests", "teamups", "lildeadpool", "sinister", "moreMayhem", "multiball", "strategy", "hold"],
       proTips: {
         intro:     "Start battles at the scoop; team-ups make everything hit harder.",
         overview:  "Bank Wolverine before a battle — it doubles all the damage you deal.",
         rundown:   "Three multiballs and Sinister: Ninja, Disco, Mechsuit, then the Final Battle.",
+        moreMayhem: "Placeholder pro tip — replace with real copy.",
         multiball: "Lock three on the right ramp for Ninja — the easiest multiball to start.",
         strategy:  "Ricochet the SNIKT target to the right ramp for up to 5× playfield.",
         hold:      "Beat every battle twice for Clone Multiball, then face Mr. Sinister.",
@@ -612,9 +658,9 @@ window.RFPC_CONTENT = {
       ],
 
       multiballs: [
-        { name: "Overlord MB",  target: "The Overlord", detail: "Green the Overlord, lock a ball, pound the captive ball.", jackpots: "Each start is worth more — and demands more shots.", tip: "Mod the van first so jackpots pay bigger." },
-        { name: "Area 51 MB",   target: "Right Ramp",   detail: "Five ramp shots light it.", jackpots: "The Super is a ramp → captive combo.", tip: "Groove the right ramp before starting." },
-        { name: "Combotron MB", target: "Side Ramp",    detail: "Six combos, then the side ramp.", jackpots: "Combo count sets the jackpot value.", tip: "Chain combos through the crossover for a big start." },
+        { name: "Overlord MB",  target: "The Overlord", detail: "Green the Overlord, lock a ball, pound the captive ball.", objective: "Lock a ball on the Overlord and pound the captive ball for escalating jackpots.", jackpots: "Each start is worth more — and demands more shots.", tip: "Mod the van first so jackpots pay bigger." },
+        { name: "Area 51 MB",   target: "Right Ramp",   detail: "Five ramp shots light it.", objective: "Chain ramp shots to unlock the alien conspiracy's jackpots.", jackpots: "The Super is a ramp → captive combo.", tip: "Groove the right ramp before starting." },
+        { name: "Combotron MB", target: "Side Ramp",    detail: "Six combos, then the side ramp.", objective: "String together combos for a high-value jackpot frenzy.", jackpots: "Combo count sets the jackpot value.", tip: "Chain combos through the crossover for a big start." },
       ],
 
       sections: {
@@ -656,6 +702,17 @@ window.RFPC_CONTENT = {
             { name: "The Final Battle", target: "Side Ramp", detail: "Take on the Overlord for the whole tour." },
           ],
         },
+        moreTour: {
+          title: "More From The Tour", kicker: "Placeholder Section", eyebrow: "Fill In With Real Content",
+          boxes: [
+            { name: "Placeholder 1", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 2", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 3", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 4", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 5", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 6", target: "TBD", detail: "Add real content here." },
+          ],
+        },
       },
 
       strategy: [
@@ -669,12 +726,13 @@ window.RFPC_CONTENT = {
 
       hold: "Gas up the van. The tour’s yours.",
 
-      sequence: ["intro", "gameoverview", "band", "rundown", "vanmodes", "modulator", "multiball", "wizards", "strategy", "hold"],
+      sequence: ["intro", "gameoverview", "band", "rundown", "vanmodes", "modulator", "wizards", "moreTour", "multiball", "strategy", "hold"],
       proTips: {
         intro:     "Tour the country in the van; save each city from the Overlord.",
         overview:  "Mod the van before a city — a modded run scores far, far more.",
         band:      "Six players, one van — the real Foo Fighters ride along the whole tour.",
         rundown:   "Three multiballs on the tour: Overlord, Area 51, Combotron.",
+        moreTour:  "Placeholder pro tip — replace with real copy.",
         multiball: "Green the Overlord, lock a ball, then pound the captive ball for jackpots.",
         strategy:  "Climb the Rock-O-Meter on the right orbit to 2×, then 3× playfield.",
         hold:      "Save six cities to reach the Final Battle with the Overlord.",
@@ -739,9 +797,9 @@ window.RFPC_CONTENT = {
       ],
 
       multiballs: [
-        { name: "Chaos MB",        target: "Spell CHAOS", detail: "Spell CHAOS, then hit the target between the bumpers.", jackpots: "Jackpots at the major shots.", tip: "Run a paddock mode inside it for double rescues." },
-        { name: "Raptor Tri-Ball", target: "Raptor Pit",  detail: "Lock a ball, then batter the pit to release all three.", jackpots: "Pit hits and ramps score jackpots.", tip: "Cradle up and pick your jackpot shots." },
-        { name: "T-Rex MB",        target: "The Truck",   detail: "Three truck hits start the hurry-up into multiball.", jackpots: "The hurry-up value carries into the multiball.", tip: "Cash the hurry-up high before it counts down." },
+        { name: "Chaos MB",        target: "Spell CHAOS", detail: "Spell CHAOS, then hit the target between the bumpers.", objective: "Spell CHAOS to unleash every dinosaur at once for a jackpot free-for-all.", jackpots: "Jackpots at the major shots.", tip: "Run a paddock mode inside it for double rescues." },
+        { name: "Raptor Tri-Ball", target: "Raptor Pit",  detail: "Lock a ball, then batter the pit to release all three.", objective: "Free all three raptors from the pit for a fast, aggressive jackpot round.", jackpots: "Pit hits and ramps score jackpots.", tip: "Cradle up and pick your jackpot shots." },
+        { name: "T-Rex MB",        target: "The Truck",   detail: "Three truck hits start the hurry-up into multiball.", objective: "Survive the hurry-up, then bank its value into the multiball's jackpots.", jackpots: "The hurry-up value carries into the multiball.", tip: "Cash the hurry-up high before it counts down." },
       ],
 
       sections: {
@@ -781,6 +839,17 @@ window.RFPC_CONTENT = {
             { name: "Control Room",  target: "Left Target",   detail: "Pick one of three modes with the flippers." },
           ],
         },
+        moreIsland: {
+          title: "More From The Island", kicker: "Placeholder Section", eyebrow: "Fill In With Real Content",
+          boxes: [
+            { name: "Placeholder 1", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 2", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 3", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 4", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 5", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 6", target: "TBD", detail: "Add real content here." },
+          ],
+        },
       },
 
       strategy: [
@@ -794,11 +863,12 @@ window.RFPC_CONTENT = {
 
       hold: "Life finds a way. Go survive the island.",
 
-      sequence: ["intro", "gameoverview", "rundown", "paddocks", "trex", "multiball", "wizards", "other", "strategy", "hold"],
+      sequence: ["intro", "gameoverview", "rundown", "paddocks", "trex", "wizards", "other", "moreIsland", "multiball", "strategy", "hold"],
       proTips: {
         intro:     "Nedry’s virus loosed the dinosaurs — rescue the staff and escape the island.",
         overview:  "Stack a paddock mode inside a multiball — rescues pay double in the chaos.",
         rundown:   "Three ways to lose control: Chaos, Raptor Tri-Ball, and T-Rex Multiball.",
+        moreIsland: "Placeholder pro tip — replace with real copy.",
         multiball: "Three truck hits start the T-Rex hurry-up straight into multiball.",
         strategy:  "Feed the purple standups for supply drops and 2× scoring.",
         hold:      "Capture every paddock to reach Escape Nublar.",
@@ -863,8 +933,8 @@ window.RFPC_CONTENT = {
       ],
 
       multiballs: [
-        { name: "Frankenstein MB", target: "Frank’s Drops", detail: "Drop the targets, open the center ramp, and jolt him alive.", jackpots: "Jackpots at the ramps and loops.", tip: "Start it with a mode running for stacked scoring." },
-        { name: "Mosh Pit MB",     target: "The Scoop",     detail: "Feed the Mosh lane, then start it at the scoop.", jackpots: "Every monster shot scores a jackpot.", tip: "Spread hits across all six monsters for the Super." },
+        { name: "Frankenstein MB", target: "Frank’s Drops", detail: "Drop the targets, open the center ramp, and jolt him alive.", objective: "Jolt the monster alive for a ramp-and-loop jackpot rampage.", jackpots: "Jackpots at the ramps and loops.", tip: "Start it with a mode running for stacked scoring." },
+        { name: "Mosh Pit MB",     target: "The Scoop",     detail: "Feed the Mosh lane, then start it at the scoop.", objective: "Spread hits across all six monsters for a high-energy jackpot round.", jackpots: "Every monster shot scores a jackpot.", tip: "Spread hits across all six monsters for the Super." },
       ],
 
       sections: {
@@ -877,6 +947,17 @@ window.RFPC_CONTENT = {
             { name: "The Bride",    target: "Left Ramp",       detail: "Play the tight figure-8 ramp for Ball & Chain." },
             { name: "The Creature", target: "Creature’s Lagoon", detail: "Sweep every major shot before the hurry-up dies." },
             { name: "The Mummy",    target: "Mummy Target",    detail: "Bash the sarcophagus open to wake him." },
+          ],
+        },
+        moreBash: {
+          title: "More From The Bash", kicker: "Placeholder Section", eyebrow: "Fill In With Real Content",
+          boxes: [
+            { name: "Placeholder 1", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 2", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 3", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 4", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 5", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 6", target: "TBD", detail: "Add real content here." },
           ],
         },
       },
@@ -892,11 +973,12 @@ window.RFPC_CONTENT = {
 
       hold: "The band’s assembled. Go start the encore.",
 
-      sequence: ["intro", "gameoverview", "rundown", "monsters", "multiball", "strategy", "hold"],
+      sequence: ["intro", "gameoverview", "rundown", "monsters", "moreBash", "multiball", "strategy", "hold"],
       proTips: {
         intro:     "Round up six monsters and their instruments for the scariest band around.",
         overview:  "Complete a mode to earn its instrument — playing it only lights the mini-wizard.",
         rundown:   "Six monster modes, two multiballs, and the Monsters of Rock encore.",
+        moreBash:  "Placeholder pro tip — replace with real copy.",
         multiball: "Drop Frank’s targets to open the center ramp, then jolt him alive.",
         strategy:  "Sixty jet-bumper hits light Mummy Mayhem and super jets.",
         hold:      "Collect all six instruments to start Monsters of Rock.",
@@ -961,9 +1043,9 @@ window.RFPC_CONTENT = {
       ],
 
       multiballs: [
-        { name: "Car Chase MB",     target: "Left Orbit",  detail: "Bash the car to light it; hit it again to swap showdowns.", jackpots: "Jackpots at the orbits and ramps.", tip: "Swap to the showdown that fits your best shot." },
-        { name: "Excommunicado MB", target: "Red Circle",  detail: "Work the bumper and targets to light it.", jackpots: "Red Circle shots build the jackpots.", tip: "Keep the ball in the bumpers to light it faster." },
-        { name: "Deconsecrated MB", target: "Center Ramp", detail: "Spell WINSTON at the captive ball to light the locks.", jackpots: "Center ramp jackpots grow with each lock.", tip: "Spell WINSTON early so the locks are ready." },
+        { name: "Car Chase MB",     target: "Left Orbit",  detail: "Bash the car to light it; hit it again to swap showdowns.", objective: "Swap showdowns to chase the biggest jackpots across the orbits and ramps.", jackpots: "Jackpots at the orbits and ramps.", tip: "Swap to the showdown that fits your best shot." },
+        { name: "Excommunicado MB", target: "Red Circle",  detail: "Work the bumper and targets to light it.", objective: "Build value in the bumpers before cashing in Red Circle jackpots.", jackpots: "Red Circle shots build the jackpots.", tip: "Keep the ball in the bumpers to light it faster." },
+        { name: "Deconsecrated MB", target: "Center Ramp", detail: "Spell WINSTON at the captive ball to light the locks.", objective: "Lock balls at the captive ball for a High-Table jackpot showdown.", jackpots: "Center ramp jackpots grow with each lock.", tip: "Spell WINSTON early so the locks are ready." },
       ],
 
       sections: {
@@ -1001,6 +1083,17 @@ window.RFPC_CONTENT = {
             { name: "Special Assignment",   target: "The Scoop",   detail: "The final contract — the goal of the whole game." },
           ],
         },
+        moreTable: {
+          title: "More From The Table", kicker: "Placeholder Section", eyebrow: "Fill In With Real Content",
+          boxes: [
+            { name: "Placeholder 1", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 2", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 3", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 4", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 5", target: "TBD", detail: "Add real content here." },
+            { name: "Placeholder 6", target: "TBD", detail: "Add real content here." },
+          ],
+        },
       },
 
       strategy: [
@@ -1014,11 +1107,12 @@ window.RFPC_CONTENT = {
 
       hold: "You’re back. Go earn your place at the High Table.",
 
-      sequence: ["intro", "gameoverview", "rundown", "jobs", "adversaries", "lightsout", "multiball", "wizards", "strategy", "hold"],
+      sequence: ["intro", "gameoverview", "rundown", "jobs", "adversaries", "lightsout", "wizards", "moreTable", "multiball", "strategy", "hold"],
       proTips: {
         intro:     "Out of retirement — take jobs for the seven factions and reach the High Table.",
         overview:  "Spawn enemies before a job — lit shots multiply by the blue circles in front.",
         rundown:   "Three multiballs off the High Table: Car Chase, Excommunicado, Deconsecrated.",
+        moreTable: "Placeholder pro tip — replace with real copy.",
         multiball: "Spell WINSTON at the captive ball to light the Deconsecrated locks.",
         strategy:  "Bank gold coins, then a ramp qualifies an ally to fight beside you.",
         hold:      "Serve every faction to reach the Special Assignment.",

@@ -153,6 +153,7 @@ function KioskShow({
   expandMs = 760,
   gapMs = 5000,
   storageKey = "rfpc-kiosk",
+  paused = false,
   renderDetail,
   ...rest
 }) {
@@ -208,13 +209,19 @@ function KioskShow({
       });
       at(acc, () => cycle(0));
     }
-    cycle(startAt.current);
+    if (paused) {
+      return () => {
+        cancelled = true;
+        clearAll();
+      };
+    }
+    cycle(active >= 0 ? active : startAt.current);
     return () => {
       cancelled = true;
       clearAll();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sections.length, introMs, holdMs, expandMs, gapMs]);
+  }, [sections.length, introMs, holdMs, expandMs, gapMs, paused]);
 
   // a new section starts un-placed, so its first (collapsed) frame won't animate
   React.useLayoutEffect(() => {

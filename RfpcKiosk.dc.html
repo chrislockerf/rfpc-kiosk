@@ -95,6 +95,18 @@ class Component extends DCLogic {
     if (!ready()) {
       this._dsPoll = setInterval(() => { if (ready()) { clearInterval(this._dsPoll); this._warmCache(); this.forceUpdate(); } }, 80);
     }
+
+    // ?start=<game-key> — seed the resume position so the loop opens on that
+    // machine's "On The Floor" anchor instead of wherever localStorage left
+    // off. Must run before ShowReel's own resume effect reads storageKey,
+    // which it does (componentDidMount is a layout effect; ShowReel's resume
+    // read is a passive effect that always fires after).
+    const params = new URLSearchParams(window.location.search);
+    const start = params.get("start");
+    if (start && this._sceneIds) {
+      const idx = this._sceneIds.indexOf("floor-" + start);
+      if (idx >= 0) window.localStorage.setItem(this.mainKey, String(idx));
+    }
   }
   componentWillUnmount() {
     window.removeEventListener("keydown", this._onKey);
@@ -359,7 +371,7 @@ class Component extends DCLogic {
             h("div", { key: "ttl", style: { fontFamily: "var(--font-marquee)", fontWeight: "var(--w-bold)", fontSize: "88px", lineHeight: 0.94, textTransform: "uppercase", color: "var(--text-strong)", textWrap: "balance" } }, m.title),
             h("div", { key: "mk", style: { fontFamily: "var(--font-mono)", fontSize: "26px", letterSpacing: "0.06em", color: "var(--accent-bright)" } }, m.maker),
             h("div", { key: "tick", "aria-hidden": "true", style: { width: 132, height: 4, background: "var(--accent)", boxShadow: "var(--glow-accent-sm)", margin: "var(--sp-2) 0" } }),
-            h("p", { key: "line", className: "rfpc-serif-italic", style: { margin: 0, fontSize: "46px", lineHeight: 1.16, color: "var(--text-strong)", textWrap: "balance", maxWidth: "18ch" } }, line))
+            h("p", { key: "line", className: "rfpc-serif-italic", style: { margin: 0, fontSize: "46px", lineHeight: 1.16, color: "var(--text-strong)", textWrap: "balance", maxWidth: "none" } }, line))
         )
       );
     };
@@ -378,7 +390,7 @@ class Component extends DCLogic {
         { index: 6, kicker: "House Advice", title: "Table Tips", teaser: x.tips.proTip, detail: tipsDetail(x.tips) },
       ];
       return h("div", { style: Object.assign({}, root, { paddingTop: "14px", paddingBottom: "72px" }) },
-        h(KioskShow, { sections: sections, columns: 3, storageKey: seedFresh("rfpc-spot-" + m.game), introMs: spotIntroMs, holdMs: boxHoldMs, gapMs: spotGapMs, expandMs: spotExpandMs }));
+        h(KioskShow, { sections: sections, columns: 3, storageKey: seedFresh("rfpc-spot-" + m.game), introMs: spotIntroMs, holdMs: boxHoldMs, gapMs: spotGapMs, expandMs: spotExpandMs, paused: this.state.paused }));
     };
 
     // ---------- MACHINE: Game Overview (big bullet points) ----------
@@ -410,21 +422,27 @@ class Component extends DCLogic {
         : h("p", { key: "b", style: { margin: 0, fontSize: "var(--t-lead)", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: "54ch" } }, body),
       cornerChip(targetTxt, chipStyle),
     ]));
+    const mbHeader = (txt) => h("div", { className: "rfpc-eyebrow", style: { color: "var(--accent-bright)", fontSize: "24px", marginBottom: 8 } }, txt);
+    const mbBody = (txt) => h("p", { style: { margin: 0, fontSize: "var(--t-body)", lineHeight: "var(--lh-body)", color: "var(--text-body)" } }, txt || "");
     const mbDetail = (b) => fit(h(React.Fragment, null,
       targetChip(b.target),
-      h("p", { key: "d", style: { margin: 0, fontSize: "var(--t-lead)", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: "54ch" } }, b.detail),
-      b.jackpots ? h("div", { key: "j", style: { marginTop: "var(--sp-4)" } },
-        h("div", { className: "rfpc-eyebrow", style: { color: "var(--accent-bright)", marginBottom: 6 } }, "Jackpots"),
-        h("p", { style: { margin: 0, fontSize: "var(--t-body)", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: "54ch" } }, b.jackpots)) : null,
-      h("div", { key: "sp", style: { flex: 1, minHeight: "var(--sp-4)" } }),
-      b.tip ? h("p", { key: "t", className: "rfpc-serif-italic", style: { margin: 0, fontSize: "var(--t-lead)", color: "var(--text-strong)" } }, b.tip) : null));
+      h("div", { key: "grid", style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--sp-8)", flex: 1, minHeight: 0 } }, [
+        h("div", { key: "col1", style: { display: "flex", flexDirection: "column", gap: "var(--sp-5)" } }, [
+          h("div", { key: "start" }, [mbHeader("How to Start"), mbBody(b.detail)]),
+          h("div", { key: "obj" }, [mbHeader("Objective"), mbBody(b.objective)]),
+        ]),
+        h("div", { key: "col2", style: { display: "flex", flexDirection: "column", gap: "var(--sp-5)" } }, [
+          h("div", { key: "jack" }, [mbHeader("Jackpots"), mbBody(b.jackpots)]),
+          h("div", { key: "tips" }, [mbHeader("Scoring Tips"), mbBody(b.tip)]),
+        ]),
+      ])));
     const stratDetail = (body) => fit(h(React.Fragment, null,
       h("p", { style: { margin: 0, fontSize: "34px", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: "54ch" } }, body)));
     const spotlightPage = (m, suffix, sections, cols) => {
       const KioskShow = DS.KioskShow;
       if (!KioskShow) return h("div", { style: root });
       return h("div", { style: Object.assign({}, root, { paddingTop: "14px", paddingBottom: "72px" }) },
-        h(KioskShow, { sections: sections, columns: cols, storageKey: seedFresh("rfpc-" + suffix + "-" + m.game), introMs: spotIntroMs, holdMs: boxHoldMs, gapMs: spotGapMs, expandMs: spotExpandMs }));
+        h(KioskShow, { sections: sections, columns: cols, storageKey: seedFresh("rfpc-" + suffix + "-" + m.game), introMs: spotIntroMs, holdMs: boxHoldMs, gapMs: spotGapMs, expandMs: spotExpandMs, paused: this.state.paused }));
     };
 
     // ---------- MACHINE: Multiball Overview ----------
@@ -586,6 +604,7 @@ class Component extends DCLogic {
 
     // ---------- review layer: pause / step / table of contents ----------
     this._sceneCount = scenes.length;
+    this._sceneIds = scenes.map((s) => s.id);
     const N = scenes.length;
     const eff = this.currentIdx();
     const paused = this.state.paused;
