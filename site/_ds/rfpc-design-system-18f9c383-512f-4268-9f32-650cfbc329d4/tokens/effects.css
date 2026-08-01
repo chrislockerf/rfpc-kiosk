@@ -1,0 +1,59 @@
+/* ============================================================
+   RFPC — LIGHT, GLOW, SHADOW, MOTION
+   Cinematic: pooled light, brass edge-glow, slow reveals.
+   ============================================================ */
+
+:root {
+  /* --- Elevation shadows (deep, soft) --- */
+  --shadow-panel: 0 18px 48px -20px rgba(0,0,0,0.8),
+                  0 2px 0 0 rgba(246,241,231,0.04) inset;
+  --shadow-lift:  0 30px 70px -24px rgba(0,0,0,0.85);
+
+  /* --- Accent glows (marquee neon, kept subtle) --- */
+  --glow-accent-sm: 0 0 18px -2px var(--accent-glow);
+  --glow-accent-md: 0 0 40px -6px var(--accent-glow);
+  --glow-text: 0 0 22px var(--accent-glow);
+
+  /* --- Ambient stage light: a warm pool behind content --- */
+  --stage-vignette:
+    radial-gradient(115% 78% at 50% -12%, rgba(205,167,68,0.12), transparent 55%),
+    radial-gradient(90% 70% at 50% 118%, rgba(0,0,0,0.55), transparent 60%),
+    linear-gradient(180deg, var(--forest-800), var(--forest-900));
+
+  /* --- Hairline top-light on panels (brass rim) --- */
+  --rim-accent: linear-gradient(180deg, rgba(255,255,255,0.10), transparent 40%);  /* @kind other */
+
+  /* --- Motion: slow, classy, no bounce --- */
+  --ease-cinema: cubic-bezier(0.22, 0.61, 0.36, 1);  /* @kind other */
+  --dur-slow: 900ms;  /* @kind other */
+  --dur-med: 560ms;   /* @kind other */
+  --dur-fast: 260ms;  /* @kind other */
+}
+
+/* --- Subtle repeating reveal + glow keyframes (opt-in) --- */
+@keyframes rfpc-rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes rfpc-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes rfpc-breathe {
+  0%, 100% { opacity: 0.6; }
+  50%      { opacity: 1; }
+}
+/* ShowReel "kiosk is alive" hold bar — fills left→right across a scene */
+@keyframes rfpc-holdbar {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Content reveals only when active + motion allowed; safe fallback otherwise. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    animation: rfpc-rise var(--dur-slow) var(--ease-cinema) forwards;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+}

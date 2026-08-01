@@ -1,0 +1,24 @@
+
+
+James Bond 007 Pinball Rulesheet (Stern, 2022)
+ Spoilers
+On Her Majesty’s Secret Service is a multi-stage, flip count based, wizard mode slightly akin to “Terror of Mechagodzilla” from Stern’s Godzilla table. The player must advance through six phases of shots called “film stages”, each using different aspects of the playfield, before the final MI6 Multiball where the totals from all six phases determine the jackpot values and are added into the super jackpot.
+The player starts off with 50 flips, 100 if they started the mode at the side ramp. +10 flips are awarded for every mode that the player had completed prior to starting the final wizard mode. Flips are also awarded as the player advances through the film stages - +5 for each “advance” shot and +35 for each film stage completed. 5 flips are subtracted if the player drains during single-ball play.
+Once any film stage has been completed, a ball is added to the game and all scoring is doubled for as long as the second ball remains in play. A brief ball saver is in play once the second ball has been added, and no flips are subtracted when it drains either.
+007 scoring and smart missiles are disabled during On Her Majesty’s Secret Service.
+The film stages are played in the order that the films were completed over the course of the game: ie. if Thunderball was the first film to be completed, that stage will be played first.
+Dr. No: Alternate between the top lanes (which advance the mode) and the dragon tank. The top lanes’ value are boosted with bumper hits, dragon tank hits, and shots to the “bumper lane” between the lower two bumpers. Hit the lit dragon tank 3 times to complete the stage.
+From Russia With Love: Shoot the right orbit (which advances the mode) to light all shots, excluding the right orbit, for combos. These combos increase the value of the next shot to the right orbit. Make 5 lit right orbit shots to complete the stage.
+Goldfinger: Shoot the Goldfinger target (which advances the mode) to light all shots to build the Goldfinger target value. The target relights after hitting a single white shot, but subsequent white shots can be made to further boost the value. Hit the lit Goldfinger target 6 times to complete the stage.
+Thunderball: Shoot the left scoop (which advances the mode) to light a pair of roving shots. Hit either roving shot to relight the left scoop, or keep shooting them to increase the scoop value. Make 4 lit left scoop shots to complete the stage.
+You Only Live Twice: Shoot the rocket lane, then hit the rocket behind the drop targets (which advances the mode). The drop targets boost the rocket value, and reset if all three have been knocked down. Make 4 lit rocket shots to complete the stage.
+Diamonds Are Forever: Shoot the spinner (which advances the mode) to light all shots white. The white shots relight the spinner and increase the individual spin value for the next spinner rip. Make 5 lit spinner rips to complete the stage.
+Once all six stages have been played, MI6 Multiball will begin. This is a three-ball multiball where six shots are lit to score jackpots:
+Right ramp scores the total from Dr. No.
+Right orbit scores the total from From Russia With Love.
+DB5 eject scores the total from Goldfinger.
+Left scoop scores the total from Thunderball.
+Rocket lane scores the total from You Only Live Twice.
+Left ramp scores the total from Diamonds Are Forever.
+Once all six jackpots have been scored, the side ramp is lit to score the super jackpot, worth the combined totals from all six jackpots, and add +10 flips.
+After MI6 Multiball ends, end-of-ball bonus is awarded one last time, and the game ends.

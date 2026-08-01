@@ -1,0 +1,64 @@
+/* ============================================================
+   RFPC — TYPOGRAPHY
+   Marquee condensed for headers, high-contrast serif for the
+   speakeasy voice, humanist body for distance legibility,
+   mono for scores/shots. Sized for a 1080p TV at 10+ ft.
+   ============================================================ */
+
+:root {
+  /* --- Families --- */
+  --font-marquee: "Oswald", "Arial Narrow", sans-serif;   /* condensed uppercase headers */
+  --font-serif:   "Playfair Display", Georgia, serif;      /* elegant titles + pro-tip italics */
+  --font-body:    "Barlow Semi Condensed", system-ui, sans-serif; /* readable labels/body */
+  --font-mono:    "Space Mono", ui-monospace, monospace;   /* shot names, counts */
+
+  /* --- Weights --- */
+  --w-light: 300;      /* @kind font */
+  --w-regular: 400;    /* @kind font */
+  --w-medium: 500;     /* @kind font */
+  --w-semibold: 600;   /* @kind font */
+  --w-bold: 700;       /* @kind font */
+
+  /* --- Type scale (TV-first: nothing below 24px in use) --- */
+  --t-marquee:  92px;  /* @kind font */ /* page/game title */
+  --t-h1:       46px;  /* @kind font */ /* section headline */
+  --t-h2:       30px;  /* @kind font */ /* sub-head / shot name */
+  --t-lead:     27px;  /* @kind font */ /* lead body */
+  --t-body:     23px;  /* @kind font */ /* body */
+  --t-label:    18px;  /* @kind font */ /* eyebrow / tag */
+  --t-micro:    15px;  /* @kind font */ /* footer fine print */
+
+  /* --- Tracking / leading --- */
+  --track-marquee: 0.02em;   /* @kind font */
+  --track-eyebrow: 0.34em;   /* @kind font */ /* wide-set marquee eyebrows */
+  --track-label:   0.16em;   /* @kind font */
+  --lh-tight: 0.98;          /* @kind font */
+  --lh-snug: 1.12;           /* @kind font */
+  --lh-body: 1.42;           /* @kind font */
+}
+
+/* --- Reusable type roles --- */
+.rfpc-eyebrow {
+  font-family: var(--font-marquee);
+  font-weight: var(--w-medium);
+  font-size: var(--t-label);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-accent);
+}
+
+.rfpc-marquee {
+  font-family: var(--font-marquee);
+  font-weight: var(--w-bold);
+  font-size: var(--t-marquee);
+  letter-spacing: var(--track-marquee);
+  line-height: var(--lh-tight);
+  text-transform: uppercase;
+  color: var(--text-strong);
+}
+
+.rfpc-serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--w-regular);
+}

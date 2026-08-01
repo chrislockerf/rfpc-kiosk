@@ -1,0 +1,37 @@
+/* ============================================================
+   RFPC — SPACING, RADII, SIZING
+   Generous rhythm. A 1080p signage frame has a fixed safe area
+   so nothing crowds the bezel; sections breathe.
+   ============================================================ */
+
+:root {
+  /* --- Space scale --- */
+  --sp-1: 6px;
+  --sp-2: 12px;
+  --sp-3: 18px;
+  --sp-4: 26px;
+  --sp-5: 36px;
+  --sp-6: 52px;
+  --sp-7: 72px;
+  --sp-8: 96px;
+
+  /* --- Signage frame (1920x1080 canvas) --- */
+  --stage-w: 1920px;
+  --stage-h: 1080px;
+  --safe-x: 88px;   /* left/right TV safe margin */
+  --safe-top: 56px;
+  --safe-bottom: 48px;
+  --header-h: 168px;
+  --footer-h: 108px;
+
+  /* --- Radii: crisp, cabinet-like. Minimal rounding. --- */
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 14px;
+  --r-pill: 999px;
+
+  /* --- Strokes --- */
+  --hair: 1px;
+  --rule: 2px;
+  --marquee-rule: 4px;
+}

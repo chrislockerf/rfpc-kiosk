@@ -78,9 +78,9 @@ class Component extends DCLogic {
     this._warmCache = () => {
       if (this._warmed) return;
       const C = window.RFPC_CONTENT;
-      if (!C || !C.machines) return;
+      if (!C || !C.games) return;
       this._warmed = true;
-      C.machines.forEach((m) => {
+      C.games.forEach((m) => {
         ["cabinet", "playfield"].forEach((k) => {
           const im = new Image();
           im.src = "assets/" + m.game + "-" + k + "-cut.png";
@@ -178,6 +178,13 @@ class Component extends DCLogic {
     const spotCycleMs = spotIntroMs + 6 * (2 * spotExpandMs + boxHoldMs + spotGapMs) + 900;
     const spotHold = (n) => spotIntroMs + Math.max(1, n) * (2 * spotExpandMs + boxHoldMs + spotGapMs) + 900;
 
+    // Every spotlight page should open its FIRST box (top-left) and proceed in
+    // reading order — left to right, then the next row. KioskShow otherwise
+    // RESUMES from the last box index it persisted, so it would open the last
+    // box, wrap to the first, then run sequentially. Re-seed the resume key to
+    // 0 as the page (re)mounts so the cycle always begins at box 1.
+    const seedFresh = (key) => { try { window.localStorage.setItem(key, "0"); } catch (e) {} return key; };
+
     // ---------- presentational helpers (inline styles only) ----------
     const root = { position: "absolute", inset: 0, display: "flex", flexDirection: "column", minHeight: 0 };
     const lead = (txt) => h("p", { style: { margin: "0 0 var(--sp-4)", fontSize: "var(--t-lead)", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: "88ch" } }, txt);
@@ -202,14 +209,19 @@ class Component extends DCLogic {
     // CONTENT — all editable copy lives in content.js (window.RFPC_CONTENT)
     // =====================================================================
     const C = window.RFPC_CONTENT || {};
-    const MACHINES = C.machines || [];
+    const MACHINES = C.games || [];
 
     // =====================================================================
-    // PER-TABLE EXTRAS — credits + the six-box content (multiballs, skills,
-    // action button, tips). Modes reuse m.shots; wizard reuses m.wizard.
+    // Everything for a table now lives in its own games[] block (content.js).
+    // Both aliases below resolve to that same per-game object — EXTRA reads the
+    // six-box rundown fields (credits, keyMultiballs, skills, button, tips),
+    // PAGES reads the deep-page fields (overview, multiballs, strategy,
+    // sections, hold, proTips, sequence). Look up by game id.
     // =====================================================================
-    const EXTRA = C.extra || {};
-    const PAGES = C.pages || {};
+    const BY_ID = {};
+    MACHINES.forEach((g) => { BY_ID[g.game] = g; });
+    const EXTRA = BY_ID;
+    const PAGES = BY_ID;
 
     // ---------- spotlight detail builders (used inside KioskShow) ----------
     const detailRows = (leadTxt, rows, cols) => fit(h(React.Fragment, null,
@@ -287,7 +299,7 @@ class Component extends DCLogic {
       }
       if (e.imgColor) {
         const round = e.round !== false;
-        return h("img", { key: "logo", src: e.imgColor, onError: this._imgRetry, style: Object.assign({}, base, { width: e.w || "1.14em", height: round ? (e.w || "1.14em") : "1.14em", borderRadius: round ? "50%" : 0, objectFit: round ? "cover" : "contain" }) });
+        return h("img", { key: "logo", src: e.imgColor, crossOrigin: "anonymous", onError: this._imgRetry, style: Object.assign({}, base, { width: e.w || "1.14em", height: round ? (e.w || "1.14em") : "1.14em", borderRadius: round ? "50%" : 0, objectFit: round ? "cover" : "contain" }) });
       }
       return h("span", { key: "logo", style: Object.assign({}, base, { width: e.w || "1.06em", background: "var(--accent)", WebkitMaskImage: "url(" + e.img + ")", maskImage: "url(" + e.img + ")", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center", WebkitMaskSize: "contain", maskSize: "contain" }) });
     };
@@ -309,7 +321,7 @@ class Component extends DCLogic {
       const slot = (key, kind, srcPath, ph2) => srcPath
         ? h("div", { key: key, style: { position: "relative", minHeight: 0, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden",
             background: "radial-gradient(56% 46% at 50% 55%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 72%)" } },
-            h("img", { src: srcPath, alt: m.title + " " + ph2, onError: this._imgRetry, style: { maxWidth: "100%", maxHeight: "100%", objectFit: "contain", filter: "drop-shadow(0 20px 44px rgba(0,0,0,0.6))" } }))
+            h("img", { src: srcPath, alt: m.title + " " + ph2, crossOrigin: "anonymous", onError: this._imgRetry, style: { maxWidth: "100%", maxHeight: "100%", objectFit: "contain", filter: "drop-shadow(0 20px 44px rgba(0,0,0,0.6))" } }))
         : h("div", { key: key, style: { position: "relative", minHeight: 0, display: "flex" } },
             h("image-slot", { id: kind + "-" + m.game, shape: "rect", fit: "cover", placeholder: "Drop the " + m.title + " " + ph2,
               style: { width: "100%", height: "100%", background: "transparent" } }));
@@ -340,7 +352,7 @@ class Component extends DCLogic {
           ph.cab
             ? h("div", { key: "art", style: { position: "relative", height: "100%", minHeight: 0, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden",
                 background: "radial-gradient(52% 50% at 50% 52%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 72%)" } },
-                h("img", { src: ph.cab, onError: this._imgRetry, alt: m.title, style: { maxWidth: "100%", maxHeight: "100%", objectFit: "contain", filter: "drop-shadow(0 26px 54px rgba(0,0,0,0.66))" } }))
+                h("img", { src: ph.cab, onError: this._imgRetry, crossOrigin: "anonymous", alt: m.title, style: { maxWidth: "100%", maxHeight: "100%", objectFit: "contain", filter: "drop-shadow(0 26px 54px rgba(0,0,0,0.66))" } }))
             : h("div", { key: "art" }),
           h("div", { key: "txt", style: { display: "flex", flexDirection: "column", justifyContent: "center", gap: "var(--sp-4)" } },
             LOGOS[m.game] ? h("div", { key: "badge", style: { fontSize: "132px", lineHeight: 0.9, marginBottom: "var(--sp-2)" } }, logoNode(m.game)) : null,
@@ -359,14 +371,14 @@ class Component extends DCLogic {
       if (!KioskShow) return h("div", { style: root });
       const sections = [
         { index: 1, kicker: "On The Playfield", title: "Modes & Battles", teaser: m.lead, detail: detailRows(null, m.shots, (m.shots || []).length >= 5 ? 2 : 1) },
-        { index: 2, kicker: "Balls Everywhere", title: "Key Multiballs", teaser: x.multiballs.lead, detail: detailRows(x.multiballs.lead, x.multiballs.rows) },
+        { index: 2, kicker: "Balls Everywhere", title: "Key Multiballs", teaser: x.keyMultiballs.lead, detail: detailRows(x.keyMultiballs.lead, x.keyMultiballs.rows) },
         { index: 3, kicker: "The End Game", title: "Wizard Mode", teaser: m.wizard.title, detail: wizardDetail(m.wizard) },
         { index: 4, kicker: "At The Plunge", title: "Skill Shots", teaser: x.skills.lead, detail: detailRows(x.skills.lead, x.skills.rows) },
         { index: 5, kicker: x.button.kicker, title: x.button.title, teaser: x.button.lead, detail: detailRows(x.button.lead, x.button.rows) },
         { index: 6, kicker: "House Advice", title: "Table Tips", teaser: x.tips.proTip, detail: tipsDetail(x.tips) },
       ];
       return h("div", { style: Object.assign({}, root, { paddingTop: "14px", paddingBottom: "72px" }) },
-        h(KioskShow, { sections: sections, columns: 3, storageKey: "rfpc-spot-" + m.game, introMs: spotIntroMs, holdMs: boxHoldMs, gapMs: spotGapMs, expandMs: spotExpandMs }));
+        h(KioskShow, { sections: sections, columns: 3, storageKey: seedFresh("rfpc-spot-" + m.game), introMs: spotIntroMs, holdMs: boxHoldMs, gapMs: spotGapMs, expandMs: spotExpandMs }));
     };
 
     // ---------- MACHINE: Game Overview (big bullet points) ----------
@@ -386,9 +398,18 @@ class Component extends DCLogic {
 
     // ---------- shared spotlight-page + box-detail builders ----------
     const targetChip = (t) => (t && Chip) ? h(Chip, { tone: "accent", style: { alignSelf: "flex-start", marginBottom: "var(--sp-4)" } }, t) : null;
-    const boxDetail = (targetTxt, body) => fit(h(React.Fragment, null,
-      targetChip(targetTxt),
-      h("p", { style: { margin: 0, fontSize: "var(--t-lead)", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: "54ch" } }, body)));
+    const cornerChip = (t, chipStyle) => (t && Chip) ? h(Chip, { key: "corner", tone: "accent", style: { position: "absolute", right: 0, bottom: 0, ...chipStyle } }, t) : null;
+    const boxDetail = (targetTxt, body, img, shape, chipStyle) => fit(h(React.Fragment, null, [
+      img
+        ? h("div", { key: "row", style: { display: "flex", alignItems: "center", gap: "var(--sp-5)", height: "100%" } }, [
+            h("img", { key: "p", src: img, crossOrigin: "anonymous", onError: this._imgRetry, style: shape === "poster"
+              ? { width: "34%", maxWidth: 220, aspectRatio: "2 / 3", borderRadius: 12, objectFit: "cover", flex: "none", boxShadow: "var(--shadow-panel), 0 0 0 3px color-mix(in srgb, var(--accent) 55%, transparent)" }
+              : { width: "46%", maxWidth: 260, aspectRatio: "1 / 1", borderRadius: "50%", objectFit: "cover", flex: "none", boxShadow: "var(--shadow-panel), 0 0 0 3px color-mix(in srgb, var(--accent) 55%, transparent)" } }),
+            h("p", { key: "b", style: { margin: 0, fontSize: "var(--t-lead)", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: "44ch" } }, body),
+          ])
+        : h("p", { key: "b", style: { margin: 0, fontSize: "var(--t-lead)", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: "54ch" } }, body),
+      cornerChip(targetTxt, chipStyle),
+    ]));
     const mbDetail = (b) => fit(h(React.Fragment, null,
       targetChip(b.target),
       h("p", { key: "d", style: { margin: 0, fontSize: "var(--t-lead)", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: "54ch" } }, b.detail),
@@ -403,14 +424,7 @@ class Component extends DCLogic {
       const KioskShow = DS.KioskShow;
       if (!KioskShow) return h("div", { style: root });
       return h("div", { style: Object.assign({}, root, { paddingTop: "14px", paddingBottom: "72px" }) },
-        h(KioskShow, { sections: sections, columns: cols, storageKey: "rfpc-" + suffix + "-" + m.game, introMs: spotIntroMs, holdMs: boxHoldMs, gapMs: spotGapMs, expandMs: spotExpandMs }));
-    };
-
-    // ---------- MACHINE: Mode Overview (editable per-game title) ----------
-    const modesPageRender = (m) => () => {
-      const boxes = ((PAGES[m.game] || {}).modes || {}).boxes || [];
-      const sections = boxes.map((b, i) => ({ index: i + 1, kicker: "How To Play It", title: b.name, teaser: b.target, detail: boxDetail(b.target, b.detail || "") }));
-      return spotlightPage(m, "modes", sections, boxes.length >= 5 ? 3 : 2);
+        h(KioskShow, { sections: sections, columns: cols, storageKey: seedFresh("rfpc-" + suffix + "-" + m.game), introMs: spotIntroMs, holdMs: boxHoldMs, gapMs: spotGapMs, expandMs: spotExpandMs }));
     };
 
     // ---------- MACHINE: Multiball Overview ----------
@@ -430,81 +444,107 @@ class Component extends DCLogic {
     // ---------- MACHINE: generic themed "section" page (Movies, Villains, …) ----------
     // Driven entirely by content.js: PAGES[game].sections[key] = { title, kicker,
     // eyebrow, boxes:[{name, target, detail}] }. Each box expands like the Rundown.
+    // per-film chip colors (villains/henchmen/bond girls/gadgets are cued by film, not shot)
+    const FILM_CHIP_COLORS = {
+      "Dr. No": "#f2d90a",
+      "From Russia With Love": "#e0473a",
+      "Goldfinger": "#d4af37",
+      "Thunderball": "#b3261e",
+      "You Only Live Twice": "#2e8b57",
+      "Diamonds Are Forever": "#3b6fd6",
+    };
+    const filmChipStyle = (name) => {
+      const c = FILM_CHIP_COLORS[name];
+      if (!c) return null;
+      return { color: "#1a1508", background: c, border: "var(--hair) solid " + c };
+    };
+    // per-city chip colors (Foo Fighters world-tour van modes)
+    const CITY_CHIP_COLORS = {
+      "Los Angeles": "#3fae4a",
+      "Chicago": "#5bc8f0",
+      "New York": "#f2d90a",
+      "New Orleans": "#9b4fd6",
+      "Seattle": "#2d5fa6",
+      "Roswell": "#e8791a",
+    };
+    const cityChipStyle = (name) => {
+      const c = CITY_CHIP_COLORS[name];
+      if (!c) return null;
+      return { color: "#1a1508", background: c, border: "var(--hair) solid " + c };
+    };
+    const boxTeaser = (img, targetTxt, shape, chipStyle) => h(React.Fragment, null, [
+      img ? (shape === "poster"
+        ? h("img", { key: "img", src: img, crossOrigin: "anonymous", onError: this._imgRetry, style: { display: "block", width: 92, height: 130, borderRadius: 8, objectFit: "cover", boxShadow: "var(--shadow-panel), 0 0 0 2px var(--accent)" } })
+        : h("img", { key: "img", src: img, crossOrigin: "anonymous", onError: this._imgRetry, style: { display: "block", width: 118, height: 118, borderRadius: "50%", objectFit: "cover", boxShadow: "0 0 0 2px var(--accent)" } })) : null,
+      (targetTxt && Chip) ? h(Chip, { key: "chip", tone: "accent", style: { position: "absolute", right: "var(--sp-4)", bottom: "var(--sp-4)", ...chipStyle } }, targetTxt) : null,
+    ]);
     const sectionPageRender = (m, key) => () => {
       const sec = ((PAGES[m.game] || {}).sections || {})[key] || {};
       const boxes = sec.boxes || [];
       const kicker = sec.kicker || "The Details";
-      const sections = boxes.map((b, i) => ({ index: i + 1, kicker: kicker, title: b.name, teaser: b.target || "", detail: boxDetail(b.target, b.detail || "") }));
-      return spotlightPage(m, key, sections, boxes.length >= 5 ? 3 : 2);
+      const cols = boxes.length >= 5 ? 3 : 2;
+      const sections = boxes.map((b, i) => {
+        const chipStyle = sec.chipByFilm ? filmChipStyle(b.target) : (sec.chipByCity ? cityChipStyle(b.name) : null);
+        return { index: i + 1, kicker: kicker, title: b.name, teaser: boxTeaser(b.img, b.target, sec.imgShape, chipStyle), detail: boxDetail(b.target, b.detail || "", b.img, sec.imgShape, chipStyle) };
+      });
+      return spotlightPage(m, key, sections, cols);
     };
 
-    // ---------- GENERAL: between-games combo (tip / lingo / real talk) ----------
-    const comboRender = (v) => () => h("div", { style: root },
-      lead(v.lead),
-      board(3, [
-        cell([cellHead("House Tip", v.tipTitle), para(v.tip, true)]),
-        cell([cellHead("Say It Right", v.lingoTitle), para(v.lingo, true)]),
-        cell([cellHead("Overheard", "Real Talk"), h("div", { key: "sp", style: { flex: 1 } }), italic(v.quip, 30)]),
-      ])
-    );
-    const COMBOS = C.combos || [];
-
-    // ---------- GENERAL: house tips (5) ----------
+    // ---------- GENERAL: single-item breather pages (one tip / term / quip per page) ----------
     const TIPS = C.tips || [];
-
-    const tips = () => h("div", { style: root },
-      lead("Nobody\u2019s a natural. These five habits separate a 90-second ball from a five-minute one."),
-      board(5, TIPS.map((t, i) => cell([
-        h("span", { key: "n", style: { fontFamily: "var(--font-mono)", fontWeight: 700, fontSize: "var(--t-label)", color: "var(--accent-bright)" } }, String(i + 1).padStart(2, "0")),
-        h("div", { key: "nm", style: { margin: "var(--sp-2) 0 var(--sp-3)", fontFamily: "var(--font-marquee)", fontWeight: "var(--w-bold)", fontSize: "27px", lineHeight: 1.04, textTransform: "uppercase", color: "var(--text-strong)", textWrap: "balance" } }, t.name),
-        h("p", { key: "b", style: { margin: 0, fontSize: "20px", lineHeight: 1.36, color: "var(--text-body)" } }, t.body),
-      ])))
-    );
-
-    // ---------- GENERAL: glossary ----------
     const GLOSSARY = C.glossary || [];
-
-    const glossary = () => h("div", { style: root },
-      h("div", { style: { flex: 1, minHeight: 0, display: "grid", gridTemplateColumns: "1fr 1fr", gridTemplateRows: "repeat(4, 1fr)", gap: "var(--sp-3) var(--sp-6)", gridAutoFlow: "column" } },
-        GLOSSARY.map((g) => h("div", { key: g.term, style: { display: "grid", gridTemplateColumns: "230px 1fr", alignItems: "baseline", gap: "var(--sp-4)", padding: "var(--sp-2) 0", borderTop: "var(--hair) solid var(--border-hair)" } },
-          h("div", { style: { display: "flex", alignItems: "baseline", gap: "var(--sp-2)" } },
-            h("span", { "aria-hidden": "true", style: { width: 9, height: 9, transform: "rotate(45deg)", background: "var(--accent)", boxShadow: "var(--glow-accent-sm)", flex: "none", alignSelf: "center" } }),
-            h("span", { style: { fontFamily: "var(--font-marquee)", fontWeight: "var(--w-bold)", fontSize: "30px", textTransform: "uppercase", color: "var(--text-strong)" } }, g.term)),
-          h("p", { style: { margin: 0, fontSize: "22px", lineHeight: 1.32, color: "var(--text-body)" } }, g.def)))
-      )
-    );
-
-    // ---------- GENERAL: closing quip ----------
+    const COMBOS = C.combos || [];
     const Q = C.quip || {};
-    const quip = () => h("div", { style: root },
+    // pool of quotable lines: the "overheard" quips plus the closing punchline, each its own page
+    const QUOTES = COMBOS.map((v) => v.quip).concat(Q.punch ? [Q.setup ? (Q.setup + " " + Q.punch) : Q.punch] : []);
+
+    const singleCenter = (kicker, big, body) => h("div", { style: root },
       h("div", { style: { flex: 1, minHeight: 0, display: "grid", placeItems: "center", textAlign: "center" } },
-        h("div", { style: { maxWidth: 1300 } },
-          h("p", { style: { margin: "0 0 var(--sp-4)", fontFamily: "var(--font-marquee)", fontSize: "30px", letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-muted)" } }, Q.intro),
-          h("p", { className: "rfpc-serif-italic", style: { margin: 0, fontSize: "56px", lineHeight: 1.2, color: "var(--text-strong)", textWrap: "balance" } }, Q.setup),
-          h("p", { className: "rfpc-serif-italic", style: { margin: "var(--sp-3) 0 0", fontSize: "72px", lineHeight: 1.05, color: "var(--brass-100)" } }, Q.punch),
-          h("p", { style: { margin: "var(--sp-5) 0 0", fontFamily: "var(--font-mono)", fontSize: "var(--t-label)", color: "var(--text-faint)" } }, Q.byline))
+        h("div", { style: { maxWidth: 1300 } }, [
+          kicker ? h("div", { key: "k", className: "rfpc-eyebrow", style: { color: "var(--accent-bright)", marginBottom: "var(--sp-4)" } }, kicker) : null,
+          h("div", { key: "b", style: { fontFamily: "var(--font-marquee)", fontWeight: "var(--w-bold)", fontSize: "60px", lineHeight: 1.05, textTransform: "uppercase", color: "var(--text-strong)", textWrap: "balance", marginBottom: "var(--sp-5)" } }, big),
+          h("p", { key: "p", style: { margin: 0, fontSize: "36px", lineHeight: 1.32, color: "var(--text-body)", textWrap: "balance" } }, body),
+        ])
       )
     );
+    const singleQuote = (q) => h("div", { style: root },
+      h("div", { style: { flex: 1, minHeight: 0, display: "grid", placeItems: "center", textAlign: "center" } },
+        h("div", { style: { maxWidth: 1300 } }, [
+          h("p", { key: "q", className: "rfpc-serif-italic", style: { margin: 0, fontSize: "54px", lineHeight: 1.28, color: "var(--text-strong)", textWrap: "balance" } }, q),
+          h("p", { key: "b", style: { margin: "var(--sp-5) 0 0", fontFamily: "var(--font-mono)", fontSize: "var(--t-label)", color: "var(--text-faint)" } }, "\u2014 overheard at The Lockedown"),
+        ])
+      )
+    );
+
+    const TIP_ITEMS = TIPS.map((t) => ({ eyebrow: "House Rules", title: "House Tip", meta: ["Play Better Tonight"], proTip: t.body, render: () => singleCenter("House Tip", t.name, t.body) }));
+    const LINGO_ITEMS = GLOSSARY.map((g) => ({ eyebrow: "Speak The Language", title: "Pinball Lingo", meta: ["The Words On The Floor"], proTip: g.def, render: () => singleCenter("Pinball Lingo", g.term, g.def) }));
+    const QUIP_ITEMS = QUOTES.map((q) => ({ eyebrow: "Real Talk", title: "Overheard", meta: ["The Lockedown"], proTip: "You\u2019re not mad at the machine. You\u2019re mad at yourself.", render: () => singleQuote(q) }));
+
+    // one breather per machine, cycling tip \u2192 lingo \u2192 overheard so nothing
+    // repeats within a full pass around the floor
+    const POOLS = { tip: TIP_ITEMS, lingo: LINGO_ITEMS, quip: QUIP_ITEMS };
+    const CYCLE = ["tip", "lingo", "quip"];
+    const poolIdx = { tip: 0, lingo: 0, quip: 0 };
+    const breathers = MACHINES.map((_, i) => {
+      const kind = CYCLE[i % CYCLE.length];
+      const pool = POOLS[kind];
+      if (!pool.length) return QUIP_ITEMS[0] || TIP_ITEMS[0] || LINGO_ITEMS[0];
+      const item = pool[poolIdx[kind] % pool.length];
+      poolIdx[kind] += 1;
+      return item;
+    });
 
     // =====================================================================
     // THE LOOP — per table: On The Floor anchor (next table lit) → intro
     // (cabinet + playfield + credits) → six-box spotlight → general breather.
     // The floor screen repeats before each table so it's clear we've moved on.
     // =====================================================================
-    // render fn per breather id; visible copy comes from C.general (content.js)
-    const genRender = { tips: tips, lingo: glossary, quip: quip,
-      combo0: comboRender(COMBOS[0]), combo1: comboRender(COMBOS[1]), combo2: comboRender(COMBOS[2]) };
-    const generalScenes = (C.general || []).map((g) => ({
-      id: g.id, eyebrow: g.eyebrow, title: g.title, meta: [g.meta], proTip: g.proTip,
-      render: genRender[g.id] || quip,
-    }));
-
     const scenes = [];
-    if (!MACHINES.length || !generalScenes.length) {
+    if (!MACHINES.length || !breathers.length) {
       return { app: h("div", { style: { position: "fixed", inset: 0, background: "var(--forest-900)" } }) };
     }
     // Default per-machine page order (machines without a custom `sequence`).
-    const DEFAULT_SEQ = ["intro", "gameoverview", "rundown", "modes", "multiball", "strategy", "hold"];
+    const DEFAULT_SEQ = ["intro", "gameoverview", "rundown", "multiball", "strategy", "hold"];
     // Build one scene for a given page key. Known keys map to their dedicated
     // renderers; any other key is treated as a custom themed section page whose
     // content lives in PAGES[game].sections[key].
@@ -516,11 +556,6 @@ class Component extends DCLogic {
       if (key === "intro") return Object.assign({}, base, { id: m.game + "-intro", eyebrow: "Get To Know The Line-Up", title: badgeTitle(m), meta: [m.maker], proTip: pt.intro || m.proTip, holdMs: holdMs, render: introRender(m), navKind: "Intro", navSub: "Machine & Credits" });
       if (key === "gameoverview") return Object.assign({}, base, { id: m.game + "-gameoverview", eyebrow: "The Quick Read", title: badgeTitle(m), meta: ["Game Overview"], proTip: pt.overview || m.proTip, holdMs: holdMs, render: overviewPageRender(m), navKind: "Overview", navSub: "Game Overview" });
       if (key === "rundown") return Object.assign({}, base, { id: m.game + "-spotlight", eyebrow: m.maker, title: badgeTitle(m), meta: ["The Rundown"], proTip: pt.rundown || m.proTip, holdMs: spotCycleMs, render: spotlightRender(m), navKind: "Rundown", navSub: "The Six-Box Rundown" });
-      if (key === "modes") {
-        const modeLabel = (pg.modes || {}).title || "Mode Overview";
-        const modeCount = ((pg.modes || {}).boxes || []).length || 1;
-        return Object.assign({}, base, { id: m.game + "-modes", eyebrow: "How Each One Plays", title: badgeLabel(m, modeLabel), meta: [m.title], pageLabel: modeLabel, proTip: pt.modes || m.proTip, holdMs: spotHold(modeCount), render: modesPageRender(m), navKind: "Modes", navSub: modeLabel });
-      }
       if (key === "multiball") {
         const mbCount = (pg.multiballs || []).length || 1;
         return Object.assign({}, base, { id: m.game + "-mb", eyebrow: m.maker, title: badgeTitle(m), meta: ["Multiball Overview"], proTip: pt.multiball || m.proTip, holdMs: spotHold(mbCount), render: multiballsPageRender(m), navKind: "Multiball", navSub: "Multiball Overview" });
@@ -544,8 +579,8 @@ class Component extends DCLogic {
         proTip: "", holdMs: overviewMs, render: overviewFn(m.game) });
       const seq = (Array.isArray(pg.sequence) && pg.sequence.length) ? pg.sequence : DEFAULT_SEQ;
       seq.forEach((key) => { const sc = makeScene(m, key); if (sc) scenes.push(sc); });
-      const g = generalScenes[i % generalScenes.length];
-      scenes.push({ id: m.game + "-gen-" + g.id, kind: "general", eyebrow: g.eyebrow, title: g.title, meta: g.meta,
+      const g = breathers[i];
+      scenes.push({ id: m.game + "-gen-" + i, kind: "general", eyebrow: g.eyebrow, title: g.title, meta: g.meta,
         gameName: "The Lockedown", proTip: g.proTip, holdMs: breatherMs, render: g.render });
     });
 
