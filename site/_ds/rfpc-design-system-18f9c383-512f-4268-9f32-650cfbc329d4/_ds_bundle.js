@@ -237,11 +237,19 @@ function KioskShow({
     const wrap = wrapRef.current;
     if (!cell || !wrap) return;
     if (expanded) {
+      const cells = cellRefs.current.slice(0, sections.length).filter(Boolean);
+      let left = Infinity, top = Infinity, right = -Infinity, bottom = -Infinity;
+      cells.forEach(c => {
+        left = Math.min(left, c.offsetLeft);
+        top = Math.min(top, c.offsetTop);
+        right = Math.max(right, c.offsetLeft + c.offsetWidth);
+        bottom = Math.max(bottom, c.offsetTop + c.offsetHeight);
+      });
       setBox({
-        left: 0,
-        top: 0,
-        width: wrap.clientWidth,
-        height: wrap.clientHeight,
+        left: left,
+        top: top,
+        width: right - left,
+        height: bottom - top,
         animate: true
       });
     } else {
@@ -331,6 +339,7 @@ function KioskShow({
     style: {
       ...cardBase,
       height: "100%",
+      boxSizing: "border-box",
       padding: "var(--sp-6)",
       background: "linear-gradient(155deg, var(--surface-raised), var(--surface-panel))",
       boxShadow: "var(--shadow-lift), var(--glow-accent-sm)",
@@ -440,7 +449,7 @@ function MarqueeHeader({
       position: "relative",
       flex: "none",
       display: "flex",
-      alignItems: "flex-end",
+      alignItems: "flex-start",
       justifyContent: "space-between",
       gap: "var(--sp-5)",
       paddingBottom: "var(--sp-3)",
@@ -451,7 +460,7 @@ function MarqueeHeader({
   }, rest), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
-      alignItems: "flex-end",
+      alignItems: "flex-start",
       gap: "var(--sp-4)",
       minWidth: 0
     }
@@ -459,30 +468,14 @@ function MarqueeHeader({
     style: {
       minWidth: 0
     }
-  }, eyebrow && /*#__PURE__*/React.createElement("div", {
-    className: "rfpc-eyebrow",
-    style: {
-      marginBottom: "var(--sp-2)",
-      display: "flex",
-      alignItems: "center",
-      gap: "var(--sp-2)"
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    "aria-hidden": "true",
-    style: {
-      width: 34,
-      height: 3,
-      background: "var(--accent)",
-      boxShadow: "var(--glow-accent-sm)",
-      display: "inline-block"
-    }
-  }), eyebrow), /*#__PURE__*/React.createElement("h1", {
+  }, /*#__PURE__*/React.createElement("h1", {
     className: "rfpc-marquee",
     style: {
       margin: 0,
+      fontSize: "90px",
       textShadow: "0 2px 30px rgba(0,0,0,0.5)"
     }
-  }, title))), meta.length > 0 && /*#__PURE__*/React.createElement("div", {
+  }, title))), (meta.length > 0 || eyebrow) && /*#__PURE__*/React.createElement("div", {
     style: {
       flex: "none",
       textAlign: "right",
@@ -495,11 +488,20 @@ function MarqueeHeader({
   }, meta.map((m, i) => /*#__PURE__*/React.createElement("div", {
     key: i,
     style: {
-      fontSize: i === 0 ? "var(--t-h2)" : "var(--t-label)",
+      fontSize: i === 0 ? "38px" : "var(--t-label)",
       fontWeight: i === 0 ? "var(--w-semibold)" : "var(--w-regular)",
       color: i === 0 ? "var(--text-strong)" : "var(--text-muted)"
     }
-  }, m))));
+  }, m)), eyebrow && /*#__PURE__*/React.createElement("div", {
+    className: "rfpc-eyebrow",
+    style: {
+      marginTop: "var(--sp-2)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "flex-end",
+      gap: "var(--sp-2)"
+    }
+  }, eyebrow)));
 }
 Object.assign(__ds_scope, { MarqueeHeader });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/signage/MarqueeHeader.jsx", error: String((e && e.message) || e) }); }
