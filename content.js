@@ -51,389 +51,6 @@ window.RFPC_CONTENT = {
   games: [
 
     /* ======================================================================
-       JAMES BOND 007
-       Pages play in the order they appear below. To reorder pages, move a
-       whole { … } block. To remove one, delete its block.
-       ====================================================================== */
-    {
-      game: "james-bond",            // code key — DO NOT change (wires photos, badge, accent)
-      title: "James Bond 007",
-      maker: "Stern · 2022",
-      proTip: "The Action Button activates Smart Missiles, 007 Scoring and Swipe-a-Ball — it’s the machine’s #1 scoring tool if used properly.",  // fallback footer tip if a page has none
-
-      pages: [
-
-        /* PAGE 1 · INTRO — cabinet, playfield & credits ----------------- */
-        {
-          key: "intro",
-          pageTitle: "Get To Know The Line-Up",
-          eyebrow: "Stern · 2022",
-          proTip: "The Action Button activates Smart Missiles, 007 Scoring and Swipe-a-Ball.  It’s the game’s #1 scoring tool if used wisely.",
-          credits: [
-            { role: "Game Design", names: "George Gomez" },
-            { role: "Engineering / Mechanics", names: "Elliot Eismin, Harrison Drake, John Rotharmel, Robert Blakeman, Tom Kopera" },
-            { role: "Software", names: "Lonnie D. Ropp, Mike Vinikour" },
-            { role: "Artwork", names: "Kevin O’Connor" },
-            { role: "Sound", names: "Jerry Thompson, Ken Hale" },
-          ],
-        },
-
-        /* PAGE 2 · GAME OVERVIEW — the big bullet points ---------------- */
-        {
-          key: "gameoverview",
-          pageTitle: "Game Overview",
-          eyebrow: "TL;DR: The Quick Read",
-          proTip: "Smart Missiles (Blue Action Button) spot the most valuable shot on the playfield. Collect them and use them wisely.",
-          intro: "Designed by George Gomez in his first pinball machine since Deadpool, James Bond 007 takes players on an international espionage journey. Across six assignments, James Bond gets help from the gadgets of the Q Branch as he takes on a wide variety of Villains and Henchmen.",
-          bullets: [
-            "Experience six classic Sean Connery 007 films.",
-            "Battle the Villain, Henchmen and SPECTRE Weapon from each film.",
-            "Activate the Bond Women from each film to provide stacking multipliers.",
-            "Visit Q during each film to obtain his special toys and weapons.",
-            "Try to stack BirdOne and Jetpack multiball during Villain and Henchmen modes.",
-            "Control the Action button as there are several uses: Blue (Smart Missile), Pink (007 Scoring) and Green (Swipe-a-Ball).",
-          ],
-        },
-
-        /* PAGE 3 · THE RUNDOWN — six boxes, each expands full-stage ----- */
-        {
-          key: "rundown",
-          pageTitle: "The Rundown",
-          eyebrow: "Stern · 2022",
-          proTip: "Each film has four modes — Villains, Henchmen, SPECTRE Weapon, Q Branch. Play each mode to complete the film and add to your end of ball bonus.",
-          modes: {
-            kicker: "On The Playfield",
-            title: "Modes & Battles",
-            lead: "Villains, henchmen, Q-Branch and SPECTRE weapons.",
-            rows: [
-              { label: "Villains", target: "Right Ramp", desc: "Battle each film’s villain." },
-              { label: "Henchmen", target: "Side Ramp", desc: "Take out the muscle." },
-              { label: "SPECTRE Weapon", target: "Goldfinger Target", desc: "Spell SPECTRE behind the rocket, then start the countdown." },
-              { label: "Q Branch", target: "DB5 Eject", desc: "Once lit, access Q’s gadgets." },
-            ],
-          },
-          keyMultiballs: {
-            kicker: "Balls Everywhere",
-            title: "Key Multiballs",
-            lead: "Stack Bird One and Jetpack Multiballs with Villain and Henchmen battles.",
-            rows: [
-              { label: "Bird One", target: "The Rocket", desc: "Lock three balls in the Rocket; jackpots light green, super jackpot at the Rocket." },
-              { label: "Jetpack Multiball", target: "Left Ramp", desc: "Qualify at the left Scuba eject, then the left ramp to start." },
-              { label: "Bond, James Bond Multiball", target: "Left Eject or Right Ramp", desc: "Qualify by battling one Villain, one Henchmen and playing both Bird One and Jetpack Multiballs." },
-            ],
-          },
-          wizard: {
-            kicker: "The End Game",
-            title: "Wizard Mode",
-            name: "OHMSS → MI6 Multiball",
-            body: "Start all six of one mode type for a mini-wizard. Play all four mini-wizards for On Her Majesty’s Secret Service — six film stages on a flip count, then MI6 Multiball.",
-            chip: "◆ Four mini-wizards",
-          },
-          skills: {
-            kicker: "At The Plunge",
-            title: "Skill Shots",
-            lead: "Hold the left flipper as you plunge to steer the skill shot.",
-            rows: [
-              { label: "Lane Skill", target: "Flashing Lane", desc: "Plunge into the lit top lane." },
-              { label: "Super Skill", target: "Right Ramp", desc: "Hold left flipper, then rip the right ramp." },
-            ],
-          },
-          button: {
-            kicker: "The #1 scoring tool",
-            title: "Action Button",
-            lead: "Charge it, then spend it on the biggest shot on the field.",
-            rows: [
-              { label: "Smart Missiles", target: "Fires Lit Shot", desc: "Collect the most valuable lit shot instantly." },
-              { label: "007 Scoring", target: "Up To 7×", desc: "Each collected Bond Woman adds +1× playfield." },
-              { label: "Swipe-a-Ball", target: "Premium", desc: "Pull a locked Bird One ball into play." },
-            ],
-          },
-          tableTips: {
-            kicker: "House Advice",
-            title: "Table Tips",
-            proTip: "Master the Action Button before films — it’s the machine’s #1 scoring tool.",
-            rows: [
-              { name: "Button First", body: "Learn the Action Button before chasing films." },
-              { name: "Play A Whole Film", body: "Play all four modes from one film and its Bond Woman stays lit across balls." },
-            ],
-          },
-        },
-
-        /* PAGE 4 · THE MOVIES ------------------------------------------- */
-        {
-          key: "movies",
-          pageTitle: "The Movies",
-          eyebrow: "Play Them In Any Order",
-          proTip: "Take the time to watch the iconic film clips that accompany each mode.",
-          kicker: "The Six Films",
-          imgShape: "poster",
-          boxes: [
-            {
-              name: "Dr. No",
-              target: "1962",
-              detail: "Bond investigates a missing agent in Jamaica and uncovers Dr. No, a reclusive scientist sabotaging American rocket launches from a hidden island base. Bond infiltrates the base, survives Dr. No’s traps, and destroys his nuclear reactor before it melts down.",
-              img: "assets/bond-movie-drno.jpg",
-            },
-            {
-              name: "From Russia With Love",
-              target: "1963",
-              detail: "SPECTRE lures Bond into a trap using a Soviet decoding machine and a clerk posing as a defector. Bond survives a train journey stalked by an assassin and a poisoned-blade attack, ultimately exposing and escaping SPECTRE’s elaborate plot.",
-              img: "assets/bond-movie-fromrussia.jpg",
-            },
-            {
-              name: "Goldfinger",
-              target: "1964",
-              detail: "Bond investigates gold smuggler Auric Goldfinger and uncovers a scheme to irradiate the U.S. gold reserve at Fort Knox, boosting the value of his own hoard. With help from pilot Pussy Galore, Bond foils the plan and stops Goldfinger’s bodyguard Oddjob.",
-              img: "assets/bond-movie-goldfinger.jpg",
-            },
-            {
-              name: "Thunderball",
-              target: "1965",
-              detail: "SPECTRE agent Largo hijacks two NATO atomic bombs and holds the world ransom. Bond traces the warheads to Largo’s yacht in the Bahamas, romancing his mistress Domino along the way, and leads a climactic underwater battle to recover the bombs.",
-              img: "assets/bond-movie-thunderball.jpg",
-            },
-            {
-              name: "You Only Live Twice",
-              target: "1967",
-              detail: "Faking his own death, Bond goes undercover in Japan to find who is hijacking American and Soviet spacecraft and pushing the two superpowers toward war. He traces the plot to SPECTRE chief Blofeld’s hollowed-out volcano base and destroys it from within.",
-              img: "assets/bond-movie-yolt.jpg",
-            },
-            {
-              name: "Diamonds Are Forever",
-              target: "1971",
-              detail: "Posing as a smuggler, Bond infiltrates a diamond-trafficking pipeline running through Amsterdam and Las Vegas, tracing it to a returning Blofeld, who is stockpiling diamonds to build a satellite laser weapon. Bond breaks up the scheme aboard an offshore oil rig.",
-              img: "assets/bond-movie-diamonds.jpg",
-            },
-          ],
-        },
-
-        /* PAGE 5 · THE VILLAINS ----------------------------------------- */
-        {
-          key: "villains",
-          pageTitle: "The Villains",
-          eyebrow: "One Of The Four Mode Types",
-          proTip: "Defeating a Villain gives you an extra Smart Missile and adds to your end of ball bonus.",
-          kicker: "Beat The Boss",
-          chipByFilm: true,
-          boxes: [
-            {
-              name: "Dr. No",
-              target: "Dr. No",
-              detail: "Trouble in Jamaica — build value at the bumpers or right orbit, then cash out at the Dragon Tank. 10 successful shots to win.",
-              img: "assets/bond-villain-drno.png",
-            },
-            {
-              name: "Rosa Klebb",
-              target: "From Russia With Love",
-              detail: "SPECTRE Island — clear all nine major shots, then finish with the left eject and DB5 eject.",
-              img: "assets/bond-villain-klebb.png",
-            },
-            {
-              name: "Auric Goldfinger",
-              target: "Goldfinger",
-              detail: "The Incredible Laser Ray — shoot the Goldfinger target to relight shots; 7 total shots lights the DB5 eject to escape.",
-              img: "assets/bond-villain-goldfinger.png",
-            },
-            {
-              name: "Emilio Largo",
-              target: "Thunderball",
-              detail: "Disco Volante Demolition — shoot the left eject, side ramp, or right ramp; 10 shots to win.",
-              img: "assets/bond-villain-largo.png",
-            },
-            {
-              name: "Blofeld",
-              target: "You Only Live Twice",
-              detail: "Feeding Frenzy — shoot the Bird 1 rocket or drop targets to beat Blofeld.",
-              img: "assets/bond-villain-blofeld.png",
-            },
-            {
-              name: "Mr. Henderson",
-              target: "Diamonds Are Forever",
-              detail: "Diamonds of Destruction — calibrate the satellite with the left eject, center loop and right ramp. 9 shots to win.",
-              img: "assets/bond-villain-blofeld.png",
-            },
-          ],
-        },
-
-        /* PAGE 6 · THE HENCHMEN ----------------------------------------- */
-        {
-          key: "henchmen",
-          pageTitle: "The Henchmen",
-          eyebrow: "Fast, Repeatable Progress",
-          proTip: "Henchmen are the fast, repeatable film progress — lean on them early.",
-          kicker: "Take Out The Muscle",
-          chipByFilm: true,
-          boxes: [
-            {
-              name: "Professor Dent",
-              target: "Dr. No",
-              detail: "Sinister Summit — lock in the moving yellow shot with the Dragon Tank; 10 yellow shots to win.",
-              img: "assets/bond-henchman-dent.png",
-            },
-            {
-              name: "Red Grant",
-              target: "From Russia With Love",
-              detail: "Encounter on the Orient Express — shoot the right orbit to light combos across the right side; 10 red shots to win.",
-              img: "assets/bond-henchman-grant.png",
-            },
-            {
-              name: "Oddjob",
-              target: "Goldfinger",
-              detail: "He Blew a Fuse — hit the left ramp, side ramp, right orbit, and right ramp, then the rocket lane to win.",
-              img: "assets/bond-henchman-oddjob.png",
-            },
-            {
-              name: "Fiona Volpe",
-              target: "Thunderball",
-              detail: "Femme Fatale — chase her down: left ramp, right ramp, left ramp, right orbit, side ramp, left ramp, DB5 eject.",
-              img: "assets/bond-henchman-volpe.png",
-            },
-            {
-              name: "Mr. Osato",
-              target: "You Only Live Twice",
-              detail: "Arrange Usual Reception Please — flee Osato’s clutches via the three ramps and upper loop.",
-            },
-            {
-              name: "Mr. Wint & Mr. Kidd",
-              target: "Diamonds Are Forever",
-              detail: "Shoot the left ramp then center lane, repeated three times, to complete the mode.",
-              img: "assets/bond-henchman-wintkidd.png",
-            },
-          ],
-        },
-
-        /* PAGE · SPECTRE WEAPONS --------------------------------------- */
-        {
-          key: "spectre",
-          pageTitle: "SPECTRE Weapons",
-          eyebrow: "Spell SPECTRE Behind The Rocket",
-          proTip: "Each SPECTRE countdown you beat leaves a perk for the rest of the game.",
-          kicker: "Beat The Countdown",
-          chipByFilm: true,
-          boxes: [
-            { name: "Troublesome Tarantulas", target: "Dr. No", detail: "Perk: +17 seconds on mode timers." },
-            { name: "Deadly Dagger", target: "From Russia With Love", detail: "Perk: +7 seconds on ball savers." },
-            { name: "Death By Derby", target: "Goldfinger", detail: "Perk: upgraded High Stakes awards." },
-            { name: "Swimming With Sharks", target: "Thunderball", detail: "Perk: two Smart Missiles per mode, plus 2 every ball." },
-            { name: "Outer Space Hijack", target: "You Only Live Twice", detail: "Perk: an add-a-ball." },
-            { name: "Bath-O-Sub Bash", target: "Diamonds Are Forever", detail: "Perk: super modes last the whole ball." },
-          ],
-        },
-
-        /* PAGE 7 · THE BOND GIRLS --------------------------------------- */
-        {
-          key: "bondGirls",
-          pageTitle: "The Bond Girls",
-          eyebrow: "Boost The Current Film",
-          proTip: "Bond girls: Pussy Galore - enough said.",
-          kicker: "Collect The Allies",
-          chipByFilm: true,
-          boxes: [
-            { name: "Honey Ryder", target: "Dr. No", detail: "Qualified by 25 bumper hits." },
-            { name: "Tatiana Romanova", target: "From Russia With Love", detail: "Qualified by 3 right orbit shots." },
-            { name: "Pussy Galore", target: "Goldfinger", detail: "Qualified by 4 DB5 ejects." },
-            { name: "Domino Derval", target: "Thunderball", detail: "Qualified by 4 left ejects." },
-            { name: "Kissy Suzuki", target: "You Only Live Twice", detail: "Qualified by 10 rocket hits — strong shots register more." },
-            { name: "Tiffany Case", target: "Diamonds Are Forever", detail: "Qualified by 200 spinner spins." },
-          ],
-        },
-
-        /* PAGE 8 · Q-BRANCH TOYS ---------------------------------------- */
-        {
-          key: "qbranch",
-          pageTitle: "Q-Branch Toys",
-          eyebrow: "Light Them, Then Cash In",
-          proTip: "Q gadgets are gravy — spend them from the scoop, but don’t drain reaching for it.",
-          kicker: "Spend The Gadgets",
-          chipByFilm: true,
-          boxes: [
-            {
-              name: "Radioactive Reconnaissance",
-              target: "Dr. No",
-              detail: "Bumper hits qualify it — take control of the Geiger Counter to find the big-award shot.",
-            },
-            {
-              name: "Attaché Case",
-              target: "From Russia With Love",
-              detail: "Six right-orbit shots qualify it; the case’s five components start Hunted by Helicopter Multiball.",
-            },
-            { name: "DB5", target: "Goldfinger", detail: "Three DB5 eject shots qualify it; six shots reveal the car’s amenities and start DB5 Multiball." },
-            {
-              name: "Power Pack",
-              target: "Thunderball",
-              detail: "Three left-eject shots qualify it; the underwater jetpack gadget leads into Power Pack Multiball.",
-            },
-            { name: "Little Nellie", target: "You Only Live Twice", detail: "20 rocket hits qualify it; five right-ramp shots start Little Nellie Multiball." },
-            { name: "Q’s Ring", target: "Diamonds Are Forever", detail: "400 spinner spins qualify it — test the electromagnet ring on the flashing blue shots." },
-          ],
-        },
-
-        /* PAGE 9 · MULTIBALL OVERVIEW — one box per multiball ----------- */
-        {
-          key: "multiball",
-          pageTitle: "Multiball Overview",
-          eyebrow: "Stern · 2022",
-          proTip: "Start a Villain or Henchmen mode and then stack BirdOne or JetPack Multiball to add to the scoring.",
-          kicker: "Balls Everywhere",
-          labels: { start: "How to Start", objective: "Objective", jackpots: "Jackpots", tips: "Scoring Tips" },
-          boxes: [
-            {
-              name: "Bird One",
-              target: "Rocket Dropdowns, Center Lock",
-              detail: "Complete rocket drop down targets to light lock, then lock three balls in the rocket at the center loop.",
-              objective: "Lock three balls in the rocket for the game's signature multiball assault.",
-              jackpots: "Every shot lights green to build the jackpot; blast the rocket for the Super Jackpot.",
-              tip: "Hit the two upper-flipper shots right away — three double jackpots earn the multiball extension.",
-            },
-            {
-              name: "Jetpack",
-              target: "Left Eject → Left Ramp",
-              detail: "The left eject lights the left ramp to start Jetpack Multiball.",
-              objective: "Shoot the center lane to lock in the hurry-up as the jackpot value.",
-              jackpots: "Five jackpots, then the left ramp for a double. On the Premium the jetpack carries the ball — shoot the Dragon Tank under it for the Super (10M, +5M).",
-              tip: "Best used when stacked with a Villain or Henchman mode - not very useful on its own.",
-            },
-            {
-              name: "Bond, James Bond",
-              target: "Left Eject or Right Ramp",
-              detail: "Activated by battling a Villain, a Henchman, and playing Bird One and Jetpack Multiballs",
-              objective: "2-ball with 70 seconds of unlimited ball save: shoot 10 lit shots.",
-              jackpots: "2.5M (5M at the side loop). The side ramp Super is worth up to 100M plus an extra ball.",
-              tip: "Each shot earns a different Bond introduction voice over from one of the films.",
-            },
-          ],
-        },
-
-        /* PAGE 10 · STRATEGY & TIPS ------------------------------------- */
-        {
-          key: "strategy",
-          pageTitle: "Strategy & Tips",
-          eyebrow: "Play It Smart",
-          proTip: "Collect Bond Women and activate 007 Scoring with the Pink Action Button. Best used during a Villain or Henchmen mode, better yet stacked with a multiball.",
-          kicker: "House Advice",
-          boxes: [
-            { name: "Button First", detail: "Learn the Action Button before chasing films — it's the machine's #1 scoring tool." },
-            { name: "Play A Whole Film", detail: "Play all four modes from one film and that film’s Bond Woman stays lit across balls." },
-            { name: "Stack Bird One", detail: "Start Bird One during a Villain or Henchman mode to double up on scoring." },
-            { name: "Save Jetpack", detail: "Jetpack is weak alone — always stack it with a Villain or Henchman mode." },
-            { name: "Chase Bond Women", detail: "Each Bond Woman adds +1× to 007 Scoring, up to 7×." },
-            { name: "Mind The Colors", detail: "Blue, Pink and Green Action Button uses each do something different — know which is lit." },
-          ],
-        },
-
-        /* PAGE 11 · NOW PLAYING — the closing hold card ----------------- */
-        {
-          key: "hold",
-          pageTitle: "Now Playing",
-          eyebrow: "The Lockedown",
-          proTip: "Play all four mini-wizards for MI6 Multiball — yeah right.",
-          line: "The most famous secret agent ever. Six iconic films. Push Start.",
-        },
-
-      ],
-    },
-
-    /* ======================================================================
        STAR WARS: FALL OF THE EMPIRE
        Pages play in the order they appear below. To reorder pages, move a
        whole { … } block. To remove one, delete its block.
@@ -972,6 +589,389 @@ window.RFPC_CONTENT = {
           eyebrow: "The Lockedown",
           proTip: "Reach Planet X, then take on every monster for King of the Monsters.",
           line: "The city’s yours to save. Go be King of the Monsters.",
+        },
+
+      ],
+    },
+
+    /* ======================================================================
+       JAMES BOND 007
+       Pages play in the order they appear below. To reorder pages, move a
+       whole { … } block. To remove one, delete its block.
+       ====================================================================== */
+    {
+      game: "james-bond",            // code key — DO NOT change (wires photos, badge, accent)
+      title: "James Bond 007",
+      maker: "Stern · 2022",
+      proTip: "The Action Button activates Smart Missiles, 007 Scoring and Swipe-a-Ball — it’s the machine’s #1 scoring tool if used properly.",  // fallback footer tip if a page has none
+
+      pages: [
+
+        /* PAGE 1 · INTRO — cabinet, playfield & credits ----------------- */
+        {
+          key: "intro",
+          pageTitle: "Get To Know The Line-Up",
+          eyebrow: "Stern · 2022",
+          proTip: "The Action Button activates Smart Missiles, 007 Scoring and Swipe-a-Ball.  It’s the game’s #1 scoring tool if used wisely.",
+          credits: [
+            { role: "Game Design", names: "George Gomez" },
+            { role: "Engineering / Mechanics", names: "Elliot Eismin, Harrison Drake, John Rotharmel, Robert Blakeman, Tom Kopera" },
+            { role: "Software", names: "Lonnie D. Ropp, Mike Vinikour" },
+            { role: "Artwork", names: "Kevin O’Connor" },
+            { role: "Sound", names: "Jerry Thompson, Ken Hale" },
+          ],
+        },
+
+        /* PAGE 2 · GAME OVERVIEW — the big bullet points ---------------- */
+        {
+          key: "gameoverview",
+          pageTitle: "Game Overview",
+          eyebrow: "TL;DR: The Quick Read",
+          proTip: "Smart Missiles (Blue Action Button) spot the most valuable shot on the playfield. Collect them and use them wisely.",
+          intro: "Designed by George Gomez in his first pinball machine since Deadpool, James Bond 007 takes players on an international espionage journey. Across six assignments, James Bond gets help from the gadgets of the Q Branch as he takes on a wide variety of Villains and Henchmen.",
+          bullets: [
+            "Experience six classic Sean Connery 007 films.",
+            "Battle the Villain, Henchmen and SPECTRE Weapon from each film.",
+            "Activate the Bond Women from each film to provide stacking multipliers.",
+            "Visit Q during each film to obtain his special toys and weapons.",
+            "Try to stack BirdOne and Jetpack multiball during Villain and Henchmen modes.",
+            "Control the Action button as there are several uses: Blue (Smart Missile), Pink (007 Scoring) and Green (Swipe-a-Ball).",
+          ],
+        },
+
+        /* PAGE 3 · THE RUNDOWN — six boxes, each expands full-stage ----- */
+        {
+          key: "rundown",
+          pageTitle: "The Rundown",
+          eyebrow: "Stern · 2022",
+          proTip: "Each film has four modes — Villains, Henchmen, SPECTRE Weapon, Q Branch. Play each mode to complete the film and add to your end of ball bonus.",
+          modes: {
+            kicker: "On The Playfield",
+            title: "Modes & Battles",
+            lead: "Villains, henchmen, Q-Branch and SPECTRE weapons.",
+            rows: [
+              { label: "Villains", target: "Right Ramp", desc: "Battle each film’s villain." },
+              { label: "Henchmen", target: "Side Ramp", desc: "Take out the muscle." },
+              { label: "SPECTRE Weapon", target: "Goldfinger Target", desc: "Spell SPECTRE behind the rocket, then start the countdown." },
+              { label: "Q Branch", target: "DB5 Eject", desc: "Once lit, access Q’s gadgets." },
+            ],
+          },
+          keyMultiballs: {
+            kicker: "Balls Everywhere",
+            title: "Key Multiballs",
+            lead: "Stack Bird One and Jetpack Multiballs with Villain and Henchmen battles.",
+            rows: [
+              { label: "Bird One", target: "The Rocket", desc: "Lock three balls in the Rocket; jackpots light green, super jackpot at the Rocket." },
+              { label: "Jetpack Multiball", target: "Left Ramp", desc: "Qualify at the left Scuba eject, then the left ramp to start." },
+              { label: "Bond, James Bond Multiball", target: "Left Eject or Right Ramp", desc: "Qualify by battling one Villain, one Henchmen and playing both Bird One and Jetpack Multiballs." },
+            ],
+          },
+          wizard: {
+            kicker: "The End Game",
+            title: "Wizard Mode",
+            name: "OHMSS → MI6 Multiball",
+            body: "Start all six of one mode type for a mini-wizard. Play all four mini-wizards for On Her Majesty’s Secret Service — six film stages on a flip count, then MI6 Multiball.",
+            chip: "◆ Four mini-wizards",
+          },
+          skills: {
+            kicker: "At The Plunge",
+            title: "Skill Shots",
+            lead: "Hold the left flipper as you plunge to steer the skill shot.",
+            rows: [
+              { label: "Lane Skill", target: "Flashing Lane", desc: "Plunge into the lit top lane." },
+              { label: "Super Skill", target: "Right Ramp", desc: "Hold left flipper, then rip the right ramp." },
+            ],
+          },
+          button: {
+            kicker: "The #1 scoring tool",
+            title: "Action Button",
+            lead: "Charge it, then spend it on the biggest shot on the field.",
+            rows: [
+              { label: "Smart Missiles", target: "Fires Lit Shot", desc: "Collect the most valuable lit shot instantly." },
+              { label: "007 Scoring", target: "Up To 7×", desc: "Each collected Bond Woman adds +1× playfield." },
+              { label: "Swipe-a-Ball", target: "Premium", desc: "Pull a locked Bird One ball into play." },
+            ],
+          },
+          tableTips: {
+            kicker: "House Advice",
+            title: "Table Tips",
+            proTip: "Master the Action Button before films — it’s the machine’s #1 scoring tool.",
+            rows: [
+              { name: "Button First", body: "Learn the Action Button before chasing films." },
+              { name: "Play A Whole Film", body: "Play all four modes from one film and its Bond Woman stays lit across balls." },
+            ],
+          },
+        },
+
+        /* PAGE 4 · THE MOVIES ------------------------------------------- */
+        {
+          key: "movies",
+          pageTitle: "The Movies",
+          eyebrow: "Play Them In Any Order",
+          proTip: "Take the time to watch the iconic film clips that accompany each mode.",
+          kicker: "The Six Films",
+          imgShape: "poster",
+          boxes: [
+            {
+              name: "Dr. No",
+              target: "1962",
+              detail: "Bond investigates a missing agent in Jamaica and uncovers Dr. No, a reclusive scientist sabotaging American rocket launches from a hidden island base. Bond infiltrates the base, survives Dr. No’s traps, and destroys his nuclear reactor before it melts down.",
+              img: "assets/bond-movie-drno.jpg",
+            },
+            {
+              name: "From Russia With Love",
+              target: "1963",
+              detail: "SPECTRE lures Bond into a trap using a Soviet decoding machine and a clerk posing as a defector. Bond survives a train journey stalked by an assassin and a poisoned-blade attack, ultimately exposing and escaping SPECTRE’s elaborate plot.",
+              img: "assets/bond-movie-fromrussia.jpg",
+            },
+            {
+              name: "Goldfinger",
+              target: "1964",
+              detail: "Bond investigates gold smuggler Auric Goldfinger and uncovers a scheme to irradiate the U.S. gold reserve at Fort Knox, boosting the value of his own hoard. With help from pilot Pussy Galore, Bond foils the plan and stops Goldfinger’s bodyguard Oddjob.",
+              img: "assets/bond-movie-goldfinger.jpg",
+            },
+            {
+              name: "Thunderball",
+              target: "1965",
+              detail: "SPECTRE agent Largo hijacks two NATO atomic bombs and holds the world ransom. Bond traces the warheads to Largo’s yacht in the Bahamas, romancing his mistress Domino along the way, and leads a climactic underwater battle to recover the bombs.",
+              img: "assets/bond-movie-thunderball.jpg",
+            },
+            {
+              name: "You Only Live Twice",
+              target: "1967",
+              detail: "Faking his own death, Bond goes undercover in Japan to find who is hijacking American and Soviet spacecraft and pushing the two superpowers toward war. He traces the plot to SPECTRE chief Blofeld’s hollowed-out volcano base and destroys it from within.",
+              img: "assets/bond-movie-yolt.jpg",
+            },
+            {
+              name: "Diamonds Are Forever",
+              target: "1971",
+              detail: "Posing as a smuggler, Bond infiltrates a diamond-trafficking pipeline running through Amsterdam and Las Vegas, tracing it to a returning Blofeld, who is stockpiling diamonds to build a satellite laser weapon. Bond breaks up the scheme aboard an offshore oil rig.",
+              img: "assets/bond-movie-diamonds.jpg",
+            },
+          ],
+        },
+
+        /* PAGE 5 · THE VILLAINS ----------------------------------------- */
+        {
+          key: "villains",
+          pageTitle: "The Villains",
+          eyebrow: "One Of The Four Mode Types",
+          proTip: "Defeating a Villain gives you an extra Smart Missile and adds to your end of ball bonus.",
+          kicker: "Beat The Boss",
+          chipByFilm: true,
+          boxes: [
+            {
+              name: "Dr. No",
+              target: "Dr. No",
+              detail: "Trouble in Jamaica — build value at the bumpers or right orbit, then cash out at the Dragon Tank. 10 successful shots to win.",
+              img: "assets/bond-villain-drno.png",
+            },
+            {
+              name: "Rosa Klebb",
+              target: "From Russia With Love",
+              detail: "SPECTRE Island — clear all nine major shots, then finish with the left eject and DB5 eject.",
+              img: "assets/bond-villain-klebb.png",
+            },
+            {
+              name: "Auric Goldfinger",
+              target: "Goldfinger",
+              detail: "The Incredible Laser Ray — shoot the Goldfinger target to relight shots; 7 total shots lights the DB5 eject to escape.",
+              img: "assets/bond-villain-goldfinger.png",
+            },
+            {
+              name: "Emilio Largo",
+              target: "Thunderball",
+              detail: "Disco Volante Demolition — shoot the left eject, side ramp, or right ramp; 10 shots to win.",
+              img: "assets/bond-villain-largo.png",
+            },
+            {
+              name: "Blofeld",
+              target: "You Only Live Twice",
+              detail: "Feeding Frenzy — shoot the Bird 1 rocket or drop targets to beat Blofeld.",
+              img: "assets/bond-villain-blofeld.png",
+            },
+            {
+              name: "Mr. Henderson",
+              target: "Diamonds Are Forever",
+              detail: "Diamonds of Destruction — calibrate the satellite with the left eject, center loop and right ramp. 9 shots to win.",
+              img: "assets/bond-villain-blofeld.png",
+            },
+          ],
+        },
+
+        /* PAGE 6 · THE HENCHMEN ----------------------------------------- */
+        {
+          key: "henchmen",
+          pageTitle: "The Henchmen",
+          eyebrow: "Fast, Repeatable Progress",
+          proTip: "Henchmen are the fast, repeatable film progress — lean on them early.",
+          kicker: "Take Out The Muscle",
+          chipByFilm: true,
+          boxes: [
+            {
+              name: "Professor Dent",
+              target: "Dr. No",
+              detail: "Sinister Summit — lock in the moving yellow shot with the Dragon Tank; 10 yellow shots to win.",
+              img: "assets/bond-henchman-dent.png",
+            },
+            {
+              name: "Red Grant",
+              target: "From Russia With Love",
+              detail: "Encounter on the Orient Express — shoot the right orbit to light combos across the right side; 10 red shots to win.",
+              img: "assets/bond-henchman-grant.png",
+            },
+            {
+              name: "Oddjob",
+              target: "Goldfinger",
+              detail: "He Blew a Fuse — hit the left ramp, side ramp, right orbit, and right ramp, then the rocket lane to win.",
+              img: "assets/bond-henchman-oddjob.png",
+            },
+            {
+              name: "Fiona Volpe",
+              target: "Thunderball",
+              detail: "Femme Fatale — chase her down: left ramp, right ramp, left ramp, right orbit, side ramp, left ramp, DB5 eject.",
+              img: "assets/bond-henchman-volpe.png",
+            },
+            {
+              name: "Mr. Osato",
+              target: "You Only Live Twice",
+              detail: "Arrange Usual Reception Please — flee Osato’s clutches via the three ramps and upper loop.",
+            },
+            {
+              name: "Mr. Wint & Mr. Kidd",
+              target: "Diamonds Are Forever",
+              detail: "Shoot the left ramp then center lane, repeated three times, to complete the mode.",
+              img: "assets/bond-henchman-wintkidd.png",
+            },
+          ],
+        },
+
+        /* PAGE · SPECTRE WEAPONS --------------------------------------- */
+        {
+          key: "spectre",
+          pageTitle: "SPECTRE Weapons",
+          eyebrow: "Spell SPECTRE Behind The Rocket",
+          proTip: "Each SPECTRE countdown you beat leaves a perk for the rest of the game.",
+          kicker: "Beat The Countdown",
+          chipByFilm: true,
+          boxes: [
+            { name: "Troublesome Tarantulas", target: "Dr. No", detail: "Perk: +17 seconds on mode timers." },
+            { name: "Deadly Dagger", target: "From Russia With Love", detail: "Perk: +7 seconds on ball savers." },
+            { name: "Death By Derby", target: "Goldfinger", detail: "Perk: upgraded High Stakes awards." },
+            { name: "Swimming With Sharks", target: "Thunderball", detail: "Perk: two Smart Missiles per mode, plus 2 every ball." },
+            { name: "Outer Space Hijack", target: "You Only Live Twice", detail: "Perk: an add-a-ball." },
+            { name: "Bath-O-Sub Bash", target: "Diamonds Are Forever", detail: "Perk: super modes last the whole ball." },
+          ],
+        },
+
+        /* PAGE 7 · THE BOND GIRLS --------------------------------------- */
+        {
+          key: "bondGirls",
+          pageTitle: "The Bond Girls",
+          eyebrow: "Boost The Current Film",
+          proTip: "Bond girls: Pussy Galore - enough said.",
+          kicker: "Collect The Allies",
+          chipByFilm: true,
+          boxes: [
+            { name: "Honey Ryder", target: "Dr. No", detail: "Qualified by 25 bumper hits." },
+            { name: "Tatiana Romanova", target: "From Russia With Love", detail: "Qualified by 3 right orbit shots." },
+            { name: "Pussy Galore", target: "Goldfinger", detail: "Qualified by 4 DB5 ejects." },
+            { name: "Domino Derval", target: "Thunderball", detail: "Qualified by 4 left ejects." },
+            { name: "Kissy Suzuki", target: "You Only Live Twice", detail: "Qualified by 10 rocket hits — strong shots register more." },
+            { name: "Tiffany Case", target: "Diamonds Are Forever", detail: "Qualified by 200 spinner spins." },
+          ],
+        },
+
+        /* PAGE 8 · Q-BRANCH TOYS ---------------------------------------- */
+        {
+          key: "qbranch",
+          pageTitle: "Q-Branch Toys",
+          eyebrow: "Light Them, Then Cash In",
+          proTip: "Q gadgets are gravy — spend them from the scoop, but don’t drain reaching for it.",
+          kicker: "Spend The Gadgets",
+          chipByFilm: true,
+          boxes: [
+            {
+              name: "Radioactive Reconnaissance",
+              target: "Dr. No",
+              detail: "Bumper hits qualify it — take control of the Geiger Counter to find the big-award shot.",
+            },
+            {
+              name: "Attaché Case",
+              target: "From Russia With Love",
+              detail: "Six right-orbit shots qualify it; the case’s five components start Hunted by Helicopter Multiball.",
+            },
+            { name: "DB5", target: "Goldfinger", detail: "Three DB5 eject shots qualify it; six shots reveal the car’s amenities and start DB5 Multiball." },
+            {
+              name: "Power Pack",
+              target: "Thunderball",
+              detail: "Three left-eject shots qualify it; the underwater jetpack gadget leads into Power Pack Multiball.",
+            },
+            { name: "Little Nellie", target: "You Only Live Twice", detail: "20 rocket hits qualify it; five right-ramp shots start Little Nellie Multiball." },
+            { name: "Q’s Ring", target: "Diamonds Are Forever", detail: "400 spinner spins qualify it — test the electromagnet ring on the flashing blue shots." },
+          ],
+        },
+
+        /* PAGE 9 · MULTIBALL OVERVIEW — one box per multiball ----------- */
+        {
+          key: "multiball",
+          pageTitle: "Multiball Overview",
+          eyebrow: "Stern · 2022",
+          proTip: "Start a Villain or Henchmen mode and then stack BirdOne or JetPack Multiball to add to the scoring.",
+          kicker: "Balls Everywhere",
+          labels: { start: "How to Start", objective: "Objective", jackpots: "Jackpots", tips: "Scoring Tips" },
+          boxes: [
+            {
+              name: "Bird One",
+              target: "Rocket Dropdowns, Center Lock",
+              detail: "Complete rocket drop down targets to light lock, then lock three balls in the rocket at the center loop.",
+              objective: "Lock three balls in the rocket for the game's signature multiball assault.",
+              jackpots: "Every shot lights green to build the jackpot; blast the rocket for the Super Jackpot.",
+              tip: "Hit the two upper-flipper shots right away — three double jackpots earn the multiball extension.",
+            },
+            {
+              name: "Jetpack",
+              target: "Left Eject → Left Ramp",
+              detail: "The left eject lights the left ramp to start Jetpack Multiball.",
+              objective: "Shoot the center lane to lock in the hurry-up as the jackpot value.",
+              jackpots: "Five jackpots, then the left ramp for a double. On the Premium the jetpack carries the ball — shoot the Dragon Tank under it for the Super (10M, +5M).",
+              tip: "Best used when stacked with a Villain or Henchman mode - not very useful on its own.",
+            },
+            {
+              name: "Bond, James Bond",
+              target: "Left Eject or Right Ramp",
+              detail: "Activated by battling a Villain, a Henchman, and playing Bird One and Jetpack Multiballs",
+              objective: "2-ball with 70 seconds of unlimited ball save: shoot 10 lit shots.",
+              jackpots: "2.5M (5M at the side loop). The side ramp Super is worth up to 100M plus an extra ball.",
+              tip: "Each shot earns a different Bond introduction voice over from one of the films.",
+            },
+          ],
+        },
+
+        /* PAGE 10 · STRATEGY & TIPS ------------------------------------- */
+        {
+          key: "strategy",
+          pageTitle: "Strategy & Tips",
+          eyebrow: "Play It Smart",
+          proTip: "Collect Bond Women and activate 007 Scoring with the Pink Action Button. Best used during a Villain or Henchmen mode, better yet stacked with a multiball.",
+          kicker: "House Advice",
+          boxes: [
+            { name: "Button First", detail: "Learn the Action Button before chasing films — it's the machine's #1 scoring tool." },
+            { name: "Play A Whole Film", detail: "Play all four modes from one film and that film’s Bond Woman stays lit across balls." },
+            { name: "Stack Bird One", detail: "Start Bird One during a Villain or Henchman mode to double up on scoring." },
+            { name: "Save Jetpack", detail: "Jetpack is weak alone — always stack it with a Villain or Henchman mode." },
+            { name: "Chase Bond Women", detail: "Each Bond Woman adds +1× to 007 Scoring, up to 7×." },
+            { name: "Mind The Colors", detail: "Blue, Pink and Green Action Button uses each do something different — know which is lit." },
+          ],
+        },
+
+        /* PAGE 11 · NOW PLAYING — the closing hold card ----------------- */
+        {
+          key: "hold",
+          pageTitle: "Now Playing",
+          eyebrow: "The Lockedown",
+          proTip: "Play all four mini-wizards for MI6 Multiball — yeah right.",
+          line: "The most famous secret agent ever. Six iconic films. Push Start.",
         },
 
       ],
@@ -1789,215 +1789,6 @@ window.RFPC_CONTENT = {
     },
 
     /* ======================================================================
-       MONSTER BASH
-       Pages play in the order they appear below. To reorder pages, move a
-       whole { … } block. To remove one, delete its block.
-       ====================================================================== */
-    {
-      game: "monster-bash",            // code key — DO NOT change (wires photos, badge, accent)
-      title: "Monster Bash",
-      maker: "Chicago Gaming · SE",
-      proTip: "Completing a mode earns its instrument; just starting all six lights Monster Bash.",  // fallback footer tip if a page has none
-
-      pages: [
-
-        /* PAGE 1 · INTRO — cabinet, playfield & credits ----------------- */
-        {
-          key: "intro",
-          pageTitle: "Get To Know The Line-Up",
-          eyebrow: "Chicago Gaming · Special Edition",
-          proTip: "Round up six monsters and their instruments for the scariest band since KISS.",
-          credits: [
-            { role: "Game Design", names: "George Gomez" },
-            { role: "Software", names: "Lyman Sheats" },
-            { role: "Music", names: "Vince Pontarelli" },
-            { role: "Artwork", names: "Kevin O’Connor" },
-            { role: "Original Release", names: "Williams · 1998" },
-            { role: "Remake", names: "Chicago Gaming Co." },
-          ],
-        },
-
-        /* PAGE 2 · GAME OVERVIEW — the big bullet points ---------------- */
-        {
-          key: "gameoverview",
-          pageTitle: "Game Overview",
-          eyebrow: "TL;DR: The Quick Read",
-          proTip: "Start a mode, then a multiball — the mode timer stops while the balls fly.",
-          intro: "Monster Bash brings together Universal’s classic movie monsters — Dracula, Frankenstein, Wolfman, the Mummy, the Bride of Frankenstein, and Creature from the Black Lagoon — who’ve formed a band and are looking to make it big. Help this rag-tag monster band pull off the concert of a lifetime.  It’s a monster-mash sitcom — campy, silly, and dripping with early Bally/Williams charm and wit.",
-          bullets: [
-            "Six monsters, six modes — complete a mode to win that monster’s instrument.",
-            "Start all six modes, finished or not, for Monster Bash Multiball.",
-            "Collect all six instruments for Monsters of Rock.",
-            "Mode timers stop during multiball — stack them.",
-            "Phantom Flip flips for you; Monster Bombs spot monster progress.",
-            "Every scoop shot is a random award.",
-          ],
-        },
-
-        /* PAGE 3 · THE RUNDOWN — six boxes, each expands full-stage ----- */
-        {
-          key: "rundown",
-          pageTitle: "The Rundown",
-          eyebrow: "Chicago Gaming · SE",
-          proTip: "Six monster modes, three multiballs, and the Monsters of Rock encore.",
-          modes: {
-            kicker: "On The Playfield",
-            title: "Monster Modes",
-            lead: "Round up six classic monsters and their instruments to put together the scariest band since KISS.",
-            rows: [
-              { label: "Creature Feature", target: "Black Lagoon", desc: "Both loops, both ramps and the Mosh Pit before the hurry-up dies." },
-              { label: "Full Moon Fever", target: "The Loops", desc: "Four loop shots start it; collect four loop hurry-ups." },
-              { label: "Ball & Chain", target: "Both Ramps", desc: "Each ramp three times to start, three more to win." },
-              { label: "Drac Attack", target: "Drac Standups → Scoop", desc: "Spell D-R-A-C-U-L-A, then hit Dracula 5 times." },
-              { label: "Frankenstein", target: "Frank → Center Ramp", desc: "Hit Frank 7 times, then the ramp starts his multiball." },
-              { label: "Mummy Mayhem", target: "Jets → Scoop", desc: "60 jet hits light it; score 7.5M in 45 seconds." },
-            ],
-          },
-          keyMultiballs: {
-            kicker: "Balls Everywhere",
-            title: "Key Multiballs",
-            lead: "Three multiballs before the encore.",
-            rows: [
-              { label: "Frankenstein Multiball", target: "Frank → Center Ramp", desc: "3-ball. Supers at Frank win his keyboard." },
-              { label: "Mosh Pit Multiball", target: "Center Lane → Scoop", desc: "Six Mosh Pit shots, then the scoop." },
-              { label: "Monster Bash", target: "The Scoop", desc: "Start all six monster modes for a 4-ball multiball." },
-            ],
-          },
-          wizard: {
-            kicker: "The End Game",
-            title: "Wizard Mode",
-            name: "Monsters of Rock",
-            body: "Complete all six modes to collect every instrument, then shoot the scoop. A 4-ball multiball; starting it pays 5M per instrument plus 25M per full set.",
-            chip: "◆ Collect all 6 instruments",
-          },
-          skills: {
-            kicker: "At The Plunge",
-            title: "Skill Shots",
-            lead: "The skill shot lives in the rollover lanes.",
-            rows: [
-              { label: "Skill Shot", target: "D-I-G Lanes", desc: "Land the lit lane for points plus a Monster Bomb." },
-            ],
-          },
-          button: {
-            kicker: "No button here",
-            title: "Phantom Flip",
-            lead: "There’s no action button. Hit the three Phantom Flip targets and the game flips for you from the inlane.",
-            rows: [
-              { label: "Phantom Flip", target: "Three Targets", desc: "Seven hits light two stackable Phantom Flips." },
-              { label: "Monster Bombs", target: "Skill Shot · Mosh Pit", desc: "Each bomb spots a shot toward its monster." },
-            ],
-          },
-          tableTips: {
-            kicker: "House Advice",
-            title: "Table Tips",
-            proTip: "Start a mode, then a multiball — the mode clock freezes while you finish it.",
-            rows: [
-              { name: "Timers Stop", body: "Mode timers freeze during any multiball." },
-              { name: "Complete, Don’t Just Start", body: "Only a finished mode earns the instrument." },
-            ],
-          },
-        },
-
-        /* PAGE 4 · THE MONSTERS ----------------------------------------- */
-        {
-          key: "monsters",
-          pageTitle: "The Monsters",
-          eyebrow: "Win The Instruments",
-          proTip: "Completing a mode earns its instrument; just starting all six lights Monster Bash.",
-          kicker: "One Mode Each",
-          boxes: [
-            { name: "Frankenstein", target: "Frank → Center Ramp", detail: "Hit Frank 7 times to raise him, then the center ramp. Six supers at Frank win his keyboard." },
-            { name: "Dracula", target: "Drac Standups → Scoop", detail: "Spell D-R-A-C-U-L-A on the standups, then hit Dracula 5 times. Hits while he moves score 2×." },
-            { name: "Wolfman", target: "The Loops", detail: "Four loops start Full Moon Fever. Collect all four loop hurry-ups for his drums." },
-            { name: "The Bride", target: "Both Ramps", detail: "Each ramp three times to start, three more to win her microphone. The Mosh Pit resets the timer." },
-            { name: "The Creature", target: "Black Lagoon", detail: "Hit both loops, both ramps and the Mosh Pit. Each shot raises the hurry-up. Wins his saxophone." },
-            { name: "The Mummy", target: "Jets → Scoop", detail: "60 jet hits light it. Score 7.5M in 45 seconds; jets score triple." },
-          ],
-        },
-
-        /* PAGE 5 · BONUS TOYS ------------------------------------------- */
-        {
-          key: "bonusToys",
-          pageTitle: "Bonus Toys",
-          eyebrow: "Points Between The Monsters",
-          proTip: "Each instrument lights every major shot for an Instrument Bonus.",
-          kicker: "Everything Else",
-          boxes: [
-            { name: "Monster Bombs", target: "Skill Shot · Mosh Pit", detail: "One per monster — garlic, silver bullet, spear gun and more. Each spots a shot." },
-            { name: "Instrument Bonus", target: "All Major Shots", detail: "Win an instrument and every major shot lights for 900K or more." },
-            { name: "Scoop Awards", target: "The Scoop", detail: "Random awards: points, light extra ball, start or advance a monster." },
-            { name: "Tomb Treasure", target: "Mosh Pit Standup", detail: "Adds +1× bonus multiplier." },
-            { name: "Extra Balls", target: "Mosh Pit · Scoop", detail: "Lit by 12 Mosh Pit shots, enough monsters, or a scoop award." },
-            { name: "Lyman’s Lament", target: "44th Scoop", detail: "The 44th scoop award in single-ball play. Voiced by Lyman Sheats." },
-          ],
-        },
-
-        /* PAGE 6 · MULTIBALL OVERVIEW — one box per multiball ----------- */
-        {
-          key: "multiball",
-          pageTitle: "Multiball Overview",
-          eyebrow: "Chicago Gaming · SE",
-          proTip: "Start a monster mode first — its timer freezes for the whole multiball.",
-          kicker: "Balls Everywhere",
-          labels: { start: "How to Start", objective: "Objective", jackpots: "Jackpots", tips: "Scoring Tips" },
-          boxes: [
-            {
-              name: "Frankenstein Multiball",
-              target: "Frank → Center Ramp",
-              detail: "Hit Frank 7 times to raise him, then shoot the center ramp.",
-              objective: "3-ball. Major shots score jackpots.",
-              jackpots: "Frank scores the supers; six supers win his keyboard.",
-              tip: "Two or three jackpots first light double and triple supers.",
-            },
-            {
-              name: "Mosh Pit Multiball",
-              target: "Center Lane → Scoop",
-              detail: "Six shots to the Mosh Pit lane, then the scoop.",
-              objective: "2-ball; the center lane adds up to two more.",
-              jackpots: "Ten shots to Frank for the Super, then his five red standups for a 3× Super.",
-              tip: "Use the Mosh Pit lane to add balls early.",
-            },
-            {
-              name: "Monster Bash",
-              target: "The Scoop",
-              detail: "Start all six monster modes — finished or not.",
-              objective: "4-ball. Every monster shot is worth 2M.",
-              jackpots: "The center lane pays Bash Jackpots that grow with each monster hit.",
-              tip: "A long Monster Bash can be the biggest score in the game.",
-            },
-          ],
-        },
-
-        /* PAGE 7 · STRATEGY & TIPS -------------------------------------- */
-        {
-          key: "strategy",
-          pageTitle: "Strategy & Tips",
-          eyebrow: "Play It Smart",
-          proTip: "Sixty jet-bumper hits light Mummy Mayhem at the scoop.",
-          kicker: "House Advice",
-          boxes: [
-            { name: "Timers Stop", detail: "Start a mode, then a multiball — the mode clock freezes while you finish it." },
-            { name: "Complete, Don’t Just Start", detail: "Only a finished mode earns the instrument for Monsters of Rock." },
-            { name: "Start All Six", detail: "Just starting every mode lights Monster Bash Multiball." },
-            { name: "Phantom Flip", detail: "Hit the three targets so the game flips a shot you’d miss." },
-            { name: "Bank The Bombs", detail: "Monster Bombs spot shots toward their monster." },
-            { name: "Feed The Jets", detail: "Sixty jet hits light Mummy Mayhem at the scoop." },
-          ],
-        },
-
-        /* PAGE 8 · NOW PLAYING — the closing hold card ------------------ */
-        {
-          key: "hold",
-          pageTitle: "Now Playing",
-          eyebrow: "The Lockedown",
-          proTip: "Collect all six instruments to start Monsters of Rock.",
-          line: "The band’s assembled. Go start the encore.",
-        },
-
-      ],
-    },
-
-    /* ======================================================================
        JOHN WICK
        Pages play in the order they appear below. To reorder pages, move a
        whole { … } block. To remove one, delete its block.
@@ -2264,6 +2055,215 @@ window.RFPC_CONTENT = {
           eyebrow: "The Lockedown",
           proTip: "Clear every job, battle or multiball to reach the wizard modes.",
           line: "You’re back. Go earn your place at the High Table.",
+        },
+
+      ],
+    },
+
+    /* ======================================================================
+       MONSTER BASH
+       Pages play in the order they appear below. To reorder pages, move a
+       whole { … } block. To remove one, delete its block.
+       ====================================================================== */
+    {
+      game: "monster-bash",            // code key — DO NOT change (wires photos, badge, accent)
+      title: "Monster Bash",
+      maker: "Chicago Gaming · SE",
+      proTip: "Completing a mode earns its instrument; just starting all six lights Monster Bash.",  // fallback footer tip if a page has none
+
+      pages: [
+
+        /* PAGE 1 · INTRO — cabinet, playfield & credits ----------------- */
+        {
+          key: "intro",
+          pageTitle: "Get To Know The Line-Up",
+          eyebrow: "Chicago Gaming · Special Edition",
+          proTip: "Round up six monsters and their instruments for the scariest band since KISS.",
+          credits: [
+            { role: "Game Design", names: "George Gomez" },
+            { role: "Software", names: "Lyman Sheats" },
+            { role: "Music", names: "Vince Pontarelli" },
+            { role: "Artwork", names: "Kevin O’Connor" },
+            { role: "Original Release", names: "Williams · 1998" },
+            { role: "Remake", names: "Chicago Gaming Co." },
+          ],
+        },
+
+        /* PAGE 2 · GAME OVERVIEW — the big bullet points ---------------- */
+        {
+          key: "gameoverview",
+          pageTitle: "Game Overview",
+          eyebrow: "TL;DR: The Quick Read",
+          proTip: "Start a mode, then a multiball — the mode timer stops while the balls fly.",
+          intro: "Monster Bash brings together Universal’s classic movie monsters — Dracula, Frankenstein, Wolfman, the Mummy, the Bride of Frankenstein, and Creature from the Black Lagoon — who’ve formed a band and are looking to make it big. Help this rag-tag monster band pull off the concert of a lifetime.  It’s a monster-mash sitcom — campy, silly, and dripping with early Bally/Williams charm and wit.",
+          bullets: [
+            "Six monsters, six modes — complete a mode to win that monster’s instrument.",
+            "Start all six modes, finished or not, for Monster Bash Multiball.",
+            "Collect all six instruments for Monsters of Rock.",
+            "Mode timers stop during multiball — stack them.",
+            "Phantom Flip flips for you; Monster Bombs spot monster progress.",
+            "Every scoop shot is a random award.",
+          ],
+        },
+
+        /* PAGE 3 · THE RUNDOWN — six boxes, each expands full-stage ----- */
+        {
+          key: "rundown",
+          pageTitle: "The Rundown",
+          eyebrow: "Chicago Gaming · SE",
+          proTip: "Six monster modes, three multiballs, and the Monsters of Rock encore.",
+          modes: {
+            kicker: "On The Playfield",
+            title: "Monster Modes",
+            lead: "Round up six classic monsters and their instruments to put together the scariest band since KISS.",
+            rows: [
+              { label: "Creature Feature", target: "Black Lagoon", desc: "Both loops, both ramps and the Mosh Pit before the hurry-up dies." },
+              { label: "Full Moon Fever", target: "The Loops", desc: "Four loop shots start it; collect four loop hurry-ups." },
+              { label: "Ball & Chain", target: "Both Ramps", desc: "Each ramp three times to start, three more to win." },
+              { label: "Drac Attack", target: "Drac Standups → Scoop", desc: "Spell D-R-A-C-U-L-A, then hit Dracula 5 times." },
+              { label: "Frankenstein", target: "Frank → Center Ramp", desc: "Hit Frank 7 times, then the ramp starts his multiball." },
+              { label: "Mummy Mayhem", target: "Jets → Scoop", desc: "60 jet hits light it; score 7.5M in 45 seconds." },
+            ],
+          },
+          keyMultiballs: {
+            kicker: "Balls Everywhere",
+            title: "Key Multiballs",
+            lead: "Three multiballs before the encore.",
+            rows: [
+              { label: "Frankenstein Multiball", target: "Frank → Center Ramp", desc: "3-ball. Supers at Frank win his keyboard." },
+              { label: "Mosh Pit Multiball", target: "Center Lane → Scoop", desc: "Six Mosh Pit shots, then the scoop." },
+              { label: "Monster Bash", target: "The Scoop", desc: "Start all six monster modes for a 4-ball multiball." },
+            ],
+          },
+          wizard: {
+            kicker: "The End Game",
+            title: "Wizard Mode",
+            name: "Monsters of Rock",
+            body: "Complete all six modes to collect every instrument, then shoot the scoop. A 4-ball multiball; starting it pays 5M per instrument plus 25M per full set.",
+            chip: "◆ Collect all 6 instruments",
+          },
+          skills: {
+            kicker: "At The Plunge",
+            title: "Skill Shots",
+            lead: "The skill shot lives in the rollover lanes.",
+            rows: [
+              { label: "Skill Shot", target: "D-I-G Lanes", desc: "Land the lit lane for points plus a Monster Bomb." },
+            ],
+          },
+          button: {
+            kicker: "No button here",
+            title: "Phantom Flip",
+            lead: "There’s no action button. Hit the three Phantom Flip targets and the game flips for you from the inlane.",
+            rows: [
+              { label: "Phantom Flip", target: "Three Targets", desc: "Seven hits light two stackable Phantom Flips." },
+              { label: "Monster Bombs", target: "Skill Shot · Mosh Pit", desc: "Each bomb spots a shot toward its monster." },
+            ],
+          },
+          tableTips: {
+            kicker: "House Advice",
+            title: "Table Tips",
+            proTip: "Start a mode, then a multiball — the mode clock freezes while you finish it.",
+            rows: [
+              { name: "Timers Stop", body: "Mode timers freeze during any multiball." },
+              { name: "Complete, Don’t Just Start", body: "Only a finished mode earns the instrument." },
+            ],
+          },
+        },
+
+        /* PAGE 4 · THE MONSTERS ----------------------------------------- */
+        {
+          key: "monsters",
+          pageTitle: "The Monsters",
+          eyebrow: "Win The Instruments",
+          proTip: "Completing a mode earns its instrument; just starting all six lights Monster Bash.",
+          kicker: "One Mode Each",
+          boxes: [
+            { name: "Frankenstein", target: "Frank → Center Ramp", detail: "Hit Frank 7 times to raise him, then the center ramp. Six supers at Frank win his keyboard." },
+            { name: "Dracula", target: "Drac Standups → Scoop", detail: "Spell D-R-A-C-U-L-A on the standups, then hit Dracula 5 times. Hits while he moves score 2×." },
+            { name: "Wolfman", target: "The Loops", detail: "Four loops start Full Moon Fever. Collect all four loop hurry-ups for his drums." },
+            { name: "The Bride", target: "Both Ramps", detail: "Each ramp three times to start, three more to win her microphone. The Mosh Pit resets the timer." },
+            { name: "The Creature", target: "Black Lagoon", detail: "Hit both loops, both ramps and the Mosh Pit. Each shot raises the hurry-up. Wins his saxophone." },
+            { name: "The Mummy", target: "Jets → Scoop", detail: "60 jet hits light it. Score 7.5M in 45 seconds; jets score triple." },
+          ],
+        },
+
+        /* PAGE 5 · BONUS TOYS ------------------------------------------- */
+        {
+          key: "bonusToys",
+          pageTitle: "Bonus Toys",
+          eyebrow: "Points Between The Monsters",
+          proTip: "Each instrument lights every major shot for an Instrument Bonus.",
+          kicker: "Everything Else",
+          boxes: [
+            { name: "Monster Bombs", target: "Skill Shot · Mosh Pit", detail: "One per monster — garlic, silver bullet, spear gun and more. Each spots a shot." },
+            { name: "Instrument Bonus", target: "All Major Shots", detail: "Win an instrument and every major shot lights for 900K or more." },
+            { name: "Scoop Awards", target: "The Scoop", detail: "Random awards: points, light extra ball, start or advance a monster." },
+            { name: "Tomb Treasure", target: "Mosh Pit Standup", detail: "Adds +1× bonus multiplier." },
+            { name: "Extra Balls", target: "Mosh Pit · Scoop", detail: "Lit by 12 Mosh Pit shots, enough monsters, or a scoop award." },
+            { name: "Lyman’s Lament", target: "44th Scoop", detail: "The 44th scoop award in single-ball play. Voiced by Lyman Sheats." },
+          ],
+        },
+
+        /* PAGE 6 · MULTIBALL OVERVIEW — one box per multiball ----------- */
+        {
+          key: "multiball",
+          pageTitle: "Multiball Overview",
+          eyebrow: "Chicago Gaming · SE",
+          proTip: "Start a monster mode first — its timer freezes for the whole multiball.",
+          kicker: "Balls Everywhere",
+          labels: { start: "How to Start", objective: "Objective", jackpots: "Jackpots", tips: "Scoring Tips" },
+          boxes: [
+            {
+              name: "Frankenstein Multiball",
+              target: "Frank → Center Ramp",
+              detail: "Hit Frank 7 times to raise him, then shoot the center ramp.",
+              objective: "3-ball. Major shots score jackpots.",
+              jackpots: "Frank scores the supers; six supers win his keyboard.",
+              tip: "Two or three jackpots first light double and triple supers.",
+            },
+            {
+              name: "Mosh Pit Multiball",
+              target: "Center Lane → Scoop",
+              detail: "Six shots to the Mosh Pit lane, then the scoop.",
+              objective: "2-ball; the center lane adds up to two more.",
+              jackpots: "Ten shots to Frank for the Super, then his five red standups for a 3× Super.",
+              tip: "Use the Mosh Pit lane to add balls early.",
+            },
+            {
+              name: "Monster Bash",
+              target: "The Scoop",
+              detail: "Start all six monster modes — finished or not.",
+              objective: "4-ball. Every monster shot is worth 2M.",
+              jackpots: "The center lane pays Bash Jackpots that grow with each monster hit.",
+              tip: "A long Monster Bash can be the biggest score in the game.",
+            },
+          ],
+        },
+
+        /* PAGE 7 · STRATEGY & TIPS -------------------------------------- */
+        {
+          key: "strategy",
+          pageTitle: "Strategy & Tips",
+          eyebrow: "Play It Smart",
+          proTip: "Sixty jet-bumper hits light Mummy Mayhem at the scoop.",
+          kicker: "House Advice",
+          boxes: [
+            { name: "Timers Stop", detail: "Start a mode, then a multiball — the mode clock freezes while you finish it." },
+            { name: "Complete, Don’t Just Start", detail: "Only a finished mode earns the instrument for Monsters of Rock." },
+            { name: "Start All Six", detail: "Just starting every mode lights Monster Bash Multiball." },
+            { name: "Phantom Flip", detail: "Hit the three targets so the game flips a shot you’d miss." },
+            { name: "Bank The Bombs", detail: "Monster Bombs spot shots toward their monster." },
+            { name: "Feed The Jets", detail: "Sixty jet hits light Mummy Mayhem at the scoop." },
+          ],
+        },
+
+        /* PAGE 8 · NOW PLAYING — the closing hold card ------------------ */
+        {
+          key: "hold",
+          pageTitle: "Now Playing",
+          eyebrow: "The Lockedown",
+          proTip: "Collect all six instruments to start Monsters of Rock.",
+          line: "The band’s assembled. Go start the encore.",
         },
 
       ],
