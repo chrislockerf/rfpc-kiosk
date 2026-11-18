@@ -63,8 +63,8 @@
 /* The Lockedown floor — 8 machines. Each keeps forest+cream; only --accent
    swaps. Colors drawn from each title's own theme. */
 
-[data-game="stranger-things"] {
-  --accent:        #e23636;   /* Upside Down red */
+[data-game="star-wars"] {
+  --accent:        #e23636;   /* Sith lightsaber red */
   --accent-bright: #f5807f;
   --accent-deep:   #4a0d0d;
   --accent-glow:   rgba(226, 54, 54, 0.42);

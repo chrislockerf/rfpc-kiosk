@@ -402,6 +402,23 @@ window.RFPC_CONTENT = {
           ],
         },
 
+        /* PAGE · MODS — geeky additions & customization -------------- */
+        {
+          key: "mods",
+          pageTitle: "Mods",
+          eyebrow: "Geeky Additions and Customization",
+          proTip: "PLACEHOLDER — footer tip for the Mods page.",
+          kicker: "The Mod",
+          boxes: [
+            { name: "PLACEHOLDER MOD ONE",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD TWO",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD THREE", target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD FOUR",  target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD FIVE",  target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD SIX",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+          ],
+        },
+
         /* PAGE 11 · NOW PLAYING — the closing hold card ----------------- */
         {
           key: "hold",
@@ -415,15 +432,15 @@ window.RFPC_CONTENT = {
     },
 
     /* ======================================================================
-       STRANGER THINGS
+       STAR WARS: FALL OF THE EMPIRE
        Pages play in the order they appear below. To reorder pages, move a
        whole { … } block. To remove one, delete its block.
        ====================================================================== */
     {
-      game: "stranger-things",            // code key — DO NOT change (wires photos, badge, accent)
-      title: "Stranger Things",
-      maker: "Stern · 2019",
-      proTip: "Don’t fear the Upside Down — its hidden ball racks up points while you flip the one you can see.",  // fallback footer tip if a page has none
+      game: "star-wars",            // code key — DO NOT change (wires photos, badge, accent)
+      title: "Star Wars",
+      maker: "Stern · 2025",
+      proTip: "Play a Rebel Mission for every character you can — each one boosts that character’s jackpots in every multiball.",  // fallback footer tip if a page has none
 
       pages: [
 
@@ -431,13 +448,14 @@ window.RFPC_CONTENT = {
         {
           key: "intro",
           pageTitle: "Get To Know The Line-Up",
-          eyebrow: "Stern · 2019",
-          proTip: "Everything starts at the TV scoop — pick a chapter, then run its shots.",
+          eyebrow: "Stern · 2025",
+          proTip: "John Borg’s return to Star Wars — his very first pinball design was Data East’s 1992 Star Wars.",
           credits: [
-            { role: "Game Design", names: "Brian Eddy" },
-            { role: "Artwork", names: "Kevin O’Connor" },
-            { role: "Sound", names: "Jerry Thompson" },
-            { role: "Release", names: "Stern · 2019" },
+            { role: "Game Design", names: "John Borg" },
+            { role: "Code / Rules", names: "Raymond Davidson, Andrew Wilkening" },
+            { role: "Engineering / Mechanics", names: "John Rotharmel, Robert Blakeman" },
+            { role: "Sound", names: "Jerry Thompson, Bob Baffy" },
+            { role: "Release", names: "Stern · 2025 · Premium" },
           ],
         },
 
@@ -446,15 +464,15 @@ window.RFPC_CONTENT = {
           key: "gameoverview",
           pageTitle: "Game Overview",
           eyebrow: "TL;DR: The Quick Read",
-          proTip: "The Upside Down’s hidden ball scores while you flip the one you can see — let it work.",
-          intro: "Stranger Things is the first Stern Pinball machine designed by Brian Eddy, after a long hiatus from pinball design. Many say it is a homage to his classic Attack from Mars - swapping Demogorgons in for Aliens.  The pin is based on the first two seasons of the popular Netflix sci-fi series and features a unique projection system to change many of the playfield targets as well as UV lighting for Upside Down modes.",
+          proTip: "Every mission you play makes that character’s jackpots pay 2×, 3× or 4× in multiball.",
+          intro: "Star Wars: Fall of the Empire marks designer John Borg’s return to the Star Wars license more than 30 years after his very first pinball machine, Data East’s 1992 Star Wars. Built on Stern’s new SPIKE 3 platform, it retells the Original Trilogy and digs into corners of the story earlier Star Wars machines passed over, as Luke and a ragtag band of rebels set out to bring down the Empire.",
           bullets: [
-            "Start every mode at the TV scoop.",
-            "Chapters play out across Hawkins as the Upside Down bleeds in.",
-            "A hidden magnet scores the ball you can’t see.",
-            "The Flashlight button reveals and collects hidden value.",
-            "Clear every chapter to reach the Battle of Starcourt.",
-            "Two multiballs: the Demogorgon and the Mind Flayer.",
+            "Spell FORCE to light Rebel Missions for eight characters.",
+            "Played missions boost that character’s multiball jackpots.",
+            "Falcon Features at the center ramp; Jabba Events in the Sarlacc Pit.",
+            "Return lanes qualify Vader modes at the left scoop.",
+            "Rip the spinners to spell JEDI for the magnet ball save.",
+            "Five mini-wizards on the road to Jedi Master.",
           ],
         },
 
@@ -462,152 +480,258 @@ window.RFPC_CONTENT = {
         {
           key: "rundown",
           pageTitle: "The Rundown",
-          eyebrow: "Stern · 2019",
-          proTip: "Two multiballs and a wizard: Demogorgon, Mind Flayer, then the Battle of Starcourt.",
+          eyebrow: "Stern · 2025",
+          proTip: "Battle of Hoth and Lightspeed are the only two multiballs that stack — run them together.",
           modes: {
             kicker: "On The Playfield",
             title: "Modes & Battles",
-            lead: "Chase the chapters through Hawkins while the Upside Down bleeds into the playfield. Start modes at the TV, then take down the Mind Flayer.",
+            lead: "Four sets of modes run side by side: Rebel Missions, Falcon Features, Jabba Events and Vader modes.",
             rows: [
-              { label: "Start Chapter", target: "The TV Scoop", desc: "Pick a chapter, then run its flashing shots." },
-              { label: "Demogorgon", target: "Bash Toy", desc: "Pound the creature to light its multiball." },
-              { label: "Upside Down", target: "Hidden Magnet", desc: "Sink the ball into scoring you can’t see." },
-              { label: "Bike Escape", target: "Left Ramp", desc: "Combo the ramps to outrun what’s chasing." },
+              { label: "Rebel Missions", target: "FORCE Targets", desc: "Spell FORCE to light the eight character shots." },
+              { label: "Falcon Features", target: "Center Ramp", desc: "Shoot it when the Falcon’s engines are lit." },
+              { label: "Jabba Events", target: "Sarlacc Pit", desc: "Drop Salacious Crumb twice, then spin the Pit to pick." },
+              { label: "Vader Modes", target: "Left Scoop", desc: "Return lanes qualify; start when nothing else runs." },
+              { label: "Rebel Combos", target: "Name Inserts", desc: "Two combos at one character starts its Super Mode." },
+              { label: "Hyperspace Loops", target: "Right Ramp", desc: "TIE fighter thresholds start the loop jackpot." },
             ],
           },
           keyMultiballs: {
             kicker: "Balls Everywhere",
             title: "Key Multiballs",
-            lead: "Multiple ways into the chaos of the Upside Down.",
+            lead: "Take down the AT-ATs, then both Death Stars.",
             rows: [
-              { label: "Demogorgon Multiball", target: "Bash Toy", desc: "Feed the creature to lock balls, then hammer lit shots." },
-              { label: "Mind Flayer Multiball", target: "Center Shots", desc: "Spread across the shadow to build jackpots." },
+              { label: "Battle of Hoth", target: "Luke VUK", desc: "The Droids target lights locks; spell AT-AT for the super." },
+              { label: "Death Star", target: "Death Star Ramp", desc: "Open the lock, then lock three balls." },
+              { label: "Death Star II", target: "Death Star Ramp", desc: "Destroy the first Death Star to move on to the second." },
+              { label: "Lightspeed", target: "Center Ramp", desc: "The first Falcon Feature — don’t miss its timed start." },
             ],
           },
           wizard: {
             kicker: "The End Game",
             title: "Wizard Mode",
-            name: "Battle of Starcourt",
-            body: "Play through every chapter to reach the Battle of Starcourt — the final stand-off at the mall, and the end of the game.",
-            chip: "◆ Clear every chapter",
+            name: "Jedi Master",
+            body: "Five mini-wizards stand in the way — Not a Jedi Yet, Ewok Encounter, Sarlacc Escape, Never Tell Me The Odds and Dark Side Multiball — before the final showdown, Jedi Master.",
+            chip: "◆ Five mini-wizards first",
           },
           skills: {
             kicker: "At The Plunge",
             title: "Skill Shots",
-            lead: "Plunge for the skill shot at the flashing lane.",
+            lead: "Plunge and hit any flashing shot. Make it within three switches for a 2× Super Skill Shot.",
             rows: [
-              { label: "Skill Shot", target: "Flashing Lane", desc: "Plunge into the lit rollover." },
-              { label: "Super Skill", target: "Left Ramp", desc: "Hold left flipper, then combo the ramp." },
+              { label: "Right Orbit", target: "Relight", desc: "Relights every skill shot to collect again." },
+              { label: "Luke VUK", target: "FORCE", desc: "Spots three FORCE letters." },
+              { label: "Left Orbit", target: "JEDI", desc: "Adds two JEDI letters." },
+              { label: "Stormtrooper", target: "Hurry-Up", desc: "Starts the Stormtrooper hurry-up." },
             ],
           },
           button: {
-            kicker: "Eleven’s power",
-            title: "The Flashlight",
-            lead: "The action button reveals and collects hidden Upside Down value.",
+            kicker: "Use the Force",
+            title: "Action Button",
+            lead: "Small button, big saves.",
             rows: [
-              { label: "Reveal", target: "Hidden Shots", desc: "Light shots you otherwise can’t see." },
+              { label: "JEDI Ball Save", target: "Outlanes", desc: "Spell JEDI, then fire the magnet to toss a draining ball back." },
+              { label: "Lock In Jabba", target: "Sarlacc Pit", desc: "Press while the ball spins to keep the Jabba Event you want." },
+              { label: "Add-A-Ball", target: "Sarlacc Pit", desc: "Ten Pit spins in multiball light it." },
             ],
           },
           tableTips: {
             kicker: "House Advice",
             title: "Table Tips",
-            proTip: "Don’t fear the Upside Down — its hidden ball scores while you flip the visible one.",
+            proTip: "Play missions before multiball — Force Boost multiplies those characters’ jackpots.",
             rows: [
-              { name: "Mind The TV", body: "Start chapters at the TV; each is a timed mode." },
-              { name: "Embrace The Flip", body: "The Upside Down scores while you play the visible ball." },
+              { name: "Missions First", body: "Every character you play boosts its jackpots in every multiball." },
+              { name: "Respect Lightspeed", body: "Drain or time out in Lightspeed Escape and that multiball is gone." },
             ],
           },
         },
 
-        /* PAGE 4 · THE SEASONS & CHAPTERS ------------------------------- */
+        /* PAGE 4 · REBEL MISSIONS ---------------------------------------- */
         {
-          key: "seasons",
-          pageTitle: "The Seasons & Chapters",
-          eyebrow: "Run The Flashing Shots",
-          proTip: "Don’t fear the Upside Down — its hidden ball racks up points while you flip the one you can see.",
-          kicker: "Start At The TV",
+          key: "missions",
+          pageTitle: "Rebel Missions",
+          eyebrow: "Spell FORCE To Light Them",
+          proTip: "Four blue shots finish a mission — white shots don’t count, but they pump up the value.",
+          kicker: "The Rebels",
           boxes: [
-            { name: "The Search", target: "The TV Scoop", detail: "Hunt for Will across Hawkins — the opening chapter." },
-            { name: "Hawkins Lab", target: "Center Scoop", detail: "Break into the lab where the gate was opened." },
-            { name: "The Byers House", target: "Right Ramp", detail: "Christmas lights and the wall of letters." },
-            { name: "The Hub", target: "Left Orbit", detail: "Regroup with the party and pick the next move." },
-            { name: "The Fun Fair", target: "Left Ramp", detail: "The Starcourt showdown builds from here." },
+            { name: "Yoda", target: "Spinners", detail: "Spinners add 10k to the shot value per spin. Missions: Meeting Yoda, Jedi Training, Seeing the Future. Bonus: The Final Lesson — a long spinner mode with ball-save checkpoints." },
+            { name: "Luke", target: "Luke VUK", detail: "The Luke VUK is always a possible blue shot, and it and the right ramp score 2×. Missions: Discovering the Force, Escaping the Death Star, Leaving Dagobah. Bonus: Dark Side Cave — spell FORCE inside the cave to face Vader." },
+            { name: "Droids", target: "Slings & Bumpers", detail: "Slingshots and bumpers move which shot is lit for 2×. Missions: Rebel Ship, Welcome to Tatooine, Ewok Deity. Bonus: Find R2-D2 — lock in roving shots with the Droids target." },
+            { name: "Lando", target: "Starts At 2×", detail: "Every blue shot starts at 2×, but too many sling or bumper hits drop it to 1×. Missions: Lando Calrissian, The Sellout, Lando’s Redemption. Bonus: Rescue Luke — a combo chase across the ramps." },
           ],
         },
 
-        /* PAGE 5 · DEMOGORGON BATTLES ----------------------------------- */
+        /* PAGE 5 · MORE REBEL MISSIONS ----------------------------------- */
         {
-          key: "demogorgon",
-          pageTitle: "Demogorgon Battles",
-          eyebrow: "Escalating Fights",
-          proTip: "Don’t fear the Upside Down — its hidden ball racks up points while you flip the one you can see.",
-          kicker: "Pound The Creature",
+          key: "missions2",
+          pageTitle: "More Rebel Missions",
+          eyebrow: "Green · Yellow · Orange · Bonus",
+          proTip: "Finish a mission, then shoot that character again with nothing running to start their Bonus Mission.",
+          kicker: "The Rebels",
           boxes: [
-            { name: "The Demogorgon", target: "Bash Toy", detail: "Hammer the creature to light and start its multiball." },
-            { name: "Demodogs", target: "Pop Bumpers", detail: "Thin the pack before the big one arrives." },
-            { name: "The Mind Flayer", target: "Center Shots", detail: "The shadow spreads across the playfield — spread your shots to match." },
+            { name: "Han", target: "Hurry-Ups", detail: "Every shot is a hurry-up that starts high and counts down. Missions: Han vs Greedo, Where’s Luke, Frozen in Carbonite. Bonus: Han & Leia — alternate left and right shots, then finish at the center ramp." },
+            { name: "Chewie", target: "Sarlacc Spins", detail: "Sarlacc Pit spins add 50k per spin, and the center ramp scores 2×. Missions: Dejarik, Find C-3PO, Fix C-3PO. Bonus: Reunion — trade Pit shots and center ramps." },
+            { name: "Leia", target: "Right Ramp 2×", detail: "The Luke VUK and center ramp build value; the right ramp scores 2×. Missions: Jailbreak, Trash Compactor, Rescuing Han. Bonus: Speeder Bikes — hurry-ups that roll into a 2-ball multiball." },
+            { name: "Obi-Wan", target: "VUK & Right Orbit", detail: "The Luke VUK and right orbit score 2× whenever they’re lit blue. Missions: Ben Meets Luke, The Message, Duel with Darth Vader. Bonus: Revealing the Truth — a marathon 28-shot mode." },
           ],
         },
 
-        /* PAGE 6 · MORE FROM HAWKINS ------------------------------------ */
+        /* PAGE 6 · FALCON FEATURES --------------------------------------- */
         {
-          key: "moreHawkins",
-          pageTitle: "More From Hawkins",
-          eyebrow: "Fill In With Real Content",
-          proTip: "Placeholder pro tip — replace with real copy.",
-          kicker: "Placeholder Section",
+          key: "falcon",
+          pageTitle: "Falcon Features",
+          eyebrow: "Center Ramp · Engines Lit",
+          proTip: "Right ramp into the center ramp as a combo gives two Falcon advances at once.",
+          kicker: "The Millennium Falcon",
           boxes: [
-            { name: "Placeholder 1", target: "TBD", detail: "Add real content here." },
-            { name: "Placeholder 2", target: "TBD", detail: "Add real content here." },
-            { name: "Placeholder 3", target: "TBD", detail: "Add real content here." },
-            { name: "Placeholder 4", target: "TBD", detail: "Add real content here." },
-            { name: "Placeholder 5", target: "TBD", detail: "Add real content here." },
-            { name: "Placeholder 6", target: "TBD", detail: "Add real content here." },
+            { name: "Lightspeed Escape", target: "Center Ramp", detail: "Build the jackpot, then make the timed center ramp to start Lightspeed Multiball. Drain or run out of time and — like Alderaan — it’s gone." },
+            { name: "That’s No Moon", target: "Sets Of Three", detail: "Search for Alderaan through sets of three lit shots. The center shot of each set scores 2×, and leftover time pays a bonus." },
+            { name: "Dogfight", target: "Center ↔ Right Ramp", detail: "Alternate the center and right ramps to shoot down TIE fighters. Combos into the right ramp score 2×." },
+            { name: "Never Tell Me The Odds", target: "Mini-Wizard", detail: "The fourth Falcon Feature — a multiball run through the asteroid field. Hit white shots, dodge the red asteroids." },
+            { name: "Welcome to Cloud City", target: "Both Orbits", detail: "Loop the left and right orbits for multiplied values, then cash both in at the center ramp." },
           ],
         },
 
-        /* PAGE 7 · MULTIBALL OVERVIEW — one box per multiball ----------- */
+        /* PAGE 7 · JABBA EVENTS ------------------------------------------ */
+        {
+          key: "jabba",
+          pageTitle: "Jabba Events",
+          eyebrow: "Into The Sarlacc Pit",
+          proTip: "Press the action button while the ball spins in the Pit to lock in the Jabba Event you want.",
+          kicker: "Jabba’s Palace",
+          boxes: [
+            { name: "Luke’s Gift", target: "Sarlacc Pit", detail: "Guide the droids into Jabba’s palace. Each shot resets a 30-second timer, and the final shot is always the Sarlacc Pit." },
+            { name: "Jabba’s Palace", target: "Drop Target", detail: "Make lit shots to relight Salacious Crumb for bigger awards. Three drop target hits light the Pit for 5×." },
+            { name: "Rancor Battle", target: "Shot Sequence", detail: "Untimed: Luke VUK, right orbit, right ramp, center ramp twice, Luke VUK, then the Pit. Quick combos multiply up to 3×." },
+            { name: "Sarlacc Escape", target: "Mini-Wizard", detail: "Play all three Jabba Events to unlock the fourth — a multiball where every Pit spin scores the jackpot." },
+          ],
+        },
+
+        /* PAGE 8 · VADER MODES ------------------------------------------- */
+        {
+          key: "vader",
+          pageTitle: "Vader Modes",
+          eyebrow: "The Dark Side",
+          proTip: "The shot that starts a Vader mode adds +1× every time you return to it — slow down and farm it.",
+          kicker: "Lord Vader",
+          boxes: [
+            { name: "Qualify", target: "Return Lanes", detail: "The return lanes alternate between lighting Dark Side Mystery and qualifying a Vader mode at the left scoop. Start it when nothing else is running." },
+            { name: "Pick Your Scene", target: "Left Scoop", detail: "After the scoop, the lit shot you hit picks the scene. Each Vader mode can only be played once per game." },
+            { name: "The Eight Scenes", target: "Start Shots", detail: "Tarkin (bumpers) · Lord Vader Arrives (left scoop) · Emperor’s Guidance (orbits) · Family Reunion (Luke VUK) · Death Star II Plans (Death Star) · Bounty Hunters (Sarlacc Pit) · Lack of Faith (Stormtrooper) · Emperor’s Orders (return lanes)." },
+            { name: "Finish At Vader", target: "Vader Scoop", detail: "Every Vader mode ends with a shot to the Vader scoop, and each one you finish adds 500k to the next mode’s shot value." },
+            { name: "Dark Side Scoring", target: "Purple Shot", detail: "Finish any Vader mode and a roving purple shot pays 5% of your Vader points for the rest of the ball. Five of them light extra ball." },
+            { name: "Dark Side Multiball", target: "Ten Purple Shots", detail: "Ten Dark Side shots light a 3-ball mini-wizard. The Death Star scores 2× and relights every shot." },
+          ],
+        },
+
+        /* PAGE 9 · WIZARD MODES ------------------------------------------ */
+        {
+          key: "wizards",
+          pageTitle: "Wizard Modes",
+          eyebrow: "The Road To Jedi Master",
+          proTip: "Each Bonus Mission you finish cuts the characters needed for Not a Jedi Yet and Ewok Encounter by one.",
+          kicker: "The End Game",
+          boxes: [
+            { name: "Not a Jedi Yet", target: "4 Characters", detail: "Play a mission for four different characters. Duel Vader in Cloud City — shots go white, blue, then red, and once a red shot is made it’s gone." },
+            { name: "Ewok Encounter", target: "All 8 Characters", detail: "Play a mission for all eight characters. A four-phase battle on Endor, peaking with a six-ball Battle Multiball." },
+            { name: "Sarlacc Escape", target: "3 Jabba Events", detail: "A switch-frenzy multiball. Every Pit spin scores the jackpot, and four jackpots light the super at the left scoop." },
+            { name: "Never Tell Me The Odds", target: "3 Falcon Features", detail: "A 3-ball asteroid field where scoring multiplies by balls in play. Hit white shots, avoid the red, then escape up the center ramp." },
+            { name: "Dark Side Multiball", target: "10 Dark Side Shots", detail: "A 3-ball multiball where every shot scores the Dark Side award. Finish with a hurry-up at the left scoop." },
+            { name: "Jedi Master", target: "The Final Wizard", detail: "The end of the road — the final wizard mode waiting beyond the mini-wizards." },
+          ],
+        },
+
+        /* PAGE 10 · OTHER SCORING ---------------------------------------- */
+        {
+          key: "other",
+          pageTitle: "Other Scoring",
+          eyebrow: "Points Are Points",
+          proTip: "Light an Ion Cannon multiplier on your best shot — it stays 2× for the rest of the ball.",
+          kicker: "Everything Else",
+          boxes: [
+            { name: "Ion Cannons", target: "Pop Bumpers", detail: "Bumper hits charge the cannons. The next pulsing shot you make locks in at 2× for the rest of the ball." },
+            { name: "Rebel Combos", target: "Name Inserts", detail: "Combo into a flashing yellow character name. Two combos at one character starts its untimed Super Mode." },
+            { name: "Hyperspace Loops", target: "Right Ramp", detail: "Collect TIE fighters at the right ramp. 5, 15 and 45 start Hyperspace Loops; 10, 30 and 60 light extra ball." },
+            { name: "Stormtrooper Hurry-Up", target: "Stormtrooper Target", detail: "Two Stormtroopers start a 10M hurry-up at the far-right target. Each one you finish adds +1× to bonus." },
+            { name: "Dark Side Mystery", target: "Left Scoop", detail: "The return lanes light Mystery. Two Mystery awards unlock Mynock Multiball on the Premium — pound the lowered center ramp." },
+            { name: "JEDI Ball Save", target: "Spinners", detail: "Rip the spinners to spell JEDI. On the Premium, the action button fires the magnet under the flippers to toss a draining ball back." },
+          ],
+        },
+
+        /* PAGE 11 · MULTIBALL OVERVIEW — one box per multiball ---------- */
         {
           key: "multiball",
           pageTitle: "Multiball Overview",
-          eyebrow: "Stern · 2019",
-          proTip: "Feed the Demogorgon to lock balls, then hammer every lit shot before they drop.",
+          eyebrow: "Stern · 2025",
+          proTip: "Play Rebel Missions before multiball — Force Boost makes those characters’ jackpots pay 2×, 3× or 4×.",
           kicker: "Balls Everywhere",
           labels: { start: "How to Start", objective: "Objective", jackpots: "Jackpots", tips: "Scoring Tips" },
           boxes: [
             {
-              name: "Demogorgon Multiball",
-              target: "Bash Toy",
-              detail: "Feed the creature to lock balls, then hammer the lit shots.",
-              objective: "Lock the creature, then pour jackpots into the beast's mouth.",
-              jackpots: "Jackpots at the lit shots; the Super lands at the beast’s mouth.",
-              tip: "Bash the toy fully before starting for more balls.",
+              name: "Battle of Hoth",
+              target: "Droids Target → Luke VUK",
+              detail: "Hit the Droids target in front of the AT-AT to light locks at the Luke VUK. Lock three to start.",
+              objective: "Spell AT-AT, then take the walker down at the Luke shot.",
+              jackpots: "Score a jackpot anywhere, then the Droids target for a letter jackpot worth everything before it. Spell AT-AT and the Luke VUK pays the super.",
+              tip: "Stack it with Lightspeed — the only two multiballs that run together.",
             },
             {
-              name: "Mind Flayer Multiball",
-              target: "Center Shots",
-              detail: "Spread shots across the shadow to build it.",
-              objective: "Spread the shadow across every shot before it consumes the whole playfield.",
-              jackpots: "Jackpots grow as the Flayer spreads across the playfield.",
-              tip: "Keep shots moving across the center — don’t camp one lane.",
+              name: "Death Star",
+              target: "Death Star Ramp",
+              detail: "Shoot the ramp to open the lock, then again to lock a ball. Three locks start it.",
+              objective: "Score fifteen jackpots, then open the Death Star for a 20M super.",
+              jackpots: "Every shot is lit; a shot goes dark until you hit a different one. Jackpots during the super phase raise it to 2×, then 3×.",
+              tip: "Super jackpot progress carries over between Death Star attempts.",
+            },
+            {
+              name: "Death Star II",
+              target: "Death Star Ramp",
+              detail: "Destroy the first Death Star and the locks move on to the second.",
+              objective: "Climb through 2× and 3× jackpots to light a 12× super.",
+              jackpots: "The super lands at the center ramp — two balls through it in quick succession.",
+              tip: "Jackpot shots don’t relight here — spread your shots.",
+            },
+            {
+              name: "Lightspeed",
+              target: "Center Ramp",
+              detail: "The first Falcon Feature. Build value, then make the timed center ramp to launch it.",
+              objective: "Hit three lit shots to light a looping super jackpot.",
+              jackpots: "The super is 5× the jackpot — repeat the center jump ramp before time runs out.",
+              tip: "Stack it with Battle of Hoth for double the chaos.",
             },
           ],
         },
 
-        /* PAGE 8 · STRATEGY & TIPS -------------------------------------- */
+        /* PAGE 12 · STRATEGY & TIPS -------------------------------------- */
         {
           key: "strategy",
           pageTitle: "Strategy & Tips",
           eyebrow: "Play It Smart",
-          proTip: "Don’t chase the Bike Escape cold — combo the ramps when they’re already lit.",
+          proTip: "Spell JEDI early — the Premium’s magnet save is the best friend you’ll have on this table.",
           kicker: "House Advice",
           boxes: [
-            { name: "Embrace The Flip", detail: "The Upside Down’s hidden ball scores while you flip the visible one." },
-            { name: "Mind The TV", detail: "Every chapter starts at the TV — always know which one’s lit." },
-            { name: "Feed The Demogorgon", detail: "Fully bash the toy before multiball for extra balls." },
-            { name: "Steer The Plunge", detail: "Hold the left flipper for the Super Skill up the ramp." },
-            { name: "Don’t Fear The Dark", detail: "Hidden scoring is free — let the magnet do the work." },
-            { name: "One Chapter At A Time", detail: "Finish a chapter before starting the next; half-runs waste time." },
+            { name: "Missions First", detail: "Every character mission you play boosts its jackpots in every multiball for the rest of the game." },
+            { name: "Respect Lightspeed", detail: "Lightspeed Escape is one chance — drain or time out and that multiball is gone." },
+            { name: "Stack Hoth + Lightspeed", detail: "They’re the only two multiballs that stack. Run them together." },
+            { name: "Spell JEDI", detail: "Rip the spinners early; the magnet ball save bails you out of outlane drains." },
+            { name: "Farm The Start Shot", detail: "In Vader modes the starting shot adds +1× each time — patience pays." },
+            { name: "Ion Cannons Early", detail: "Lock 2× multipliers on your favorite shots before the big modes." },
+          ],
+        },
+
+        /* PAGE · MODS — geeky additions & customization -------------- */
+        {
+          key: "mods",
+          pageTitle: "Mods",
+          eyebrow: "Geeky Additions and Customization",
+          proTip: "PLACEHOLDER — footer tip for the Mods page.",
+          kicker: "The Mod",
+          boxes: [
+            { name: "PLACEHOLDER MOD ONE",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD TWO",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD THREE", target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD FOUR",  target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD FIVE",  target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD SIX",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
           ],
         },
 
@@ -616,8 +740,8 @@ window.RFPC_CONTENT = {
           key: "hold",
           pageTitle: "Now Playing",
           eyebrow: "The Lockedown",
-          proTip: "Clear every chapter to reach the Battle of Starcourt — the final stand.",
-          line: "The gate is open. Go run the Upside Down.",
+          proTip: "Five mini-wizards stand between you and Jedi Master.",
+          line: "The Empire’s on the ropes. Go finish it.",
         },
 
       ],
@@ -846,6 +970,23 @@ window.RFPC_CONTENT = {
             { name: "Stack The Building", detail: "Start Godzilla Multiball inside a city mode to double up." },
             { name: "Secret Skill", detail: "Plunge behind the upper flipper for the big skill shot." },
             { name: "Save Mothra", detail: "Choose Mothra’s ball save when your outlanes are hungry." },
+          ],
+        },
+
+        /* PAGE · MODS — geeky additions & customization -------------- */
+        {
+          key: "mods",
+          pageTitle: "Mods",
+          eyebrow: "Geeky Additions and Customization",
+          proTip: "PLACEHOLDER — footer tip for the Mods page.",
+          kicker: "The Mod",
+          boxes: [
+            { name: "PLACEHOLDER MOD ONE",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD TWO",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD THREE", target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD FOUR",  target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD FIVE",  target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD SIX",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
           ],
         },
 
@@ -1106,6 +1247,23 @@ window.RFPC_CONTENT = {
           ],
         },
 
+        /* PAGE · MODS — geeky additions & customization -------------- */
+        {
+          key: "mods",
+          pageTitle: "Mods",
+          eyebrow: "Geeky Additions and Customization",
+          proTip: "PLACEHOLDER — footer tip for the Mods page.",
+          kicker: "The Mod",
+          boxes: [
+            { name: "PLACEHOLDER MOD ONE",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD TWO",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD THREE", target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD FOUR",  target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD FIVE",  target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD SIX",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+          ],
+        },
+
         /* PAGE 12 · NOW PLAYING — the closing hold card ----------------- */
         {
           key: "hold",
@@ -1355,6 +1513,23 @@ window.RFPC_CONTENT = {
             { name: "Save The Super", detail: "Time Area 51’s ramp → captive combo for the Super." },
             { name: "Six-Way Skill", detail: "Chain the left crossover on the plunge for a big skill shot." },
             { name: "City Order", detail: "Start the closest city — half-saved cities waste the tour." },
+          ],
+        },
+
+        /* PAGE · MODS — geeky additions & customization -------------- */
+        {
+          key: "mods",
+          pageTitle: "Mods",
+          eyebrow: "Geeky Additions and Customization",
+          proTip: "PLACEHOLDER — footer tip for the Mods page.",
+          kicker: "The Mod",
+          boxes: [
+            { name: "PLACEHOLDER MOD ONE",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD TWO",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD THREE", target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD FOUR",  target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD FIVE",  target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD SIX",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
           ],
         },
 
@@ -1609,6 +1784,23 @@ window.RFPC_CONTENT = {
           ],
         },
 
+        /* PAGE · MODS — geeky additions & customization -------------- */
+        {
+          key: "mods",
+          pageTitle: "Mods",
+          eyebrow: "Geeky Additions and Customization",
+          proTip: "PLACEHOLDER — footer tip for the Mods page.",
+          kicker: "The Mod",
+          boxes: [
+            { name: "PLACEHOLDER MOD ONE",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD TWO",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD THREE", target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD FOUR",  target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD FIVE",  target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD SIX",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+          ],
+        },
+
         /* PAGE 11 · NOW PLAYING — the closing hold card ----------------- */
         {
           key: "hold",
@@ -1809,6 +2001,23 @@ window.RFPC_CONTENT = {
           ],
         },
 
+        /* PAGE · MODS — geeky additions & customization -------------- */
+        {
+          key: "mods",
+          pageTitle: "Mods",
+          eyebrow: "Geeky Additions and Customization",
+          proTip: "PLACEHOLDER — footer tip for the Mods page.",
+          kicker: "The Mod",
+          boxes: [
+            { name: "PLACEHOLDER MOD ONE",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD TWO",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD THREE", target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD FOUR",  target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD FIVE",  target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD SIX",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+          ],
+        },
+
         /* PAGE 8 · NOW PLAYING — the closing hold card ------------------ */
         {
           key: "hold",
@@ -1839,14 +2048,14 @@ window.RFPC_CONTENT = {
           key: "intro",
           pageTitle: "Get To Know The Line-Up",
           eyebrow: "Stern · 2024",
-          proTip: "Out of retirement — take jobs for the seven factions and reach the High Table.",
+          proTip: "Out of retirement — work for seven factions, survive five adversaries, and reach the Special Assignment.",
           credits: [
             { role: "Game Design", names: "Elliot Eismin" },
-            { role: "Code / Rules", names: "Tim Sexton, Mike Vinikour, Joshua Henderson" },
+            { role: "Code / Rules", names: "Mike Vinikour, Joshua Henderson, Tim Sexton" },
             { role: "Engineering", names: "Robert Blakeman" },
             { role: "Artwork", names: "Randy Martinez" },
             { role: "Sound", names: "Jerry Thompson" },
-            { role: "Release", names: "Stern · 2024" },
+            { role: "Release", names: "Stern · 2024 · Code 1.02" },
           ],
         },
 
@@ -1858,12 +2067,12 @@ window.RFPC_CONTENT = {
           proTip: "Spawn enemies before a job — lit shots multiply by the blue circles in front.",
           intro: "Following the death of his beloved pet dog Daisy at the hands of a Russian crime family, John Wick comes out of retirement from his old life as a cold-blooded assassin with the sole goal of taking revenge on those who wronged him. Worse comes to worse when former associates and fellow assassins aim to take John down. With the help of Winston, owner of the New York Continental, and other allies, John must defeat the members of the High Table. John Wick is the first pinball machine designed by former mechanical engineer Elliot Eismin and takes influence from all four mainline films in the series.",
           bullets: [
-            "Out of retirement, out for blood — serve the seven factions.",
-            "Take jobs at the crate, then cash them out for perks.",
-            "Spawn enemies before a job so lit shots multiply.",
-            "Bank gold coins to qualify an ally.",
-            "Serve every faction to reach the Special Assignment.",
-            "Three multiballs: Car Chase, Excommunicado, Deconsecrated.",
+            "Light jobs at the weapons crate, then start them at the right VUK.",
+            "Seven factions — cash a job out at the left eject for its perk.",
+            "Blue-circle enemies multiply the shots behind them.",
+            "Defeat ten enemies to light an Adversary Battle.",
+            "Six multiballs: four Car Chases, Excommunicado, Deconsecrated.",
+            "Four wizard modes, ending with the game-ending Special Assignment.",
           ],
         },
 
@@ -1872,51 +2081,57 @@ window.RFPC_CONTENT = {
           key: "rundown",
           pageTitle: "The Rundown",
           eyebrow: "Stern · 2024",
-          proTip: "Three multiballs off the High Table: Car Chase, Excommunicado, Deconsecrated.",
+          proTip: "Six multiballs: four Car Chases, plus Excommunicado and Deconsecrated.",
           modes: {
             kicker: "On The Playfield",
             title: "Modes & Battles",
-            lead: "Out of retirement, out for blood. Take jobs for the seven factions, survive the adversaries, and reach the High Table.",
+            lead: "Out of retirement, out for blood. Take jobs for seven factions, survive five adversaries, and fight your way to the Special Assignment.",
             rows: [
-              { label: "Take a Job", target: "Weapons Crate", desc: "Light three blue lights, then start the job at the VUK." },
-              { label: "Cash Out", target: "Left Eject", desc: "Finish a faction’s shots, then bank it for the perk." },
-              { label: "Adversary Battle", target: "Left Eject", desc: "Drop ten enemies in single-ball play to light the fight." },
-              { label: "Allies", target: "Gold Coin Targets", desc: "Bank coins, then a ramp qualifies an ally." },
+              { label: "Take A Job", target: "Weapons Crate", desc: "Light three blue lights, then start the job at the right VUK." },
+              { label: "Cash Out", target: "Left Eject", desc: "Finish a job’s shots; the eject pays 20% plus the faction perk." },
+              { label: "Adversary Battle", target: "Left Eject", desc: "Defeat ten enemies in single-ball play to light the fight." },
+              { label: "Enemies", target: "Blue Circles", desc: "Each one adds +1× to the shot behind it, up to 4×." },
+              { label: "Allies", target: "Gold Coin Targets", desc: "Light allies, then a ramp qualifies one for the next job." },
+              { label: "Lights Out", target: "Spell YAGA", desc: "Cycle the inlanes, then the action button doubles scoring." },
             ],
           },
           keyMultiballs: {
             kicker: "Balls Everywhere",
             title: "Key Multiballs",
-            lead: "Three multiballs off the High Table.",
+            lead: "Six multiballs — four Car Chases plus Excommunicado and Deconsecrated.",
             rows: [
-              { label: "Car Chase Multiball", target: "Left Orbit", desc: "Bash the car to light it; hit it to swap showdowns." },
-              { label: "Excommunicado Multiball", target: "Red Circle", desc: "Work the bumper and targets to light it." },
-              { label: "Deconsecrated Multiball", target: "Center Ramp", desc: "Spell WINSTON at the captive ball to light locks." },
+              { label: "Car Chase Multiball", target: "Left Orbit", desc: "Bash the car to light it; car hits change which of four chases is lit." },
+              { label: "Excommunicado Multiball", target: "Red Circle", desc: "Max out the dance floor, then shoot the Red Circle." },
+              { label: "Deconsecrated Multiball", target: "Center Ramp", desc: "Spell WINSTON at the captive ball, then lock three balls." },
             ],
           },
           wizard: {
             kicker: "The End Game",
             title: "Wizard Mode",
             name: "Special Assignment",
-            body: "Clear the multiballs, jobs and battles for Red Circle Reckoning, then The Staircase, The Duel, and the final Special Assignment.",
-            chip: "◆ Serve every faction",
+            body: "Red Circle Reckoning lights early. Play all of one category — every job, battle or multiball — for The Staircase, then The Duel, then the game-ending Special Assignment.",
+            chip: "◆ Jobs · Battles · Multiballs",
           },
           skills: {
             kicker: "At The Plunge",
             title: "Skill Shots",
-            lead: "Four crate skill shots wait at the plunge.",
+            lead: "Four ways to start a ball right.",
             rows: [
-              { label: "Baba Yaga", target: "Right VUK", desc: "Plunge clean — starts the lit job instantly." },
-              { label: "MXV Skill", target: "Orbit → Ramp → Eject", desc: "A three-shot combo for a fortune and ten enemies." },
+              { label: "Baba Yaga", target: "Right VUK", desc: "Plunge clean with no switches — 1.5M and starts the lit job." },
+              { label: "VIP Skill", target: "Red Circle Backdoor", desc: "Plunge into the club; starts Excommunicado if it’s lit." },
+              { label: "MXV Skill", target: "Orbit → Ramp → Eject", desc: "Full-plunge combo for 10M and ten bonus enemies." },
+              { label: "Car Skill", target: "Behind The Car", desc: "Premium only — advances the next Car Chase." },
             ],
           },
           button: {
-            kicker: "Stack the odds",
-            title: "Enemies & Coins",
-            lead: "Spawn enemies before a job so lit shots multiply; bank gold coins to qualify an ally.",
+            kicker: "Hold the button",
+            title: "Action Button",
+            lead: "Saved for the moments that matter.",
             rows: [
-              { label: "Enemies", target: "Blue Circles", desc: "Each circle multiplies the shot behind it." },
-              { label: "Allies", target: "Gold Coins", desc: "Bank coins, then a ramp qualifies the ally." },
+              { label: "Lights Out", target: "YAGA Lit", desc: "30 seconds of doubled scoring." },
+              { label: "Add-A-Ball", target: "Tarasov Perk", desc: "Hold it in any multiball." },
+              { label: "Swipe-A-Ball", target: "Center Locks", desc: "Premium — pull a locked ball into another multiball." },
+              { label: "The Duel", target: "Crosshair", desc: "Time the press dead center for up to 25M." },
             ],
           },
           tableTips: {
@@ -1924,137 +2139,171 @@ window.RFPC_CONTENT = {
             title: "Table Tips",
             proTip: "Spawn enemies before you start a job — lit shots multiply by the circles in front of them.",
             rows: [
-              { name: "Spawn First", body: "Load enemies before starting a job for the multipliers." },
-              { name: "Seven Factions", body: "Each job serves a faction with its own perk — serve them all." },
+              { name: "Spawn First", body: "Load enemies before a job — every circle multiplies the shot." },
+              { name: "Grab The Perks", body: "Night Watch and Security Detail perks make every multiball last longer." },
             ],
           },
         },
 
-        /* PAGE 4 · JOBS ------------------------------------------------- */
+        /* PAGE 4 · JOBS — LEFT SIDE ------------------------------------- */
         {
           key: "jobs",
           pageTitle: "Jobs",
-          eyebrow: "Serve The Seven Factions",
-          proTip: "Spawn enemies before you start a job — lit shots multiply by the blue circles stacked in front of them.",
+          eyebrow: "Left Side Factions",
+          proTip: "Shoot a faction’s shot before starting the job at the VUK to pick who you work for.",
           kicker: "Take The Contract",
           boxes: [
-            { name: "The Continental", target: "Weapons Crate", detail: "The hotel where no business is conducted — the first contract." },
-            { name: "High Table", target: "Left Eject", detail: "Work for the ruling council for the richest perks." },
-            { name: "The Bowery", target: "Right Ramp", detail: "Call in the King’s network of eyes." },
-            { name: "Ruska Roma", target: "Left Ramp", detail: "Old debts and older allies." },
-            { name: "The Adjudicator", target: "Center Ramp", detail: "Answer for broken rules — a high-stakes job." },
+            { name: "Night Watch", target: "Left Eject", detail: "The Bowery · All seven shots lit purple; a roving white shot scores 2×. Perk: +5 seconds on every ball saver." },
+            { name: "Assassination", target: "Left Orbit", detail: "New York Continental · Green shots light the captive ball for kill shots — five to cash out. Perk: marker ball save at both outlanes." },
+            { name: "Security Detail", target: "Left Ramp", detail: "Osaka Continental · Chase one blinking red shot across the playfield, seven times. Perk: multiball extend, once per ball." },
+            { name: "VIP Award", target: "Red Circle", detail: "High Table · Hit the blinking 5M hurry-up shot six times; the solid shot resets it. Perk: bonus starts every ball at 2×." },
           ],
         },
 
-        /* PAGE 5 · ADVERSARIES ------------------------------------------ */
+        /* PAGE 5 · JOBS — RIGHT SIDE ------------------------------------ */
+        {
+          key: "jobs2",
+          pageTitle: "More Jobs",
+          eyebrow: "Right Side Factions",
+          proTip: "Play three jobs to light extra ball — and all seven to light a wizard mode.",
+          kicker: "Take The Contract",
+          boxes: [
+            { name: "Heist", target: "Center Ramp", detail: "Ruska Roma · Standups light yellow shots; the gold coin targets collect them all at once. Perk: motion sensors during Lights Out." },
+            { name: "Gather Intel", target: "Right Orbit", detail: "Marquis de Gramont · Combo the left and right ramps to build a center ramp jackpot. Perk: +20 seconds of Lights Out." },
+            { name: "Task A Crew", target: "Right Ramp", detail: "Tarasov Family · Build the left orbit spinner value, then rip it four times. Perk: add-a-ball with the action button." },
+          ],
+        },
+
+        /* PAGE 6 · ADVERSARIES ------------------------------------------ */
         {
           key: "adversaries",
           pageTitle: "Adversaries",
-          eyebrow: "Drop Ten To Light It",
-          proTip: "Spawn enemies before you start a job — lit shots multiply by the blue circles stacked in front of them.",
-          kicker: "Single-Ball Fights",
+          eyebrow: "Defeat Ten Enemies To Light",
+          proTip: "Make half the shots and hit the blood marker to cash the escape jackpot — or keep fighting for up to 4×.",
+          kicker: "One-On-One",
           boxes: [
-            { name: "Ares", target: "Left Eject", detail: "The Adjudicator’s enforcer — a brutal duel." },
-            { name: "Zero", target: "Left Eject", detail: "The rival assassin with respect and a blade." },
-            { name: "Cassian", target: "Left Eject", detail: "The old friend who still has a job to do." },
-            { name: "The Sommelier", target: "Left Eject", detail: "Not wine — weapons, and a fight to the finish." },
+            { name: "Viggo", target: "Car & Captive Ball", detail: "Shoot the car or captive ball to light gold bonus shots. Twelve lit shots earn Be Seeing You." },
+            { name: "Kirill", target: "Red Circle", detail: "Clear the alternating red shots, then the Red Circle pays their total. Skip the Red Circle for a whole wave to add 1M." },
+            { name: "Cassian", target: "Switch Frenzy", detail: "Everything scores and builds the jackpot; one roving purple shot collects it. Six jackpots earn Be Seeing You." },
+            { name: "Ares", target: "Roving Red Shot", detail: "Find Ares — one red shot hops around, and bumpers or slings briefly reveal it. Eight red shots earn Be Seeing You." },
+            { name: "Zero", target: "Combos", detail: "Chain light-blue shots, then collect at the car, captive ball, or the left eject for 2×. Four combos earn Be Seeing You." },
           ],
         },
 
-        /* PAGE 6 · LIGHTS OUT! ------------------------------------------ */
+        /* PAGE 7 · CAR CHASE MULTIBALLS --------------------------------- */
         {
-          key: "lightsout",
-          pageTitle: "Lights Out!",
-          eyebrow: "The Club Shootout",
-          proTip: "Spawn enemies before you start a job — lit shots multiply by the blue circles stacked in front of them.",
-          kicker: "Kill The Lights",
+          key: "carchase",
+          pageTitle: "Car Chase Multiballs",
+          eyebrow: "Bash The Car To Light",
+          proTip: "Bagarre a L’Étoile is the highest-scoring Car Chase on average — hit the car to cycle to it.",
+          kicker: "The Car",
           boxes: [
-            { name: "Lights Out!", target: "Red Circle", detail: "The neon club sequence — stack blue circles to multiply every lit shot." },
+            { name: "Helipad Showdown", target: "Chase 1", detail: "Red shots build the car jackpot up to 4×. Nine jackpots light a 5× super at the car." },
+            { name: "Taxicab Chase", target: "Chase 2", detail: "A 15-second hurry-up at the car locks in the value. Four jackpots light a 5× super at the left orbit." },
+            { name: "Motorcycle Pursuit", target: "Chase 3", detail: "Pursuit shots on one side, then the car to switch sides. Four jackpots light the super at the Continental." },
+            { name: "Bagarre a L’Étoile", target: "Chase 4", detail: "Ramps light the car, orbits raise the multiplier. Four jackpots set up four 5× supers at the car." },
           ],
         },
 
-        /* PAGE 7 · WIZARD MODES ----------------------------------------- */
+        /* PAGE 8 · ALLIES & OTHER SCORING ------------------------------- */
+        {
+          key: "other",
+          pageTitle: "Allies & Other Scoring",
+          eyebrow: "Stack The Odds",
+          proTip: "Lights Out stays lit across balls if you don’t use it — save it for a big job or multiball.",
+          kicker: "Everything Else",
+          boxes: [
+            { name: "Akira", target: "Left Ramp", detail: "Ally · Rotates enemies one shot to the right — hold the left flipper to rotate them left." },
+            { name: "Charon", target: "Center Ramp", detail: "Ally · For four seconds, defeated enemies instantly respawn for another multiplied shot." },
+            { name: "Katia", target: "Right Ramp", detail: "Ally · Moves enemies off unlit shots and onto the shots that score right now." },
+            { name: "Lights Out", target: "Spell YAGA", detail: "Cycle the inlanes to spell YAGA, then the action button kills the lights for 30 seconds of 2× scoring." },
+            { name: "Gold Coins", target: "Coin Targets", detail: "Bounces light random coin shots. Each coin adds 1M to bonus, and ten light extra ball." },
+            { name: "Marker Ball Save", target: "Left Standups", detail: "Five hits light an outlane ball save; the flippers move which lane is lit." },
+          ],
+        },
+
+        /* PAGE 9 · WIZARD MODES ----------------------------------------- */
         {
           key: "wizards",
           pageTitle: "Wizard Modes",
-          eyebrow: "Serve Every Faction",
-          proTip: "Spawn enemies before you start a job — lit shots multiply by the blue circles stacked in front of them.",
+          eyebrow: "Played In Order",
+          proTip: "Red Circle Reckoning lights after just one job, one battle and one of each multiball type.",
           kicker: "The End Game",
           boxes: [
-            { name: "Red Circle Reckoning", target: "All Shots", detail: "The reward for clearing the multiballs, jobs and battles." },
-            { name: "The Staircase", target: "Center Ramp", detail: "Fight down the steps of the Continental." },
-            { name: "The Duel", target: "Left Eject", detail: "One shot, one chance — the penultimate test." },
-            { name: "Special Assignment", target: "The Scoop", detail: "The final contract — the goal of the whole game." },
+            { name: "Red Circle Reckoning", target: "Mini-Wizard", detail: "A 60-second, 4-ball run — 10M per shot, 30M at the Red Circle, and an extra ball when you finish." },
+            { name: "The Staircase", target: "Center Ramp", detail: "Three levels of enemies, then fight back up as a 2-ball multiball. Collect the white arrows to multiply each level’s bonus." },
+            { name: "The Duel", target: "Action Button", detail: "Keep both balls alive for 2×, lock both, then time the button to the crosshair for up to 25M. Three rounds, then a 50M finish." },
+            { name: "Special Assignment", target: "Final Mode", detail: "60 flips to clear every shot and find Iosef. Win or lose, the game ends." },
           ],
         },
 
-        /* PAGE 8 · MORE FROM THE TABLE ---------------------------------- */
-        {
-          key: "moreTable",
-          pageTitle: "More From The Table",
-          eyebrow: "Fill In With Real Content",
-          proTip: "Placeholder pro tip — replace with real copy.",
-          kicker: "Placeholder Section",
-          boxes: [
-            { name: "Placeholder 1", target: "TBD", detail: "Add real content here." },
-            { name: "Placeholder 2", target: "TBD", detail: "Add real content here." },
-            { name: "Placeholder 3", target: "TBD", detail: "Add real content here." },
-            { name: "Placeholder 4", target: "TBD", detail: "Add real content here." },
-            { name: "Placeholder 5", target: "TBD", detail: "Add real content here." },
-            { name: "Placeholder 6", target: "TBD", detail: "Add real content here." },
-          ],
-        },
-
-        /* PAGE 9 · MULTIBALL OVERVIEW — one box per multiball ----------- */
+        /* PAGE 10 · MULTIBALL OVERVIEW — one box per multiball ---------- */
         {
           key: "multiball",
           pageTitle: "Multiball Overview",
           eyebrow: "Stern · 2024",
-          proTip: "Spell WINSTON at the captive ball to light the Deconsecrated locks.",
+          proTip: "The Security Detail and Task a Crew perks extend or add a ball to any multiball.",
           kicker: "Balls Everywhere",
           labels: { start: "How to Start", objective: "Objective", jackpots: "Jackpots", tips: "Scoring Tips" },
           boxes: [
             {
               name: "Car Chase Multiball",
               target: "Left Orbit",
-              detail: "Bash the car to light it; hit it again to swap showdowns.",
-              objective: "Swap showdowns to chase the biggest jackpots across the orbits and ramps.",
-              jackpots: "Jackpots at the orbits and ramps.",
-              tip: "Swap to the showdown that fits your best shot.",
+              detail: "Two car hits light the first one on the Premium (3 balls). Hit the car again to change which chase is lit.",
+              objective: "Four chases to play — each one adds a ball to the next.",
+              jackpots: "The car jackpot starts at 2M and grows with every car hit; supers land at the car or left orbit.",
+              tip: "Hit the car in single-ball play to build the jackpot before you start.",
             },
             {
               name: "Excommunicado Multiball",
               target: "Red Circle",
-              detail: "Work the bumper and targets to light it.",
-              objective: "Build value in the bumpers before cashing in Red Circle jackpots.",
-              jackpots: "Red Circle shots build the jackpots.",
-              tip: "Keep the ball in the bumpers to light it faster.",
+              detail: "Work the Red Circle bumper and targets to max out the dance floor, then shoot the Red Circle.",
+              objective: "Survive a 15-second build phase, then a 2-ball multiball.",
+              jackpots: "Gold shots pan out from the center; all six light the Red Circle super.",
+              tip: "Premium: short-plunge into the Red Circle during the build to lock balls and raise the super.",
             },
             {
               name: "Deconsecrated Multiball",
               target: "Center Ramp",
-              detail: "Spell WINSTON at the captive ball to light the locks.",
-              objective: "Lock balls at the captive ball for a High-Table jackpot showdown.",
-              jackpots: "Center ramp jackpots grow with each lock.",
-              tip: "Spell WINSTON early so the locks are ready.",
+              detail: "Spell WINSTON at the captive ball to light the locks, then lock three balls.",
+              objective: "Score seven green jackpots to light the captive ball.",
+              jackpots: "The captive ball then pays repeated super jackpots for 15 seconds.",
+              tip: "Defeat enemies during the mode — they feed every jackpot.",
             },
           ],
         },
 
-        /* PAGE 10 · STRATEGY & TIPS ------------------------------------- */
+        /* PAGE 11 · STRATEGY & TIPS ------------------------------------- */
         {
           key: "strategy",
           pageTitle: "Strategy & Tips",
           eyebrow: "Play It Smart",
-          proTip: "Bank gold coins, then a ramp qualifies an ally to fight beside you.",
+          proTip: "Bank gold coins — they light allies, add 1M each to bonus, and ten light extra ball.",
           kicker: "House Advice",
           boxes: [
-            { name: "Spawn First", detail: "Load enemies before a job — lit shots multiply by the circles in front of them." },
-            { name: "Seven Factions", detail: "Each job serves a faction with its own perk — serve them all." },
-            { name: "Bank Coins", detail: "Gold coins qualify allies; keep a few in reserve." },
-            { name: "Baba Yaga Skill", detail: "Plunge clean to the right VUK to start the lit job instantly." },
-            { name: "MXV Combo", detail: "Orbit → ramp → eject on the plunge for a fortune and ten enemies." },
-            { name: "Cash Smart", detail: "Finish a faction’s shots before cashing for the bigger perk." },
+            { name: "Spawn First", detail: "Load enemies before a job — each circle multiplies the shot behind it." },
+            { name: "Pick Your Faction", detail: "Shoot a faction’s shot before starting the job to choose the perk you want." },
+            { name: "Perks Early", detail: "Night Watch, Security Detail and Task a Crew make every multiball last longer." },
+            { name: "Use Your Allies", detail: "Katia moves enemies onto lit shots — perfect before a big job." },
+            { name: "Save Lights Out", detail: "It carries across balls — fire it during a job or multiball." },
+            { name: "Car Hits Count", detail: "Bash the car in single-ball play to build the Car Chase jackpot." },
+          ],
+        },
+
+        /* PAGE · MODS — geeky additions & customization -------------- */
+        {
+          key: "mods",
+          pageTitle: "Mods",
+          eyebrow: "Geeky Additions and Customization",
+          proTip: "PLACEHOLDER — footer tip for the Mods page.",
+          kicker: "The Mod",
+          boxes: [
+            { name: "PLACEHOLDER MOD ONE",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD TWO",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD THREE", target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD FOUR",  target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD FIVE",  target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
+            { name: "PLACEHOLDER MOD SIX",   target: "Where It Goes", detail: "PLACEHOLDER — what this mod is and why it was added." },
           ],
         },
 
@@ -2063,7 +2312,7 @@ window.RFPC_CONTENT = {
           key: "hold",
           pageTitle: "Now Playing",
           eyebrow: "The Lockedown",
-          proTip: "Serve every faction to reach the Special Assignment.",
+          proTip: "Clear every job, battle or multiball to reach the wizard modes.",
           line: "You’re back. Go earn your place at the High Table.",
         },
 
