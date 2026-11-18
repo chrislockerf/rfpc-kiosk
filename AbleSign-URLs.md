@@ -5,13 +5,13 @@ Each URL starts the loop on that machine's "On The Floor" page and plays through
 
 | Machine | Segment length | URL |
 |---|---|---|
-| Star Wars: Fall of the Empire | 636s (10m 36s) | https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html?start=star-wars |
-| Godzilla | 485s (8m 5s) | https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html?start=godzilla |
-| James Bond 007 | 633s (10m 33s) | https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html?start=james-bond |
-| Deadpool | 514s (8m 34s) | https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html?start=deadpool |
-| Foo Fighters | 553s (9m 13s) | https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html?start=foo-fighters |
-| Jurassic Park | 579s (9m 39s) | https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html?start=jurassic-park |
-| John Wick | 524s (8m 44s) | https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html?start=john-wick |
-| Monster Bash | 359s (5m 59s) | https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html?start=monster-bash |
+| Star Wars: Fall of the Empire | 636s | https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html?start=star-wars |
+| Godzilla | 485s | https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html?start=godzilla |
+| James Bond 007 | 633s | https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html?start=james-bond |
+| Deadpool | 514s | https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html?start=deadpool |
+| Foo Fighters | 553s | https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html?start=foo-fighters |
+| Jurassic Park | 579s | https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html?start=jurassic-park |
+| John Wick | 524s | https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html?start=john-wick |
+| Monster Bash | 359s | https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html?start=monster-bash |
 
-Full loop (all 8, no param): 4283s (71.4 min) — https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html
+Full loop (all 8, no param): 4283s — https://chrislockerf.github.io/rfpc-kiosk/RfpcKiosk.dc.html

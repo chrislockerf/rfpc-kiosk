@@ -1,3 +1,5 @@
 Whenever content.js is edited or re-uploaded — by Claude in this project OR by the user re-uploading it — (sequence/sections/breather changes), regenerate AbleSign-URLs.md before ending the turn: recompute each machine's segment runtime (floor anchor + its sequence + breather) using the same holdMs/spotHold formulas as RfpcKiosk.dc.html's scene builder, and rewrite the table + full-loop total. Don't wait to be asked.
 
 After every publish (push to GitHub Pages), list every machine's AbleSign segment timing and the full-loop total in the reply, flagging which ones changed, so Chris can update AbleSign manually.
+
+Timing format: always show segment times and the full-loop total in seconds only (e.g. "636s"), never minutes. In the reply, list machines in loop order with each machine's ?start= URL alongside its time.
