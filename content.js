@@ -1123,13 +1123,13 @@ window.RFPC_CONTENT = {
               name: "Oddjob",
               target: "Goldfinger",
               detail: "He Blew a Fuse — hit the left ramp, side ramp, right orbit, and right ramp, then the rocket lane to win.",
-              img: "assets/bond-henchman-oddjob.png",
+              img: "assets/bond-photo-oddjob.jpg",
             },
             {
               name: "Fiona Volpe",
               target: "Thunderball",
               detail: "Femme Fatale — chase her down: left ramp, right ramp, left ramp, right orbit, side ramp, left ramp, DB5 eject.",
-              img: "assets/bond-henchman-volpe.png",
+              img: "assets/bond-photo-volpe.jpg",
             },
             {
               name: "Mr. Osato",
