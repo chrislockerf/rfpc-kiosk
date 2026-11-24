@@ -180,7 +180,7 @@ class Component extends DCLogic {
           return function () { cancelAnimationFrame(raf); ro.disconnect(); };
         });
         return h("div", { ref: outer, style: { position: "relative", height: "100%", width: "100%", overflow: "hidden" } },
-          h("div", { ref: inner, style: { minHeight: "100%", width: "100%", display: "flex", flexDirection: "column", transformOrigin: "0 0", transform: "scale(" + scale + ")" } }, props.children));
+          h("div", { ref: inner, style: { minHeight: "100%", width: (100 / scale) + "%", display: "flex", flexDirection: "column", transformOrigin: "0 0", transform: "scale(" + scale + ")" } }, props.children));
       };
     }
     const AutoFit = this._AutoFit;
@@ -252,7 +252,7 @@ class Component extends DCLogic {
     const detailRows = (leadTxt, rows, cols, footer, layout) => fit(h(React.Fragment, null,
       leadTxt ? h("p", { key: "l", style: { margin: "0 0 var(--sp-4)", fontSize: "var(--t-lead)", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: "48ch" } }, leadTxt) : null,
       layout === "table" ? simpleTable(rows) :
-      h("div", { key: "r", style: (cols === 2 || layout === "columns") ? { display: "grid", gridTemplateColumns: "1fr 1fr", columnGap: "var(--sp-6)", rowGap: 0, alignContent: "start" } : null }, (rows || []).map((r, i) => ShotRow ? h(ShotRow, { key: i, label: r.label, target: r.target }, r.desc) : null)),
+      h("div", { key: "r", style: (cols === 2 || layout === "columns" || layout === "columns3") ? { display: "grid", gridTemplateColumns: layout === "columns3" ? "1fr 1fr 1fr" : "1fr 1fr", columnGap: "var(--sp-6)", rowGap: 0, alignContent: "start" } : null }, (rows || []).map((r, i) => ShotRow ? h(ShotRow, { key: i, label: r.label, target: r.target }, r.desc) : null)),
       footLine(footer)));
     const wizardDetail = (w) => fit(h(React.Fragment, null,
       h("p", { key: "b", style: { margin: 0, fontSize: "var(--t-lead)", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: (w.rows && w.rows.length) ? "none" : "52ch" } }, w.body),

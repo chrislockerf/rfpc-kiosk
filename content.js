@@ -121,7 +121,7 @@ window.RFPC_CONTENT = {
           skills: {
             kicker: "At The Plunge",
             title: "Skill Shots",
-            layout: "columns",
+            layout: "columns3",
             lead: "Plunge and hit any flashing shot. Make it within three switches for a 2× Super Skill Shot.",
             rows: [
               { label: "Right Orbit", target: "Relight", desc: "Relights every skill shot to collect again." },
