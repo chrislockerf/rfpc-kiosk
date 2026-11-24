@@ -1209,11 +1209,13 @@ window.RFPC_CONTENT = {
               name: "DB5",
               target: "Goldfinger",
               detail: "Three DB5 eject shots qualify it; six shots reveal the car’s amenities and start DB5 Multiball.",
+              img: "assets/bond-photo-db5.jpg",
             },
             {
               name: "Power Pack",
               target: "Thunderball",
               detail: "Three left-eject shots qualify it; the underwater jetpack gadget leads into Power Pack Multiball.",
+              img: "assets/bond-photo-powerpack.jpg",
             },
             {
               name: "Little Nellie",
@@ -1242,6 +1244,7 @@ window.RFPC_CONTENT = {
               objective: "Lock three balls in the rocket for the game's signature multiball assault.",
               jackpots: "Every shot lights green to build the jackpot; blast the rocket for the Super Jackpot.",
               tip: "Hit the two upper-flipper shots right away — three double jackpots earn the multiball extension.",
+              img: "assets/bond-photo-rocket.jpg",
             },
             {
               name: "Jetpack",
@@ -1250,6 +1253,7 @@ window.RFPC_CONTENT = {
               objective: "Shoot the center lane to lock in the hurry-up as the jackpot value.",
               jackpots: "Five jackpots, then the left ramp for a double. On the Premium the jetpack carries the ball — shoot the Dragon Tank under it for the Super (10M, +5M).",
               tip: "Best used when stacked with a Villain or Henchman mode - not very useful on its own.",
+              img: "assets/bond-photo-dragontank.jpg",
             },
             {
               name: "Bond, James Bond",
@@ -1258,6 +1262,7 @@ window.RFPC_CONTENT = {
               objective: "2-ball with 70 seconds of unlimited ball save: shoot 10 lit shots.",
               jackpots: "2.5M (5M at the side loop). The side ramp Super is worth up to 100M plus an extra ball.",
               tip: "Each shot earns a different Bond introduction voice over from one of the films.",
+              img: "assets/bond-photo-bond.jpg",
             },
           ],
         },
