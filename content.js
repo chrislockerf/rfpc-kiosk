@@ -1111,13 +1111,13 @@ window.RFPC_CONTENT = {
               name: "Professor Dent",
               target: "Dr. No",
               detail: "Sinister Summit — lock in the moving yellow shot with the Dragon Tank; 10 yellow shots to win.",
-              img: "assets/bond-henchman-dent.png",
+              img: "assets/bond-photo-dent.jpg",
             },
             {
               name: "Red Grant",
               target: "From Russia With Love",
               detail: "Encounter on the Orient Express — shoot the right orbit to light combos across the right side; 10 red shots to win.",
-              img: "assets/bond-henchman-grant.png",
+              img: "assets/bond-photo-grant.jpg",
             },
             {
               name: "Oddjob",
