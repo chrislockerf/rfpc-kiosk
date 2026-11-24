@@ -1077,13 +1077,13 @@ window.RFPC_CONTENT = {
               name: "Auric Goldfinger",
               target: "Goldfinger",
               detail: "The Incredible Laser Ray — shoot the Goldfinger target to relight shots; 7 total shots lights the DB5 eject to escape.",
-              img: "assets/bond-villain-goldfinger.png",
+              img: "assets/bond-photo-goldfinger.jpg",
             },
             {
               name: "Emilio Largo",
               target: "Thunderball",
               detail: "Disco Volante Demolition — shoot the left eject, side ramp, or right ramp; 10 shots to win.",
-              img: "assets/bond-villain-largo.png",
+              img: "assets/bond-photo-largo.jpg",
             },
             {
               name: "Blofeld",
