@@ -1065,13 +1065,13 @@ window.RFPC_CONTENT = {
               name: "Dr. No",
               target: "Dr. No",
               detail: "Trouble in Jamaica — build value at the bumpers or right orbit, then cash out at the Dragon Tank. 10 successful shots to win.",
-              img: "assets/bond-villain-drno.png",
+              img: "assets/bond-photo-drno.jpg",
             },
             {
               name: "Rosa Klebb",
               target: "From Russia With Love",
               detail: "SPECTRE Island — clear all nine major shots, then finish with the left eject and DB5 eject.",
-              img: "assets/bond-villain-klebb.png",
+              img: "assets/bond-photo-klebb.jpg",
             },
             {
               name: "Auric Goldfinger",
