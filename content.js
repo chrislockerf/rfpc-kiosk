@@ -420,12 +420,13 @@ window.RFPC_CONTENT = {
               name: "Luke’s Gift",
               target: "Sarlacc Pit",
               detail: "Guide the droids into Jabba’s palace. Each shot resets a 30-second timer, and the final shot is always the Sarlacc Pit.",
+              img: "assets/sw-jabba.jpg",
             },
             {
               name: "Jabba’s Palace",
               target: "Drop Target",
               detail: "Make lit shots to relight Salacious Crumb for bigger awards. Three drop target hits light the Pit for 5×.",
-              img: "assets/sw-jabba.jpg",
+              img: "assets/sw-crumb.jpg",
             },
             {
               name: "Rancor Battle",
