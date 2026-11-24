@@ -46,6 +46,110 @@ window.RFPC_CONTENT = {
   },
 
   /* ==========================================================================
+     WELCOME — plays first, before Star Wars (AbleSign: ?start=welcome).
+     Synced from the "RFPC Kiosk Content" doc. Edit there, then sync.
+     ========================================================================== */
+  welcome: {
+    "pages": [
+      {
+        "pageTitle": "Welcome",
+        "eyebrow": "River Forest Pinball Club",
+        "proTip": "Grab a drink, pick a table, and remember: the tilt bob sees everything.",
+        "key": "splash",
+        "title": "Welcome To The Lockedown",
+        "taglines": [
+          "Eight tables. One basement. Zero mercy.",
+          "Your outlanes called. They miss you.",
+          "Leave your ego at the door. The machines will take it anyway.",
+          "Free play. No excuses."
+        ]
+      },
+      {
+        "pageTitle": "House Rules",
+        "eyebrow": "Read Before You Flip",
+        "proTip": "Questions, stuck balls or rule disputes — find Chris.",
+        "key": "rules",
+        "intro": "Play hard, play nice. Six rules keep the basement running.",
+        "bullets": [
+          "Drinks never touch the glass. Ever.",
+          "Nudge, don't shove. Tilts are your problem.",
+          "Stuck ball? Grab Chris — don't lift the glass or open the coin door.",
+          "One game at a time. Let others rotate in.",
+          "Kids welcome, with a grown-up close by.",
+          "Trash talk encouraged. Sore losing is not."
+        ]
+      },
+      {
+        "pageTitle": "The Lineup",
+        "eyebrow": "Tonight On The Floor",
+        "proTip": "Every table gets its own deep dive next — rules, modes and strategy.",
+        "key": "lineup",
+        "rows": [
+          {
+            "game": "star-wars",
+            "name": "Star Wars",
+            "line": "Eight heroes, one Empire. Pick a mission and go."
+          },
+          {
+            "game": "godzilla",
+            "name": "Godzilla",
+            "line": "Smash cities, fight monsters, save Tokyo (or don't)."
+          },
+          {
+            "game": "james-bond",
+            "name": "James Bond 007",
+            "line": "Six films, one tuxedo. Shaken, not drained."
+          },
+          {
+            "game": "deadpool",
+            "name": "Deadpool",
+            "line": "Ninjas, villains and chimichangas. Fourth wall optional."
+          },
+          {
+            "game": "foo-fighters",
+            "name": "Foo Fighters",
+            "line": "Rock the tour, blast the aliens, save the world."
+          },
+          {
+            "game": "jurassic-park",
+            "name": "Jurassic Park",
+            "line": "Feed the T-Rex. Try not to become lunch."
+          },
+          {
+            "game": "john-wick",
+            "name": "John Wick",
+            "line": "Every shot has consequences. Pick your contract."
+          },
+          {
+            "game": "monster-bash",
+            "name": "Monster Bash",
+            "line": "Get the band together. The monsters do the rest."
+          },
+          {
+            "game": "darts",
+            "name": "Spyder Darts",
+            "line": "Steady hands, soft tips. Loser buys the next round."
+          }
+        ]
+      },
+      {
+        "pageTitle": "Get On The Board",
+        "eyebrow": "Stern Insider",
+        "proTip": "Only the Stern tables connect — Monster Bash keeps its own scores.",
+        "key": "board",
+        "qrUrl": "https://insider.sternpinball.com/",
+        "qrCaption": "Scan to join Stern Insider — it's free",
+        "bullets": [
+          "Scan the code and create a free Stern Insider account.",
+          "Start a game, then scan the QR code on the machine's screen with the Insider app.",
+          "Every game logs to your profile and the house leaderboards.",
+          "Beat a high score and your name shows up on this TV."
+        ]
+      }
+    ]
+  },
+
+  /* ==========================================================================
      THE EIGHT MACHINES — in floor order.
      ========================================================================== */
   games: [
@@ -149,6 +253,7 @@ window.RFPC_CONTENT = {
           wizard: {
             kicker: "The End Game",
             title: "Wizard Modes",
+            layout: "columns",
             name: "Become a Jedi Master",
             body: "Five mini-wizards stand in the way — Not a Jedi Yet, Ewok Encounter, Sarlacc Escape, Never Tell Me The Odds and Dark Side Multiball — before the final showdown, Jedi Master.",
             chip: "◆ Five mini-wizards first",

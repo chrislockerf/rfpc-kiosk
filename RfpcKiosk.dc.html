@@ -108,7 +108,7 @@ class Component extends DCLogic {
     const params = new URLSearchParams(window.location.search);
     const start = params.get("start");
     if (start && this._sceneIds) {
-      const idx = this._sceneIds.indexOf("floor-" + start);
+      const idx = start === "welcome" ? this._sceneIds.findIndex((x) => x.indexOf("welcome-") === 0) : this._sceneIds.indexOf("floor-" + start);
       if (idx >= 0) window.localStorage.setItem(this.mainKey, String(idx));
     }
   }
@@ -403,6 +403,39 @@ class Component extends DCLogic {
       );
     };
 
+    // ---------- WELCOME block (plays first; content.js → welcome.pages) ----------
+    const WELCOME = (C.welcome && C.welcome.pages) || [];
+    const dartIcon = () => h("svg", { viewBox: "0 0 40 40", style: { width: "1.1em", height: "1.1em" } },
+      [18, 13, 8, 3].map((r, i) => h("circle", { key: i, cx: 20, cy: 20, r: r, fill: i % 2 ? "var(--surface-panel, #221d1a)" : "var(--accent)", stroke: "var(--accent-bright)", strokeWidth: 1.2 })));
+    const welcomeSplash = (page) => () => {
+      const tl = page.taglines || [];
+      const line = tl.length ? tl[Math.floor(Date.now() / 3600000) % tl.length] : "";
+      return h("div", { style: Object.assign({}, root, { alignItems: "center", justifyContent: "center", gap: "var(--sp-6)", textAlign: "center" }) },
+        h("img", { key: "logo", src: "assets/rfpc-mark-cream.png", alt: "RFPC", style: { height: "44%", maxHeight: 420, objectFit: "contain", transform: "scale(1.35)", filter: "drop-shadow(0 20px 48px rgba(0,0,0,0.6))" } }),
+        h("div", { key: "t", style: { fontFamily: "var(--font-marquee)", fontWeight: "var(--w-bold)", fontSize: "96px", lineHeight: 0.95, textTransform: "uppercase", color: "var(--text-strong)", textWrap: "balance" } }, page.title || "Welcome"),
+        h("div", { key: "tick", "aria-hidden": "true", style: { width: 160, height: 4, background: "var(--accent)", boxShadow: "var(--glow-accent-sm)" } }),
+        line ? h("p", { key: "l", style: { margin: 0, fontSize: "46px", lineHeight: 1.2, color: "var(--text-body)", fontWeight: 500, textWrap: "balance" } }, line) : null);
+    };
+    const welcomeLineup = (page) => () => h("div", { style: root },
+      h("div", { style: { flex: 1, minHeight: 0, display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridAutoRows: "1fr", gap: "var(--sp-5)" } },
+        (page.rows || []).map((r, i) => h("div", { key: i, style: { display: "flex", alignItems: "center", gap: "var(--sp-5)", padding: "var(--sp-4) var(--sp-5)", borderRadius: 12,
+            border: "1px solid var(--border-panel)", borderLeft: "4px solid var(--accent)", background: "color-mix(in srgb, var(--surface-panel) 70%, transparent)", minHeight: 0 } },
+          h("div", { key: "ic", style: { fontSize: Math.min(64, 130 / parseFloat((LOGOS[r.game] && LOGOS[r.game].w) || "1.14")) + "px", lineHeight: 1, flex: "none", width: 120, display: "flex", justifyContent: "center" } }, LOGOS[r.game] ? logoNode(r.game) : dartIcon()),
+          h("div", { key: "tx", style: { display: "flex", flexDirection: "column", gap: 6, minWidth: 0 } },
+            h("div", { key: "n", style: { fontFamily: "var(--font-marquee)", fontWeight: "var(--w-bold)", fontSize: "32px", lineHeight: 1, textTransform: "uppercase", color: "var(--text-strong)" } }, r.name),
+            h("div", { key: "d", style: { fontSize: "23px", lineHeight: 1.25, color: "var(--text-body)" } }, r.line))))));
+    const welcomeBoard = (page) => () => h("div", { style: root },
+      h("div", { style: { flex: 1, minHeight: 0, display: "grid", gridTemplateColumns: "auto 1fr", gap: "var(--sp-8)", alignItems: "center" } },
+        h("div", { key: "qr", style: { display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--sp-4)" } },
+          h("img", { key: "img", src: "assets/qr-insider.svg", alt: "Stern Insider QR code", style: { width: 400, height: 400, borderRadius: 18, boxShadow: "var(--shadow-panel), 0 0 0 4px color-mix(in srgb, var(--accent) 60%, transparent)" } }),
+          h("div", { key: "cap", className: "rfpc-eyebrow", style: { color: "var(--accent-bright)", fontSize: "20px", textAlign: "center", maxWidth: 420 } }, page.qrCaption || "")),
+        h("div", { key: "steps", style: { display: "flex", flexDirection: "column", gap: "var(--sp-6)" } },
+          (page.bullets || []).map((b, i) => h("div", { key: i, style: { display: "flex", alignItems: "center", gap: "var(--sp-5)" } },
+            h("div", { key: "n", style: { flex: "none", width: 64, height: 64, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-marquee)", fontWeight: "var(--w-bold)", fontSize: "34px",
+                color: "var(--text-strong)", background: "var(--accent)", boxShadow: "var(--glow-accent-sm)" } }, String(i + 1)),
+            h("p", { key: "t", style: { margin: 0, fontSize: "36px", lineHeight: 1.22, color: "var(--text-strong)", textWrap: "balance" } }, b))))));
+    const welcomeRender = (page) => page.key === "splash" ? welcomeSplash(page) : page.key === "lineup" ? welcomeLineup(page) : page.key === "board" ? welcomeBoard(page) : overviewPageRender(null, page);
+
     // ---------- MACHINE: six-box spotlight (KioskShow) ----------
     const spotlightRender = (m, page) => () => {
       const KioskShow = DS.KioskShow;
@@ -612,6 +645,11 @@ class Component extends DCLogic {
       return Object.assign(head, { holdMs: spotHold((page.boxes || []).length || 1), render: sectionPageRender(m, page), navKind: "Section" });
     };
 
+    WELCOME.forEach((page, i) => {
+      scenes.push({ id: "welcome-" + (page.key || i), kind: "general", eyebrow: L_FLOOR.venue || "The Lockedown", title: page.pageTitle || "Welcome",
+        meta: [page.eyebrow || ""], gameName: L_FLOOR.venue || "The Lockedown", proTip: page.proTip || "", holdMs: holdMs, render: welcomeRender(page), navKind: "Welcome", navSub: page.pageTitle || "" });
+    });
+
     MACHINES.forEach((m, i) => {
       scenes.push({ id: "floor-" + m.game, kind: "overview", game: "floor", eyebrow: L_FLOOR.eyebrow || "The Lockedown", title: L_FLOOR.title || "On The Floor",
         meta: [(L_FLOOR.nowUpPrefix || "Now Up \u00B7 ") + m.title], gameName: L_FLOOR.venue || "The Lockedown",
@@ -635,6 +673,7 @@ class Component extends DCLogic {
         if (s.navKind) return { kind: s.navKind, label: s.gameName, sub: s.navSub || "" };
         return { kind: "Intro", label: s.gameName, sub: "Machine & Credits" };
       }
+      if (s.navKind === "Welcome") return { kind: "Welcome", label: "Welcome", sub: s.navSub || "" };
       return { kind: "Break", label: s.title, sub: (s.meta && s.meta[0]) || "" };
     };
     const pad = (x) => String(x).padStart(2, "0");
