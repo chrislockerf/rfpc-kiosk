@@ -383,6 +383,7 @@ window.RFPC_CONTENT = {
               name: "Lightspeed Escape",
               target: "Center Ramp",
               detail: "Build the jackpot, then make the timed center ramp to start Lightspeed Multiball. Drain or run out of time and — like Alderaan — it’s gone.",
+              img: "assets/sw-falcon.jpg",
             },
             {
               name: "That’s No Moon",
