@@ -463,6 +463,7 @@ window.RFPC_CONTENT = {
               name: "Finish At Vader",
               target: "Vader Scoop",
               detail: "Every Vader mode ends with a shot to the Vader scoop, and each one you finish adds 500k to the next mode’s shot value.",
+              img: "assets/sw-vader.jpg",
             },
             {
               name: "Dark Side Scoring",
@@ -541,6 +542,7 @@ window.RFPC_CONTENT = {
               name: "Stormtrooper Hurry-Up",
               target: "Stormtrooper Target",
               detail: "Two Stormtroopers start a 10M hurry-up at the far-right target. Each one you finish adds +1× to bonus.",
+              img: "assets/sw-stormtrooper.jpg",
             },
             {
               name: "Dark Side Mystery",
@@ -551,6 +553,7 @@ window.RFPC_CONTENT = {
               name: "JEDI Ball Save",
               target: "Spinners",
               detail: "Rip the spinners to spell JEDI. On the Premium, the action button fires the magnet under the flippers to toss a draining ball back.",
+              img: "assets/sw-yoda.jpg",
             },
           ],
         },
@@ -569,6 +572,7 @@ window.RFPC_CONTENT = {
               objective: "Spell AT-AT, then take the walker down at the Luke shot.",
               jackpots: "Score a jackpot anywhere, then the Droids target for a letter jackpot worth everything before it. Spell AT-AT and the Luke VUK pays the super.",
               tip: "Stack it with Lightspeed — the only two multiballs that run together.",
+              img: "assets/sw-atat.jpg",
             },
             {
               name: "Death Star",
@@ -577,6 +581,7 @@ window.RFPC_CONTENT = {
               objective: "Score fifteen jackpots, then open the Death Star for a 20M super.",
               jackpots: "Every shot is lit; a shot goes dark until you hit a different one. Jackpots during the super phase raise it to 2×, then 3×.",
               tip: "Super jackpot progress carries over between Death Star attempts.",
+              img: "assets/sw-deathstar.jpg",
             },
             {
               name: "Death Star II",
