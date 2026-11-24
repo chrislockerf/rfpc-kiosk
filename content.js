@@ -2539,6 +2539,14 @@ window.RFPC_CONTENT = {
   /* ==========================================================================
      SHARED BREATHER CONTENT — plays between machines
      ========================================================================== */
+  // Stern Insider per-machine leaderboards, shown live (embedded) right
+  // after each machine's "Get To Know The Line-Up" page. Add a machine by
+  // adding its sternlb.com short link here; remove the line to drop it.
+  leaderboardSec: 20,
+  leaderboards: {
+    "star-wars": "https://sternlb.com/tr7nuii",
+  },
+
   combos: [
     {
       lead: "Between machines — a habit worth keeping, a word worth knowing, and something somebody actually yelled.",
