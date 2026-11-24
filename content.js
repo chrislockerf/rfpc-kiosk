@@ -423,6 +423,7 @@ window.RFPC_CONTENT = {
               name: "Jabba’s Palace",
               target: "Drop Target",
               detail: "Make lit shots to relight Salacious Crumb for bigger awards. Three drop target hits light the Pit for 5×.",
+              img: "assets/sw-jabba.jpg",
             },
             {
               name: "Rancor Battle",
