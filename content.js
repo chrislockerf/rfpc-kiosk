@@ -109,6 +109,7 @@ window.RFPC_CONTENT = {
           keyMultiballs: {
             kicker: "Balls Everywhere",
             title: "Key Multiballs",
+            layout: "columns",
             lead: "Jump to Hyperspace in the Falcon, take down the AT-ATs, then both Death Stars.",
             rows: [
               { label: "Battle of Hoth", target: "Luke VUK", desc: "The Droids target lights locks; spell AT-AT for the super." },
@@ -120,7 +121,7 @@ window.RFPC_CONTENT = {
           skills: {
             kicker: "At The Plunge",
             title: "Skill Shots",
-            layout: "table",
+            layout: "columns",
             lead: "Plunge and hit any flashing shot. Make it within three switches for a 2× Super Skill Shot.",
             rows: [
               { label: "Right Orbit", target: "Relight", desc: "Relights every skill shot to collect again." },
