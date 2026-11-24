@@ -167,20 +167,31 @@ class Component extends DCLogic {
           const o = outer.current, n = inner.current;
           if (!o || !n) return;
           let raf = 0;
+          // Find the largest scale (0.4–1.4) at which the content, laid out at
+          // width 100%/scale, still fits the box height once scaled. Measured
+          // synchronously by bisection, so the box settles in one step instead
+          // of flickering between sizes.
           const measure = function () {
             const avail = o.clientHeight;
-            const natural = n.offsetHeight; // unaffected by CSS transform
-            const s = (avail > 0 && natural > avail + 1) ? Math.max(0.4, avail / natural) : 1;
-            if (Math.abs(s - scaleRef.current) > 0.004) { scaleRef.current = s; setScale(s); }
+            if (!(avail > 0)) return;
+            const prevW = n.style.width, prevMin = n.style.minHeight;
+            n.style.minHeight = "0px";
+            const fits = function (k) { n.style.width = (100 / k) + "%"; return n.offsetHeight * k <= avail + 1; };
+            let lo = 0.4, hi = 1.4, best = 0.4;
+            if (fits(hi)) best = hi;
+            else { for (let it = 0; it < 9; it++) { const mid = (lo + hi) / 2; if (fits(mid)) { best = mid; lo = mid; } else hi = mid; } }
+            n.style.width = prevW; n.style.minHeight = prevMin;
+            if (Math.abs(best - scaleRef.current) > 0.01) { scaleRef.current = best; setScale(best); }
           };
           const schedule = function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(measure); };
           schedule();
           const ro = new ResizeObserver(schedule);
-          ro.observe(o); ro.observe(n);
+          ro.observe(o);
+          const imgs = n.querySelectorAll("img"); imgs.forEach(function (im) { if (!im.complete) im.addEventListener("load", schedule, { once: true }); });
           return function () { cancelAnimationFrame(raf); ro.disconnect(); };
         });
         return h("div", { ref: outer, style: { position: "relative", height: "100%", width: "100%", overflow: "hidden" } },
-          h("div", { ref: inner, style: { minHeight: "100%", width: (100 / scale) + "%", display: "flex", flexDirection: "column", transformOrigin: "0 0", transform: "scale(" + scale + ")" } }, props.children));
+          h("div", { ref: inner, style: { minHeight: (100 / scale) + "%", width: (100 / scale) + "%", display: "flex", flexDirection: "column", transformOrigin: "0 0", transform: "scale(" + scale + ")" } }, props.children));
       };
     }
     const AutoFit = this._AutoFit;
@@ -256,7 +267,7 @@ class Component extends DCLogic {
       footLine(footer)));
     const wizardDetail = (w) => fit(h(React.Fragment, null,
       h("p", { key: "b", style: { margin: 0, fontSize: "var(--t-lead)", lineHeight: "var(--lh-body)", color: "var(--text-body)", maxWidth: (w.rows && w.rows.length) ? "none" : "52ch" } }, w.body),
-      (w.rows && w.rows.length) ? h("div", { key: "wr", style: { marginTop: "var(--sp-5)" } }, simpleTable(w.rows, ["Mode", "How To Light", "How To Play"])) : null,
+      (w.rows && w.rows.length) ? h("div", { key: "wr", style: { marginTop: "var(--sp-5)", display: "grid", gridTemplateColumns: "1fr 1fr", columnGap: "var(--sp-6)", rowGap: 0, alignContent: "start" } }, w.rows.map((r, i) => ShotRow ? h(ShotRow, { key: i, label: r.label, target: r.target }, r.desc) : null)) : null,
       w.note ? h("p", { key: "n", style: { margin: "var(--sp-4) 0 0", fontSize: "20px", color: "var(--text-muted)" } }, w.note) : null,
       h("div", { key: "sp", style: { flex: 1 } }),
       Chip ? h(Chip, { key: "c", tone: "brass", style: { alignSelf: "flex-start" } }, w.chip) : null,
