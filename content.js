@@ -347,11 +347,13 @@ window.RFPC_CONTENT = {
               name: "Leia",
               target: "Right Ramp 2×",
               detail: "The Luke VUK and center ramp build value; the right ramp scores 2×. Missions: Jailbreak, Trash Compactor, Rescuing Han. Bonus: Speeder Bikes — hurry-ups that roll into a 2-ball multiball.",
+              img: "assets/sw-leia.jpg",
             },
             {
               name: "Obi-Wan",
               target: "VUK & Right Orbit",
               detail: "The Luke VUK and right orbit score 2× whenever they’re lit blue. Missions: Ben Meets Luke, The Message, Duel with Darth Vader. Bonus: Revealing the Truth — a marathon 28-shot mode.",
+              img: "assets/sw-obiwan.jpg",
             },
           ],
         },
