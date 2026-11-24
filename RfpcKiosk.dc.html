@@ -403,13 +403,6 @@ class Component extends DCLogic {
       );
     };
 
-    // ---------- MACHINE: live Stern Insider leaderboard (embedded) ----------
-    const leaderboardRender = (m, url) => () => h("div", { style: root },
-      h("div", { style: { position: "relative", flex: 1, minHeight: 0, borderRadius: "var(--radius-lg, 14px)", overflow: "hidden",
-          border: "1px solid var(--border-panel)", borderBottom: "4px solid var(--accent)", boxShadow: "var(--glow-accent-sm)", background: "#000" } },
-        h("div", { key: "fb", style: { position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-body)", fontSize: "30px", color: "var(--text-muted)" } }, "Loading the Stern Insider leaderboard\u2026"),
-        h("iframe", { key: "lb", src: url, title: m.title + " leaderboard", allow: "fullscreen", style: { position: "absolute", inset: 0, width: "100%", height: "100%", border: 0, background: "transparent" } })));
-
     // ---------- MACHINE: six-box spotlight (KioskShow) ----------
     const spotlightRender = (m, page) => () => {
       const KioskShow = DS.KioskShow;
@@ -623,14 +616,7 @@ class Component extends DCLogic {
       scenes.push({ id: "floor-" + m.game, kind: "overview", game: "floor", eyebrow: L_FLOOR.eyebrow || "The Lockedown", title: L_FLOOR.title || "On The Floor",
         meta: [(L_FLOOR.nowUpPrefix || "Now Up \u00B7 ") + m.title], gameName: L_FLOOR.venue || "The Lockedown",
         proTip: m.floorTip || "", holdMs: overviewMs, render: overviewFn(m.game) });
-      const lbUrl = (C.leaderboards || {})[m.game];
-      (m.pages || []).forEach((page) => {
-        const sc = makeScene(m, page); if (sc) scenes.push(sc);
-        if (lbUrl && page.key === "intro")
-          scenes.push({ kind: "machine", game: m.game, gameName: m.title, id: m.game + "-leaderboard", eyebrow: "Stern Insider \u00B7 Live", title: badgeTitle(m),
-            meta: ["Leaderboard"], proTip: m.proTip, navSub: "Leaderboard", navKind: "Leaderboard",
-            holdMs: Math.round((C.leaderboardSec || 20) * 1000), render: leaderboardRender(m, lbUrl) });
-      });
+      (m.pages || []).forEach((page) => { const sc = makeScene(m, page); if (sc) scenes.push(sc); });
       const g = breathers[i];
       scenes.push({ id: m.game + "-gen-" + i, kind: "general", eyebrow: g.eyebrow, title: g.title, meta: g.meta,
         gameName: L_FLOOR.venue || "The Lockedown", proTip: g.proTip, holdMs: breatherMs, render: g.render });
