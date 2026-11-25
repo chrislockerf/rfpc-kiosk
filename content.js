@@ -1847,6 +1847,7 @@ window.RFPC_CONTENT = {
               name: "How To Mod",
               target: "Drops → Paddle",
               detail: "Hit a drop to lock in the blinking mod. Clear all three, then pound the paddle.",
+              img: "assets/foo-mod-van.jpg",
             },
             { name: "Engine", target: "More Time", detail: "Adds seconds to the next van mode." },
             { name: "Speakers", target: "More Points", detail: "Adds value to every shot in the next van mode." },
