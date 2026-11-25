@@ -2468,6 +2468,7 @@ window.RFPC_CONTENT = {
               name: "Zero",
               target: "Combos",
               detail: "Chain light-blue shots, then collect at the car, captive ball, or the left eject for 2×. Four combos earn Be Seeing You.",
+              img: "assets/jw-zero.jpg",
             },
           ],
         },
