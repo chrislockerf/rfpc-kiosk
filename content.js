@@ -163,7 +163,7 @@ window.RFPC_CONTENT = {
       game: "star-wars",
       title: "Star Wars",
       maker: "Stern · 2025",
-      proTip: "Play an each of the three Rebel Missions for each iconic character — each one boosts that character’s jackpots in every multiball.",
+      proTip: "Play each of the three Rebel Missions for each iconic character — each one boosts that character’s jackpots in every multiball.",
       pages: [
         {
           pageTitle: "Get To Know The Line-Up",
@@ -243,7 +243,7 @@ window.RFPC_CONTENT = {
               {
                 label: "Lightspeed",
                 target: "Center Ramp",
-                desc: "The first Falcon Feature — don’t miss its timed start.  Build the jackpot value by hitting lit shots BEFORE shooting the center ramp to begin muliball.",
+                desc: "The first Falcon Feature — don’t miss its timed start.  Build the jackpot value by hitting lit shots BEFORE shooting the center ramp to begin multiball.",
               },
             ],
           },
