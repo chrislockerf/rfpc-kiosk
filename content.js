@@ -28,7 +28,7 @@
 
      labels{} → the handful of shared labels used by the floor screen and the
                 between-game breather pages.
-     combos / tips / glossary / quip / general → the shared breather content.
+     breathers (per machine) / breatherPool → the between-machine pages.
    ============================================================================ */
 
 window.RFPC_CONTENT = {
@@ -248,10 +248,10 @@ window.RFPC_CONTENT = {
             ],
           },
           skills: {
-            kicker: "At The Plunge",
+            kicker: "At The Plunge:",
             title: "Skill Shots",
             layout: "columns3",
-            lead: "Plunge and hit any flashing shot. Make it within three switches for a 2× Super Skill Shot.",
+            lead: "Plunge and hit any flashing shot. Make it within three switches for a 2× Super Skill Shot.  Expires after 6 switch hits.",
             rows: [
               { label: "Right Orbit", target: "Relight", desc: "Relights every skill shot to collect again." },
               { label: "Either Bumper", target: "Ion Cannons", desc: "Three hits toward the next shot multiplier." },
@@ -658,6 +658,14 @@ window.RFPC_CONTENT = {
           line: "The Empire’s on the ropes. Go finish it.",
         },
       ],
+      breathers: [
+        {
+          type: "House Tip",
+          title: "Dead Bounce",
+          text: "Hold both flippers DOWN and let the ball bounce off a still flipper back into play.",
+          footer: "Hold both flippers DOWN and let the ball bounce off a still flipper back into play.",
+        },
+      ],
     },
 
     /* ======================================================================
@@ -923,6 +931,14 @@ window.RFPC_CONTENT = {
           proTip: "Reach Planet X, then take on every monster for King of the Monsters.",
           key: "hold",
           line: "The city’s yours to save. Go be King of the Monsters.",
+        },
+      ],
+      breathers: [
+        {
+          type: "Lingo",
+          title: "SDTM",
+          text: "Straight Down The Middle. Drains between the flippers, unsaveable. Sad.",
+          footer: "Straight Down The Middle. Drains between the flippers, unsaveable. Sad.",
         },
       ],
     },
@@ -1314,6 +1330,14 @@ window.RFPC_CONTENT = {
           line: "The most famous secret agent ever. Six iconic films. Push Start.",
         },
       ],
+      breathers: [
+        {
+          type: "Overheard",
+          title: "",
+          text: "“That ramp feeds it straight down the middle. That’s bullshit.”",
+          footer: "You’re not mad at the machine. You’re mad at yourself.",
+        },
+      ],
     },
 
     /* ======================================================================
@@ -1581,6 +1605,14 @@ window.RFPC_CONTENT = {
           proTip: "Beat M. Rex, the clones and the Mechsuit, then face Mr. Sinister.",
           key: "hold",
           line: "Maximum effort. Go break the fourth wall.",
+        },
+      ],
+      breathers: [
+        {
+          type: "House Tip",
+          title: "Cradle",
+          text: "Trap the ball against a raised flipper. Reset, breathe, aim your next shot — then release.",
+          footer: "Trap the ball against a raised flipper. Reset, breathe, aim your next shot — then release.",
         },
       ],
     },
@@ -1871,6 +1903,14 @@ window.RFPC_CONTENT = {
           line: "Gas up the van. The tour’s yours.",
         },
       ],
+      breathers: [
+        {
+          type: "Lingo",
+          title: "Drain",
+          text: "Losing the ball down an outlane or the center. The end of your turn.",
+          footer: "Losing the ball down an outlane or the center. The end of your turn.",
+        },
+      ],
     },
 
     /* ======================================================================
@@ -2141,6 +2181,14 @@ window.RFPC_CONTENT = {
           proTip: "Win all three mini-wizards to unlock Escape Nublar.",
           key: "hold",
           line: "Life finds a way. Go survive the island.",
+        },
+      ],
+      breathers: [
+        {
+          type: "Overheard",
+          title: "",
+          text: "“One more ball. I mean it this time. This is the last one.”",
+          footer: "You’re not mad at the machine. You’re mad at yourself.",
         },
       ],
     },
@@ -2485,6 +2533,14 @@ window.RFPC_CONTENT = {
           line: "You’re back. Go earn your place at the High Table.",
         },
       ],
+      breathers: [
+        {
+          type: "House Tip",
+          title: "Nudge, Don’t Tilt",
+          text: "Bump the machine to nudge the ball off a drain. Three shoves in a row and TILT kills your ball.",
+          footer: "Bump the machine to nudge the ball off a drain. Three shoves in a row and TILT kills your ball.",
+        },
+      ],
     },
 
     /* ======================================================================
@@ -2694,102 +2750,78 @@ window.RFPC_CONTENT = {
           line: "The band’s assembled. Go start the encore.",
         },
       ],
+      breathers: [
+        {
+          type: "Lingo",
+          title: "Cradle",
+          text: "Holding the ball still against a raised flipper to reset and aim.",
+          footer: "Holding the ball still against a raised flipper to reset and aim.",
+        },
+      ],
     },
 
   ],
 
   /* ==========================================================================
-     SHARED BREATHER CONTENT — plays between machines
+     BREATHER POOL — spare House Tips / Lingo / Overheard pages that are not on
+     the floor yet. Each machine's own breathers live in its `breathers` list
+     (they play after that machine's last page). Synced from the doc's
+     "Spare Breathers" section. Edit there, then sync.
      ========================================================================== */
-  combos: [
+  breatherPool: [
     {
-      lead: "Between machines — a habit worth keeping, a word worth knowing, and something somebody actually yelled.",
-      tipTitle: "Dead Bounce",
-      tip: "Hold both flippers DOWN and let the ball bounce off a still flipper back into play. Flipping at the wrong instant is how you drain.",
-      lingoTitle: "SDTM",
-      lingo: "Straight down the middle. Drains between the flippers, unsaveable. Nothing you can do. Sad.",
-      quip: "“That ramp feeds it straight down the middle. That’s bullshit.”",
+      "type": "House Tip",
+      "title": "Drop Catch",
+      "text": "The instant the ball lands on a raised flipper, drop it to kill the bounce — then re-cradle.",
+      "footer": "The instant the ball lands on a raised flipper, drop it to kill the bounce — then re-cradle."
     },
     {
-      lead: "A breather. One thing to practice, one thing to say, one thing everybody says.",
-      tipTitle: "Cradle",
-      tip: "Trap the ball against a raised flipper. Reset, breathe, aim your next shot — then release. The whole game slows down.",
-      lingoTitle: "Brick",
-      lingo: "A shot that clanks off the target instead of going in. Everybody bricks. Aim, don’t panic.",
-      quip: "“One more ball. I mean it this time. This is the last one.”",
+      "type": "House Tip",
+      "title": "Post Pass",
+      "text": "Tap the flipper to slide a cradled ball across to the other flipper, so you get the shot you wanted.",
+      "footer": "Tap the flipper to slide a cradled ball across to the other flipper, so you get the shot you wanted."
     },
     {
-      lead: "Stretch your flipping hand. A save to learn, a term to drop, a truth to accept.",
-      tipTitle: "Nudge, Don’t Tilt",
-      tip: "Bump the machine to nudge the ball off a drain. Shove it three times in a row and the game bites back: TILT kills your ball.",
-      lingoTitle: "Slap Save",
-      lingo: "A two-flipper panic swat at a draining ball. Undignified. Sometimes it even works.",
-      quip: "“I had it. I totally had it. Did you see that?”",
-    },
-  ],
-
-  tips: [
-    { name: "Dead Bounce", body: "Hold both flippers DOWN and let the ball bounce off a still flipper back into play." },
-    { name: "Cradle", body: "Trap the ball against a raised flipper. Reset, breathe, aim your next shot — then release." },
-    { name: "Nudge, Don’t Tilt", body: "Bump the machine to nudge the ball off a drain. Three shoves in a row and TILT kills your ball." },
-    { name: "Drop Catch", body: "The instant the ball lands on a raised flipper, drop it to kill the bounce — then re-cradle." },
-    { name: "Post Pass", body: "Tap the flipper to slide a cradled ball across to the other flipper, so you get the shot you wanted." },
-  ],
-
-  glossary: [
-    { term: "SDTM", def: "Straight Down The Middle. Drains between the flippers, unsaveable. Sad." },
-    { term: "Drain", def: "Losing the ball down an outlane or the center. The end of your turn." },
-    { term: "Cradle", def: "Holding the ball still against a raised flipper to reset and aim." },
-    { term: "Dead Bounce", def: "Letting the ball bounce off a still flipper instead of risking a flip." },
-    { term: "Multiball", def: "Two or more balls in play at once. Chaos, and a lot of points." },
-    { term: "Wizard Mode", def: "The hidden end-game mode you unlock after finishing everything." },
-    { term: "Nudge / Tilt", def: "Bumping the machine to steer the ball — vs. over-bumping and getting punished." },
-    { term: "Slap Save", def: "A two-flipper panic swat at a draining ball. Sometimes it even works." },
-  ],
-
-  quip: {
-    intro: "I mean, come on. That’s not fair.",
-    setup: "The right ramp on Monster Bash feeds the ball straight down the middle.",
-    punch: "That’s bullshit.",
-    byline: "— every regular, eventually",
-  },
-
-  general: [
-    {
-      id: "tips",
-      eyebrow: "House Rules",
-      title: "House Tips",
-      meta: "Play Better Tonight",
-      proTip: "A still flipper is a save. A panicked flipper is a drain.",
+      "type": "Lingo",
+      "title": "Dead Bounce",
+      "text": "Letting the ball bounce off a still flipper instead of risking a flip.",
+      "footer": "Letting the ball bounce off a still flipper instead of risking a flip."
     },
     {
-      id: "lingo",
-      eyebrow: "Speak The Language",
-      title: "Pinball Lingo",
-      meta: "The Words On The Floor",
-      proTip: "If you can say SDTM out loud, you’ve officially lost a ball to it.",
+      "type": "Lingo",
+      "title": "Multiball",
+      "text": "Two or more balls in play at once. Chaos, and a lot of points.",
+      "footer": "Two or more balls in play at once. Chaos, and a lot of points."
     },
     {
-      id: "combo0",
-      eyebrow: "House Rules",
-      title: "Between Games",
-      meta: "Tips · Lingo · Quips",
-      proTip: "A still flipper is a save. A panicked flipper is a drain.",
+      "type": "Lingo",
+      "title": "Wizard Mode",
+      "text": "The hidden end-game mode you unlock after finishing everything.",
+      "footer": "The hidden end-game mode you unlock after finishing everything."
     },
     {
-      id: "combo1",
-      eyebrow: "House Rules",
-      title: "Between Games",
-      meta: "Tips · Lingo · Quips",
-      proTip: "Cradle first, aim second. The rushed shot drains.",
+      "type": "Lingo",
+      "title": "Nudge / Tilt",
+      "text": "Bumping the machine to steer the ball — vs. over-bumping and getting punished.",
+      "footer": "Bumping the machine to steer the ball — vs. over-bumping and getting punished."
     },
-    { id: "quip", eyebrow: "Real Talk", title: "Overheard", meta: "The Lockedown", proTip: "You’re not mad at the machine. You’re mad at yourself." },
     {
-      id: "combo2",
-      eyebrow: "House Rules",
-      title: "Between Games",
-      meta: "Tips · Lingo · Quips",
-      proTip: "The machine wants you to panic. Don’t give it the satisfaction.",
+      "type": "Lingo",
+      "title": "Slap Save",
+      "text": "A two-flipper panic swat at a draining ball. Sometimes it even works.",
+      "footer": "A two-flipper panic swat at a draining ball. Sometimes it even works."
     },
+    {
+      "type": "Overheard",
+      "title": "",
+      "text": "“I had it. I totally had it. Did you see that?”",
+      "footer": "You’re not mad at the machine. You’re mad at yourself."
+    },
+    {
+      "type": "Overheard",
+      "title": "",
+      "text": "The right ramp on Monster Bash feeds the ball straight down the middle. That’s bullshit.",
+      "footer": "You’re not mad at the machine. You’re mad at yourself."
+    }
   ],
 };

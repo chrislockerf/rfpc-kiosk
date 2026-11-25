@@ -577,13 +577,6 @@ class Component extends DCLogic {
     };
 
     // ---------- GENERAL: single-item breather pages (one tip / term / quip per page) ----------
-    const TIPS = C.tips || [];
-    const GLOSSARY = C.glossary || [];
-    const COMBOS = C.combos || [];
-    const Q = C.quip || {};
-    // pool of quotable lines: the "overheard" quips plus the closing punchline, each its own page
-    const QUOTES = COMBOS.map((v) => v.quip).concat(Q.punch ? [Q.setup ? (Q.setup + " " + Q.punch) : Q.punch] : []);
-
     const singleCenter = (kicker, big, body) => h("div", { style: root },
       h("div", { style: { flex: 1, minHeight: 0, display: "grid", placeItems: "center", textAlign: "center" } },
         h("div", { style: { maxWidth: 1300 } }, [
@@ -603,23 +596,14 @@ class Component extends DCLogic {
     );
 
     const L_TIP = LBL.houseTip || {}, L_LINGO = LBL.lingo || {}, L_QUIP = LBL.overheard || {};
-    const TIP_ITEMS = TIPS.map((t) => ({ eyebrow: L_TIP.eyebrow, title: L_TIP.title, meta: [L_TIP.pageTitle], proTip: t.body, render: () => singleCenter(L_TIP.kicker, t.name, t.body) }));
-    const LINGO_ITEMS = GLOSSARY.map((g) => ({ eyebrow: L_LINGO.eyebrow, title: L_LINGO.title, meta: [L_LINGO.pageTitle], proTip: g.def, render: () => singleCenter(L_LINGO.kicker, g.term, g.def) }));
-    const QUIP_ITEMS = QUOTES.map((q) => ({ eyebrow: L_QUIP.eyebrow, title: L_QUIP.title, meta: [L_QUIP.pageTitle], proTip: L_QUIP.proTip, render: () => singleQuote(q) }));
-
-    // one breather per machine, cycling tip \u2192 lingo \u2192 overheard so nothing
-    // repeats within a full pass around the floor
-    const POOLS = { tip: TIP_ITEMS, lingo: LINGO_ITEMS, quip: QUIP_ITEMS };
-    const CYCLE = ["tip", "lingo", "quip"];
-    const poolIdx = { tip: 0, lingo: 0, quip: 0 };
-    const breathers = MACHINES.map((_, i) => {
-      const kind = CYCLE[i % CYCLE.length];
-      const pool = POOLS[kind];
-      if (!pool.length) return QUIP_ITEMS[0] || TIP_ITEMS[0] || LINGO_ITEMS[0];
-      const item = pool[poolIdx[kind] % pool.length];
-      poolIdx[kind] += 1;
-      return item;
-    });
+    // Between-machine pages: each machine's own `breathers` list in content.js
+    // (House Tip / Lingo / Overheard), played after that machine's last page.
+    const breatherScene = (b) => {
+      const t = (b.type || "").toLowerCase();
+      if (t.indexOf("lingo") === 0) return { eyebrow: L_LINGO.eyebrow, title: L_LINGO.title, meta: [L_LINGO.pageTitle], proTip: b.footer || b.text, render: () => singleCenter(L_LINGO.kicker, b.title, b.text) };
+      if (t.indexOf("overheard") === 0 || t.indexOf("quote") === 0) return { eyebrow: L_QUIP.eyebrow, title: L_QUIP.title, meta: [L_QUIP.pageTitle], proTip: b.footer || L_QUIP.proTip, render: () => singleQuote(b.text) };
+      return { eyebrow: L_TIP.eyebrow, title: L_TIP.title, meta: [L_TIP.pageTitle], proTip: b.footer || b.text, render: () => singleCenter(L_TIP.kicker, b.title, b.text) };
+    };
 
     // =====================================================================
     // THE LOOP — per table: On The Floor anchor (next table lit) → intro
@@ -627,7 +611,7 @@ class Component extends DCLogic {
     // The floor screen repeats before each table so it's clear we've moved on.
     // =====================================================================
     const scenes = [];
-    if (!MACHINES.length || !breathers.length) {
+    if (!MACHINES.length) {
       return { app: h("div", { style: { position: "fixed", inset: 0, background: "var(--forest-900)" } }) };
     }
     // Page order is simply the order of each machine's pages[] in content.js.
@@ -658,9 +642,11 @@ class Component extends DCLogic {
         meta: [(L_FLOOR.nowUpPrefix || "Now Up \u00B7 ") + m.title], gameName: L_FLOOR.venue || "The Lockedown",
         proTip: m.floorTip || "", holdMs: overviewMs, render: overviewFn(m.game) });
       (m.pages || []).forEach((page) => { const sc = makeScene(m, page); if (sc) scenes.push(sc); });
-      const g = breathers[i];
-      scenes.push({ id: m.game + "-gen-" + i, kind: "general", eyebrow: g.eyebrow, title: g.title, meta: g.meta,
-        gameName: L_FLOOR.venue || "The Lockedown", proTip: g.proTip, holdMs: breatherMs, render: g.render });
+      (m.breathers || []).forEach((b, k) => {
+        const g = breatherScene(b);
+        scenes.push({ id: m.game + "-gen-" + k, kind: "general", eyebrow: g.eyebrow, title: g.title, meta: g.meta,
+          gameName: L_FLOOR.venue || "The Lockedown", proTip: g.proTip, holdMs: breatherMs, render: g.render });
+      });
     });
 
     // ---------- review layer: pause / step / table of contents ----------
