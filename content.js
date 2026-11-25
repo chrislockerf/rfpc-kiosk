@@ -2211,7 +2211,7 @@ window.RFPC_CONTENT = {
         {
           pageTitle: "Game Overview",
           eyebrow: "TL;DR: The Quick Read",
-          proTip: "Feed T-Rex is always the first T-Rex Event.",
+          proTip: "Feed T-Rex is the first T-Rex Event by default.",
           key: "gameoverview",
           intro: "Jurassic Park is the second Stern Pinball machine designed by Keith Elwin. Directly after the events of the film, Nedry’s computer virus has continued to plunge the park into chaos - meaning the dinosaurs are loose and the employees are in danger. The player has to rescue as many staff as they can and capture the dinosaurs, all while trying to survive the horrors of the abandoned park and eventually staging an escape.",
           bullets: [
@@ -2220,7 +2220,7 @@ window.RFPC_CONTENT = {
             "Every capture earns a perk for the rest of the game.",
             "Spell T-REX at the truck for T-Rex Events at the left ramp.",
             "Your first capture lights the Control Room for three timed modes.",
-            "Win the three mini-wizards to unlock Escape Nublar.",
+            "Play the three mini-wizards to unlock Escape Nublar.",
           ],
         },
         {
@@ -2233,11 +2233,15 @@ window.RFPC_CONTENT = {
             title: "Modes & Battles",
             lead: "Nedry’s virus loosed the dinosaurs. Rescue the staff, capture the dinosaurs, and stage your escape from the island.",
             rows: [
-              { label: "Enter Paddock", target: "Left Ramp", desc: "Spell M-A-P with white shots to light it." },
+              { label: "Enter Paddock", target: "Left Ramp", desc: "Spell M-A-P with white shots — one for the first paddock, three after." },
               { label: "Choose Path", target: "The Truck", desc: "Truck hits switch between the left and right paths." },
               { label: "Capture Dino", target: "Flashing Trap Shot", desc: "Rescue staff, set the trap, then hit the yellow/green shot." },
               { label: "Control Room", target: "Left Target", desc: "Pick one of three timed modes with the flippers." },
-              { label: "T-Rex Events", target: "Truck → Left Ramp", desc: "Spell T-REX at the truck, then the left ramp." },
+              {
+                label: "T-Rex Events",
+                target: "Truck → Left Ramp",
+                desc: "Spell T-REX at the truck, then the left ramp. Later events need a full truck turn per letter.",
+              },
               { label: "Pteranodon Attack", target: "Right Ramp", desc: "Four right ramp shots start a switch frenzy." },
             ],
           },
@@ -2247,7 +2251,7 @@ window.RFPC_CONTENT = {
             lead: "Four ways to lose control of the island.",
             rows: [
               { label: "Chaos Multiball", target: "Spell CHAOS", desc: "Letters in order, then the target between the bumpers." },
-              { label: "Raptor Tri-Ball", target: "Raptor Pen", desc: "Capture a raptor, then break the fence." },
+              { label: "Raptor Tri-Ball", target: "Raptor Pen", desc: "Complete the pen targets twice, then break the fence." },
               { label: "Feed T-Rex", target: "Left Ramp", desc: "A hurry-up that turns into a 2-ball multiball." },
               { label: "King of the Island", target: "Left Ramp", desc: "Capture the Spinosaurus to light it." },
             ],
@@ -2256,10 +2260,11 @@ window.RFPC_CONTENT = {
             kicker: "At The Plunge",
             title: "Skill Shots",
             layout: "table",
-            lead: "The skill shot is a ramp combo — chain it for multipliers.",
+            lead: "The skill shot is a ramp combo — chain it for multipliers. Each shot adds 3 seconds of ball save; all four light Escape.",
             rows: [
               { label: "Combo Skill", target: "Left Ramp", desc: "Full plunge, then the left ramp for 2M." },
               { label: "Super → Ultra", target: "Right → Side → Orbit", desc: "Each next shot pays 2×, 4×, then 6×." },
+              { label: "Secret Skills", target: "Soft Plunge", desc: "C lane 6M, O lane 8M, pops standup 10M — or 20M off the right flipper." },
             ],
           },
           button: {
@@ -2275,7 +2280,7 @@ window.RFPC_CONTENT = {
             kicker: "The End Game",
             title: "Wizard Mode",
             name: "Escape Nublar",
-            body: "Play the three mini-wizards — Visitor’s Center, Museum Mayhem and Secure Control Room — then the left ramp starts Escape Nublar. It ends the game.",
+            body: "Play the three mini-wizards — Visitor’s Center, Museum Mayhem and Secure Control Room — then the left ramp starts Escape Nublar. The game ends after it unless When Dinosaurs Ruled the Earth is lit.",
             chip: "◆ Three mini-wizards",
           },
           tableTips: {
@@ -2284,28 +2289,36 @@ window.RFPC_CONTENT = {
             proTip: "Clear a paddock without losing a staff member for a Perfect Paddock.",
             rows: [
               { name: "Perfect Paddock", body: "Rescue every staff member for a bigger bounty." },
-              { name: "Supply Drops", body: "Purple standups, then the big standup: 2× scoring." },
+              { name: "Supply Drops", body: "Flashing standups, then the big standup: 2× scoring." },
             ],
           },
         },
         {
           pageTitle: "Paddocks",
           eyebrow: "Spell M-A-P · Left Ramp",
-          proTip: "Shoot the truck to switch paths before you enter the next paddock.",
+          proTip: "Shoot the truck to switch paths before you enter the next paddock — it can skip a Super Predator.",
           key: "paddocks",
           kicker: "Pick A Path",
           boxes: [
-            { name: "Level 1", target: "Gallimimus · Brachiosaurus", detail: "One rescue sets the trap. The easy start." },
+            {
+              name: "Level 1",
+              target: "Gallimimus · Brachiosaurus",
+              detail: "One rescue sets the trap. Perks: 2× bounties or +200K rescue streaks.",
+            },
             {
               name: "Level 2",
               target: "Triceratops · Ankylosaurus",
               detail: "Triceratops makes loop awards easier; Ankylosaurus makes inlanes easier.",
             },
-            { name: "Level 3", target: "Stegosaurus · Compy", detail: "More rescues and faster dinosaurs." },
+            {
+              name: "Level 3",
+              target: "Stegosaurus · Compy",
+              detail: "More rescues and faster dinosaurs. Perks: +15K per pop Amber or +250K combos.",
+            },
             {
               name: "Level 4",
               target: "Pteranodon · Raptor",
-              detail: "Pteranodon flies to any rescue. Raptors hunt in pairs. Each doubles a multiball’s jackpots.",
+              detail: "Pteranodon flies to any rescue. Raptors hunt in pairs — two captures. Each doubles a multiball’s jackpots.",
             },
             { name: "Rescues", target: "Red Shots", detail: "The green arrow is the dino. Reach the red staff shots before it does." },
             { name: "Visitor’s Center", target: "Spell M-A-P", detail: "Leave a Level 4 paddock, then spell M-A-P again." },
@@ -2318,25 +2331,41 @@ window.RFPC_CONTENT = {
           key: "predators",
           kicker: "The Big Ones",
           boxes: [
-            { name: "Spitter", target: "Level 1.5", detail: "Capture it for +2× on Super Spinner." },
-            { name: "T-Rex", target: "Level 2.5", detail: "The halfway paddock on every path." },
-            { name: "Spinosaurus", target: "Level 3.5", detail: "Capture it to light King of the Island at the left ramp." },
+            { name: "Spitter", target: "Level 1.5", detail: "Capture it for +2× on Super Spinner and +1 Bonus X." },
+            {
+              name: "T-Rex",
+              target: "Level 2.5",
+              detail: "The halfway paddock on every path: 8 staff, 7.5M plus an extra ball, +8 seconds on every timer and +1 Bonus X.",
+            },
+            {
+              name: "Spinosaurus",
+              target: "Level 3.5",
+              detail: "Capture it to light King of the Island at the left ramp. Set the traps left, then right. +1 Bonus X.",
+            },
           ],
         },
         {
           pageTitle: "T-Rex Events",
           eyebrow: "Spell T-REX At The Truck",
-          proTip: "Feed T-Rex is always first; the rest cycle Chase → Encounter → Rampage.",
+          proTip: "Feed T-Rex comes first by default; the rest cycle Chase → Encounter → Rampage.",
           key: "trex",
           kicker: "Start At The Left Ramp",
           boxes: [
-            { name: "Feed T-Rex", target: "Always First", detail: "A hurry-up that turns into a 2-ball multiball." },
-            { name: "T-Rex Chase", target: "Dodge The Shots", detail: "Outrun the T-Rex as the lit shots and truck shift." },
+            {
+              name: "Feed T-Rex",
+              target: "First By Default",
+              detail: "A 20-second hurry-up — orange arrows raise it to 6.75M — then shoot the T-Rex for a 2-ball multiball.",
+            },
+            {
+              name: "T-Rex Chase",
+              target: "Dodge The Shots",
+              detail: "Outrun the T-Rex as the lit shots and truck shift. Dodges within 3 seconds of a shift score double.",
+            },
             { name: "T-Rex Encounter", target: "Trapped Workers", detail: "Free three trapped workers to finish the mode." },
             {
               name: "T-Rex Rampage",
               target: "Left Ramp",
-              detail: "Lower the T-Rex, then cash out at the left ramp. Tower first for 3×, helipad for 2×.",
+              detail: "Lower the T-Rex, then cash out at the left ramp. Tower first for 3×, helipad for 2× — they stack to 6×.",
             },
             { name: "Museum Mayhem", target: "Play All Four", detail: "Spell T-REX once more: chase two raptors, then a 3-ball victory multiball." },
           ],
@@ -2352,12 +2381,16 @@ window.RFPC_CONTENT = {
             {
               name: "Virus Attack",
               target: "Any Lit Shot",
-              detail: "A lit shot lights the Control Room for 10M plus the shots you made. Three times.",
+              detail: "Lit shots pay 3M, 4M, then 5M and light the Control Room for 10M plus the shots you made. Three times.",
             },
             { name: "Restore Power", target: "Spinner First", detail: "The spinner lights seven shots. Each one pays more than the last." },
             { name: "System Boot", target: "Two-Shot Combos", detail: "Left ramp, helipad or spinner, then a harder follow-up. Three sets." },
             { name: "Secure Control Room", target: "Play All Three", detail: "Mini-wizard: a hurry-up at every major shot in order." },
-            { name: "Invalid Frenzy", target: "Secret", detail: "A hidden 4-ball multiball. Why would Nedry do this?" },
+            {
+              name: "Invalid Frenzy",
+              target: "Secret",
+              detail: "A hidden 4-ball multiball after all three modes — or pick ??INVALID?? on the Smart Missile. Why would Nedry do this?",
+            },
           ],
         },
         {
@@ -2373,7 +2406,7 @@ window.RFPC_CONTENT = {
             {
               name: "Escape Nublar",
               target: "Left Ramp",
-              detail: "Play all three, then drive back through the paddocks. Three trucks; the game ends.",
+              detail: "Play all three, then drive back through the paddocks. Three trucks; the game ends unless When Dinosaurs Ruled the Earth is lit. Also playable alone as Escape Nublar Challenge — hold both flippers in attract.",
             },
             { name: "When Dinosaurs Ruled the Earth", target: "Win All Four", detail: "A 60-second 6-ball multiball with unlimited ball save." },
           ],
@@ -2389,12 +2422,42 @@ window.RFPC_CONTENT = {
             { name: "Amber Bonus", target: "Pop Bumpers", detail: "Builds from the pops all game; collect it at the pops standup." },
             {
               name: "Supply Drop & 2×",
-              target: "Purple Standups",
-              detail: "Three purple standups, then the big standup. Lights 2× scoring for 45 seconds.",
+              target: "Flashing Standups",
+              detail: "Light the flashing standups, then the big standup. Lights 2× scoring for 45 seconds.",
             },
             { name: "Pteranodon Attack", target: "Right Ramp", detail: "Four ramp shots. Switches build an award collected at the right ramp." },
             { name: "Spinner", target: "Four Ramps", detail: "Each ramp raises the spinner value — up to 225K a spin." },
-            { name: "Fossils", target: "Finish Modes", detail: "Completed modes and multiballs award fossils toward sets." },
+            { name: "Fossils", target: "Finish Modes", detail: "11 fossils in four sets pay 20M, 35M, 100M and 250M — all 11 pay 500M." },
+          ],
+        },
+        {
+          pageTitle: "Combos & Saves",
+          eyebrow: "Shots Worth Chaining",
+          proTip: "Six DNA combos light an extra ball at the right ramp.",
+          key: "combosSaves",
+          kicker: "Keep It Flowing",
+          boxes: [
+            {
+              name: "DNA Combos",
+              target: "11 Dinosaurs",
+              detail: "Each dino has its own shot sequence — Triceratops is just the left ramp to the Amber target. Six light an extra ball; all 11 earn a wildcard Fossil.",
+            },
+            {
+              name: "6-Way Combo",
+              target: "Six Major Shots",
+              detail: "Spinner, upper loop and all four ramps in any order. Builds to 40×, worth about 18M–57M, and awards a Fossil.",
+            },
+            {
+              name: "Escape",
+              target: "Left Outlane",
+              detail: "The pops rollover lights the Escape standup for 20 seconds; hit it to light the left outlane save.",
+            },
+            { name: "Nedry", target: "Right Outlane", detail: "Hit the 2× standup 3, 15 or 30 times to light the right outlane save." },
+            {
+              name: "Super Supply Drop",
+              target: "Every 10 Loops",
+              detail: "First at 3 loops, then every 10. Four Amber Frenzies, then Goat Mania, an extra ball and more.",
+            },
           ],
         },
         {
@@ -2408,15 +2471,15 @@ window.RFPC_CONTENT = {
             {
               name: "Chaos Multiball",
               target: "Spell CHAOS",
-              detail: "Collect C-H-A-O-S in order, then hit the target between the bumpers.",
+              detail: "Collect C-H-A-O-S in order, then hit the target between the bumpers. Later ones need CHAOS spelled twice.",
               objective: "Jackpots light on one half of the playfield; hit the truck to switch sides.",
               jackpots: "Supers at the amber target, then the CHAOS letters.",
-              tip: "Pop bumper hits add balls in Chaos.",
+              tip: "Pop bumper hits add balls in Chaos — 10 for the first, 10 more for each after.",
             },
             {
               name: "Raptor Tri-Ball",
               target: "Raptor Pen",
-              detail: "Capture a raptor, then shoot the pen until the fence breaks.",
+              detail: "Complete the Raptor Pen targets twice (the dead-end lane counts as all of them) to light Raptor Capture, then shoot the pen until the fence breaks.",
               objective: "Four phases. Ramp jackpots, then CHAOS jackpots, then six balls.",
               jackpots: "Supers at the right ramp and upper loop, times the balls in play.",
               tip: "Clear the pen targets and dead-end lane for 15 seconds of 2× jackpots.",
@@ -2438,7 +2501,10 @@ window.RFPC_CONTENT = {
           key: "strategy",
           kicker: "House Advice",
           boxes: [
-            { name: "Feed T-Rex First", detail: "It’s always the first event — and turns into a multiball." },
+            {
+              name: "Extra Balls",
+              detail: "6 rescues or 6 DNA combos (right ramp), the T-Rex capture, a Smart Missile, Fossil Set 2 or a Super Supply Drop.",
+            },
             { name: "Perfect Paddocks", detail: "Rescue every staff member for a bigger bounty." },
             { name: "Tranquilize", detail: "Tower awards include the Super Tranquilizer to slow fast dinos." },
             { name: "Pick Your Path", detail: "Truck hits switch paths — choose the perks you want." },
@@ -2449,7 +2515,7 @@ window.RFPC_CONTENT = {
         {
           pageTitle: "Now Playing",
           eyebrow: "The Lockedown",
-          proTip: "Win all three mini-wizards to unlock Escape Nublar.",
+          proTip: "Play all three mini-wizards to unlock Escape Nublar — win them all for When Dinosaurs Ruled the Earth.",
           key: "hold",
           line: "Life finds a way. Go survive the island.",
         },
