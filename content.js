@@ -1890,7 +1890,12 @@ window.RFPC_CONTENT = {
           key: "sideModes",
           kicker: "Everything Else",
           boxes: [
-            { name: "Bot Frenzy", target: "Left Ramp", detail: "Third Bot Award. 40 seconds: targets multiply the spinner up to 8×." },
+            {
+              name: "Bot Frenzy",
+              target: "Left Ramp",
+              detail: "Third Bot Award. 40 seconds: targets multiply the spinner up to 8×.",
+              img: "assets/foo-side-botfrenzy.jpg",
+            },
             {
               name: "Supersonic Radio",
               target: "Radio Targets",
