@@ -271,7 +271,7 @@ class Component extends DCLogic {
       (w.rows && w.rows.length) ? h("div", { key: "wr", style: { marginTop: "var(--sp-5)", display: "grid", gridTemplateColumns: "1fr 1fr", columnGap: "var(--sp-6)", rowGap: 0, alignContent: "start" } }, w.rows.map((r, i) => ShotRow ? h(ShotRow, { key: i, label: r.label, target: r.target }, r.desc) : null)) : null,
       w.note ? h("p", { key: "n", style: { margin: "var(--sp-4) 0 0", fontSize: "20px", color: "var(--text-muted)" } }, w.note) : null,
       h("div", { key: "sp", style: { flex: 1 } }),
-      Chip ? h(Chip, { key: "c", tone: "brass", style: { alignSelf: "flex-start" } }, w.chip) : null,
+      (Chip && w.chip) ? h(Chip, { key: "c", tone: "brass", style: { alignSelf: "flex-start" } }, w.chip) : null,
       footLine(w.footer)));
     const tipsDetail = (t) => fit(h(React.Fragment, null,
       h("div", { key: "rows", style: { display: "flex", flexDirection: "column", gap: "var(--sp-4)" } },

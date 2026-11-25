@@ -311,8 +311,16 @@ window.RFPC_CONTENT = {
             title: "Action Button",
             lead: "Small button, big saves.",
             rows: [
-              { label: "JEDI Ball Save", target: "Outlanes", desc: "Spell JEDI, then press the YELLOW button to fire the magnet to toss a draining ball back into play.  May the Force be with you." },
-              { label: "Lock In Jabba", target: "Sarlacc Pit", desc: "Press the ORANGE button while the ball spins in the Sarlacc Pit to select the Jabba Event you want to activate." },
+              {
+                label: "JEDI Ball Save",
+                target: "Outlanes",
+                desc: "Spell JEDI, then press the YELLOW button to fire the magnet to toss a draining ball back into play.  May the Force be with you.",
+              },
+              {
+                label: "Lock In Jabba",
+                target: "Sarlacc Pit",
+                desc: "Press the ORANGE button while the ball spins in the Sarlacc Pit to select the Jabba Event you want to activate.",
+              },
               { label: "Add-A-Ball", target: "Sarlacc Pit", desc: "Ten Sarlacc Pit spins during multiball light the button GREEN to add a ball." },
             ],
           },
@@ -322,7 +330,7 @@ window.RFPC_CONTENT = {
             layout: "columns",
             name: "Become a Jedi Master",
             body: "Five mini-wizards stand in the way — Not a Jedi Yet, Ewok Encounter, Sarlacc Escape, Never Tell Me The Odds and Dark Side Multiball — before the final showdown, Jedi Master.",
-            chip: "◆ Five mini-wizards first",
+            chip: "",
             rows: [
               { label: "Not a Jedi Yet", target: "Play missions for 4 characters" },
               { label: "Ewok Encounter", target: "Play missions for all 8 characters" },
