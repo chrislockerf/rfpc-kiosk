@@ -2444,11 +2444,13 @@ window.RFPC_CONTENT = {
               name: "Viggo",
               target: "Car & Captive Ball",
               detail: "Shoot the car or captive ball to light gold bonus shots. Twelve lit shots earn Be Seeing You.",
+              img: "assets/jw-viggo.jpg",
             },
             {
               name: "Kirill",
               target: "Red Circle",
               detail: "Clear the alternating red shots, then the Red Circle pays their total. Skip the Red Circle for a whole wave to add 1M.",
+              img: "assets/jw-kirill.jpg",
             },
             {
               name: "Cassian",
