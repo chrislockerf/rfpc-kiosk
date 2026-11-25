@@ -38,7 +38,7 @@
   <nav id="nav"></nav>
 </header>
 <main id="main"></main>
-<script src="content.js"></script>
+<script>document.write('<script src="content.js?v=' + Date.now() + '"><\/script>');</script>
 <script>
   const COLORS = { "star-wars":"#e0473a","godzilla":"#3fbf5a","james-bond":"#3b6fd6","deadpool":"#d12a2a","foo-fighters":"#e6852f","jurassic-park":"#d9a441","john-wick":"#29a8d9","monster-bash":"#8b5cf6" };
   const C = window.RFPC_CONTENT || {};
