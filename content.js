@@ -2753,6 +2753,7 @@ window.RFPC_CONTENT = {
               name: "The Creature",
               target: "Black Lagoon",
               detail: "Hit both loops, both ramps and the Mosh Pit. Each shot raises the hurry-up. Wins his saxophone.",
+              img: "assets/mb-creature.jpg",
             },
             { name: "The Mummy", target: "Jets → Scoop", detail: "60 jet hits light it. Score 7.5M in 45 seconds; jets score triple." },
           ],
