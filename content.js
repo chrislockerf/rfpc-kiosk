@@ -54,11 +54,11 @@ window.RFPC_CONTENT = {
       {
         "pageTitle": "Welcome",
         "eyebrow": "River Forest Pinball Club",
-        "proTip": "Grab a drink, pick a table, and remember: the tilt bob sees everything.",
+        "proTip": "No matter how well you plan, sometimes the ball just drains.",
         "key": "splash",
         "title": "Welcome To The Lockedown",
         "taglines": [
-          "Eight tables. One basement. Zero mercy.",
+          "Eight machines. One basement. Zero mercy.",
           "Your outlanes called. They miss you.",
           "Leave your ego at the door. The machines will take it anyway.",
           "Free play. No excuses."
@@ -67,7 +67,7 @@ window.RFPC_CONTENT = {
       {
         "pageTitle": "House Rules",
         "eyebrow": "Read Before You Flip",
-        "proTip": "Questions, stuck balls or rule disputes — find Chris.",
+        "proTip": "Questions or stuck balls  — find Chris.",
         "key": "rules",
         "intro": "Play hard, play nice. Six rules keep the basement running.",
         "bullets": [
@@ -88,17 +88,17 @@ window.RFPC_CONTENT = {
           {
             "game": "star-wars",
             "name": "Star Wars",
-            "line": "Eight heroes, one Empire. Pick a mission and go."
+            "line": "Eight heroes battle the Empire. Pick a mission and go."
           },
           {
             "game": "godzilla",
             "name": "Godzilla",
-            "line": "Smash cities, fight monsters, save Tokyo (or don't)."
+            "line": "Smash cities, fight monsters, save the world from the Xiliens."
           },
           {
             "game": "james-bond",
             "name": "James Bond 007",
-            "line": "Six films, one tuxedo. Shaken, not drained."
+            "line": "Play through six iconic Sean Connery 007 films."
           },
           {
             "game": "deadpool",
@@ -108,34 +108,34 @@ window.RFPC_CONTENT = {
           {
             "game": "foo-fighters",
             "name": "Foo Fighters",
-            "line": "Rock the tour, blast the aliens, save the world."
+            "line": "Defend cities from the Overlord, save the world.  Jam to some tunes along the way."
           },
           {
             "game": "jurassic-park",
             "name": "Jurassic Park",
-            "line": "Feed the T-Rex. Try not to become lunch."
+            "line": "Help stranded workers escape Nebula Island.  Feed the T-Rex. Try not to become lunch."
           },
           {
             "game": "john-wick",
             "name": "John Wick",
-            "line": "Every shot has consequences. Pick your contract."
+            "line": "Play through the enemies of all 4 films.  Every shot has consequences. Pick your contract."
           },
           {
             "game": "monster-bash",
             "name": "Monster Bash",
-            "line": "Get the band together. The monsters do the rest."
+            "line": "Get the band together to rock Transylvania. The monsters do the rest."
           },
           {
             "game": "darts",
             "name": "Spyder Darts",
-            "line": "Steady hands, soft tips. Loser buys the next round."
+            "line": "Pick your game carefully. Loser buys the next round."
           }
         ]
       },
       {
         "pageTitle": "Get On The Board",
         "eyebrow": "Stern Insider",
-        "proTip": "Only the Stern tables connect — Monster Bash keeps its own scores.",
+        "proTip": "Only the Stern tables connect to the online leaderboards — Monster Bash keeps its own high scores.",
         "key": "board",
         "qrUrl": "https://insider.sternpinball.com/",
         "qrCaption": "Scan to join Stern Insider — it's free",
@@ -143,6 +143,7 @@ window.RFPC_CONTENT = {
           "Scan the code and create a free Stern Insider account.",
           "Start a game, then scan the QR code on the machine's screen with the Insider app.",
           "Every game logs to your profile and the house leaderboards.",
+          "Earn achievements unique to each machine.",
           "Beat a high score and your name shows up on this TV."
         ]
       }
@@ -162,7 +163,7 @@ window.RFPC_CONTENT = {
       game: "star-wars",
       title: "Star Wars",
       maker: "Stern · 2025",
-      proTip: "Play a Rebel Mission for every character you can — each one boosts that character’s jackpots in every multiball.",
+      proTip: "Play an each of the three Rebel Missions for each iconic character — each one boosts that character’s jackpots in every multiball.",
       pages: [
         {
           pageTitle: "Get To Know The Line-Up",
@@ -184,12 +185,12 @@ window.RFPC_CONTENT = {
           key: "gameoverview",
           intro: "Star Wars: Fall of the Empire marks designer John Borg’s return to the Star Wars license more than 30 years after his very first pinball machine, Data East’s 1992 Star Wars. Built on Stern’s new SPIKE 3 platform, it retells the Original Trilogy and digs into corners of the story earlier Star Wars machines passed over, as Luke and a ragtag band of rebels set out to bring down the Empire.",
           bullets: [
-            "Spell FORCE to light Rebel Missions for eight characters.",
+            "Spell FORCE to light up to three Rebel Missions for eight characters.",
             "Played missions boost that character’s multiball jackpots.",
             "Start Falcon Features at the center ramp; Jabba Events at the Sarlacc Pit.",
             "Return lanes qualify Vader modes at the left scoop.",
-            "Rip the spinners to spell JEDI for the magnet ball save.",
-            "Complete five mini-wizards on the road to Jedi Master.",
+            "Rip the spinners to spell JEDI for the FORCE magnet ball save.",
+            "Complete five mini-wizards on the road to the final Jedi Master wizard mode.",
           ],
         },
         {
@@ -202,12 +203,28 @@ window.RFPC_CONTENT = {
             title: "Modes & Battles",
             lead: "Four sets of modes run side by side: Rebel Missions, Falcon Features, Jabba Events and Vader modes.",
             rows: [
-              { label: "Rebel Missions", target: "FORCE Targets", desc: "Spell FORCE to light the eight character shots to start a mission." },
-              { label: "Falcon Features", target: "Center Ramp", desc: "Shoot it when the Falcon’s engines are lit." },
-              { label: "Jabba Events", target: "Sarlacc Pit", desc: "Drop Salacious Crumb twice, then spin the Pit to pick a Jabba Event." },
-              { label: "Vader Modes", target: "Left Scoop", desc: "Return lanes qualify; Vader modes do not stack with any other modes." },
-              { label: "Rebel Combos", target: "Name Inserts", desc: "Two combos at one character starts its Super Mode." },
-              { label: "Hyperspace Loops", target: "Right Ramp", desc: "TIE fighter thresholds start the loop jackpot." },
+              { label: "Rebel Missions", target: "FORCE Targets", desc: "Spell FORCE to light the eight character shots to start a Rebel Mission." },
+              {
+                label: "Falcon Features",
+                target: "Center Ramp",
+                desc: "Shoot it when the Falcon’s engines are lit to enable and activate Falcon Features.",
+              },
+              { label: "Jabba Events", target: "Sarlacc Pit", desc: "Drop Salacious Crumb twice, then spin the Pit to start a Jabba Event." },
+              {
+                label: "Vader Modes",
+                target: "Left Scoop",
+                desc: "Return lanes qualify; shoot Vader VUK to start.  Vader modes do not stack with any other modes.",
+              },
+              {
+                label: "Rebel Combos",
+                target: "Name Inserts",
+                desc: "Two combos at one character starts its Super Mode.  Complete the mode for big points.  They can be played multiple times.",
+              },
+              {
+                label: "Hyperspace Loops",
+                target: "Right Ramp",
+                desc: "TIE fighter shots to the right ramp start the mode.  Then pound the center ramp for jackpots.",
+              },
             ],
           },
           keyMultiballs: {
@@ -216,10 +233,18 @@ window.RFPC_CONTENT = {
             layout: "columns",
             lead: "Jump to Hyperspace in the Falcon, take down the AT-ATs, then both Death Stars.",
             rows: [
-              { label: "Battle of Hoth", target: "Luke VUK", desc: "The Droids target lights locks; spell AT-AT for the super." },
+              {
+                label: "Battle of Hoth",
+                target: "Luke VUK",
+                desc: "The Droids target lights locks; shoot Luke VUK to start; spell AT-AT for the super jackpot.",
+              },
               { label: "Death Star", target: "Death Star Ramp", desc: "Hit the Death Star to open the lock, then lock three balls." },
               { label: "Death Star II", target: "Death Star Ramp", desc: "Destroy the first Death Star to move on to the second." },
-              { label: "Lightspeed", target: "Center Ramp", desc: "The first Falcon Feature — don’t miss its timed start." },
+              {
+                label: "Lightspeed",
+                target: "Center Ramp",
+                desc: "The first Falcon Feature — don’t miss its timed start.  Build the jackpot value by hitting lit shots BEFORE shooting the center ramp to begin muliball.",
+              },
             ],
           },
           skills: {
