@@ -2456,6 +2456,7 @@ window.RFPC_CONTENT = {
               name: "Cassian",
               target: "Switch Frenzy",
               detail: "Everything scores and builds the jackpot; one roving purple shot collects it. Six jackpots earn Be Seeing You.",
+              img: "assets/jw-cassian.jpg",
             },
             {
               name: "Ares",
