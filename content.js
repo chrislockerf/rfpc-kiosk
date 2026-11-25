@@ -1850,7 +1850,7 @@ window.RFPC_CONTENT = {
               img: "assets/foo-mod-van.jpg",
             },
             { name: "Engine", target: "More Time", detail: "Adds seconds to the next van mode." },
-            { name: "Speakers", target: "More Points", detail: "Adds value to every shot in the next van mode." },
+            { name: "Speakers", target: "More Points", detail: "Adds value to every shot in the next van mode.", img: "assets/foo-mod-speakers.jpg" },
             { name: "Bomb", target: "Fewer Shots", detail: "Spots shots so the next city takes fewer to finish." },
             { name: "MOD-ulator Frenzy", target: "Paddle Target", detail: "The second Bot Award. Mods cycle fast and every paddle hit levels one." },
             { name: "Mod Levels", target: "Insert Colors", detail: "Each mod climbs yellow → red. Mods also raise D.C.’s jackpots." },
