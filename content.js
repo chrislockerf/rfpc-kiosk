@@ -2746,6 +2746,7 @@ window.RFPC_CONTENT = {
               name: "The Bride",
               target: "Both Ramps",
               detail: "Each ramp three times to start, three more to win her microphone. The Mosh Pit resets the timer.",
+              img: "assets/mb-bride.jpg",
             },
             {
               name: "The Creature",
