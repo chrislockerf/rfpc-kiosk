@@ -568,7 +568,7 @@ class Component extends DCLogic {
     const boxTeaser = (img, targetTxt, shape, chipStyle) => h(React.Fragment, null, [
       img ? (shape === "poster"
         ? h("img", { key: "img", src: img, crossOrigin: "anonymous", onError: this._imgRetry, style: { display: "block", width: 92, height: 130, borderRadius: 8, objectFit: "cover", boxShadow: "var(--shadow-panel), 0 0 0 2px var(--accent)" } })
-        : h("img", { key: "img", src: img, crossOrigin: "anonymous", onError: this._imgRetry, style: { display: "block", width: 59, height: 59, borderRadius: "50%", objectFit: "cover", boxShadow: "0 0 0 2px var(--accent)" } })) : null,
+        : h("img", { key: "img", src: img, crossOrigin: "anonymous", onError: this._imgRetry, style: { display: "block", width: 130, height: 130, borderRadius: "50%", objectFit: "cover", boxShadow: "0 0 0 2px var(--accent)" } })) : null,
       (targetTxt && Chip) ? h(Chip, { key: "chip", tone: "accent", style: { position: "absolute", right: "var(--sp-4)", bottom: "var(--sp-4)", ...chipStyle } }, targetTxt) : null,
     ]);
     const sectionPageRender = (m, page) => () => {
