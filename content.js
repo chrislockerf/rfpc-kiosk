@@ -2324,10 +2324,14 @@ window.RFPC_CONTENT = {
             rows: [
               { label: "Take A Job", target: "Weapons Crate", desc: "Light three blue lights, then start the job at the right VUK." },
               { label: "Cash Out", target: "Left Eject", desc: "Finish a job’s shots; the eject pays 20% plus the faction perk." },
-              { label: "Adversary Battle", target: "Left Eject", desc: "Defeat ten enemies in single-ball play to light the fight." },
+              {
+                label: "Adversary Battle",
+                target: "Left Eject",
+                desc: "Defeat ten enemies to light a 200-second fight; left standups change which one.",
+              },
               { label: "Enemies", target: "Blue Circles", desc: "Each one adds +1× to the shot behind it, up to 4×." },
               { label: "Allies", target: "Gold Coin Targets", desc: "Light allies, then a ramp qualifies one for the next job." },
-              { label: "Lights Out", target: "Spell YAGA", desc: "Cycle the inlanes, then the action button doubles scoring." },
+              { label: "Bonus X", target: "Spell BABA", desc: "Spell BABA at the inlanes to raise the bonus multiplier, up to 5×." },
             ],
           },
           keyMultiballs: {
@@ -2359,7 +2363,6 @@ window.RFPC_CONTENT = {
             rows: [
               { label: "Lights Out", target: "YAGA Lit", desc: "30 seconds of doubled scoring." },
               { label: "Add-A-Ball", target: "Tarasov Perk", desc: "Hold it in any multiball." },
-              { label: "Swipe-A-Ball", target: "Center Locks", desc: "Premium — pull a locked ball into another multiball." },
               { label: "The Duel", target: "Crosshair", desc: "Time the press dead center for up to 25M." },
             ],
           },
@@ -2390,7 +2393,7 @@ window.RFPC_CONTENT = {
             {
               name: "The Bowery – Night Watch",
               target: "Left Eject",
-              detail: "All seven shots lit purple; a roving white shot scores 2×. Perk: +5 seconds on every ball saver.",
+              detail: "All seven shots lit purple; a roving white shot scores 2×. Clear them all for a second round. Perk: +5 seconds on every ball saver.",
               faction: "The Bowery",
               job: "Night Watch",
             },
@@ -2427,14 +2430,14 @@ window.RFPC_CONTENT = {
             {
               name: "Ruska Roma – Heist",
               target: "Center Ramp",
-              detail: "Standups light yellow shots; the gold coin targets collect them all at once. Perk: motion sensors during Lights Out.",
+              detail: "Standups light yellow shots; six major shots light the cash-out, and blood marker rebounds collect at 2×. Perk: motion sensors during Lights Out.",
               faction: "Ruska Roma",
               job: "Heist",
             },
             {
               name: "Marquis de Gramont – Gather Intel",
               target: "Right Orbit",
-              detail: "Combo the left and right ramps to build a center ramp jackpot. Perk: +20 seconds of Lights Out.",
+              detail: "Six left/right ramp shots light the cash-out and build a center ramp jackpot. Perk: +20 seconds of Lights Out.",
               faction: "Marquis de Gramont",
               job: "Gather Intel",
             },
@@ -2463,7 +2466,7 @@ window.RFPC_CONTENT = {
             {
               name: "Kirill",
               target: "Red Circle",
-              detail: "Clear the alternating red shots, then the Red Circle pays their total. Skip the Red Circle for a whole wave to add 1M.",
+              detail: "Clear the alternating red shots, then the Red Circle pays their total. Skip the Red Circle for a whole wave to add 1M. Twelve shots earn Be Seeing You.",
               img: "assets/jw-kirill.jpg",
             },
             {
@@ -2560,19 +2563,23 @@ window.RFPC_CONTENT = {
             {
               name: "Red Circle Reckoning",
               target: "Mini-Wizard",
-              detail: "A 60-second, 4-ball run — 10M per shot, 30M at the Red Circle, and an extra ball when you finish.",
+              detail: "A 60-second, 4-ball run — 10M per shot, 30M at the Red Circle. The final shot adds 1M per second left, plus an extra ball.",
             },
             {
               name: "The Staircase",
               target: "Center Ramp",
-              detail: "Three levels of enemies, then fight back up as a 2-ball multiball. Collect the white arrows to multiply each level’s bonus.",
+              detail: "Three levels of enemies, then fight back up as a 2-ball multiball. Collect the white arrows to multiply each level’s bonus — up to 60M, 100M, then 280M.",
             },
             {
               name: "The Duel",
               target: "Action Button",
               detail: "Keep both balls alive for 2×, lock both, then time the button to the crosshair for up to 25M. Three rounds, then a 50M finish.",
             },
-            { name: "Special Assignment", target: "Final Mode", detail: "60 flips to clear every shot and find Iosef. Win or lose, the game ends." },
+            {
+              name: "Special Assignment",
+              target: "Final Mode",
+              detail: "60 flips to clear every shot and find Iosef — each kill adds 6 flips, each drain costs 5. Beat Iosef and the game ends.",
+            },
           ],
         },
         {
@@ -2616,12 +2623,12 @@ window.RFPC_CONTENT = {
           key: "strategy",
           kicker: "House Advice",
           boxes: [
-            { name: "Spawn First", detail: "Load enemies before a job — each circle multiplies the shot behind it." },
+            { name: "Spawn First", detail: "Every ball spawns at least 5 enemies, then one per 50 switches — Red Circle hits count as 4." },
             { name: "Pick Your Faction", detail: "Shoot a faction’s shot before starting the job to choose the perk you want." },
-            { name: "Perks Early", detail: "Night Watch, Security Detail and Task a Crew make every multiball last longer." },
+            { name: "Beat The Clock", detail: "Jobs run 60s, +3s a shot. Crate targets, then the right VUK, add 30s once per job." },
             { name: "Use Your Allies", detail: "Katia moves enemies onto lit shots — perfect before a big job." },
             { name: "Save Lights Out", detail: "It carries across balls — fire it during a job or multiball." },
-            { name: "Car Hits Count", detail: "Bash the car in single-ball play to build the Car Chase jackpot." },
+            { name: "Extra Balls", detail: "Ten enemies, three jobs, your first Be Seeing You, ten gold coins, or Red Circle Reckoning." },
           ],
         },
         {
