@@ -1930,6 +1930,7 @@ window.RFPC_CONTENT = {
               objective: "All shots score jackpots. Upper playfield shots raise them.",
               jackpots: "The Super is the same sequence again.",
               tip: "After it ends, the secret files target pays fresh jackpots for 30 seconds.",
+              img: "assets/foo-mb-area51.jpg",
             },
             {
               name: "Combotron Multiball",
