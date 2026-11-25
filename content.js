@@ -1922,6 +1922,7 @@ window.RFPC_CONTENT = {
               objective: "All My Life (2-ball), Monkey Wrench (3-ball), The Pretender (4-ball), in order.",
               jackpots: "The Overlord back target collects the Super.",
               tip: "Both Overlord targets allow a re-lock for 20 seconds of 2× jackpots.",
+              img: "assets/foo-mb-overlord.jpg",
             },
             {
               name: "Area 51 Multiball",
