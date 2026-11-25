@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RFPC Kiosk — Image Index</title>
+<style>
+  :root { --bg:#14110f; --panel:#1f1a17; --line:#3a302a; --text:#efe6d2; --muted:#9a8c78; --gold:#d9a441; --miss:#5a4a3f; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:15px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { position:sticky; top:0; z-index:2; background:var(--bg); border-bottom:1px solid var(--line); padding:14px 20px; display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; }
+  h1 { margin:0; font-size:20px; letter-spacing:.04em; }
+  .stats { color:var(--muted); font-size:13px; }
+  nav a { color:var(--gold); text-decoration:none; font-size:13px; margin-right:10px; white-space:nowrap; }
+  label { font-size:13px; color:var(--muted); display:flex; gap:6px; align-items:center; cursor:pointer; }
+  main { padding:8px 20px 60px; max-width:1400px; margin:0 auto; }
+  section.game { margin-top:28px; }
+  section.game > h2 { margin:0 0 4px; font-size:22px; border-left:5px solid var(--c, var(--gold)); padding-left:10px; }
+  .gstats { color:var(--muted); font-size:13px; margin:0 0 10px 15px; }
+  h3 { margin:18px 0 8px; font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-weight:600; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:12px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:10px; display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; }
+  .card img { width:110px; height:110px; object-fit:cover; border-radius:50%; box-shadow:0 0 0 3px var(--c, var(--gold)); background:#000; }
+  .card img.poster { border-radius:6px; width:84px; height:120px; }
+  .card img.wide { border-radius:6px; width:130px; height:110px; object-fit:contain; box-shadow:none; }
+  .card .ph { width:110px; height:110px; border-radius:50%; border:2px dashed var(--miss); display:grid; place-items:center; color:var(--miss); font-size:12px; }
+  .card .n { font-weight:600; font-size:14px; }
+  .card .f { color:var(--muted); font-size:11px; word-break:break-all; }
+  body.hide-missing .card.missing { display:none; }
+  body.only-missing .card:not(.missing) { display:none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>RFPC Kiosk — Image Index</h1>
+  <span class="stats" id="stats"></span>
+  <label><input type="checkbox" id="onlyMissing"> Only boxes without a photo</label>
+  <nav id="nav"></nav>
+</header>
+<main id="main"></main>
+<script src="content.js"></script>
+<script>
+  const COLORS = { "star-wars":"#e0473a","godzilla":"#3fbf5a","james-bond":"#3b6fd6","deadpool":"#d12a2a","foo-fighters":"#e6852f","jurassic-park":"#d9a441","john-wick":"#29a8d9","monster-bash":"#8b5cf6" };
+  const C = window.RFPC_CONTENT || {};
+  const main = document.getElementById("main"), nav = document.getElementById("nav");
+  let total = 0, have = 0;
+  const el = (t, cls, txt) => { const e = document.createElement(t); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+  const card = (name, img, shape) => {
+    const c = el("div", "card" + (img ? "" : " missing"));
+    if (img) { const i = el("img", shape === "poster" ? "poster" : shape === "wide" ? "wide" : ""); i.src = img; i.alt = name; i.loading = "lazy"; c.append(i); }
+    else c.append(el("div", "ph", "no photo"));
+    c.append(el("div", "n", name));
+    if (img) c.append(el("div", "f", img.replace("assets/", "")));
+    return c;
+  };
+  (C.games || []).forEach((g) => {
+    const sec = el("section", "game"); sec.id = g.game; sec.style.setProperty("--c", COLORS[g.game] || "");
+    sec.append(el("h2", null, g.title));
+    const gs = el("div", "gstats"); sec.append(gs);
+    let gt = 0, gh = 0;
+    // machine art
+    const art = el("div", "grid");
+    [["Cabinet", "assets/" + g.game + "-cabinet-cut.png"], ["Playfield", "assets/" + g.game + "-playfield-cut.png"]].forEach(([n, src]) => art.append(card(n, src, "wide")));
+    sec.append(el("h3", null, "Machine art (Line-Up page)")); sec.append(art);
+    (g.pages || []).forEach((p) => {
+      const boxes = p.boxes || [];
+      if (!boxes.length) return;
+      const grid = el("div", "grid");
+      boxes.forEach((b) => { gt++; total++; if (b.img) { gh++; have++; } grid.append(card(b.name, b.img, p.imgShape)); });
+      sec.append(el("h3", null, p.pageTitle)); sec.append(grid);
+    });
+    gs.textContent = gh + " of " + gt + " boxes have a photo";
+    main.append(sec);
+    const a = el("a", null, g.title); a.href = "#" + g.game; nav.append(a);
+  });
+  document.getElementById("stats").textContent = have + " of " + total + " boxes have a photo";
+  document.getElementById("onlyMissing").addEventListener("change", (e) => document.body.classList.toggle("only-missing", e.target.checked));
+</script>
+</body>
+</html>
