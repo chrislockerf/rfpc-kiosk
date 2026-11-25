@@ -1711,7 +1711,12 @@ window.RFPC_CONTENT = {
             },
             { name: "Chris Shiflett", target: "Lead Guitar", detail: "Lead guitar since 1999 — the solos and the sharp riffs." },
             { name: "Rami Jaffee", target: "Keys", detail: "Keyboards and organ — the texture under the anthems.", img: "assets/foo-band-rami.jpg" },
-            { name: "Taylor Hawkins", target: "Drums", detail: "The powerhouse drummer and Grohl’s foil from 1997 — forever a Foo Fighter." },
+            {
+              name: "Taylor Hawkins",
+              target: "Drums",
+              detail: "The powerhouse drummer and Grohl’s foil from 1997 — forever a Foo Fighter.",
+              img: "assets/foo-band-taylor.jpg",
+            },
           ],
         },
         {
