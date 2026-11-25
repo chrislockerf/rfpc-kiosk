@@ -724,14 +724,14 @@ window.RFPC_CONTENT = {
         {
           pageTitle: "Game Overview",
           eyebrow: "TL;DR: The Quick Read",
-          proTip: "Start all four objectives — RAID, POWER, BRIDGE, TANKS — to light Planet X.",
+          proTip: "Start all four objectives — RAID (a Tier 2 battle), POWER, BRIDGE, TANKS — to light Planet X.",
           key: "gameoverview",
           intro: "Godzilla is the fourth Stern pinball machine designed by Keith Elwin and the first machine to implement Stern Insider Connected, released in September 2021. The table depicts events from 10 classic Godzilla films in an original story depicting Godzilla fighting against the Xilien invasion of Earth, while tearing up a few cities for good measure.",
           bullets: [
             "Rampage through Tokyo, New York, London and Paris.",
             "Each city has four objectives: RAID, POWER, BRIDGE and TANKS.",
             "Win the city’s Kaiju Battle to conquer it and earn a permanent perk.",
-            "Start all four objectives — in any cities — to light Planet X.",
+            "Start a Tier 2 battle, Tesla Strike, Bridge Attack and Tank Attack — in any cities — to light Planet X.",
             "Pick an Ally at the scoop: Rodan, Mothra or Anguirus.",
             "Charge the Heat Ray on the center spinner to collect every lit shot.",
           ],
@@ -744,14 +744,22 @@ window.RFPC_CONTENT = {
           modes: {
             kicker: "On The Playfield",
             title: "City Objectives",
-            lead: "Every city has the same four objectives. Starting one is enough to count toward Planet X.",
+            lead: "Every city has the same four objectives. Starting one counts toward Planet X — for RAID, it has to be a Tier 2 battle.",
             rows: [
-              { label: "RAID · Kaiju Battle", target: "The Scoop", desc: "Shoot one ramp twice, then pick your monster." },
-              { label: "POWER · Tesla Strike", target: "Powerline Targets", desc: "Complete the targets twice, then the roving one." },
+              { label: "RAID · Kaiju Battle", target: "The Scoop", desc: "Two shots to a ramp light the first battle; later ones need both ramps." },
+              {
+                label: "POWER · Tesla Strike",
+                target: "Powerline Targets",
+                desc: "Complete the targets twice, then hit the flashing one five times.",
+              },
               { label: "BRIDGE · Bridge Attack", target: "Captive Ball", desc: "50 switches light it; four attacks drop the bridge." },
-              { label: "TANKS · Tank Attack", target: "The Scoop", desc: "Destroy 10 roving TANK shots, then the scoop." },
-              { label: "City Select", target: "The Scoop", desc: "Change cities once you’ve played an objective." },
-              { label: "Destruction Jackpot", target: "The Building", desc: "Lit by every objective you play." },
+              {
+                label: "TANKS · Tank Attack",
+                target: "The Scoop",
+                desc: "Destroy 10 roving TANK shots, then the scoop. It overrides the Kaiju Battle pick.",
+              },
+              { label: "City Select", target: "The Scoop", desc: "Win a Kaiju Battle and the right scoop lights City Select." },
+              { label: "Destruction Jackpot", target: "The Building", desc: "Shoot the building, then the upper loop, in single-ball play." },
             ],
           },
           keyMultiballs: {
@@ -760,7 +768,11 @@ window.RFPC_CONTENT = {
             lead: "Three core multiballs, plus Bridge and Tank Attack.",
             rows: [
               { label: "Godzilla Multiball", target: "The Building", desc: "Destroy the building, then shoot it to start." },
-              { label: "Mechagodzilla Multiball", target: "Right Spinner", desc: "20 spinner shots, the 3 Neo Barrier targets, then the jump ramp." },
+              {
+                label: "Mechagodzilla Multiball",
+                target: "Right Spinner",
+                desc: "Spin the right spinner 20 times, hit the 3 Neo Barrier targets, then the jump ramp.",
+              },
               { label: "Saucer Attack Multiball", target: "Saucer Bumper", desc: "Destroy 6 saucers at the far-right bumper." },
             ],
           },
@@ -770,9 +782,11 @@ window.RFPC_CONTENT = {
             layout: "table",
             lead: "The plunger is player-controlled — aim your skill shot.",
             rows: [
-              { label: "Skill Shot", target: "Left Spinner Lane", desc: "Plunge into the lane for 5M." },
-              { label: "Secret Skill", target: "Upper Loop", desc: "Plunge to the upper flipper and reflex the loop." },
+              { label: "Skill Shot", target: "Left Spinner Lane", desc: "Plunge into the lane for 5M and 8 seconds of ball save." },
+              { label: "Secret Skill", target: "Upper Loop", desc: "Plunge to the upper flipper and reflex the loop for 4M." },
               { label: "Super Secret", target: "Spinner → Scoop", desc: "Left spinner lane straight into the scoop: 10M, +2 Power-Ups and an Ally." },
+              { label: "Bumper Skill", target: "Short Plunge", desc: "Short plunge to the bumper: 250K–750K and a short ball save." },
+              { label: "Inlane Secret", target: "Left Inlane", desc: "Reach the left inlane off the plunge for 5M+." },
             ],
           },
           button: {
@@ -782,7 +796,11 @@ window.RFPC_CONTENT = {
             rows: [
               { label: "Heat Ray", target: "Center Spinner", desc: "60 spins for the first, 120 for the next." },
               { label: "Super Spinner", target: "Center Spinner", desc: "After a Heat Ray, the next rip scores 2× (+1× per city conquered)." },
-              { label: "Allies", target: "The Scoop", desc: "Pick with the right flipper: Rodan, Mothra or Anguirus." },
+              {
+                label: "Allies",
+                target: "The Scoop",
+                desc: "Pick with the right flipper. Rodan: 60s of 2×. Mothra: left outlane save. Anguirus: add-a-ball in any multiball.",
+              },
             ],
           },
           wizard: {
@@ -797,7 +815,7 @@ window.RFPC_CONTENT = {
             title: "Table Tips",
             proTip: "Start a Tier 1 Kaiju Battle, then start a multiball on top of it.",
             rows: [
-              { name: "Start, Don’t Finish", body: "Starting an objective counts toward Planet X." },
+              { name: "Start, Don’t Finish", body: "Starting an objective counts toward Planet X — RAID needs a Tier 2 battle." },
               { name: "Stack The Battle", body: "Tier 1 battles stack with any multiball — start the battle first." },
             ],
           },
@@ -813,7 +831,11 @@ window.RFPC_CONTENT = {
             { name: "New York", target: "+2M Saucer Attack", detail: "Conquer New York and every Saucer Attack pays 2M more." },
             { name: "London", target: "+4M Destruction JP", detail: "Conquer London to add 4M to every Destruction Jackpot." },
             { name: "Paris", target: "+500K Loops", detail: "Conquer Paris and every loop pays 500K more." },
-            { name: "Change Cities", target: "The Scoop", detail: "Play any objective in a city, then the scoop lets you move on." },
+            {
+              name: "Change Cities",
+              target: "The Scoop",
+              detail: "Win a Kaiju Battle and the right scoop lights City Select. Conquests stack: 2 cities earn an extra ball, 4 add +15M to the DJ.",
+            },
             {
               name: "Annihilation & Carnage",
               target: "Repeat Shots",
@@ -828,23 +850,56 @@ window.RFPC_CONTENT = {
           key: "kaiju",
           kicker: "60 Seconds Each",
           boxes: [
-            { name: "Ebirah", target: "All 3 Spinners", detail: "Rip the left, right and center spinners, then the pop bumper for 25M." },
+            { name: "Ebirah", target: "All 3 Spinners", detail: "15 spins on each side spinner and 40 on the center, then the pop bumper for 25M." },
             {
               name: "Titanosaurus",
               target: "5 Targets In Order",
-              detail: "Powerline targets left to right, the Maser Cannon, then the captive ball.",
+              detail: "Powerline targets left to right, the Maser Cannon, then the captive ball — 4M, 7M, 10M, 15M, then 20M.",
             },
             { name: "Gigan", target: "Ramps", detail: "Eight ramp shots. Opposite-ramp combos score double." },
-            { name: "Megalon", target: "Roving Purple Shot", detail: "Hit the purple shot 7 times. Miss it and he hides — a ramp brings him back." },
             {
-              name: "Tier 2 · vs King Ghidorah",
+              name: "Megalon",
+              target: "Roving Purple Shot",
+              detail: "Hit the purple shot 7 times. Miss it and he hides — a ramp brings him back. Up to 5×, +10M on the final blow.",
+            },
+            {
+              name: "Tier 2 · Ghidorah Battles",
               target: "Change Cities First",
-              detail: "Five shots three times each, then Fight or Flee at the scoop.",
+              detail: "Two 75-second fights: five shots three times each (1×, 2×, 4×), or 40 switches light five 7.5M shots. Fight or Flee at the scoop.",
             },
             {
               name: "Tier 2 · vs Megalon & Gigan",
               target: "3-Ball Multiball",
-              detail: "Godzilla and Jet Jaguar: paired jackpots, then the right spinner for supers.",
+              detail: "Godzilla and Jet Jaguar: paired jackpots from 3M, then the right spinner for supers.",
+            },
+          ],
+        },
+        {
+          pageTitle: "Objectives & Power-Ups",
+          eyebrow: "POWER · BRIDGE · TANKS",
+          proTip: "Power-Ups 4–7 need a Godzilla or Mechagodzilla Super; 8 and up need both.",
+          key: "objectivesPowerUps",
+          kicker: "Every City",
+          boxes: [
+            {
+              name: "Tesla Strike",
+              target: "Center Spinner",
+              detail: "Untimed. Spin the center spinner to build the Tesla value (2M+), then collect it at a blue shot. Five collections win.",
+            },
+            {
+              name: "Bridge Attack Multiball",
+              target: "Right Ramp",
+              detail: "2-ball. Ramp shots build the jackpot; three light doubles, and two doubles start a 15-second super round at 6× that adds balls.",
+            },
+            {
+              name: "Tank Attack Multiball",
+              target: "The Scoop",
+              detail: "2-ball. Tanks roll in every 8 seconds and speed up — shoot them first. Each one that gets through costs 1× of the multiplier.",
+            },
+            {
+              name: "Godzilla Power-Ups",
+              target: "The Scoop",
+              detail: "Earn arrows from battles, multiballs and cities, then cash them at the scoop. #9 adds +2× to the DJ and lights every Ally.",
             },
           ],
         },
@@ -858,18 +913,22 @@ window.RFPC_CONTENT = {
             {
               name: "Monster Zero",
               target: "The Building",
-              detail: "Score the Godzilla MB Super, pick it at Power-Up 4 or 8. Lock 3 balls, then Victory Multiball.",
+              detail: "Score the Godzilla MB Super, pick it at Power-Up 4 or 8. Lock 3 balls with green arrows, then Victory Multiball — ten jackpots light the Super.",
             },
             {
               name: "Terror of Mechagodzilla",
               target: "The Building",
-              detail: "Score the Mechagodzilla MB Super, same Power-Up pick. Four phases on a flip count.",
+              detail: "Score the Mechagodzilla MB Super, same Power-Up pick. Four phases on 30, 45, 50, then 100 flips.",
             },
-            { name: "Planet X Multiball", target: "City Select", detail: "Start all four objectives, then choose Planet X at the scoop." },
+            {
+              name: "Planet X Multiball",
+              target: "City Select",
+              detail: "Start a Tier 2 battle, Tesla Strike, Bridge and Tank Attack, then choose Planet X at the scoop. Four waves, then a 175M+ hurry-up.",
+            },
             {
               name: "King of the Monsters",
               target: "The Building",
-              detail: "Fight all four Tier 1 Kaiju at once, then a 4-ball bounty round against Ghidorah.",
+              detail: "Beat all four Tier 1 Kaiju in 60s (+5s per city) to build a bounty, then a 4-ball round against Ghidorah — up to 4× for balls kept.",
             },
             {
               name: "Monster Island Madness",
@@ -888,14 +947,18 @@ window.RFPC_CONTENT = {
             {
               name: "Destruction Jackpot",
               target: "The Building",
-              detail: "Lit by every objective. Battles, cities and Rampage raise its multiplier.",
+              detail: "Lit by objectives, saucers, loops, tail whips and trains. Collect it at the building, then the upper loop, in single-ball play.",
             },
             {
               name: "Monster Rampage",
               target: "Left Spinner",
               detail: "Spell RAMPAGE. One lit shot moves every 15 seconds; 12 shots earn an extra ball.",
             },
-            { name: "Jet Fighter Attack", target: "Inlanes", detail: "Six inlane missiles start it. Shoot the roving red arrows to down jets." },
+            {
+              name: "Jet Fighter Attack",
+              target: "Inlanes",
+              detail: "Six inlane missiles start it. Shoot the roving red arrows to down jets. 5 jets light an Ally, 10 an extra ball.",
+            },
             { name: "Imposter Battle", target: "Magna-Grab", detail: "Each battle pays more — the 4th is worth 250M." },
             { name: "Saucer Attack", target: "Saucer Bumper", detail: "Destroy saucers: 3 for an extra ball, 6 for Saucer Attack Multiball." },
             {
@@ -917,15 +980,15 @@ window.RFPC_CONTENT = {
               name: "Godzilla Multiball",
               target: "The Building",
               detail: "Shoot the ramps and building to destroy it, then shoot the building again.",
-              objective: "3-ball. Each jackpot shot climbs from blue 1× up to red 5×.",
+              objective: "3-ball. Each jackpot shot climbs from blue 1× up to red 5×. Three green standups, then the right spinner, add a ball.",
               jackpots: "Six jackpots light the Super at the building, worth the jackpot total.",
               tip: "The reverse building Wallop shot adds +1× to the Super once per multiball.",
             },
             {
               name: "Mechagodzilla Multiball",
               target: "Right Spinner",
-              detail: "20 spinner shots, the 3 Neo Barrier targets, then the jump ramp.",
-              objective: "Jackpots alternate between the ramps and building and the target bank.",
+              detail: "Spin the right spinner 20 times, hit the 3 Neo Barrier targets, then the jump ramp.",
+              objective: "Jackpots alternate between the ramps and building and the target bank. The 3rd and 4th pay 2×, the 5th and 6th 3×.",
               jackpots: "The Super builds on spinners for 20 seconds, then cash it.",
               tip: "Cash the Super at the tail whip lane for 3× and +3 Power-Ups.",
             },
@@ -934,7 +997,7 @@ window.RFPC_CONTENT = {
               target: "Saucer Bumper",
               detail: "Destroy 6 saucers at the far-right bumper.",
               objective: "Clear the white shots so the Maser Cannon locks on, then hit the bumper.",
-              jackpots: "The bumper pays 10×, and every saucer jackpot adds a ball.",
+              jackpots: "Jackpots start at 2.5M. The bumper pays 10×, and every saucer jackpot adds a ball.",
               tip: "Once per game — save it for a long ball.",
             },
           ],
@@ -946,10 +1009,13 @@ window.RFPC_CONTENT = {
           key: "strategy",
           kicker: "House Advice",
           boxes: [
-            { name: "Start, Don’t Finish", detail: "Starting all four objectives lights Planet X, even without finishing them." },
+            {
+              name: "Start, Don’t Finish",
+              detail: "Starting a Tier 2 battle, Tesla Strike, Bridge and Tank Attack lights Planet X — no need to finish them.",
+            },
             { name: "Battle, Then Multiball", detail: "Tier 1 Kaiju Battles stack with multiballs — start the battle first." },
             { name: "Rodan First", detail: "Take Rodan’s 60 seconds of 2× right before Godzilla Multiball." },
-            { name: "Get The Supers", detail: "Godzilla and Mechagodzilla Supers unlock Monster Zero and Terror." },
+            { name: "Extra Balls", detail: "Win two Kaiju Battles, or get 3 saucers, 10 jets, 12 Rampage shots or five City Combos." },
             { name: "Win First Try", detail: "A Kaiju Battle’s time bonus drops to a tenth on a second attempt." },
             { name: "Mothra Saves", detail: "Choose Mothra to light the left outlane when it’s been hungry." },
           ],
