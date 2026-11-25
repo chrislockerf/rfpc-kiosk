@@ -1898,7 +1898,12 @@ window.RFPC_CONTENT = {
             },
             { name: "Super Lightning", target: "Lightning Target", detail: "Ten target hits: the ramps pay 10× the lightning value." },
             { name: "Ray Gun Targets", target: "Inlanes", detail: "One target gives 2× to the next shot; hit the other quickly for 4×." },
-            { name: "Super Spinner", target: "Inlanes", detail: "Roll both inlanes three times: the spinner scores 5×." },
+            {
+              name: "Super Spinner",
+              target: "Inlanes",
+              detail: "Roll both inlanes three times: the spinner scores 5×.",
+              img: "assets/foo-side-spinner.jpg",
+            },
             { name: "Overdrive", target: "Ball Save", detail: "A ball save; one of the secret skill shots lights it instantly." },
           ],
         },
