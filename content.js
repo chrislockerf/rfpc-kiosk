@@ -1841,11 +1841,17 @@ window.RFPC_CONTENT = {
           key: "wizards",
           kicker: "The Big Finishes",
           boxes: [
-            { name: "Austin", target: "3 Cities", detail: "Times Like These: all shots lit. The spider-bot shot relights them at a multiplier." },
+            {
+              name: "Austin",
+              target: "3 Cities",
+              detail: "Times Like These: all shots lit. The spider-bot shot relights them at a multiplier.",
+              img: "assets/foo-city-austin.jpg",
+            },
             {
               name: "D.C.",
               target: "6 Cities",
               detail: "Holding Poison: clear the drops and paddle to light supers at band shots; each adds a ball.",
+              img: "assets/foo-city-dc.jpg",
             },
             { name: "FooBot Multiball", target: "Left Ramp", detail: "Collect all six robot parts from features around the game." },
             {
