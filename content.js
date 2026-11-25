@@ -1697,7 +1697,12 @@ window.RFPC_CONTENT = {
               detail: "Founder and frontman — the ex-Nirvana drummer who put the band together in 1994.",
               img: "assets/foo-band-dave.jpg",
             },
-            { name: "Nate Mendel", target: "Bass", detail: "On bass since day one — the low-end backbone of every record." },
+            {
+              name: "Nate Mendel",
+              target: "Bass",
+              detail: "On bass since day one — the low-end backbone of every record.",
+              img: "assets/foo-band-nate.jpg",
+            },
             { name: "Pat Smear", target: "Guitar", detail: "Founding guitarist and punk veteran — the wall of rhythm guitar." },
             { name: "Chris Shiflett", target: "Lead Guitar", detail: "Lead guitar since 1999 — the solos and the sharp riffs." },
             { name: "Rami Jaffee", target: "Keys", detail: "Keyboards and organ — the texture under the anthems." },
