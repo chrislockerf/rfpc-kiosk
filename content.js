@@ -1881,7 +1881,12 @@ window.RFPC_CONTENT = {
               target: "Band Combos",
               detail: "Make all six band-member combos and finish all six cities. Every jackpot adds a ball.",
             },
-            { name: "The Final Battle", target: "Left Ramp", detail: "Every city, all three Overlord multiballs, and FooBot Multiball." },
+            {
+              name: "The Final Battle",
+              target: "Left Ramp",
+              detail: "Every city, all three Overlord multiballs, and FooBot Multiball.",
+              img: "assets/foo-wiz-finalbattle.jpg",
+            },
           ],
         },
         {
