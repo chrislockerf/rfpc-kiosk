@@ -2769,6 +2769,7 @@ window.RFPC_CONTENT = {
               name: "Monster Bombs",
               target: "Skill Shot · Mosh Pit",
               detail: "One per monster — garlic, silver bullet, spear gun and more. Each spots a shot.",
+              img: "assets/mb-bombs.jpg",
             },
             { name: "Instrument Bonus", target: "All Major Shots", detail: "Win an instrument and every major shot lights for 900K or more." },
             { name: "Scoop Awards", target: "The Scoop", detail: "Random awards: points, light extra ball, start or advance a monster." },
