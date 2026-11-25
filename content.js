@@ -146,6 +146,47 @@ window.RFPC_CONTENT = {
           "Earn achievements unique to each machine.",
           "Beat a high score and your name shows up on this TV."
         ]
+      },
+      {
+        "pageTitle": "Pinball Lingo",
+        "eyebrow": "Speak The Language",
+        "proTip": "Say SDTM out loud and you’ve officially lost a ball to it.",
+        "key": "lingo",
+        "intro": "Eight words you’ll hear around the basement tonight.",
+        "rows": [
+          {
+            "term": "Drain",
+            "def": "Losing the ball down an outlane or between the flippers. Turn over."
+          },
+          {
+            "term": "SDTM",
+            "def": "Straight Down The Middle. Unsaveable. Nothing you could do."
+          },
+          {
+            "term": "Outlane",
+            "def": "The far-left and far-right lanes by the flippers. Ball goes in, ball goes away."
+          },
+          {
+            "term": "Cradle",
+            "def": "Trapping the ball on a raised flipper to stop, breathe and aim."
+          },
+          {
+            "term": "Multiball",
+            "def": "Two or more balls in play at once. Chaos, and a lot of points."
+          },
+          {
+            "term": "Jackpot",
+            "def": "The big-value shot lit during a multiball or mode. Go get it."
+          },
+          {
+            "term": "Tilt",
+            "def": "Shove the machine too hard and it kills your ball — and your bonus."
+          },
+          {
+            "term": "Wizard Mode",
+            "def": "The end-game mode you earn by finishing everything else."
+          }
+        ]
       }
     ]
   },
