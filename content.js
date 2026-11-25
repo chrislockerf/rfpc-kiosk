@@ -2734,6 +2734,7 @@ window.RFPC_CONTENT = {
               name: "Frankenstein",
               target: "Frank → Center Ramp",
               detail: "Hit Frank 7 times to raise him, then the center ramp. Six supers at Frank win his keyboard.",
+              img: "assets/mb-frankenstein.jpg",
             },
             {
               name: "Dracula",
