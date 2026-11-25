@@ -2462,6 +2462,7 @@ window.RFPC_CONTENT = {
               name: "Ares",
               target: "Roving Red Shot",
               detail: "Find Ares — one red shot hops around, and bumpers or slings briefly reveal it. Eight red shots earn Be Seeing You.",
+              img: "assets/jw-ares.jpg",
             },
             {
               name: "Zero",
