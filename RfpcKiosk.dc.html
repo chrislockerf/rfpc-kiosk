@@ -530,7 +530,7 @@ class Component extends DCLogic {
     // ---------- MACHINE: Strategy & Tips ----------
     const strategyPageRender = (m, page) => () => {
       const st = page.boxes || [];
-      const sections = st.map((b, i) => ({ index: i + 1, kicker: page.kicker, title: b.name, detail: stratDetail(b.detail || "") }));
+      const sections = st.map((b, i) => ({ index: i + 1, kicker: page.kicker, title: b.name, teaser: b.img ? boxTeaser(b.img, null, page.imgShape) : undefined, detail: b.img ? boxDetail(null, b.detail || "", b.img, page.imgShape) : stratDetail(b.detail || "") }));
       return spotlightPage(m, "strat", sections, 3);
     };
 

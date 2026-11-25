@@ -1967,11 +1967,11 @@ window.RFPC_CONTENT = {
           key: "strategy",
           kicker: "House Advice",
           boxes: [
-            { name: "Mod The Van", detail: "Level the mods before you start a city." },
+            { name: "Mod The Van", detail: "Level the mods before you start a city.", img: "assets/foo-strat-modulator.jpg" },
             { name: "One-Try Cities", detail: "Finish each city in one visit to raise Austin’s jackpots." },
             { name: "Climb The Meter", detail: "Right orbit builds 2×, then 3× playfield — start it before a mode." },
             { name: "Save The Button", detail: "Charge the UFO button for the last shots of a city or wizard." },
-            { name: "Stack Area 51", detail: "Build Area 51 during an Overlord multiball." },
+            { name: "Stack Area 51", detail: "Build Area 51 during an Overlord multiball.", img: "assets/foo-strat-area51.jpg" },
             { name: "Build The Bot", detail: "Each FooBot part doubles its band member’s shot." },
           ],
         },
