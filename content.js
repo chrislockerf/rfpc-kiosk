@@ -1875,7 +1875,12 @@ window.RFPC_CONTENT = {
               detail: "Holding Poison: clear the drops and paddle to light supers at band shots; each adds a ball.",
               img: "assets/foo-city-dc.jpg",
             },
-            { name: "FooBot Multiball", target: "Left Ramp", detail: "Collect all six robot parts from features around the game." },
+            {
+              name: "FooBot Multiball",
+              target: "Left Ramp",
+              detail: "Collect all six robot parts from features around the game.",
+              img: "assets/foo-wiz-foobot.jpg",
+            },
             {
               name: "Toy Time Multiball",
               target: "Band Combos",
