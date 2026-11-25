@@ -82,7 +82,7 @@ window.RFPC_CONTENT = {
       {
         "pageTitle": "The Lineup",
         "eyebrow": "Tonight On The Floor",
-        "proTip": "Every table gets its own deep dive next — rules, modes and strategy.",
+        "proTip": "Every table gets its own deep dive next — leaderboard, rules, modes and strategy.",
         "key": "lineup",
         "rows": [
           {
@@ -156,11 +156,11 @@ window.RFPC_CONTENT = {
         "rows": [
           {
             "term": "Drain",
-            "def": "Losing the ball down an outlane or between the flippers. Turn over."
+            "def": "Losing the ball down an outlane or between the flippers. Usually paired with a swear word from your mouth."
           },
           {
             "term": "SDTM",
-            "def": "Straight Down The Middle. Unsaveable. Nothing you could do."
+            "def": "Straight Down The Middle. The worst kind of drain.  Unsaveable. Nothing you could do."
           },
           {
             "term": "Outlane",
@@ -172,7 +172,7 @@ window.RFPC_CONTENT = {
           },
           {
             "term": "Multiball",
-            "def": "Two or more balls in play at once. Chaos, and a lot of points."
+            "def": "Two or more balls in play at once. Chaos, and a lot of points, especially if you know how to score on the mode."
           },
           {
             "term": "Jackpot",
@@ -180,7 +180,7 @@ window.RFPC_CONTENT = {
           },
           {
             "term": "Tilt",
-            "def": "Shove the machine too hard and it kills your ball — and your bonus."
+            "def": "Shove the machine too hard and it kills your ball — and your bonus.  The tilt bobs are not in these machines, so a tilt is quite the accomplishment!"
           },
           {
             "term": "Wizard Mode",
@@ -204,7 +204,7 @@ window.RFPC_CONTENT = {
       game: "star-wars",
       title: "Star Wars",
       maker: "Stern · 2025",
-      proTip: "Play each of the three Rebel Missions for each iconic character — each one boosts that character’s jackpots in every multiball.",
+      proTip: "Join the Rebellion and defeat the Emperor, Darth Vader and the ever Empire.",
       pages: [
         {
           pageTitle: "Get To Know The Line-Up",
@@ -292,7 +292,7 @@ window.RFPC_CONTENT = {
             kicker: "At The Plunge:",
             title: "Skill Shots",
             layout: "columns3",
-            lead: "Plunge and hit any flashing shot. Make it within three switches for a 2× Super Skill Shot.  Expires after 6 switch hits.",
+            lead: "Plunge and hit any flashing shot to gain an advantage. Make it within three switches for a 2× Super Skill Shot.  Expires after 6 switch hits.",
             rows: [
               { label: "Right Orbit", target: "Relight", desc: "Relights every skill shot to collect again." },
               { label: "Either Bumper", target: "Ion Cannons", desc: "Three hits toward the next shot multiplier." },
@@ -311,9 +311,9 @@ window.RFPC_CONTENT = {
             title: "Action Button",
             lead: "Small button, big saves.",
             rows: [
-              { label: "JEDI Ball Save", target: "Outlanes", desc: "Spell JEDI, then fire the magnet to toss a draining ball back." },
-              { label: "Lock In Jabba", target: "Sarlacc Pit", desc: "Press while the ball spins to keep the Jabba Event you want." },
-              { label: "Add-A-Ball", target: "Sarlacc Pit", desc: "Ten Sarlacc Pit spins during multiball light the button green to add a ball." },
+              { label: "JEDI Ball Save", target: "Outlanes", desc: "Spell JEDI, then press the YELLOW button to fire the magnet to toss a draining ball back into play.  May the Force be with you." },
+              { label: "Lock In Jabba", target: "Sarlacc Pit", desc: "Press the ORANGE button while the ball spins in the Sarlacc Pit to select the Jabba Event you want to activate." },
+              { label: "Add-A-Ball", target: "Sarlacc Pit", desc: "Ten Sarlacc Pit spins during multiball light the button GREEN to add a ball." },
             ],
           },
           wizard: {
@@ -324,32 +324,12 @@ window.RFPC_CONTENT = {
             body: "Five mini-wizards stand in the way — Not a Jedi Yet, Ewok Encounter, Sarlacc Escape, Never Tell Me The Odds and Dark Side Multiball — before the final showdown, Jedi Master.",
             chip: "◆ Five mini-wizards first",
             rows: [
-              {
-                label: "Not a Jedi Yet",
-                target: "Play missions for 4 characters",
-                desc: "Duel Vader in Cloud City. Shots go white 1×, blue 2×, red 3× — a red shot is gone for good. Three shots light the blue checkpoints; clear 6 waves, then cash the hurry-up at the left scoop.",
-              },
-              {
-                label: "Ewok Encounter",
-                target: "Play missions for all 8 characters",
-                desc: "Four phases on Endor: timed 2-ball shots build the jackpot, then 6-ball Battle Multiball (15 jackpots, then Luke), then battle hurry-ups.",
-              },
-              {
-                label: "Sarlacc Escape",
-                target: "Play all 3 Jabba Events",
-                desc: "Switch-frenzy multiball. Every Sarlacc Pit spin scores the jackpot; four jackpots light the super at the left scoop.",
-              },
-              {
-                label: "Never Tell Me The Odds",
-                target: "Play 3 Falcon Features",
-                desc: "3-ball asteroid field, scoring multiplied by balls in play. Hit white shots, dodge red asteroids, then escape up the center ramp.",
-              },
-              {
-                label: "Dark Side Multiball",
-                target: "10 Dark Side shots",
-                desc: "3-ball. Every shot scores the Dark Side award; the Death Star pays 2× and relights all shots. Finish with the left scoop hurry-up.",
-              },
-              { label: "Jedi Master", target: "The final wizard mode", desc: "Rules not yet published in the 0.98 rulesheet — fill in once known." },
+              { label: "Not a Jedi Yet", target: "Play missions for 4 characters" },
+              { label: "Ewok Encounter", target: "Play missions for all 8 characters" },
+              { label: "Sarlacc Escape", target: "Play all 3 Jabba Events" },
+              { label: "Never Tell Me The Odds", target: "Play 3 Falcon Features" },
+              { label: "Dark Side Multiball", target: "10 Dark Side shots" },
+              { label: "Jedi Master", target: "The final wizard mode" },
             ],
             note: "Bonus Missions you finish cut the characters needed for Not a Jedi Yet and Ewok Encounter by one each.",
           },
@@ -703,8 +683,8 @@ window.RFPC_CONTENT = {
         {
           type: "House Tip",
           title: "Dead Bounce",
-          text: "Hold both flippers DOWN and let the ball bounce off a still flipper back into play.",
-          footer: "Hold both flippers DOWN and let the ball bounce off a still flipper back into play.",
+          text: "Keep both flippers DOWN and let the ball bounce off a still flipper back into play. Resist the urge to flip!",
+          footer: "Sometimes the best thing to do is nothing.",
         },
       ],
     },
@@ -717,12 +697,12 @@ window.RFPC_CONTENT = {
       game: "godzilla",
       title: "Godzilla",
       maker: "Stern · 2021",
-      proTip: "Just starting an objective counts toward Planet X — you don’t have to finish it.",
+      proTip: "Godzilla is generally considered the #1 pinball machine of all time. Lucky you.",
       pages: [
         {
           pageTitle: "Get To Know The Line-Up",
           eyebrow: "Stern · 2021",
-          proTip: "Four cities, four objectives, then Planet X and King of the Monsters.",
+          proTip: "Four cities, four objectives, then on to Planet X and King of the Monsters.",
           key: "intro",
           credits: [
             { role: "Game Design", names: "Keith Elwin" },
