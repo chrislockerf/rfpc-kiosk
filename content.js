@@ -1900,6 +1900,7 @@ window.RFPC_CONTENT = {
               name: "Supersonic Radio",
               target: "Radio Targets",
               detail: "Max the dial with mystery awards. 50 seconds of gray shots that turn pink.",
+              img: "assets/foo-side-radio.jpg",
             },
             { name: "Super Lightning", target: "Lightning Target", detail: "Ten target hits: the ramps pay 10× the lightning value." },
             { name: "Ray Gun Targets", target: "Inlanes", detail: "One target gives 2× to the next shot; hit the other quickly for 4×." },
