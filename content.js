@@ -1526,7 +1526,7 @@ window.RFPC_CONTENT = {
               { label: "Battles", target: "The Scoop", desc: "Complete DEAD, then pick Juggernaut, Mystique or Sabretooth." },
               { label: "Quests", target: "Right Orbit → Scoop", desc: "Advance the truck, collect the orange chimichangas, then the scoop." },
               { label: "Team-Ups", target: "Two Shots Each", desc: "Qualify an X-Man while no mode runs; they join your next Battle." },
-              { label: "Lil’ Deadpool", target: "OOF Drops", desc: "Drop the targets, hit the standup twice, then the drops again." },
+              { label: "Lil’ Deadpool", target: "OOF Drops", desc: "Drop the OOF targets, then hit the standup twice (+1 per mode played)." },
               { label: "Playfield X", target: "SNIKT → Right Ramp", desc: "Ricochet off SNIKT onto the ramp for up to 5×." },
               { label: "Katanarama Time", target: "Both Ramps", desc: "Three diamonds on each ramp: 30 seconds of big shots." },
             ],
@@ -1538,7 +1538,7 @@ window.RFPC_CONTENT = {
             rows: [
               { label: "Ninja Multiball", target: "Right Ramp", desc: "Complete POOL to light lock; lock three balls." },
               { label: "Disco Multiball", target: "Left Spinner", desc: "60 spins on the left spinner." },
-              { label: "Mechsuit Multiball", target: "Weapons → Scoop", desc: "Cash out 45 weapons at the scoop." },
+              { label: "Mechsuit Multiball", target: "Weapons → Scoop", desc: "Cash out 45 weapons, then the scoop with no other mode running." },
               { label: "Sauron Multiball", target: "Win 3 Battles", desc: "Beat Juggernaut, Mystique and Sabretooth." },
             ],
           },
@@ -1548,10 +1548,14 @@ window.RFPC_CONTENT = {
             layout: "table",
             lead: "Plunge for the BAM! lane, or hold the left flipper for the big ones.",
             rows: [
-              { label: "Lane Skill", target: "Flashing BAM! Lane", desc: "Plunge into the lit lane for 2.5M." },
-              { label: "Super Skill", target: "Right Ramp", desc: "Hold left flipper, shoot the ramp for 5M." },
-              { label: "MXV Skill", target: "Orbit → Right Ramp", desc: "Right orbit to right ramp for 12.5M plus Ninjapocalypse." },
-              { label: "Super Secret", target: "SNIKT → Right Ramp", desc: "15M and +1 Playfield X." },
+              { label: "Lane Skill", target: "Flashing BAM! Lane", desc: "Plunge into the lit lane for 2.5M (+250K per skill shot)." },
+              { label: "Super Skill", target: "Right Ramp", desc: "Hold left flipper, shoot the ramp for 5M (+500K per skill shot)." },
+              {
+                label: "MXV Skill",
+                target: "Orbit → Right Ramp",
+                desc: "Right orbit to right ramp for 12.5M (+750K per skill shot) plus Ninjapocalypse.",
+              },
+              { label: "Super Secret", target: "SNIKT → Right Ramp", desc: "15M (+1M per skill shot) and a timed +1 Playfield X." },
             ],
           },
           button: {
@@ -1560,14 +1564,14 @@ window.RFPC_CONTENT = {
             lead: "Spell BOOM in the return lanes. The button spots the highest-value shot on the field (not the scoop).",
             rows: [
               { label: "Boom", target: "Highest Shot", desc: "Instantly collect the top lit shot." },
-              { label: "Big Boom", target: "Everything", desc: "Bank four BOOMs to collect every lit shot." },
+              { label: "Super Boom", target: "Everything", desc: "Bank four BOOMs to collect every lit shot." },
             ],
           },
           wizard: {
             kicker: "The End Game",
             title: "Wizard Mode",
             name: "The Final Battle",
-            body: "Beat Megakrakolodonus Rex, Clone Multiball and Mechsuit Multiball. Then hit all four Team-Up shots in 45 seconds and survive a 70-second multiball against Mr. Sinister.",
+            body: "Beat Megakrakolodonus Rex and Clone Multiball, and play Mechsuit Multiball. Then hit all four Team-Up shots in 45 seconds and survive a 70-second multiball against Mr. Sinister.",
             chip: "◆ M. Rex · Clones · Mechsuit",
           },
           tableTips: {
@@ -1583,15 +1587,23 @@ window.RFPC_CONTENT = {
         {
           pageTitle: "The Battles",
           eyebrow: "Complete DEAD First",
-          proTip: "Drain mid-Battle and your damage is saved for the next try.",
+          proTip: "Drain mid-Battle and your damage is saved. Draining with the Final Shot lit still wins — tilting doesn’t.",
           key: "battles",
           kicker: "Finish Them At The Scoop",
           boxes: [
-            { name: "Juggernaut", target: "DEAD/POOL Targets", detail: "Hit any four targets to taunt him and light every shot for 20 seconds." },
+            {
+              name: "Juggernaut",
+              target: "DEAD/POOL Targets",
+              detail: "Hit any four targets to taunt him and light every shot for 20 seconds. Keep making lit shots — Deadpool loses health when you stop.",
+            },
             { name: "Mystique", target: "Spinner → Ramps", detail: "Center spinner, then both ramps. Hit the Team-Up shot when she shape-shifts." },
             { name: "Sabretooth", target: "Orbits & Spinner", detail: "Orbits or center spinner. Orbit shots feed the pops for extra damage." },
             { name: "Sauron Multiball", target: "Win All Three", detail: "Beat all three villains to unlock Sauron Multiball." },
-            { name: "Level 2 Battles", target: "The Scoop", detail: "Harder rematches of all three. Win them for Clone Multiball." },
+            {
+              name: "Level 2 Battles",
+              target: "The Scoop",
+              detail: "Harder rematches — damage Sauron with the green shots before you can hit the villain. Win all three for Clone Multiball.",
+            },
           ],
         },
         {
@@ -1604,7 +1616,7 @@ window.RFPC_CONTENT = {
             {
               name: "Light A Quest",
               target: "Right Orbit → Scoop",
-              detail: "Right orbit advances the truck. Collect the orange chimichanga shots, then the scoop.",
+              detail: "Right orbit advances the truck. Collect 3 orange chimichangas (+1 per Quest), then the scoop.",
             },
             {
               name: "T-Rex Quest",
@@ -1641,10 +1653,18 @@ window.RFPC_CONTENT = {
             {
               name: "Lil’ Deadpool Multiball",
               target: "OOF Drops",
-              detail: "Drop the targets, hit the standup twice, then the drops again to start.",
+              detail: "Drop the OOF targets, then hit the standup twice (+1 per mode). The 500K hurry-up locks in as the jackpot when you hit the drops; lock a ball for 500K-per-spin spinner supers.",
             },
-            { name: "Lil’ Deadpool Frenzy", target: "Every Switch", detail: "Every switch scores 100K for 60 seconds." },
-            { name: "Lil’ Deadpool Bounce", target: "Roving Targets", detail: "Chase the roving targets for +1 Playfield X." },
+            {
+              name: "Lil’ Deadpool Frenzy",
+              target: "Every Switch",
+              detail: "Every switch scores 100K for 60 seconds; Lil’ Deadpool hits build it up to 250K.",
+            },
+            {
+              name: "Lil’ Deadpool Bounce",
+              target: "Roving Targets",
+              detail: "Chase the roving targets — three hits light the Lil’ Deadpool target for a jackpot and +1 Playfield X for the ball.",
+            },
           ],
         },
         {
@@ -1654,12 +1674,20 @@ window.RFPC_CONTENT = {
           key: "sinister",
           kicker: "Sinister’s Plan",
           boxes: [
-            { name: "Megakrakolodonus Rex", target: "The Scoop", detail: "Win both Quests and play Sauron Multiball. A single-ball fight." },
-            { name: "Clone Multiball", target: "The Scoop", detail: "Win all three Level 2 Battles." },
+            {
+              name: "Megakrakolodonus Rex",
+              target: "The Scoop",
+              detail: "Win both Quests and play Sauron Multiball. Blue shots reveal the weak spot, then 10 seconds to hit the Lil’ Deadpool target — 15 hits win.",
+            },
+            {
+              name: "Clone Multiball",
+              target: "The Scoop",
+              detail: "Win all three Level 2 Battles. Four blue shots start a hidden 10M hurry-up; each must be relit by a different blue shot.",
+            },
             {
               name: "The Final Battle",
               target: "Team-Up Shots",
-              detail: "Hit all four Team-Up shots in 45 seconds, then a 70-second multiball. Win it for Special.",
+              detail: "Hit all four Team-Up shots in 45 seconds, then a 70-second multiball — the Final Shot scores big in the last 15 seconds. Win it for Special.",
             },
           ],
         },
@@ -1671,11 +1699,23 @@ window.RFPC_CONTENT = {
           kicker: "Everything Else",
           boxes: [
             { name: "Katanarama Time", target: "Both Ramps", detail: "Three diamonds on each ramp start 30 seconds of 1M+ orbits and ramps." },
-            { name: "Colossal Jackpot", target: "U-Turn", detail: "Two shots through the U-turn light it. Switch hits grow it." },
-            { name: "Berserker Rage", target: "Center Loop", detail: "Four loops light it: 45 seconds of growing spinner value." },
+            {
+              name: "Colossal Jackpot",
+              target: "U-Turn",
+              detail: "Two shots through the U-turn light it. Strong U-turn hits double it, and Playfield X multiplies it.",
+            },
+            {
+              name: "Berserker Rage",
+              target: "Center Loop",
+              detail: "Four loops light it: 45 seconds of growing spinner value. Bumpers add to it, and the BOOM button gives a Berserker Boom.",
+            },
             { name: "Weapons & Ninja Stars", target: "White Shots → Scoop", detail: "25 weapons or 50 Ninja Stars light an extra ball." },
             { name: "DEADPOOL & Mystery", target: "Standups → Scoop", detail: "DEAD lights a Battle, POOL lights a lock, DEADPOOL lights Mystery." },
-            { name: "Regeneration", target: "Left Outlane", detail: "Every three DEADPOOL completions light the ball save." },
+            {
+              name: "Bonus X",
+              target: "Top BAM! Lanes",
+              detail: "Each time you complete the four top BAM! lanes, the end-of-ball bonus multiplier goes up.",
+            },
           ],
         },
         {
@@ -1692,29 +1732,29 @@ window.RFPC_CONTENT = {
               detail: "Complete POOL to light the lock, then lock three balls at the right ramp.",
               objective: "Every major shot is a jackpot.",
               jackpots: "Ninja Stars set the value. The Super at the right ramp is the jackpot total.",
-              tip: "Bump the pops and grab Ninjapocalypse first.",
+              tip: "Bump the pops and grab Ninjapocalypse first. It stacks with Battles and Quests.",
             },
             {
               name: "Disco Multiball",
               target: "Left Spinner",
               detail: "60 spins on the left spinner.",
               objective: "Switch hits build the jackpots.",
-              jackpots: "The left ramp collects the Super.",
-              tip: "Premium Disco Loops pay off at 60, 180 and 300 spins.",
+              jackpots: "A random shot in each wave starts the Super Jackpot round.",
+              tip: "On the Premium, Disco Loops replaces it at 60, 180 and 300 spins — loop the left orbit for a 5M+ hurry-up.",
             },
             {
               name: "Mechsuit Multiball",
               target: "Weapons → Scoop",
-              detail: "Cash out 45 weapons: white shots, then the scoop.",
+              detail: "Cash out 45 weapons: white shots, then the scoop. Start it with no other mode running.",
               objective: "4-ball. Jackpots start at 5M.",
-              jackpots: "Five jackpots light the Super at the scoop.",
+              jackpots: "Five jackpots light the Super at the scoop. Jackpots can’t repeat on the same shot back to back; the Super relights at 150, 250 and 350 weapons.",
               tip: "More white shots before the scoop cash more weapons.",
             },
             {
               name: "Sauron Multiball",
               target: "Win 3 Battles",
               detail: "Beat Juggernaut, Mystique and Sabretooth.",
-              objective: "The reward for clearing the first round of Battles.",
+              objective: "3-ball. Ramps and the U-turn feed the jackpots and Super.",
               jackpots: "Required, with both Quests, for Megakrakolodonus Rex.",
               tip: "Play it before chasing the Level 2 rematches.",
             },
@@ -1727,7 +1767,7 @@ window.RFPC_CONTENT = {
           key: "strategy",
           kicker: "House Advice",
           boxes: [
-            { name: "Spell BOOM", detail: "Hold the button to spot the highest-value shot on the field." },
+            { name: "Stack Ninja", detail: "Ninja Multiball stacks with Battles and Quests — lock up before you start one." },
             { name: "Lil’ Deadpool In Battle", detail: "Start Lil’ Deadpool while a Battle is running." },
             { name: "Playfield X", detail: "Ricochet the SNIKT target to the right ramp for up to 5×." },
             { name: "Ninjapocalypse", detail: "Right orbit → right ramp grabs 10 Ninja Stars before Ninja Multiball." },
