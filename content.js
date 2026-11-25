@@ -2740,6 +2740,7 @@ window.RFPC_CONTENT = {
               name: "Dracula",
               target: "Drac Standups → Scoop",
               detail: "Spell D-R-A-C-U-L-A on the standups, then hit Dracula 5 times. Hits while he moves score 2×.",
+              img: "assets/mb-dracula.jpg",
             },
             { name: "Wolfman", target: "The Loops", detail: "Four loops start Full Moon Fever. Collect all four loop hurry-ups for his drums." },
             {
