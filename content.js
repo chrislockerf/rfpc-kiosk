@@ -1709,7 +1709,12 @@ window.RFPC_CONTENT = {
               detail: "Founding guitarist and punk veteran — the wall of rhythm guitar.",
               img: "assets/foo-band-pat.jpg",
             },
-            { name: "Chris Shiflett", target: "Lead Guitar", detail: "Lead guitar since 1999 — the solos and the sharp riffs." },
+            {
+              name: "Chris Shiflett",
+              target: "Lead Guitar",
+              detail: "Lead guitar since 1999 — the solos and the sharp riffs.",
+              img: "assets/foo-band-chris.jpg",
+            },
             { name: "Rami Jaffee", target: "Keys", detail: "Keyboards and organ — the texture under the anthems.", img: "assets/foo-band-rami.jpg" },
             {
               name: "Taylor Hawkins",
