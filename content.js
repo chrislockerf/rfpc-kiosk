@@ -996,6 +996,7 @@ window.RFPC_CONTENT = {
               name: "Oxygen Destroyer",
               target: "Right Outlane",
               detail: "Last ball only: shoot the new ball through the building in 12 seconds to save it.",
+              img: "assets/gz-oxygen.jpg",
             },
           ],
         },
@@ -1779,6 +1780,7 @@ window.RFPC_CONTENT = {
               objective: "Switch hits build the jackpots.",
               jackpots: "A random shot in each wave starts the Super Jackpot round.",
               tip: "On the Premium, Disco Loops replaces it at 60, 180 and 300 spins — loop the left orbit for a 5M+ hurry-up.",
+              img: "assets/dp-disco.jpg",
             },
             {
               name: "Mechsuit Multiball",
