@@ -851,6 +851,7 @@ window.RFPC_CONTENT = {
               name: "Change Cities",
               target: "The Scoop",
               detail: "Win a Kaiju Battle and the right scoop lights City Select. Conquests stack: 2 cities earn an extra ball, 4 add +15M to the DJ.",
+              img: "assets/gz-cityselect.jpg",
             },
             {
               name: "Annihilation & Carnage",
@@ -866,17 +867,24 @@ window.RFPC_CONTENT = {
           key: "kaiju",
           kicker: "60 Seconds Each",
           boxes: [
-            { name: "Ebirah", target: "All 3 Spinners", detail: "15 spins on each side spinner and 40 on the center, then the pop bumper for 25M." },
+            {
+              name: "Ebirah",
+              target: "All 3 Spinners",
+              detail: "15 spins on each side spinner and 40 on the center, then the pop bumper for 25M.",
+              img: "assets/gz-ebirah.jpg",
+            },
             {
               name: "Titanosaurus",
               target: "5 Targets In Order",
               detail: "Powerline targets left to right, the Maser Cannon, then the captive ball — 4M, 7M, 10M, 15M, then 20M.",
+              img: "assets/gz-titanosaurus.jpg",
             },
-            { name: "Gigan", target: "Ramps", detail: "Eight ramp shots. Opposite-ramp combos score double." },
+            { name: "Gigan", target: "Ramps", detail: "Eight ramp shots. Opposite-ramp combos score double.", img: "assets/gz-gigan.jpg" },
             {
               name: "Megalon",
               target: "Roving Purple Shot",
               detail: "Hit the purple shot 7 times. Miss it and he hides — a ramp brings him back. Up to 5×, +10M on the final blow.",
+              img: "assets/gz-megalon.jpg",
             },
             {
               name: "Tier 2 · Ghidorah Battles",
@@ -901,11 +909,13 @@ window.RFPC_CONTENT = {
               name: "Tesla Strike",
               target: "Center Spinner",
               detail: "Untimed. Spin the center spinner to build the Tesla value (2M+), then collect it at a blue shot. Five collections win.",
+              img: "assets/gz-tesla.jpg",
             },
             {
               name: "Bridge Attack Multiball",
               target: "Right Ramp",
               detail: "2-ball. Ramp shots build the jackpot; three light doubles, and two doubles start a 15-second super round at 6× that adds balls.",
+              img: "assets/gz-bridge.jpg",
             },
             {
               name: "Tank Attack Multiball",
@@ -976,7 +986,12 @@ window.RFPC_CONTENT = {
               detail: "Six inlane missiles start it. Shoot the roving red arrows to down jets. 5 jets light an Ally, 10 an extra ball.",
             },
             { name: "Imposter Battle", target: "Magna-Grab", detail: "Each battle pays more — the 4th is worth 250M." },
-            { name: "Saucer Attack", target: "Saucer Bumper", detail: "Destroy saucers: 3 for an extra ball, 6 for Saucer Attack Multiball." },
+            {
+              name: "Saucer Attack",
+              target: "Saucer Bumper",
+              detail: "Destroy saucers: 3 for an extra ball, 6 for Saucer Attack Multiball.",
+              img: "assets/gz-saucer.jpg",
+            },
             {
               name: "Oxygen Destroyer",
               target: "Right Outlane",
@@ -999,6 +1014,7 @@ window.RFPC_CONTENT = {
               objective: "3-ball. Each jackpot shot climbs from blue 1× up to red 5×. Three green standups, then the right spinner, add a ball.",
               jackpots: "Six jackpots light the Super at the building, worth the jackpot total.",
               tip: "The reverse building Wallop shot adds +1× to the Super once per multiball.",
+              img: "assets/gz-building.jpg",
             },
             {
               name: "Mechagodzilla Multiball",
@@ -1007,6 +1023,7 @@ window.RFPC_CONTENT = {
               objective: "Jackpots alternate between the ramps and building and the target bank. The 3rd and 4th pay 2×, the 5th and 6th 3×.",
               jackpots: "The Super builds on spinners for 20 seconds, then cash it.",
               tip: "Cash the Super at the tail whip lane for 3× and +3 Power-Ups.",
+              img: "assets/gz-mecha.jpg",
             },
             {
               name: "Saucer Attack Multiball",
@@ -1015,6 +1032,7 @@ window.RFPC_CONTENT = {
               objective: "Clear the white shots so the Maser Cannon locks on, then hit the bumper.",
               jackpots: "Jackpots start at 2.5M. The bumper pays 10×, and every saucer jackpot adds a ball.",
               tip: "Once per game — save it for a long ball.",
+              img: "assets/gz-saucer.jpg",
             },
           ],
         },
@@ -1033,7 +1051,7 @@ window.RFPC_CONTENT = {
             { name: "Rodan First", detail: "Take Rodan’s 60 seconds of 2× right before Godzilla Multiball." },
             { name: "Extra Balls", detail: "Win two Kaiju Battles, or get 3 saucers, 10 jets, 12 Rampage shots or five City Combos." },
             { name: "Win First Try", detail: "A Kaiju Battle’s time bonus drops to a tenth on a second attempt." },
-            { name: "Mothra Saves", detail: "Choose Mothra to light the left outlane when it’s been hungry." },
+            { name: "Mothra Saves", detail: "Choose Mothra to light the left outlane when it’s been hungry.", img: "assets/gz-mothra.jpg" },
           ],
         },
         {
@@ -1468,7 +1486,11 @@ window.RFPC_CONTENT = {
           boxes: [
             { name: "Extra Balls", detail: "Make upper loop shots, start 3, 6, 12 and 18 modes, or finish Bond… James Bond." },
             { name: "Play A Whole Film", detail: "Play all four modes from one film and that film’s Bond Woman stays lit across balls." },
-            { name: "Stack Bird One", detail: "Start Bird One during a Villain or Henchman mode to double up on scoring." },
+            {
+              name: "Stack Bird One",
+              detail: "Start Bird One during a Villain or Henchman mode to double up on scoring.",
+              img: "assets/bond-photo-rocket.jpg",
+            },
             { name: "Save Jetpack", detail: "Jetpack is weak alone — always stack it with a Villain or Henchman mode." },
             { name: "Chase Bond Women", detail: "Each Bond Woman adds +1× to 007 Scoring, up to 7×." },
             { name: "Pick Your Mode", detail: "Bumpers or the Goldfinger target change the lit villain or henchman — pick a film you can finish." },
