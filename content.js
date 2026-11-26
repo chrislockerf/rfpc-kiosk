@@ -833,9 +833,19 @@ window.RFPC_CONTENT = {
               detail: "Conquer Tokyo for a bigger Annihilation Bonus all game.",
               img: "assets/gz-tokyo.jpg",
             },
-            { name: "New York", target: "+2M Saucer Attack", detail: "Conquer New York and every Saucer Attack pays 2M more." },
-            { name: "London", target: "+4M Destruction JP", detail: "Conquer London to add 4M to every Destruction Jackpot." },
-            { name: "Paris", target: "+500K Loops", detail: "Conquer Paris and every loop pays 500K more." },
+            {
+              name: "New York",
+              target: "+2M Saucer Attack",
+              detail: "Conquer New York and every Saucer Attack pays 2M more.",
+              img: "assets/gz-newyork.jpg",
+            },
+            {
+              name: "London",
+              target: "+4M Destruction JP",
+              detail: "Conquer London to add 4M to every Destruction Jackpot.",
+              img: "assets/gz-london.jpg",
+            },
+            { name: "Paris", target: "+500K Loops", detail: "Conquer Paris and every loop pays 500K more.", img: "assets/gz-paris.jpg" },
             {
               name: "Change Cities",
               target: "The Scoop",
