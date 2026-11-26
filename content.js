@@ -827,7 +827,12 @@ window.RFPC_CONTENT = {
           key: "cities",
           kicker: "City Select",
           boxes: [
-            { name: "Tokyo", target: "+1% Annihilation", detail: "Conquer Tokyo for a bigger Annihilation Bonus all game." },
+            {
+              name: "Tokyo",
+              target: "+1% Annihilation",
+              detail: "Conquer Tokyo for a bigger Annihilation Bonus all game.",
+              img: "assets/gz-tokyo.jpg",
+            },
             { name: "New York", target: "+2M Saucer Attack", detail: "Conquer New York and every Saucer Attack pays 2M more." },
             { name: "London", target: "+4M Destruction JP", detail: "Conquer London to add 4M to every Destruction Jackpot." },
             { name: "Paris", target: "+500K Loops", detail: "Conquer Paris and every loop pays 500K more." },
