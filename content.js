@@ -653,6 +653,7 @@ window.RFPC_CONTENT = {
               objective: "Climb through 2× and 3× jackpots to light a 12× super.",
               jackpots: "The super lands at the center ramp — two balls through it in quick succession.",
               tip: "Jackpot shots don’t relight here — spread your shots.",
+              img: "assets/sw-deathstar.jpg",
             },
             {
               name: "Lightspeed",
