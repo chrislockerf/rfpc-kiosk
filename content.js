@@ -1781,6 +1781,7 @@ window.RFPC_CONTENT = {
               jackpots: "A random shot in each wave starts the Super Jackpot round.",
               tip: "On the Premium, Disco Loops replaces it at 60, 180 and 300 spins — loop the left orbit for a 5M+ hurry-up.",
               img: "assets/dp-disco.jpg",
+              vid: "assets/dp-disco.mp4",
             },
             {
               name: "Mechsuit Multiball",
