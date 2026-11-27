@@ -1790,6 +1790,8 @@ window.RFPC_CONTENT = {
               objective: "4-ball. Jackpots start at 5M.",
               jackpots: "Five jackpots light the Super at the scoop. Jackpots can’t repeat on the same shot back to back; the Super relights at 150, 250 and 350 weapons.",
               tip: "More white shots before the scoop cash more weapons.",
+              img: "assets/dp-mech.jpg",
+              vid: "assets/dp-mech.mp4",
             },
             {
               name: "Sauron Multiball",
