@@ -1772,6 +1772,8 @@ window.RFPC_CONTENT = {
               objective: "Every major shot is a jackpot.",
               jackpots: "Ninja Stars set the value. The Super at the right ramp is the jackpot total.",
               tip: "Bump the pops and grab Ninjapocalypse first. It stacks with Battles and Quests.",
+              img: "assets/dp-ninja.jpg",
+              vid: "assets/dp-ninja.mp4",
             },
             {
               name: "Disco Multiball",
